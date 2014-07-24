@@ -1,0 +1,1169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<AutogenXml Version="3.004" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://rdsuite.europe.nokia.com/products/autogen/files/autogen_xml.xsd">
+<ResourceIsiCommon Name="Common Messages" Version="000.031">
+<Description>
+<Para>The common ISI feature descriptions can be found from reference /4/, where the glossary is presented</Para>
+</Description>
+<ProjectInfo>
+<SiteName>Devices R&amp;D Salo</SiteName>
+<ProjectName>DCT/ASD/AM/SWAM</ProjectName>
+<ProjectOwner>Leif Karilainen</ProjectOwner>
+<IsiVersionAutoGenerate>000.027</IsiVersionAutoGenerate>
+<SubmessageNamesAreUnique />
+</ProjectInfo>
+<IsihdrInfo>
+<ContinuusInstanceName>sa_mcu#1</ContinuusInstanceName>
+<ContinuusInstanceName16>sa_mcu#1</ContinuusInstanceName16>
+<ContinuusProjectDb>ou1gif</ContinuusProjectDb>
+<ContinuusProjectPath>global_interface/coresw_interface/coresw_public</ContinuusProjectPath>
+<ContinuusProjectPath16>global_interface/coresw_interface/coresw_public</ContinuusProjectPath16>
+<DefinitionName>AUTOGEN_NO_RESOURCE_ID_TYPE</DefinitionName>
+<Filename>comm_isi.h</Filename>
+<Filename16>comm_isi_16.h</Filename16>
+<MergedMaskPrefix>_</MergedMaskPrefix>
+<GenerateMergedMasks16 />
+</IsihdrInfo>
+<HtmlInfo>
+<ContinuusProjectDb>ou1gif</ContinuusProjectDb>
+<ContinuusProjectName>GIF_SPECS-ou1gif#browse</ContinuusProjectName>
+<DirectoryPath>GIF_SPECS/CoreSW/coresw_public_spec</DirectoryPath>
+<DocumentNumber>-</DocumentNumber>
+<Filename>i_comm_isi_m.html</Filename>
+<Title>ISI Common Message Interface Specification</Title>
+<IncludeIntroduction />
+</HtmlInfo>
+<PmdInfo>
+<PmdPhonetDeviceId>PN_DEV_HOST</PmdPhonetDeviceId>
+</PmdInfo>
+<DescriptionNotes>
+<Note Name="/1/">
+<Description>
+<Para>Autogeneration Process</Para>
+<Para>Intranet</Para>
+<Para>http://tracing.europe.nokia.com/autogen/overview.asp</Para>
+</Description>
+</Note>
+<Note Name="/2/">
+<Description>
+<Para>ISI Server Specification Documentation Guidelines</Para>
+<Para>Document code: DSY02803-EN</Para>
+<Para>DocMan location: eslns42/SRV/Nokia</Para>
+<Para>DocMan: DCT DocMan</Para>
+<Para>Filename: TP/PP/ppmgmtdm.nsf</Para>
+</Description>
+</Note>
+<Note Name="/3/">
+<Description>
+<Para>ISI General Information</Para>
+<Para>Document code: DSY02801-EN</Para>
+<Para>DocMan location: eslns42/SRV/Nokia</Para>
+<Para>DocMan: DCT DocMan</Para>
+<Para>Filename: TP/PP/ppmgmtdm.nsf</Para>
+</Description>
+</Note>
+<Note Name="/4/">
+<Description>
+<Para>ISI Common Feature Descriptions</Para>
+<Para>Continuus Database: ou1gif</Para>
+<Para>Continuus Project: GIF_SPECS-ou1gif#browse</Para>
+<Para>Directory Path: GIF_SPECS/CoreSW/coresw_public_spec</Para>
+<Para>Filename:  i_comm_fp.doc</Para>
+<Para>http://oucmswww.nmp.nokia.com:58080/document_browser/ccm_wa/GIF_SPECS/CoreSW/coresw_public_spec/</Para>
+</Description>
+</Note>
+<Note Name="/5/">
+<Description>
+<Para>Common R&amp;D Display Data and Layout</Para>
+<Para>Continuus Database: sa1core</Para>
+<Para>Continuus Project: paradise_doc-ou1core#browse</Para>
+<Para>Directory Path: paradise_doc/FTD</Para>
+<Para>Filename:  rd_display_spec.doc</Para>
+<Para>https://oucmswww.nmp.nokia.com:58443/document_browser/ccm_wa/paradise_doc/FTD/</Para>
+</Description>
+</Note>
+<Note Name="/6/">
+<Description>
+<Para>NVD Library Interface Specification</Para>
+<Para>Continuus Database: ou1gif</Para>
+<Para>Continuus Project: GIF_SPECS-ou1gif#browse</Para>
+<Para>Directory Path: GIF_SPECS/CoreSW/coresw_public_spec</Para>
+<Para>Filename:  nvd_lib_inf.doc</Para>
+<Para>http://oucmswww.nmp.nokia.com:58080/document_browser/ccm_wa/GIF_SPECS/CoreSW/coresw_public_spec/</Para>
+</Description>
+</Note>
+<Note Name="/7/">
+<Description>
+<Para>ISI Non-Volatile Data Server Feature Descriptions</Para>
+<Para>Continuus Database: ou1gif</Para>
+<Para>Continuus Project: GIF_SPECS-ou1gif#browse</Para>
+<Para>Directory Path: GIF_SPECS/CoreSW/coresw_public_spec</Para>
+<Para>Filename:  i_nvd_f.doc</Para>
+<Para>http://oucmswww.nmp.nokia.com:58080/document_browser/ccm_wa/GIF_SPECS/CoreSW/coresw_public_spec/</Para>
+</Description>
+</Note>
+<Note Name="/8/">
+<Description>
+<Para>Monitor server FTD user instructions</Para>
+<Para>Continuus Database: co1core</Para>
+<Para>Continuus Project: Core_SW_Cph-Latest</Para>
+<Para>Directory Path: Core_SW_Cph/Components/Monitor_Server</Para>
+<Para>Filename:  mon_ftd_user_instr.doc</Para>
+<Para>https://cocmswww.europe.nokia.com:58443/document_browser/ccm_wa/co1core/Core_SW_Cph-Latest/Core_SW_Cph/Components/Monitor_Server/</Para>
+</Description>
+</Note>
+</DescriptionNotes>
+<VersionHistory>
+<VersionInfo Version="000.019" Status="NonDraft" Date="30-Nov-2001" Editor="Leif Karilainen">
+<Reason>Defects found in inspection are corrected. This version is now compatible with the ISI:COMMON_MESSAGES.BASE-SPEC;19.0</Reason>
+<Reference>See SWAM ADB LK01112144458, NON-DRAFT</Reference>
+<Description>
+<Para>The message name for COMM_SERVICE_PROVIDER_NOT_FOUND_RESP changed to COMM_ISA_ENTITY_NOT_REACHABLE_RESP and status field added to the message</Para>
+</Description>
+</VersionInfo>
+<VersionInfo Version="000.020" Status="Approved" Date="28-Apr-2003" Editor="Leif Karilainen">
+<Reason>New message macro template taken into use and some macros updated because of new autogen version (DEFINE_CONST_TBL_BEGIN --&gt;CONST_TBL_BEGIN and similar kind of cases). COMM_FTD_SYSTEM_SWITCH sub block added. COMM_MAX_FTD_STRING_LENGTH changed from 127 to 124. This version is now compatible with the ISI:COMMON_FEATURES.BASE-SPEC;000.020.</Reason>
+<Reference>See SWAM ADB LK03042933779., APPROVED</Reference>
+<Description>
+<Para>-</Para>
+</Description>
+</VersionInfo>
+<VersionInfo Version="000.021" Status="Approved" Date="29-Sep-2003" Editor="Leif Karilainen">
+<Reason>Autogenerated common ISI header taken into use in sw packages.</Reason>
+<Reference>See SWAM ADB LK03093036140., APPROVED</Reference>
+<Description>
+<Para>COMM_FTD_DATA_STRING C-structure changed so that string[] field is generated. References have been updated.</Para>
+</Description>
+</VersionInfo>
+<VersionInfo Version="000.022" Status="Approved" Date="13-Oct-2003" Editor="Leif Karilainen">
+<Reason>Comments from inspection.</Reason>
+<Reference>See SWAM ADB LK03093036140., APPROVED</Reference>
+<Description>
+<Para>Continuus html project info added to cover page.</Para>
+</Description>
+</VersionInfo>
+<VersionInfo Version="000.023" Status="Approved" Date="12-Jan-2004" Editor="Leif Karilainen">
+<Reason>New common ISI message.</Reason>
+<Reference>See SWAM ADB LK04011246215., APPROVED</Reference>
+<Description>
+<Para>COMM_RF_CONTROL_REQ(RESP) added.</Para>
+</Description>
+</VersionInfo>
+<VersionInfo Version="000.024" Status="Approved" Date="01-Mar-2004" Editor="Leif Karilainen">
+<Reason>comm_isi_16.h needs updates.</Reason>
+<Reference>See SWAM ADB LK04030137132, APPROVED</Reference>
+<Description>
+<Para>New defines for merge fields in comm_isi_16.h have been taken into use. See e.g. PROPERTY_ISIHDR_GENERATE_MERGED_MASKS_16.</Para>
+</Description>
+</VersionInfo>
+<VersionInfo Version="000.025" Status="Approved" Date="26-Apr-2004" Editor="Leif Karilainen">
+<Reason>comm_isi_m.h needs updates.</Reason>
+<Reference>See SWAM ADB LK04042648164, APPROVED</Reference>
+<Description>
+<Para>HEX interpretation for some fields in COMM_SERVICE_NOT_IDENTIFIED_RESP and one field in COMM_ISA_ENTITY_NOT_REACHABLE_RESP messages.</Para>
+</Description>
+</VersionInfo>
+<VersionInfo Version="000.026" Status="Approved" Date="26-Aug-2004" Editor="Leif Karilainen">
+<Reason>New message.</Reason>
+<Reference>See SWAM ADB LK04082636973, APPROVED</Reference>
+<Description>
+<Para>COMM_SERVICE_NOT_AUTHENTICATED_RESP introduced.</Para>
+</Description>
+</VersionInfo>
+<VersionInfo Version="000.027" Status="Approved" Date="04-Jan-2006" Editor="Leif Karilainen">
+<Reason>Minor update</Reason>
+<Reference>See SWAM ADB LK06010448865, APPROVED</Reference>
+</VersionInfo>
+<VersionInfo Version="000.028" Status="Approved" Date="08-Dec-2006" Editor="Leif Karilainen">
+<Reason>Update to support extended resource ID concept behind flag COMMON_MESSAGES_EXTENDED_INTERFACE first time.</Reason>
+<Reference>See SWAM ADB LK06120455502, APPROVED</Reference>
+<Description>
+<Para>-</Para>
+</Description>
+</VersionInfo>
+<VersionInfo Version="000.029" Status="Approved" Date="03-May-2007" Editor="Leif Karilainen">
+<Reason>Minor updates</Reason>
+<Reference>See SWAM ADB LK07050349205, APPROVED</Reference>
+<Description>
+<Para>Removed autogen warnings caused by old macro usage. Updated references.</Para>
+</Description>
+</VersionInfo>
+<VersionInfo Version="000.030" Status="Approved" Date="14-Nov-2008" Editor="Leif Karilainen">
+<Reason>Minor updates</Reason>
+<Reference>See SWAM ADB LK08111334707, APPROVED</Reference>
+<Description>
+<Para>Regenerated all common message output files as autogen had some problems to generate correct message length macros with the old autogen version.</Para>
+</Description>
+</VersionInfo>
+<VersionInfo Version="000.031" Status="Approved" Date="11-Dec-2008" Editor="Leif Karilainen">
+<Reason>Minor updates</Reason>
+<Reference>See SWAM ADB LK08120847276, APPROVED</Reference>
+<Description>
+<Para>Added 3rd party specific address space, OxF3</Para>
+</Description>
+</VersionInfo>
+</VersionHistory>
+<Constants>
+<Constant Name="COMM_ISI_H_VERSION" Id="31">
+<Description>
+<Para>COMM_ISI_H_VERSION definition should not be used anymore, use instead the COMM_ISI_VERSION_Z(Y) definitions</Para>
+</Description>
+</Constant>
+<Constant Name="COMMON_MESSAGE" Id="240">
+<Description>
+<Para>The range from 0xF0(240) to 0xFF(255) is reserved for common purposes and therefore should not be used for server-specific ISI messages.</Para>
+</Description>
+</Constant>
+<Constant Name="SBC_MESSAGE" Id="241">
+<Description>
+<Para>Server base component is sending messages to itself and needs therefore a global message ID which is not in conflict with the real server&#39;s own message space address</Para>
+</Description>
+</Constant>
+<Constant Name="SERVER_MESSAGE_SPACE_EXTENSION" Id="242">
+<Description>
+<Para>If the server&#39;s own message ID space is full (0x00-0xEF) there is a possibility to enlarge the address space by using the SERVER_MESSAGE_SPACE_EXTENSION message and in the following field specifying the actual message ID. </Para>
+<Para>Note that the usage of this space extension must be known when specifying the message because of the alignment restrictions. Same rules applies to the enlarged message ID space as for the original one (server specific space is from 0x00 to 0xEF). By this we support the possibility to have nested message ID extensions.</Para>
+<Break />
+<Para>So we are reusing the 0x00 - 0xEF address space with a field telling the extension level (see message 3.1 Message extension level). If the extension level is e.g. 3 it means that we have used the 0x00 - 0xEF address space 4 times, so we have totally 4 x 240 messages available</Para>
+</Description>
+</Constant>
+<Constant Name="THIRD_PARTY_SPECIFIC_MESSAGE" Id="243">
+<Description>
+<Para>Sub message address space 0x00-0xFF under message ID 0xF3 is reserved for 3rd party specific messages i.e. Nokia should not be using this address space range.</Para>
+</Description>
+</Constant>
+<Constant Name="COMM_MAX_FTD_STRING_LENGTH" Id="124">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+<Constant Name="COMM_MAX_FTD_DATA_LENGTH" Id="248">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+<Constant Name="COMM_MAX_VERSION_COMMENTS_LENGTH" Id="127">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+<Constant Name="COMM_MAX_FTD_DATA_ITEMS" Id="255">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+</Constants>
+<Tables>
+<ConstantTable Name="COMM_FTD_FAIL_REASON" SignedValues="false">
+<IsihdrInfo>
+<DefinitionName>COMM_FTD_FAIL_REASON_CONST</DefinitionName>
+</IsihdrInfo>
+<Constant Name="COMM_FTD_DATA_NOT_ACTIVATED" Id="0">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+<Constant Name="COMM_FTD_DATA_NOT_SUPPORTED" Id="1">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+<Constant Name="COMM_FTD_DATA_NOT_AVAILABLE" Id="2">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+</ConstantTable>
+<ConstantTable Name="COMM_GEN_STATUS_INFO" SignedValues="false">
+<IsihdrInfo>
+<DefinitionName>COMM_GEN_STATUS_INFO_CONST</DefinitionName>
+</IsihdrInfo>
+<Constant Name="COMM_STATUS_OK" Id="0">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+<Constant Name="COMM_STATUS_FAIL" Id="1">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+</ConstantTable>
+<ConstantTable Name="COMM_PWR_OFF_STATES" SignedValues="false">
+<IsihdrInfo>
+<DefinitionName>COMM_PWR_OFF_STATES_CONST</DefinitionName>
+</IsihdrInfo>
+<Constant Name="COMM_PWR_OFF" Id="0">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+<Constant Name="COMM_PWR_CHARGING" Id="1">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+<Constant Name="COMM_PWR_DISCHARGING" Id="2">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+</ConstantTable>
+<ConstantTable Name="COMM_STRING_TYPE" SignedValues="false">
+<IsihdrInfo>
+<DefinitionName>COMM_STRING_TYPE_CONST</DefinitionName>
+</IsihdrInfo>
+<Constant Name="COMM_STRING_ASCII" Id="0">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+<Constant Name="COMM_STRING_UNICODE" Id="1">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+</ConstantTable>
+<ConstantTable Name="COMM_ISA_ENTITY_NOT_REACHABLE_STATUS" SignedValues="false" ValidFrom="000.019">
+<Description>
+<Para>ISA Entity not Reachable States</Para>
+</Description>
+<IsihdrInfo>
+<DefinitionName>COMM_ISA_ENTITY_NOT_REACHABLE_STATUS_CONST</DefinitionName>
+</IsihdrInfo>
+<Constant Name="COMM_ISA_ENTITY_NOT_AVAILABLE" Id="0">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+<Constant Name="COMM_ISA_ENTITY_NOT_EXISTING" Id="1">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+</ConstantTable>
+<ConstantTable Name="COMM_FTD_SYSTEM_SWITCH_INFO" SignedValues="false" ValidFrom="000.020">
+<IsihdrInfo>
+<DefinitionName>COMM_FTD_SYSTEM_SWITCH_INFO_CONST</DefinitionName>
+</IsihdrInfo>
+<Constant Name="COMM_FTD_SWITCH_WCDMA_TO_GSM" Id="1">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+<Constant Name="COMM_FTD_SWITCH_GSM_TO_WCDMA" Id="2">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+</ConstantTable>
+<ConstantTable Name="COMM_RF_OPERATION" SignedValues="false" ValidFrom="000.023">
+<IsihdrInfo>
+<DefinitionName>COMM_RF_OPERATION_CONST</DefinitionName>
+</IsihdrInfo>
+<Constant Name="COMM_RF_ON" Id="0">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+<Constant Name="COMM_RF_OFF" Id="1">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+<Constant Name="COMM_RF_WIFI" Id="2" ValidFrom="000.027">
+<Description>
+<Para>-</Para>
+</Description>
+</Constant>
+</ConstantTable>
+</Tables>
+<Subblocks>
+<Subblock Name="COMM_FTD_DATA_FAIL" Id="0">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_FTD_DATA_FAIL_STR</StructLengthName>
+<StructName>COMM_FTD_DATA_FAIL_STR</StructName>
+</IsihdrInfo>
+<SubblockId Name="Sub Block ID" VarName="subblockID" Size="16" />
+<SubblockLength Name="Sub Block Length" VarName="subblock_length" Size="8" />
+<Filler Name="Filler" VarName="filler1" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+<Number Name="Not Identified Sub Block ID" VarName="not_identified_subblockID" Size="16" Signed="false" Endian="BigEndian">
+<Description>
+<Para>-</Para>
+</Description>
+<Presentation Type="FtdId" />
+</Number>
+<Number Name="Fail Reason" VarName="fail_reason" Size="8" Signed="false" Endian="BigEndian">
+<Presentation Type="Constant" TableName="COMM_FTD_FAIL_REASON" />
+</Number>
+<Filler Name="Filler" VarName="filler2" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+</Subblock>
+<Subblock Name="COMM_FTD_DATA_ALL" Id="1">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_FTD_DATA_ALL_STR</StructLengthName>
+<StructName>COMM_FTD_DATA_ALL_STR</StructName>
+</IsihdrInfo>
+<SubblockId Name="Sub Block ID" VarName="subblockID" Size="16" />
+<SubblockLength Name="Sub Block Length" VarName="subblock_length" Size="8" />
+<Filler Name="Filler" VarName="filler1" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+</Subblock>
+<Subblock Name="COMM_FTD_SYSTEM_SWITCH" Id="2" ValidFrom="000.020">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_FTD_SYSTEM_SWITCH_STR</StructLengthName>
+<StructName>COMM_FTD_SYSTEM_SWITCH_STR</StructName>
+</IsihdrInfo>
+<SubblockId Name="Sub Block ID" VarName="subblockID" Size="16" />
+<SubblockLength Name="Sub Block Length" VarName="subblock_length" Size="8" />
+<Number Name="System Switch" VarName="system_switch" Size="8" Signed="false" Endian="BigEndian">
+<Presentation Type="Constant" TableName="COMM_FTD_SYSTEM_SWITCH_INFO" />
+</Number>
+</Subblock>
+</Subblocks>
+<SubblockTemplates>
+<SubblockTemplate Name="COMM_FTD_DATA_BYTE">
+<Description>
+<Para>Should just be used as a template for FTD data item description, see reference /5/</Para>
+</Description>
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_FTD_DATA_BYTE_STR</StructLengthName>
+<StructName>COMM_FTD_DATA_BYTE_STR</StructName>
+</IsihdrInfo>
+<SubblockId Name="Sub Block ID" VarName="subblockID" Size="16" />
+<SubblockLength Name="Sub Block Length" VarName="subblock_length" Size="8" />
+<Number Name="Data" VarName="data" Size="8" Signed="false" Endian="BigEndian">
+<Description>
+<Para>-</Para>
+</Description>
+<Presentation Type="Decimal" />
+</Number>
+</SubblockTemplate>
+<SubblockTemplate Name="COMM_FTD_DATA_WORD">
+<Description>
+<Para>Should just be used as a template for FTD data item description, see reference /5/</Para>
+</Description>
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_FTD_DATA_WORD_STR</StructLengthName>
+<StructName>COMM_FTD_DATA_WORD_STR</StructName>
+</IsihdrInfo>
+<SubblockId Name="Sub Block ID" VarName="subblockID" Size="16" />
+<SubblockLength Name="Sub Block Length" VarName="subblock_length" Size="8" />
+<Filler Name="Filler" VarName="filler1" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+<Number Name="Data" VarName="data" Size="16" Signed="false" Endian="BigEndian">
+<Description>
+<Para>-</Para>
+</Description>
+<Presentation Type="Decimal" />
+</Number>
+<Filler Name="Filler" VarName="filler2" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+<Filler Name="Filler" VarName="filler3" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+</SubblockTemplate>
+<SubblockTemplate Name="COMM_FTD_DATA_DWORD">
+<Description>
+<Para>Should just be used as a template for FTD data item description, see reference /5/</Para>
+</Description>
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_FTD_DATA_DWORD_STR</StructLengthName>
+<StructName>COMM_FTD_DATA_DWORD_STR</StructName>
+</IsihdrInfo>
+<SubblockId Name="Sub Block ID" VarName="subblockID" Size="16" />
+<SubblockLength Name="Sub Block Length" VarName="subblock_length" Size="8" />
+<Filler Name="Filler" VarName="filler1" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+<Number Name="Data" VarName="data" Size="32" Signed="false" Endian="BigEndian">
+<Description>
+<Para>-</Para>
+</Description>
+<Presentation Type="Decimal" />
+</Number>
+</SubblockTemplate>
+<SubblockTemplate Name="COMM_FTD_DATA_STRING">
+<Description>
+<Para>Should just be used as a template for FTD data item description, see reference /5/</Para>
+</Description>
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_FTD_DATA_STRING_STR</StructLengthName>
+<StructName>COMM_FTD_DATA_STRING_STR</StructName>
+</IsihdrInfo>
+<SubblockId Name="Sub Block ID" VarName="subblockID" Size="16" />
+<SubblockLength Name="Sub Block Length" VarName="subblock_length" Size="8" />
+<IrregularStructure Name="String Data" VarName="string_lenght" Size="8" Endian="BigEndian">
+<Number Name="String type" VarName="str_type" Size="1" Signed="false" Endian="BigEndian" Tag="STR_TYPE">
+<Presentation Type="Constant" TableName="COMM_STRING_TYPE" />
+</Number>
+<Number Name="String length" VarName="str_len" Size="7" Signed="false" Endian="BigEndian" Tag="STR_LEN">
+<MaxValue>COMM_MAX_FTD_STRING_LENGTH</MaxValue>
+<Presentation Type="Decimal" />
+</Number>
+</IrregularStructure>
+<Selection Name="String data" VarName="data" TagName="STR_TYPE">
+<Case TagValue="COMM_STRING_UNICODE">
+<String Name="Data" VarName="string" Type="Unicode" Endian="BigEndian" IsZeroTerminated="true">
+<IsihdrInfo>
+<GenerationType>ReserveSpace</GenerationType>
+</IsihdrInfo>
+<Count Type="TagValue" TagName="STR_LEN" />
+</String>
+</Case>
+<Default>
+<String Name="Data" VarName="string" Type="Ascii" Endian="BigEndian" IsZeroTerminated="true">
+<IsihdrInfo>
+<GenerationType>ReserveSpace</GenerationType>
+</IsihdrInfo>
+<Count Type="TagValue" TagName="STR_LEN" />
+</String>
+</Default>
+</Selection>
+<Alignment Boundary="32" />
+</SubblockTemplate>
+<SubblockTemplate Name="COMM_FTD_DATA_TABLE">
+<Description>
+<Para>Should just be used as a template for FTD data item description, see reference /5/</Para>
+</Description>
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_FTD_DATA_TABLE_STR</StructLengthName>
+<StructName>COMM_FTD_DATA_TABLE_STR</StructName>
+</IsihdrInfo>
+<SubblockId Name="Sub Block ID" VarName="subblockID" Size="16" />
+<SubblockLength Name="Sub Block Length" VarName="subblock_length" Size="8" />
+<Number Name="Data length" VarName="data_length" Size="8" Signed="false" Endian="BigEndian" Tag="N">
+<MaxValue>COMM_MAX_FTD_DATA_LENGTH</MaxValue>
+<Presentation Type="Decimal" />
+</Number>
+<Array Name="Data" VarName="data">
+<Description>
+<Para>-</Para>
+</Description>
+<IsihdrInfo>
+<GenerationType>ReserveSpace</GenerationType>
+</IsihdrInfo>
+<Count Type="TagValue" TagName="N" />
+<Number Name="Data" VarName="data" Size="8" Signed="false" Endian="BigEndian">
+<Description>
+<Para>-</Para>
+</Description>
+<Presentation Type="Decimal" />
+<IsihdrInfo>
+<GenerationType>ReserveSpace</GenerationType>
+</IsihdrInfo>
+</Number>
+</Array>
+<Alignment Boundary="32" />
+</SubblockTemplate>
+</SubblockTemplates>
+<Messages>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_ISA_ENTITY_NOT_REACHABLE_RESP" SubId="20" Function="Response" ValidFrom="000.019">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_ISA_ENTITY_NOT_REACHABLE_RESP_STR</StructLengthName>
+<StructName>COMM_ISA_ENTITY_NOT_REACHABLE_RESP_STR</StructName>
+</IsihdrInfo>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Number Name="Not Delivered Message ID" VarName="not_delivered_messageID" Size="8" Signed="false" Endian="BigEndian">
+<Description>
+<Para>-</Para>
+</Description>
+<Presentation Type="HexaDecimal" />
+</Number>
+<Number Name="Status" VarName="status" Size="8" Signed="false" Endian="BigEndian">
+<Presentation Type="Constant" TableName="COMM_ISA_ENTITY_NOT_REACHABLE_STATUS" />
+</Number>
+<Filler Name="Filler" VarName="filler1" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+<Filler Name="Filler" VarName="filler2" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+<Filler Name="Filler" VarName="filler3" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_SERVICE_NOT_IDENTIFIED_RESP" SubId="1" Function="Response">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_SERVICE_NOT_IDENTIFIED_RESP_STR</StructLengthName>
+<StructName>COMM_SERVICE_NOT_IDENTIFIED_RESP_STR</StructName>
+</IsihdrInfo>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Number Name="Not Served Message ID" VarName="not_served_messageID" Size="8" Signed="false" Endian="BigEndian">
+<Description>
+<Para>-</Para>
+</Description>
+<Presentation Type="HexaDecimal" />
+</Number>
+<Number Name="Message Extension Level" VarName="message_extension" Size="8" Signed="false" Endian="BigEndian">
+<Description>
+<Para>If not served message ID is SERVER_MESSAGE_SPACE_EXTENSION this field informs the level (amount) of extension fields in the message where the final message ID resides which couldnt be recognized. (0 means no extension in use), see the note in chapter SERVER_MESSAGE_SPACE_EXTENSION about extension field usage.</Para>
+</Description>
+<Presentation Type="Decimal" />
+</Number>
+<Number Name="Not Served Sub Message ID" VarName="not_served_submessageID" Size="8" Signed="false" Endian="BigEndian">
+<Description>
+<Para>-</Para>
+</Description>
+<Presentation Type="HexaDecimal" />
+</Number>
+<Filler Name="Filler" VarName="filler1" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+<Filler Name="Filler" VarName="filler2" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_SERVER_VERSION_GET_REQ" SubId="2" Function="Request">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_SERVER_VERSION_GET_REQ_STR</StructLengthName>
+<StructName>COMM_SERVER_VERSION_GET_REQ_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_SERVER_VERSION_GET_RESP" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Filler Name="Filler" VarName="filler1" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_SERVER_VERSION_GET_RESP" SubId="3" Function="Response">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_SERVER_VERSION_GET_RESP_STR</StructLengthName>
+<StructName>COMM_SERVER_VERSION_GET_RESP_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_SERVER_VERSION_GET_REQ" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Number Name="Version Number Z" VarName="version_nbr_zzz" Size="8" Signed="false" Endian="BigEndian">
+<Description>
+<Para>-</Para>
+</Description>
+<Presentation Type="Decimal" />
+</Number>
+<Number Name="Version Number Y" VarName="version_nbr_yyy" Size="8" Signed="false" Endian="BigEndian">
+<Description>
+<Para>-</Para>
+</Description>
+<Presentation Type="Decimal" />
+</Number>
+<Number Name="Version Number X" VarName="version_nbr_xxx" Size="8" Signed="false" Endian="BigEndian">
+<Description>
+<Para>-</Para>
+</Description>
+<Presentation Type="Decimal" />
+</Number>
+<Number Name="Release Year" VarName="release_year" Size="8" Signed="false" Endian="BigEndian">
+<Description>
+<Para>-</Para>
+</Description>
+<Presentation Type="Decimal" />
+</Number>
+<Number Name="Release Month" VarName="release_month" Size="8" Signed="false" Endian="BigEndian">
+<Description>
+<Para>-</Para>
+</Description>
+<Presentation Type="Decimal" />
+</Number>
+<Number Name="Release Day" VarName="release_day" Size="8" Signed="false" Endian="BigEndian">
+<Description>
+<Para>-</Para>
+</Description>
+<Presentation Type="Decimal" />
+</Number>
+<Number Name="Version Comments Length" VarName="version_comments_length" Size="8" Signed="false" Endian="BigEndian" Tag="N">
+<Description>
+<Para>MSB must be set to 0 because of ASCII string </Para>
+</Description>
+<MaxValue>COMM_MAX_VERSION_COMMENTS_LENGTH</MaxValue>
+<Presentation Type="Decimal" />
+</Number>
+<String Name="Version Comments" VarName="version_comments" Type="Ascii" Endian="BigEndian" IsZeroTerminated="true">
+<IsihdrInfo>
+<GenerationType>ReserveSpace</GenerationType>
+</IsihdrInfo>
+<Count Type="TagValue" TagName="N" />
+</String>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_ISI_VERSION_GET_REQ" SubId="18" Function="Request">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_ISI_VERSION_GET_REQ_STR</StructLengthName>
+<StructName>COMM_ISI_VERSION_GET_REQ_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_ISI_VERSION_GET_RESP" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transaction_ID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Filler Name="Filler" VarName="filler" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_ISI_VERSION_GET_RESP" SubId="19" Function="Response">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_ISI_VERSION_GET_RESP_STR</StructLengthName>
+<StructName>COMM_ISI_VERSION_GET_RESP_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_ISI_VERSION_GET_REQ" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transaction_ID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Number Name="ISI Version Z" VarName="isi_version_zzz" Size="8" Signed="false" Endian="BigEndian">
+<Description>
+<Para>-</Para>
+</Description>
+<Presentation Type="Decimal" />
+</Number>
+<Number Name="ISI Version Y" VarName="isi_version_yyy" Size="8" Signed="false" Endian="BigEndian">
+<Description>
+<Para>-</Para>
+</Description>
+<Presentation Type="Decimal" />
+</Number>
+<Filler Name="Filler" VarName="filler1" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+<Filler Name="Filler" VarName="filler2" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+<Filler Name="Filler" VarName="filler3" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_FTD_DATA_REQ" SubId="4" Function="Request">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_FTD_DATA_REQ_STR</StructLengthName>
+<StructName>COMM_FTD_DATA_REQ_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_FTD_DATA_RESP" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Number Name="Number of asked FTD Data" VarName="nbr_of_FTD_data_items" Size="8" Signed="false" Endian="BigEndian" Tag="N">
+<MaxValue>COMM_MAX_FTD_DATA_ITEMS</MaxValue>
+<Presentation Type="Decimal" />
+</Number>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_FTD_DATA_RESP" SubId="5" Function="Response">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_FTD_DATA_RESP_STR</StructLengthName>
+<StructName>COMM_FTD_DATA_RESP_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_FTD_DATA_REQ" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Number Name="Number of FTD Data" VarName="nbr_of_subblocks" Size="8" Signed="false" Endian="BigEndian" Tag="N">
+<Presentation Type="Decimal" />
+</Number>
+<SubblockList Name="Sub Blocks" VarName="sub_blocks">
+<Description>
+<Para>see reference /5/and /8/ for sub blocks</Para>
+</Description>
+<IsihdrInfo>
+<GenerationType>DontGenerate</GenerationType>
+</IsihdrInfo>
+<Count Type="TagValue" TagName="N" />
+<FtdData />
+<SubblockReference SubblockName="COMM_FTD_DATA_FAIL" />
+<SubblockReference SubblockName="COMM_FTD_SYSTEM_SWITCH" ValidFrom="000.020" />
+</SubblockList>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_FTD_TEST_DATA_REQ" SubId="6" Function="Request">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_FTD_TEST_DATA_REQ_STR</StructLengthName>
+<StructName>COMM_FTD_TEST_DATA_REQ_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_FTD_TEST_DATA_RESP" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Filler Name="Filler" VarName="filler1" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+<Number Name="FTD data item" VarName="FTD_data_item" Size="16" Signed="false" Endian="BigEndian">
+<Description>
+<Para>Use FTD sub block IDs as parameter</Para>
+</Description>
+<Presentation Type="FtdId" />
+</Number>
+<Filler Name="Filler" VarName="filler2" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+<Filler Name="Filler" VarName="filler3" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+<Number Name="Input Data" VarName="user_provided_data" Size="32" Signed="false" Endian="BigEndian">
+<Description>
+<Para>User provided data</Para>
+</Description>
+<Presentation Type="Decimal" />
+</Number>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_FTD_TEST_DATA_RESP" SubId="7" Function="Response">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_FTD_TEST_DATA_RESP_STR</StructLengthName>
+<StructName>COMM_FTD_TEST_DATA_RESP_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_FTD_TEST_DATA_REQ" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Number Name="Status" VarName="status" Size="8" Signed="false" Endian="BigEndian">
+<Presentation Type="Constant" TableName="COMM_GEN_STATUS_INFO" />
+</Number>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_FTD_DATA_DEACTIVATE_REQ" SubId="8" Function="Request">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_FTD_DATA_DEACTIVATE_REQ_STR</StructLengthName>
+<StructName>COMM_FTD_DATA_DEACTIVATE_REQ_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_FTD_DATA_DEACTIVATE_RESP" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Number Name="Number of asked FTD Data" VarName="nbr_of_FTD_data_items" Size="8" Signed="false" Endian="BigEndian" Tag="N">
+<MaxValue>COMM_MAX_FTD_DATA_ITEMS</MaxValue>
+<Presentation Type="Decimal" />
+</Number>
+<SubblockIdList Name="List of FTD data items" VarName="FTD_data_items">
+<IsihdrInfo>
+<GenerationType>ReserveSpace</GenerationType>
+</IsihdrInfo>
+<Count Type="TagValue" TagName="N" />
+<FtdData />
+<SubblockReference SubblockName="COMM_FTD_DATA_ALL" />
+</SubblockIdList>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_FTD_DATA_DEACTIVATE_RESP" SubId="9" Function="Response">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_FTD_DATA_DEACTIVATE_RESP_STR</StructLengthName>
+<StructName>COMM_FTD_DATA_DEACTIVATE_RESP_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_FTD_DATA_DEACTIVATE_REQ" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Number Name="Number of FTD Data" VarName="nbr_of_subblocks" Size="8" Signed="false" Endian="BigEndian" Tag="N">
+<Presentation Type="Decimal" />
+</Number>
+<SubblockList Name="Sub blocks" VarName="sub_blocks">
+<IsihdrInfo>
+<GenerationType>DontGenerate</GenerationType>
+</IsihdrInfo>
+<Count Type="TagValue" TagName="N" />
+<SubblockReference SubblockName="COMM_FTD_DATA_FAIL" />
+</SubblockList>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_PWR_OFF_CONFIRM_REQ" SubId="12" Function="Request">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_PWR_OFF_CONFIRM_REQ_STR</StructLengthName>
+<StructName>COMM_PWR_OFF_CONFIRM_REQ_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_PWR_OFF_CONFIRM_RESP" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Filler Name="Filler" VarName="filler1" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_PWR_OFF_CONFIRM_RESP" SubId="13" Function="Response">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_PWR_OFF_CONFIRM_RESP_STR</StructLengthName>
+<StructName>COMM_PWR_OFF_CONFIRM_RESP_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_PWR_OFF_CONFIRM_REQ" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Number Name="Power Off State" VarName="state" Size="8" Signed="false" Endian="BigEndian">
+<Presentation Type="Constant" TableName="COMM_PWR_OFF_STATES" />
+</Number>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_NVD_SET_DEFAULT_REQ" SubId="14" Function="Request">
+<Description>
+<Para>For a detailed description, see reference /6/ and /7/</Para>
+<Break />
+<Break />
+<Para>Note: The word &#39;reason&#39; is used interchangeably with &#39;level&#39; when used in the context of factory settings. Although &#39;reason&#39; more accurately describes the parameter (and is used in all new documenation), it is possible to encounter &#39;level&#39; in some NVD documenation that was approved prior to use of the term &#39;reason&#39;.</Para>
+</Description>
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_NVD_SET_DEFAULT_REQ_STR</StructLengthName>
+<StructName>COMM_NVD_SET_DEFAULT_REQ_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_NVD_SET_DEFAULT_RESP" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Filler Name="Filler" VarName="filler1" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+<Number Name="Reason" VarName="reason" Size="32" Signed="false" Endian="BigEndian">
+<Description>
+<Para>See reference /7/ for different reason values</Para>
+</Description>
+<Presentation Type="HexaDecimal" />
+</Number>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_NVD_SET_DEFAULT_RESP" SubId="15" Function="Response">
+<Description>
+<Para>For a detailed description, see reference /6/ and /7/</Para>
+</Description>
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_NVD_SET_DEFAULT_RESP_STR</StructLengthName>
+<StructName>COMM_NVD_SET_DEFAULT_RESP_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_NVD_SET_DEFAULT_REQ" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Number Name="Status" VarName="status" Size="8" Signed="false" Endian="BigEndian">
+<Presentation Type="Constant" TableName="COMM_GEN_STATUS_INFO" />
+</Number>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_NVD_VERSION_CHK_REQ" SubId="16" Function="Request">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_NVD_VERSION_CHK_REQ_STR</StructLengthName>
+<StructName>COMM_NVD_VERSION_CHK_REQ_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_NVD_VERSION_CHK_RESP" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Filler Name="Filler" VarName="filler1" Size="8">
+<Description>
+<Para>For future use. The value should always be zero.</Para>
+</Description>
+</Filler>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_NVD_VERSION_CHK_RESP" SubId="17" Function="Response">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_NVD_VERSION_CHK_RESP_STR</StructLengthName>
+<StructName>COMM_NVD_VERSION_CHK_RESP_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_NVD_VERSION_CHK_REQ" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Number Name="Status" VarName="status" Size="8" Signed="false" Endian="BigEndian">
+<Presentation Type="Constant" TableName="COMM_GEN_STATUS_INFO" />
+</Number>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_RF_CONTROL_REQ" SubId="21" Function="Request" ValidFrom="000.023">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_RF_CONTROL_REQ_STR</StructLengthName>
+<StructName>COMM_RF_CONTROL_REQ_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_RF_CONTROL_RESP" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Number Name="RF Operation" VarName="operation" Size="8" Signed="false" Endian="BigEndian">
+<Presentation Type="Constant" TableName="COMM_RF_OPERATION" />
+</Number>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_RF_CONTROL_RESP" SubId="22" Function="Response" ValidFrom="000.023">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_RF_CONTROL_RESP_STR</StructLengthName>
+<StructName>COMM_RF_CONTROL_RESP_STR</StructName>
+</IsihdrInfo>
+<RelatedMessages>
+<RelatedMessage Name="COMM_RF_CONTROL_REQ" />
+</RelatedMessages>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Number Name="Status" VarName="status" Size="8" Signed="false" Endian="BigEndian">
+<Presentation Type="Constant" TableName="COMM_GEN_STATUS_INFO" />
+</Number>
+</Message>
+<Message Name="COMMON_MESSAGE" Id="240" SubName="COMM_SERVICE_NOT_AUTHENTICATED_RESP" SubId="23" Function="Response" ValidFrom="000.026">
+<IsihdrInfo>
+<StructLengthName>SIZE_COMM_SERVICE_NOT_AUTHENTICATED_RESP_STR</StructLengthName>
+<StructName>COMM_SERVICE_NOT_AUTHENTICATED_RESP_STR</StructName>
+</IsihdrInfo>
+<TransactionId Name="Transaction ID" VarName="transactionID" Size="8">
+<Description>
+<Para>-</Para>
+</Description>
+</TransactionId>
+<MessageId Name="Message ID" VarName="messageID" Size="8" />
+<SubmessageId Name="Sub message ID" VarName="submessageID" Size="8" />
+<Number Name="Not Served Message ID" VarName="not_served_messageID" Size="8" Signed="false" Endian="BigEndian">
+<Description>
+<Para>-</Para>
+</Description>
+<Presentation Type="HexaDecimal" />
+</Number>
+</Message>
+</Messages>
+</ResourceIsiCommon>
+</AutogenXml>

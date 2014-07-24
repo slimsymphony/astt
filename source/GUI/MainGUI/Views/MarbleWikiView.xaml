@@ -1,0 +1,26 @@
+﻿<Views:UcBase x:Class="Marble.Views.MarbleWikiView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Views="clr-namespace:Marble.Views" mc:Ignorable="d"
+             d:DesignWidth="800" d:DesignHeight="480">
+    <Views:UcBase.Resources>
+    </Views:UcBase.Resources>
+    <Views:UcBase.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Close"
+                        Executed="CloseCommandHandler"/>
+    </Views:UcBase.CommandBindings>
+
+    <Grid x:Name="LayoutRoot" Background="#FF2F2F2F">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <GroupBox x:Name="groupBox1" Grid.Column="0" Header="Marble Wiki" Margin="3,3,3,8" Background="White" Style="{DynamicResource MarbleGroupBox}">
+            <WebBrowser x:Name="webBrowserMarbleWiki" Cursor="Arrow" />
+        </GroupBox>
+
+    </Grid>
+</Views:UcBase>

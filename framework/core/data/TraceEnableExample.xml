@@ -1,0 +1,14 @@
+<TraceActivation>
+  <Configuration Name='MyConfiguration' Version='3'>
+	<Settings>
+	  <Storage Name='PMM' State='True' />
+	  <Timestamp Name='MCU' State='Off' />
+	</Settings>
+	<TraceType XPath='//McuTrace[@Device=&quot;PN_DEV_HOST&quot;]'>
+	  <TraceGroup Name='TP_MESSAGE_TRA' State='Extended' />
+	  <TraceGroup Name='DISP_INTERFACE_TRA' State='Extended' />
+	</TraceType><TraceType XPath='//OsTrace[@Device=&quot;PN_DEV_HOST&quot;]'>
+	  <TraceGroup Name='OS_MONITOR_SCHEDULING_HOOKS' State='On' />
+	</TraceType>
+  </Configuration>
+</TraceActivation>

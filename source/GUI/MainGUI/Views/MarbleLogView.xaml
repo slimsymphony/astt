@@ -1,0 +1,375 @@
+﻿<Views:UcBase x:Class="Marble.Views.MarbleLogView" x:Name="UcMarbleLogView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Views="clr-namespace:Marble.Views"
+              xmlns:CustomControls="clr-namespace:MarbleLibrary.CustomControls;assembly=MarbleLibrary"
+              xmlns:Converters="clr-namespace:MarbleLibrary.Converters;assembly=MarbleLibrary"
+              xmlns:templates="clr-namespace:Marble.Templates" xmlns:model="clr-namespace:Marble.Model"
+              mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600" SizeChanged="UcMarbleLogView_SizeChanged">
+    <Views:UcBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Templates/MarbleLogEntryCellTemplate.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Views:UcBase.Resources>
+    <Views:UcBase.InputBindings>
+        <KeyBinding Key="C" Modifiers="Control" Command="{Binding ElementName=UcMarbleLogView, Path=CmdCopySelected}" />
+    </Views:UcBase.InputBindings>
+    
+    <Grid x:Name="GridRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <StackPanel x:Name="StackPanelFilterControls" Orientation="Horizontal" Background="{StaticResource MarbleDarkPurleBackgroundGradient}">
+            
+            <Button x:Name="ButtonCopySelected" Style="{StaticResource MarbleButton}" Width="40" Click="ButtonCopySelected_Click" Margin="2,0,2,0">
+                <Button.ToolTip>
+                    <CustomControls:MarbleToolTip ToolTipTitle="Copy Selected (Ctrl+C)"
+                                                  ToolTipDescription="Copy selected output log entries to clipboard. Select multiple items using Shift and Ctrl keys."/>
+                </Button.ToolTip>
+                <Button.Content>
+                    <Image Source="/MarbleLibrary;component/Images\copy.icon.16x16.png" Height="16" Width="16" />
+                </Button.Content>
+            </Button>
+            <Button x:Name="ButtonCopyAll" Style="{StaticResource MarbleButton}" Width="40" Click="ButtonCopyAll_Click" Margin="2,0,2,0">
+                <Button.ToolTip>
+                    <CustomControls:MarbleToolTip ToolTipTitle="Copy All"
+                                                  ToolTipDescription="Copy all output log entries to clipboard."/>
+                </Button.ToolTip>
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/MarbleLibrary;component/Images\copy.icon.16x16.png" Height="16" Width="16" />
+                        <TextBlock Text="*" FontSize="30" Height="20" Margin="0,-10,0,0" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <ToggleButton x:Name="ToggleButtonGeneric" IsChecked="True" Width="28" Style="{StaticResource ToggleButtonWithImageStyle}" Margin="20,0,0,0">
+                <ToggleButton.ToolTip>
+                    <CustomControls:MarbleToolTip ToolTipTitle="Show/Hide Generic Type"
+                                                  ToolTipDescription="Turns on/off whether Generic type messages are displayed."/>
+                </ToggleButton.ToolTip>
+                <ToggleButton.Content>
+                    <Image Width="16" Height="16" Source="/MarbleLibrary;component/Images\empty.label.32x16.png" Margin="2"/>
+                </ToggleButton.Content>
+            </ToggleButton>
+            <ToggleButton x:Name="ToggleButtonGuiMessage" IsChecked="True" Width="28" Style="{StaticResource ToggleButtonWithImageStyle}">
+                <ToggleButton.ToolTip>
+                    <CustomControls:MarbleToolTip ToolTipTitle="Show/Hide GuiMessage Type"
+                                                  ToolTipDescription="Turns on/off whether GuiMessage type messages are displayed."/>
+                </ToggleButton.ToolTip>
+                <ToggleButton.Content>
+                    <Image Width="16" Height="16" Source="/MarbleLibrary;component/Images\gui.message.icon.16x16.png" Margin="2" />
+                </ToggleButton.Content>
+            </ToggleButton>
+            <ToggleButton x:Name="ToggleButtonStageStart" IsChecked="True" Width="28" Style="{StaticResource ToggleButtonWithImageStyle}">
+                <ToggleButton.ToolTip>
+                    <CustomControls:MarbleToolTip ToolTipTitle="Show/Hide StageStart Type"
+                                                  ToolTipDescription="Turns on/off whether StageStart type messages are displayed."/>
+                </ToggleButton.ToolTip>
+                <ToggleButton.Content>
+                    <Image Width="16" Height="16" Source="/MarbleLibrary;component/Images\start.start.icon.16x16.png" Margin="2" />
+                </ToggleButton.Content>
+            </ToggleButton>
+            <ToggleButton x:Name="ToggleButtonEvent" IsChecked="True" Width="28" Style="{StaticResource ToggleButtonWithImageStyle}">
+                <ToggleButton.ToolTip>
+                    <CustomControls:MarbleToolTip ToolTipTitle="Show/Hide Event Type"
+                                                  ToolTipDescription="Turns on/off whether Event type messages are displayed."/>
+                </ToggleButton.ToolTip>
+                <ToggleButton.Content>
+                    <Image Width="16" Height="16" Source="/MarbleLibrary;component/Images\event.icon.16x16.png" Margin="2" />
+                </ToggleButton.Content>
+            </ToggleButton>
+            <ToggleButton x:Name="ToggleButtonInfo" IsChecked="True" Width="28" Style="{StaticResource ToggleButtonWithImageStyle}">
+                <ToggleButton.ToolTip>
+                    <CustomControls:MarbleToolTip ToolTipTitle="Show/Hide Info Type"
+                                                  ToolTipDescription="Turns on/off whether Info type messages are displayed."/>
+                </ToggleButton.ToolTip>
+                <ToggleButton.Content>
+                    <Image Width="16" Height="16" Source="/MarbleLibrary;component/Images\info.icon.32x32.png" Margin="2" />
+                </ToggleButton.Content>
+            </ToggleButton>
+            <ToggleButton x:Name="ToggleButtonWarning" IsChecked="True" Width="28" Style="{StaticResource ToggleButtonWithImageStyle}">
+                <ToggleButton.ToolTip>
+                    <CustomControls:MarbleToolTip ToolTipTitle="Show/Hide Warning Type"
+                                                  ToolTipDescription="Turns on/off whether Warning type messages are displayed."/>
+                </ToggleButton.ToolTip>
+                <ToggleButton.Content>
+                    <Image Width="16" Height="16" Source="/MarbleLibrary;component/Images\warning.shadow.icon.16x16.png" Margin="2" />
+                </ToggleButton.Content>
+            </ToggleButton>
+            <ToggleButton x:Name="ToggleButtonError" IsChecked="True" Width="28" Style="{StaticResource ToggleButtonWithImageStyle}">
+                <ToggleButton.ToolTip>
+                    <CustomControls:MarbleToolTip ToolTipTitle="Show/Hide Error Type"
+                                                  ToolTipDescription="Turns on/off whether Error type messages are displayed."/>
+                </ToggleButton.ToolTip>
+                <ToggleButton.Content>
+                    <Image Width="16" Height="16" Source="/MarbleLibrary;component/Images\error.shadow.icon.16x16.png" Margin="2" />
+                </ToggleButton.Content>
+            </ToggleButton>
+            <ToggleButton x:Name="ToggleButtonFailure" IsChecked="True" Width="28" Style="{StaticResource ToggleButtonWithImageStyle}">
+                <ToggleButton.ToolTip>
+                    <CustomControls:MarbleToolTip ToolTipTitle="Show/Hide Failure Type"
+                                                  ToolTipDescription="Turns on/off whether Failure type messages are displayed."/>
+                </ToggleButton.ToolTip>
+                <ToggleButton.Content>
+                    <Image Width="16" Height="16" Source="/MarbleLibrary;component/Images\failed.circle.shadow.icon.16x16.png" Margin="2" />
+                </ToggleButton.Content>
+            </ToggleButton>
+            <!-- CURRENTLY NOT IN USE -->
+            <!--<ToggleButton x:Name="ToggleButtonFatal" IsChecked="True" Width="28" Style="{StaticResource ToggleButtonWithImageStyle}">
+                <ToggleButton.ToolTip>
+                    <CustomControls:MarbleToolTip ToolTipTitle="Show/Hide Fatal Type"
+                                                    ToolTipDescription="Turns on/off whether Fatal type messages are displayed."/>
+                </ToggleButton.ToolTip>    
+                <ToggleButton.Content>
+                    <Image Width="16" Height="16" Source="/MarbleLibrary;component/Images\error.icon.16x16.png" Margin="2" />
+                </ToggleButton.Content>
+            </ToggleButton>-->
+            <ToggleButton x:Name="ToggleButtonFrameworkResponse" IsChecked="False" Width="28" Style="{StaticResource ToggleButtonWithImageStyle}">
+                <ToggleButton.ToolTip>
+                    <CustomControls:MarbleToolTip ToolTipTitle="Show/Hide FrameworkResponse Type"
+                                                  ToolTipDescription="Turns on/off whether FrameworkResponse type messages are displayed."/>
+                </ToggleButton.ToolTip>
+                <ToggleButton.Content>
+                    <Image Width="16" Height="16" Source="/MarbleLibrary;component/Images\framework.message.icon.16x16.png" Margin="2" />
+                </ToggleButton.Content>
+            </ToggleButton>
+            <ToggleButton x:Name="ToggleButtonFrameworkRequest" IsChecked="False" Width="28" Style="{StaticResource ToggleButtonWithImageStyle}">
+                <ToggleButton.ToolTip>
+                    <CustomControls:MarbleToolTip ToolTipTitle="Show/Hide FrameworkRequest Type"
+                                                  ToolTipDescription="Turns on/off whether FrameworkRequest type messages are displayed."/>
+                </ToggleButton.ToolTip>
+                <ToggleButton.Content>
+                    <Image Width="16" Height="16" Source="/MarbleLibrary;component/Images\framework.icon.16x16.png" Margin="2" />
+                </ToggleButton.Content>
+            </ToggleButton>
+
+            <!--public enum MarbleLogEntryType
+    {
+        Generic = 0,
+        GuiMessage = 1,
+        Event,
+        Info,
+        Warning,
+        Error,
+        Failure,
+        Fatal,
+        StageStart,
+        FrameworkResponse,
+        FrameworkRequest,
+    }-->
+
+        </StackPanel>
+
+        <Grid Grid.Row="2" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+
+            <DataGrid x:Name="columnsDataGrid" Margin="0,0,0,0" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" GotFocus="columnsDataGrid_GotFocus" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="columnType" Header="Type" Width="40" />
+                    <DataGridTextColumn x:Name="columnTimeStamp" Header="Time Stamp" Width="150" />
+                    <DataGridTextColumn x:Name="columnMessage" Header="Message" MinWidth="150" Width="150" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!--<ListView x:Name="ListViewMarbleLog" IsSynchronizedWithCurrentItem="True" ScrollViewer.CanContentScroll="True"
+                      VirtualizingStackPanel.VirtualizationMode="Standard" BorderThickness="0" VirtualizingStackPanel.ScrollUnit="Pixel"
+                                          VirtualizingPanel.CacheLengthUnit="Page" VirtualizingPanel.CacheLength="10"
+                  Grid.Row="1" Height="300"
+                  ItemsSource="{Binding}" HorizontalAlignment="Stretch" >-->
+            <ListView x:Name="ListViewMarbleLog" IsSynchronizedWithCurrentItem="True" ScrollViewer.CanContentScroll="True"
+                      VirtualizingStackPanel.VirtualizationMode="Standard" BorderThickness="0" VirtualizingStackPanel.ScrollUnit="Pixel"
+                      VirtualizingPanel.CacheLengthUnit="Page" VirtualizingPanel.CacheLength="5"
+                  Grid.Row="1" Height="300"
+                  ItemsSource="{Binding Mode=OneTime}" HorizontalAlignment="Stretch" 
+                      >
+                <ListView.Background>
+                    <ImageBrush ImageSource="/MarbleLibrary;component/Images\marble.logo.1039x467.png" Opacity="0.02" Stretch="None" AlignmentX="Right" AlignmentY="Bottom"  />
+                </ListView.Background>
+                <ListView.Resources>
+                    <templates:MarbleLogEntryDataTemplateSelector x:Key="MarbleLogEntryMessageCellDataTemplateSelector"
+                                                                  GenericMarbleLogEntryTemplate="{StaticResource MarbleLogEntryGenericCellTemplate}"
+                                                                  GuiMessageMarbleLogEntryTemplate="{StaticResource MarbleLogEntryGuiMessageCellTemplate}"
+                                                                  EventMarbleLogEntryTemplate="{StaticResource MarbleLogEntryEventCellTemplate}"
+                                                                  InfoMarbleLogEntryTemplate="{StaticResource MarbleLogEntryInfoCellTemplate}"
+                                                                  WarningMarbleLogEntryTemplate="{StaticResource MarbleLogEntryWarningCellTemplate}"
+                                                                  ErrorMarbleLogEntryTemplate="{StaticResource MarbleLogEntryErrorCellTemplate}"
+                                                                  FailureMarbleLogEntryTemplate="{StaticResource MarbleLogEntryFailureCellTemplate}"
+                                                                  FatalMarbleLogEntryTemplate="{StaticResource MarbleLogEntryFatalCellTemplate}"
+                                                                  StageStartMarbleLogEntryTemplate="{StaticResource MarbleLogEntryStageStartCellTemplate}"
+                                                                  FrameworkRequestMarbleLogEntryTemplate="{StaticResource MarbleLogEntryFrameworkRequestCellTemplate}"
+                                                                  FrameworkResponseMarbleLogEntryTemplate="{StaticResource MarbleLogEntryFrameworkResponseCellTemplate}"/>
+                </ListView.Resources>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="VerticalContentAlignment" Value="Top"/>
+                        <!-- !! Zero Margin can result crashes in VirtualizingStackPanel !! -->
+                        <Setter Property="Margin" Value="0" />
+                        <Style.Triggers>
+                            <!-- Error TYPE FILTER -->
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.Error}" />
+                                    <Condition Binding="{Binding ElementName=ToggleButtonError, Path=IsChecked}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <!--<Setter Property="Template" Value="{x:Null}" />-->
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <!--<Setter Property="IsHitTestVisible" Value="False" />-->
+                            </MultiDataTrigger>
+                            <!-- Event TYPE FILTER -->
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.Event}" />
+                                    <Condition Binding="{Binding ElementName=ToggleButtonEvent, Path=IsChecked}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <!--<Setter Property="Template" Value="{x:Null}" />-->
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <!--<Setter Property="IsHitTestVisible" Value="False" />-->
+                            </MultiDataTrigger>
+                            <!-- Failure TYPE FILTER -->
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.Failure}" />
+                                    <Condition Binding="{Binding ElementName=ToggleButtonFailure, Path=IsChecked}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <!--<Setter Property="Template" Value="{x:Null}" />-->
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <!--<Setter Property="IsHitTestVisible" Value="False" />-->
+                            </MultiDataTrigger>
+                            <!-- Fatal TYPE FILTER -->
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.Fatal}" />
+                                    <Condition Binding="{Binding ElementName=ToggleButtonFatal, Path=IsChecked}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <!--<Setter Property="Template" Value="{x:Null}" />-->
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <!--<Setter Property="IsHitTestVisible" Value="False" />-->
+                            </MultiDataTrigger>
+                            <!-- FrameworkRequest TYPE FILTER -->
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.FrameworkRequest}" />
+                                    <Condition Binding="{Binding ElementName=ToggleButtonFrameworkRequest, Path=IsChecked}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <!--<Setter Property="Template" Value="{x:Null}" />-->
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <!--<Setter Property="IsHitTestVisible" Value="False" />-->
+                            </MultiDataTrigger>
+                            <!-- FrameworkResponse TYPE FILTER -->
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.FrameworkResponse}" />
+                                    <Condition Binding="{Binding ElementName=ToggleButtonFrameworkResponse, Path=IsChecked}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <!--<Setter Property="Template" Value="{x:Null}" />-->
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <!--<Setter Property="IsHitTestVisible" Value="False" />-->
+                            </MultiDataTrigger>
+                            <!-- Generic TYPE FILTER -->
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.Generic}" />
+                                    <Condition Binding="{Binding ElementName=ToggleButtonGeneric, Path=IsChecked}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <!--<Setter Property="Template" Value="{x:Null}" />-->
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <!--<Setter Property="IsHitTestVisible" Value="False" />-->
+                            </MultiDataTrigger>
+                            <!-- GuiMessage TYPE FILTER -->
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.GuiMessage}" />
+                                    <Condition Binding="{Binding ElementName=ToggleButtonGuiMessage, Path=IsChecked}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <!--<Setter Property="Template" Value="{x:Null}" />-->
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <!--<Setter Property="IsHitTestVisible" Value="False" />-->
+                            </MultiDataTrigger>
+                            <!-- Info TYPE FILTER -->
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.Info}" />
+                                    <Condition Binding="{Binding ElementName=ToggleButtonInfo, Path=IsChecked}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <!--<Setter Property="Template" Value="{x:Null}" />-->
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <!--<Setter Property="IsHitTestVisible" Value="False" />-->
+                            </MultiDataTrigger>
+                            <!-- StageStart TYPE FILTER -->
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.StageStart}" />
+                                    <Condition Binding="{Binding ElementName=ToggleButtonStageStart, Path=IsChecked}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <!--<Setter Property="Template" Value="{x:Null}" />-->
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <!--<Setter Property="IsHitTestVisible" Value="False" />-->
+                            </MultiDataTrigger>
+                            <!-- Warning TYPE FILTER -->
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.Warning}" />
+                                    <Condition Binding="{Binding ElementName=ToggleButtonWarning, Path=IsChecked}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <!--<Setter Property="Template" Value="{x:Null}" />-->
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <!--<Setter Property="IsHitTestVisible" Value="False" />-->
+                            </MultiDataTrigger>
+                            
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                <GridView>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
+                    <!--<GridViewColumn x:Name="GridViewColumnType" Header="Type" CellTemplate="{StaticResource MarbleLogEntryTypeGridViewCellTemplate}"
+                                Width="{Binding ElementName=columnType, Path=ActualWidth}">
+
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="GridViewColumnTimeStamp" Header="Time" 
+                                    DisplayMemberBinding="{Binding Path=TimeStamp, StringFormat={}{0:yyyy'.'MM'.'dd HH':'mm':'ss'.'fff}, Mode=OneTime}"
+                                    Width="{Binding ElementName=columnTimeStamp, Path=ActualWidth}">
+
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="GridViewColumnMessage" Header="Message"
+                                    Width="{Binding ElementName=columnMessage, Path=ActualWidth}"
+                                    CellTemplateSelector="{StaticResource MarbleLogEntryMessageCellDataTemplateSelector}">
+                    </GridViewColumn>-->
+                    <GridViewColumn x:Name="GridViewColumnType" Header="Type" CellTemplate="{StaticResource MarbleLogEntryTypeGridViewCellTemplate}">
+
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="GridViewColumnTimeStamp" Header="Time" 
+                                DisplayMemberBinding="{Binding Path=TimeStamp, StringFormat={}{0:yyyy'.'MM'.'dd HH':'mm':'ss'.'fff}, Mode=OneTime}">
+
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="GridViewColumnMessage" Header="Message"
+                                CellTemplateSelector="{StaticResource MarbleLogEntryMessageCellDataTemplateSelector}">
+                    </GridViewColumn>
+                        <!--<GridViewColumn x:Name="GridViewColumnMessage" Header="Message"
+                                    Width="{Binding ElementName=columnMessage, Path=ActualWidth}" DisplayMemberBinding="{Binding Path=Message, Mode=OneTime}">
+                        </GridViewColumn>-->
+                    </GridView>
+                    
+                    
+            </ListView.View>
+        </ListView>
+            
+            </Grid>
+    </Grid>
+</Views:UcBase>

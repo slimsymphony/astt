@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C00FF6E5-2F87-4BA3-B4CC-FC4B55744AF0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TestAutomation.Bridge</RootNamespace>
+    <AssemblyName>TestAutomation.Bridge</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\framework\dlls\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivityManager\Activity.cs" />
+    <Compile Include="BugReporter\BugReporter.cs" />
+    <Compile Include="Crashdumps\Crashdumps.cs" />
+    <Compile Include="FileSystemAdapter\DiskSpaceInfoReceiver.cs" />
+    <Compile Include="FileSystemAdapter\Extensions.cs" />
+    <Compile Include="FileSystemAdapter\IOReceiver.cs" />
+    <Compile Include="FileSystemAdapter\LinkResolverReceiver.cs" />
+    <Compile Include="FileSystemAdapter\LsReceiver.cs" />
+    <Compile Include="FileSystemAdapter\MD5.cs" />
+    <Compile Include="FileSystemAdapter\RemoteFileInfo.cs" />
+    <Compile Include="FileSystemAdapter\RemoteFileType.cs" />
+    <Compile Include="Logger\DmesgData.cs" />
+    <Compile Include="Logger\DmesgListener.cs" />
+    <Compile Include="MediaPlayer\MediaPlayer.cs" />
+    <Compile Include="PackageManager\ApkInfo.cs" />
+    <Compile Include="PackageManager\PackageManager.cs" />
+    <Compile Include="PowerManager\PowerManager.cs" />
+    <Compile Include="ScriptingTools\DynamicProxy.cs" />
+    <Compile Include="ScriptingTools\EventProxy.cs" />
+    <Compile Include="ScriptingTools\Extensions.cs" />
+    <Compile Include="ScriptingTools\Formatting.cs" />
+    <Compile Include="ScriptingTools\PythonCallable.cs" />
+    <Compile Include="ScriptingTools\ScriptException.cs" />
+    <Compile Include="ServerClient\Accessibility.cs" />
+    <Compile Include="ActivityManager\ActivityManager.cs" />
+    <Compile Include="ServerClient\Constants.cs" />
+    <Compile Include="FileSystemAdapter\Crc.cs" />
+    <Compile Include="FileSystemAdapter\FileSystemAdapter.cs" />
+    <Compile Include="ServerClient\DirectoryObserver.cs" />
+    <Compile Include="ServerClient\HandlerDelegates.cs" />
+    <Compile Include="IpHelpers.cs" />
+    <Compile Include="Logger\LogData.cs" />
+    <Compile Include="Logger\LogListener.cs" />
+    <Compile Include="Logger\LogRecorder.cs" />
+    <Compile Include="ServerClient\MessageCounter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerClient\RemoteClassBase.cs" />
+    <Compile Include="ServerClient\RemoteFileSystem.cs" />
+    <Compile Include="ServerClient\RPC.cs" />
+    <Compile Include="ServiceClient\ScriptingServiceOptions.cs" />
+    <Compile Include="ServiceClient\ScriptServiceClient.cs" />
+    <Compile Include="Shell\Shell.cs" />
+    <Compile Include="SqlLite\SqLite.cs" />
+    <Compile Include="TABInterface.cs" />
+    <Compile Include="ServerClient\TestServerClient.cs" />
+    <Compile Include="ServerClient\TestServerOptions.cs" />
+    <Compile Include="Time\Time.cs" />
+    <Compile Include="Trace\Tracing.cs" />
+    <Compile Include="ViewerServerClient\ViewServerClient.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\protobuf-net\protobuf-net.csproj">
+      <Project>{8374e4d7-2a91-48f1-9360-09b09cf27c3f}</Project>
+      <Name>protobuf-net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Managed.AndroidDebugBridge\Managed.Adb.csproj">
+      <Project>{65473257-e70f-410b-9269-d0c0f771ea87}</Project>
+      <Name>Managed.Adb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestAutomation.ChkBugReport\TestAutomation.ChkBugReport.csproj">
+      <Project>{2ec85f3b-ff08-4b5b-a106-bbe47c6ed282}</Project>
+      <Name>TestAutomation.ChkBugReport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestAutomation.ScriptingService\TestAutomation.ScriptingService.csproj">
+      <Project>{d8f1f844-c668-42ba-9519-05f1157ea21d}</Project>
+      <Name>TestAutomation.ScriptingService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestAutomation.TestServer\TestAutomation.TestServer.csproj">
+      <Project>{b6d1c069-2a6c-482a-a85e-e49362d8c72a}</Project>
+      <Name>TestAutomation.TestServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestAutomation.Utils\TestAutomation.Utils.csproj">
+      <Project>{73598caf-ddb2-4964-8deb-d267bb9b0aa4}</Project>
+      <Name>TestAutomation.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

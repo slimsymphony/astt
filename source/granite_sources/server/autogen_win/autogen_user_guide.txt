@@ -1,0 +1,103 @@
+--------------------------------------------------------------------------------------------
+NOKIA
+R&D Copenhagen
+CoreSW
+
+
+
+
+      User guide for configuring autogen
+
+
+ 
+
+Continuus DB:      co_pctls
+Project:           autogen
+Filename:          autogen_user_guide.txt
+
+Document code:      -
+
+Copyright (c) Nokia Corporation. All rights reserved
+
+
+Change history:
+
+VERSION     : 13         DRAFT      08-Jun-2006  Stig Holmsten Eliasen
+REASON      : Autogen documentation enhancement
+REFERENCE   : -
+DESCRIPTION : User guide moved to web based documentation
+
+VERSION     : 12         DRAFT      22-Dec-2004  Stig Holmsten Eliasen
+REASON      : Autogen enhancement
+REFERENCE   : -
+DESCRIPTION : Added description for generating XML output
+
+VERSION     : 11         DRAFT      08-Mar-2004  Christian Jacob Hansen
+REASON      : Change in local confuration
+REFERENCE   : -
+DESCRIPTION : Added inclusion of autogen_local_server_conf.h
+
+VERSION     : 10         DRAFT      01-Oct-2003  Christian Jacob Hansen
+REASON      : Removed autogen_output_conf.h
+REFERENCE   : -
+DESCRIPTION : -
+
+VERSION     : 9          DRAFT      03-Jun-2003  Christian Jacob Hansen
+REASON      : Added desription of local environment
+REFERENCE   : -
+DESCRIPTION : -
+
+VERSION     : 8          DRAFT      10-Mar-2003  Christian Jacob Hansen
+REASON      : Minor error corrections
+REFERENCE   : -
+DESCRIPTION : -
+
+VERSION     : 7          DRAFT      11-Dec-2002  Christian Jacob Hansen
+REASON      : Add description of MCU trace configuration problems and perl script
+REFERENCE   : -
+DESCRIPTION : -
+
+VERSION     : 6          DRAFT      23-Oct-2002  Christian Jacob Hansen
+REASON      : Add Make file for safe mode
+REFERENCE   : -
+DESCRIPTION : Added MakeAutogenSafe
+
+VERSION     : 5          DRAFT      09-Sep-2002  Christian Jacob Hansen
+REASON      : Change to tool
+REFERENCE   : -
+DESCRIPTION : Changed autogen_server_conf.h description
+
+VERSION     : 4          DRAFT      18-Jun-2002  Christian Jacob Hansen
+REASON      : Change to tool
+REFERENCE   : -
+DESCRIPTION : Removed autogen_env_conf.h description
+
+VERSION     : 3          DRAFT      13-Jun-2002  Christian Jacob Hansen
+REASON      : Change to tool
+REFERENCE   : -
+DESCRIPTION : Removed autogen_version_conf.h and autogen_output_conf.h description
+
+VERSION     : 2          DRAFT      23-May-2002  Christian Jacob Hansen
+REASON      : Change to tool
+REFERENCE   : -
+DESCRIPTION : Removed pack output description
+              Changed integration description
+
+VERSION     : 1          DRAFT      28-Nov-2001  Christian Jacob Hansen
+REASON      : Original
+REFERENCE   : -
+DESCRIPTION : Original version of the file
+
+
+--------------------------------------------------------------------------------------------
+Link to autogen documentation:
+--------------------------------------------------------------------------------------------
+
+http://rdsuite.europe.nokia.com/products/autogen/documentation/default.html
+
+See: Topics
+       General
+         autogen user guide
+
+--------------------------------------------------------------------------------------------
+

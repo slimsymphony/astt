@@ -1,0 +1,1435 @@
+﻿<Window x:Class="Marble.Views.CaptureTool" x:Name="windowCaptureTool"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:Marble.Converters"
+        xmlns:Converters="clr-namespace:MarbleLibrary.Converters;assembly=MarbleLibrary"
+        xmlns:CustomControls="clr-namespace:MarbleLibrary.CustomControls;assembly=MarbleLibrary"
+        xmlns:avalonEdit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit"
+        xmlns:viewModel="clr-namespace:Marble.ViewModel" xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:controls="clr-namespace:Wpf.Controls;assembly=Wpf.SplitButton"
+        xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
+        xmlns:utilities="clr-namespace:Marble.Utilities"
+        Title="Marble - Scripting Tool" Width="780"
+        ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
+        Icon="/MarbleLibrary;component/Images/Marble.M.Icon.ico" KeyUp="windowCaptureTool_KeyUp">
+    <Window.Resources>
+        <ResourceDictionary>
+
+            <Converters:NumericValueIsBiggerThanParameterValue x:Key="ValueBiggerThanParameter" />
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="{StaticResource MarbleDarkPurpleButtonBackground}" MaxWidth="{Binding ElementName=windowCaptureTool, Path=ActualWidth}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <GroupBox x:Name="groupBoxScriptingTool" Grid.Column="0" Header="Scripting Tool" Margin="3,3,3,3" Background="White" Style="{DynamicResource MarbleGroupBox}" ScrollViewer.CanContentScroll="False">
+
+            <DockPanel>
+                
+                <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl x:Name="ItemsControlLeftSideMenu" DockPanel.Dock="Left" Background="{StaticResource MarbleDarkPurpleButtonBackground}" Width="86">
+                        <Button Style="{StaticResource MarbleButton}" Width="80" Height="32" Margin="2"
+                                Click="OnCaptureButtonClick" IsEnabled="{Binding Source={x:Static Application.Current}, Path=ViewModel.MarbleConnector.State, Converter={converters:ConnectorStateToIsIdleConverter}}"
+                                        ToolTip="Captures the phone screen and creates display element table." >
+                            Capture
+                        </Button>
+                        
+                        <Button Style="{StaticResource MarbleButton}" Width="80" Height="32" Margin="2,10,2,2"
+                                ToolTip="Opens previously capture image (and display elements) from a file."
+                                    Click="OnOpenButtonClick" IsEnabled="{Binding MarbleConnector.State, Converter={converters:ConnectorStateToIsIdleConverter}}" >
+                            Open
+                        </Button>
+                        <Button Style="{StaticResource MarbleButton}" Width="80" Height="32" Margin="2"
+                                Click="OnSaveButtonClick" IsEnabled="{Binding CanSave, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding}"
+                                            ToolTip="Saves captured image along with the element table to a file.">
+                            Save
+                        </Button>
+                        <Button Style="{StaticResource MarbleButton}" Width="80" Height="32" Margin="2"
+                                Click="CopyImageToClipboard_Click" IsEnabled="{Binding CanSave, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding}"
+                                            ToolTip="Copies captured image to clipboard.">
+                            Copy Image
+                        </Button>
+
+                        <ToggleButton Width="80" Height="32" Margin="2,10,2,2" IsChecked="{Binding Path=IsDrawGridActive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="Collapsed">
+                            Grid
+                        </ToggleButton>
+                        <ToggleButton Width="80" Height="32" Margin="2" IsChecked="{Binding Path=IsPhoneControlEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="Collapsed">
+                            Send Cmds
+                        </ToggleButton>
+
+                        <ToggleButton x:Name="ToggleButtonSelect" Width="80" Height="32" Margin="2,10,2,2" IsChecked="{Binding ElementName=radioButtonElement, Path=IsChecked, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      Click="ToggleButtonRadioButtonAction_Click" ToolTip="Enable/disable Select mode.">
+                            Select
+                        </ToggleButton>
+                        <ToggleButton x:Name="ToggleButtonLongSelect" Width="80" Height="32" Margin="2,2,2,2" IsChecked="{Binding ElementName=radioButtonLongSelect, Path=IsChecked, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      Click="ToggleButtonRadioButtonAction_Click" ToolTip="Enable/disable Long Select mode.">
+                            Long
+                        </ToggleButton>
+                        <ToggleButton x:Name="ToggleButtonCoordinates" Width="80" Height="32" Margin="2" IsChecked="{Binding ElementName=radioButtonDefaultSelectCoordinates, Path=IsChecked, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                      Click="ToggleButtonRadioButtonAction_Click" Visibility="Collapsed">
+                            Coordinates
+                        </ToggleButton>
+                        <ToggleButton x:Name="ToggleButtonSwipe" Width="80" Height="32" Margin="2" IsChecked="{Binding ElementName=radioButtonSwipe, Path=IsChecked, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                      Click="ToggleButtonRadioButtonAction_Click" ToolTip="Enable/disable Swipe mode.">
+                            Swipe
+                        </ToggleButton>
+                        <ToggleButton x:Name="ToggleButtonPinch" Width="80" Height="32" Margin="2" IsChecked="{Binding ElementName=radioButtonPinch, Path=IsChecked}"
+                                      Click="ToggleButtonRadioButtonAction_Click" ToolTip="Enable/disable Pinch mode.">
+                            Pinch
+                        </ToggleButton>                        
+                        <ToggleButton x:Name="ToggleButtonGesture" Width="80" Height="32" Margin="2" IsChecked="{Binding ElementName=radioButtonGesture, Path=IsChecked, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                      Click="ToggleButtonRadioButtonAction_Click" Visibility="Collapsed">
+                            Gesture
+                        </ToggleButton>
+                        
+
+                        <ToggleButton x:Name="ToggleButtonShowElementTable" Width="80" Height="32" Margin="2,10,2,2" Click="ToggleButtonShowElementTable_Click" >
+                            Show Table
+                        </ToggleButton>
+
+                        <ToggleButton x:Name="ToggleButtonCaptureOptions" Width="80" Height="32" Margin="2" IsHitTestVisible="{Binding ElementName=PopupCaptureOptions, Path=IsOpen, Mode=OneWay, Converter={Converters:InvertBoolValueConverter}}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Options" Style="{StaticResource MarbleTextBlockDarkBackgroundStyle}" />
+                                <TextBlock Text="" Margin="0,8,-10,-8" FontFamily="Wingdings 3" />
+                            </StackPanel>
+                        </ToggleButton>
+
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <Popup x:Name="PopupCaptureOptions" IsOpen="{Binding IsChecked, ElementName=ToggleButtonCaptureOptions}" StaysOpen="False" AllowsTransparency="True" Placement="Mouse">
+                    <Popup.Style>
+                        <Style TargetType="{x:Type Popup}">
+                            <Setter Property="TextBlock.Foreground" Value="{StaticResource MarbleNormalTextColorOnDarkBackground}" />
+                            <Setter Property="TextBlock.FontFamily" Value="Calibri" />
+                            <Setter Property="Typography.Capitals" Value="SmallCaps"></Setter>
+                        </Style>
+                    </Popup.Style>
+                    <!--<GroupBox x:Name="groupBoxCaptureOptions" Header="Capture Options" Margin="5" Background="{StaticResource MarbleDarkPurpleButtonBackground}" Style="{DynamicResource MarbleGroupBox}">-->
+                    <StackPanel Margin="5" Background="{StaticResource MarbleDarkPurpleButtonBackground}">
+                        <StackPanel Orientation="Horizontal">
+                            <!--<CheckBox x:Name="checkBoxDrawGrid" IsChecked="{Binding Path=IsDrawGridActive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Draw grid" VerticalAlignment="Center" Margin="0,0,0,0" Checked="OnDrawGridCheckBoxChecked" Unchecked="OnDrawGridCheckBoxUnchecked" />-->
+                            <CheckBox x:Name="checkBoxDrawGrid" IsChecked="{Binding Path=IsDrawGridActive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Draw grid" VerticalAlignment="Center" Margin="0,0,0,0" ToolTip="Draws a grid on top of the captured image."/>
+                            <TextBlock Text="Cell Width:" VerticalAlignment="Center" Margin="10,0,0,0" Visibility="{Binding ElementName=checkBoxDrawGrid, Path=IsChecked, Converter={Converters:BoolToVisibilityHiddenConverter}}"/>
+                            <CustomControls:NumericTextBox x:Name="textBoxGridWidth" Margin="5,0,5,0" MinValue="1" MaxValue="9999" UseAutomaticValueCorrection="True" Width="50" Text="{Binding Path=GridWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AllowDrop="False"
+                                            Visibility="{Binding ElementName=checkBoxDrawGrid, Path=IsChecked, Converter={Converters:BoolToVisibilityHiddenConverter}}" />
+                            <!--<CustomControls:NumericTextBox x:Name="textBoxGridWidth" Margin="5,0,5,0" MinValue="1" MaxValue="9999" Width="50" Text="50" TextChanged="OnGridWidthTextBoxTextChanged"
+                                            PreviewTextInput="OnGridWidthTextBoxPreviewTextInput" AllowDrop="False"
+                                            Visibility="{Binding ElementName=checkBoxDrawGrid, Path=IsChecked, Converter={Converters:BoolToVisibilityHiddenConverter}}" />-->
+                        </StackPanel>
+                        <CheckBox IsChecked="{Binding Path=IsPhoneControlEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Content="Send commands to phone" VerticalAlignment="Center" Margin="0,0,0,0" ToolTip="Generated script command is sent to phone and screen is re-captured."/>
+
+                        <StackPanel>
+                                
+                        <TextBlock Text="Default Selection Method" Margin="0,5,0,0" />
+                        <StackPanel x:Name="stackPanelDefaultSelectRadioButtons">
+                                <RadioButton x:Name="radioButtonDefaultSelectBestPossible" Content="Best Possible" Margin="0,5,0,0"
+                                         GroupName="GroupNameDefaultSelectMethod" ToolTip="Try to use best possible selection method." Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}"
+                                         IsChecked="{Binding Path=DefaultSelectionMethod, Mode=TwoWay, Converter={Converters:EnumToBoolWithEnumParameterConverter}, ConverterParameter={x:Static viewModel:ElementSelectionMethod.BestPossible}}"/>
+                                <RadioButton x:Name="radioButtonDefaultSelectDescription" Content="Description" Margin="0,5,0,0" 
+                                             GroupName="GroupNameDefaultSelectMethod" ToolTip="Set Description as default selection method." Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}"
+                                             IsChecked="{Binding Path=DefaultSelectionMethod, Mode=TwoWay, Converter={Converters:EnumToBoolWithEnumParameterConverter}, ConverterParameter={x:Static viewModel:ElementSelectionMethod.Description}}"/>
+                                <RadioButton x:Name="radioButtonDefaultSelectResourceId" Content="Resource ID" Margin="0,5,0,0"
+                                         GroupName="GroupNameDefaultSelectMethod" ToolTip="Set Resource ID as default selection method." Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}"
+                                         IsChecked="{Binding Path=DefaultSelectionMethod, Mode=TwoWay, Converter={Converters:EnumToBoolWithEnumParameterConverter}, ConverterParameter={x:Static viewModel:ElementSelectionMethod.ResourceId}}"/>
+                                <RadioButton x:Name="radioButtonDefaultSelectText" Content="Text" Margin="0,5,0,0" 
+                                             GroupName="GroupNameDefaultSelectMethod" ToolTip="Set Text as default selection method." Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}"
+                                             IsChecked="{Binding Path=DefaultSelectionMethod, Mode=TwoWay, Converter={Converters:EnumToBoolWithEnumParameterConverter}, ConverterParameter={x:Static viewModel:ElementSelectionMethod.Text}}"/>
+                                <RadioButton x:Name="radioButtonDefaultSelectClassIndex" Content="Index Tree" Margin="0,5,0,0" 
+                                             GroupName="GroupNameDefaultSelectMethod" ToolTip="Set Class / Index as default selection method." Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}"
+                                             IsChecked="{Binding Path=DefaultSelectionMethod, Mode=TwoWay, Converter={Converters:EnumToBoolWithEnumParameterConverter}, ConverterParameter={x:Static viewModel:ElementSelectionMethod.IndexTree}}"/>
+                                <RadioButton x:Name="radioButtonDefaultSelectCoordinates" Content="Coordinates" Margin="0,5,0,0" 
+                                         GroupName="GroupNameDefaultSelectMethod" ToolTip="Set Coordinates as default selection method." Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}"
+                                         IsChecked="{Binding Path=DefaultSelectionMethod, Mode=TwoWay, Converter={Converters:EnumToBoolWithEnumParameterConverter}, ConverterParameter={x:Static viewModel:ElementSelectionMethod.Coordinates}}"/>
+                        </StackPanel>
+                            
+                        <TextBlock Text="On Click Copy to Clipboard:" Margin="0,5,0,0"/>
+                        <StackPanel x:Name="stackPanelInputMethodGestureRadioButtons">
+                                <RadioButton x:Name="radioButtonElement" GroupName="GroupNameInputMethodGesture" Margin="0,5,0,0" IsChecked="True"
+                                                    Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}">
+                                    <TextBlock><Bold>Select/Drag Element</Bold></TextBlock>
+                                    <RadioButton.ToolTip>
+                                        <TextBlock>
+                                                    Tool for generating commands to select or drag display elements.
+                                                    <LineBreak />
+                                                    Hold mouse button for one second to perform long select.
+                                        </TextBlock>
+                                    </RadioButton.ToolTip>
+                                </RadioButton>
+                                <RadioButton x:Name="radioButtonLongSelect" GroupName="GroupNameInputMethodGesture" Content="Long Select Element" Margin="0,5,0,0" ToolTip="Tool for generating long select commands."
+                                                Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}"/>
+                                <RadioButton x:Name="radioButtonSwipe" GroupName="GroupNameInputMethodGesture" Content="Swipe Coordinates" Margin="0,5,0,0" ToolTip="Tool for generating swipe commands."
+                                                Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}"/>
+                                <RadioButton x:Name="radioButtonPinch" GroupName="GroupNameInputMethodGesture" Content="Pinch" Margin="0,5,0,0" ToolTip="Tool for generating pinch commands (in or out)."
+                                                Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}" IsChecked="{Binding IsPinchToolInUse, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <RadioButton x:Name="radioButtonGesture" GroupName="GroupNameInputMethodGesture" Content="Gesture Coordinates" Margin="0,5,0,0" ToolTip="Tool for generating gesture commands."
+                                                Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}" Visibility="Collapsed"/>
+                            </StackPanel>
+                        
+                            <!-- MAKE VISIBLE WHEN GESTURES ARE SUPPORTED -->
+                            <StackPanel Visibility="Collapsed">
+                                <StackPanel Orientation="Horizontal" Margin="30 5"
+                                    Visibility="{Binding ElementName=radioButtonGesture, Path=IsChecked, Converter={Converters:BoolToVisibilityHiddenConverter}}">
+                                    <TextBlock Text="Granularity: " />
+                                    <TextBlock x:Name="GranularityTextBlock" Text="{Binding ElementName=GranularitySlider, Path=Value}" />
+                                </StackPanel>
+                                <Slider x:Name="GranularitySlider" Minimum="1" Maximum="100" Value="20"
+                                    SmallChange="1" IsSnapToTickEnabled="True"
+                                    Visibility="{Binding ElementName=radioButtonGesture, Path=IsChecked, Converter={Converters:BoolToVisibilityHiddenConverter}}"/>
+                            </StackPanel>
+
+                        </StackPanel>
+                        
+                        <TextBlock Text="Command History" Margin="0,5,0,0" />
+                        <StackPanel x:Name="StackPanelCommandHistoryOptions" Margin="0,5,0,5">
+                            <CheckBox x:Name="CheckBoxCommandHistoryAutoCompleteEnabled" IsChecked="True" Content="Python Parser Auto-Complete" 
+                                      ToolTip="Enable/disable Python parse auto-complete."/>
+                        </StackPanel>
+                    </StackPanel>
+                    <!--</GroupBox>-->
+                </Popup>
+            
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition x:Name="ColumnDefinitionCommandHistory" Width="Auto" MinWidth="350">
+                            <ColumnDefinition.Resources>
+                                <system:Double x:Key="FixedAdjustmentValue">32</system:Double>
+                            </ColumnDefinition.Resources>
+                            <ColumnDefinition.MaxWidth>
+                                <MultiBinding Converter="{Converters:ReduceFromFirstValue}" UpdateSourceTrigger="PropertyChanged">
+                                    <MultiBinding.Bindings>
+                                        <Binding ElementName="windowCaptureTool" Path="ActualWidth" UpdateSourceTrigger="PropertyChanged"/>
+                                        <Binding ElementName="ItemsControlLeftSideMenu" Path="ActualWidth" UpdateSourceTrigger="PropertyChanged"/>
+                                        <Binding ElementName="ScrollViewerLeftPanel" Path="ActualWidth" UpdateSourceTrigger="PropertyChanged"/>
+                                        <!--<Binding ElementName="ColumnDefinitionElementTable" Path="ActualWidth" UpdateSourceTrigger="PropertyChanged"/>-->
+                                        <Binding ElementName="ColumnDefinitionElementTable" Path="ActualWidth" UpdateSourceTrigger="PropertyChanged"/>
+                                        <Binding ElementName="AdvancedGridSplitterElementTable" Path="ActualWidth" UpdateSourceTrigger="PropertyChanged"/>
+                                        <Binding Source="{StaticResource FixedAdjustmentValue}" />
+                                    </MultiBinding.Bindings>
+                                </MultiBinding>
+                            </ColumnDefinition.MaxWidth>
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="Auto"/>
+                        <CustomControls:ColumnDefinitionExtended x:Name="ColumnDefinitionElementTable" Width="Auto" Visible="{Binding ElementName=ToggleButtonShowElementTable, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid.ColumnDefinitions>
+
+                    <ScrollViewer x:Name="ScrollViewerLeftPanel" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel x:Name="stackPanelLeft" Grid.Column="0" VerticalAlignment="Top">
+                            <Grid Margin="5,5,5,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Canvas VerticalAlignment="Top" x:Name="canvasStatus" Height="32" Width="32" ClipToBounds="True">
+                                    <Canvas.Style>
+                                        <Style>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Source={x:Static Application.Current}, Path=ViewModel.MarbleConnector.State, UpdateSourceTrigger=PropertyChanged}" Value="FrameworkExecuting">
+                                                    <DataTrigger.EnterActions>
+                                                        <BeginStoryboard x:Name="animationFadeInAndOut">
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.Target="{Binding TemplatedParent}" Storyboard.TargetProperty="Height"
+                                                                        From="0" To="32" Duration="0:0:1" AutoReverse="False" RepeatBehavior="Forever" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </DataTrigger.EnterActions>
+                                                    <DataTrigger.ExitActions>
+                                                        <RemoveStoryboard BeginStoryboardName="animationFadeInAndOut" />
+                                                    </DataTrigger.ExitActions>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Canvas.Style>
+
+                                    <!--<Image Height="32" Width="32" Source="/MarbleLibrary;component/Images\screen.capture.icon.32x32.png" />-->
+                                    <Image x:Name="imageLoadArrow" Height="32" Width="32" Source="/MarbleLibrary;component/Images\loading.yellow.orange.icon.32x32.png" Canvas.Bottom="0" Canvas.Right="0" Opacity="0">
+                                        <Image.RenderTransform>
+                                            <RotateTransform  CenterX="16" CenterY="16"/>
+                                        </Image.RenderTransform>
+                                        <Image.Style>
+                                            <Style>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Source={x:Static Application.Current}, Path=ViewModel.MarbleConnector.State, UpdateSourceTrigger=PropertyChanged}" Value="StartingFramework">
+                                                        <DataTrigger.EnterActions>
+                                                            <BeginStoryboard x:Name="animationRotateLoadArrow">
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.Target="{Binding TemplatedParent}" Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)"
+                                                                        From="0" To="360" Duration="0:0:2" AutoReverse="False" RepeatBehavior="Forever" />
+                                                                    <DoubleAnimation Storyboard.Target="{Binding TemplatedParent}" Storyboard.TargetProperty="Opacity"
+                                                                        From="0" To="1" Duration="0:0:0.5" AutoReverse="False" />
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </DataTrigger.EnterActions>
+                                                        <DataTrigger.ExitActions>
+                                                            <RemoveStoryboard BeginStoryboardName="animationRotateLoadArrow" />
+                                                        </DataTrigger.ExitActions>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                    <Image x:Name="imageExecuting" Height="32" Width="32" ClipToBounds="True" Source="/MarbleLibrary;component/Images\screen.capture.small.icon.32x32.png" Canvas.Top="0" Canvas.Right="0" Opacity="0">
+                                        <Image.Style>
+                                            <Style>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Source={x:Static Application.Current}, Path=ViewModel.MarbleConnector.State, UpdateSourceTrigger=PropertyChanged}" Value="FrameworkExecuting">
+                                                        <DataTrigger.EnterActions>
+                                                            <BeginStoryboard x:Name="animationFadeInAndOut">
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.Target="{Binding TemplatedParent}" Storyboard.TargetProperty="Opacity"
+                                                                        From="0" To="1" Duration="0:0:0.1" AutoReverse="False" />
+                                                                    <!--<ThicknessAnimation Storyboard.Target="{Binding TemplatedParent}" Storyboard.TargetProperty="Margin" 
+                                                                        From="0,0,0,-32" To="0,0,0,0" AutoReverse="False" RepeatBehavior="Forever" />-->
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </DataTrigger.EnterActions>
+                                                        <DataTrigger.ExitActions>
+                                                            <RemoveStoryboard BeginStoryboardName="animationFadeInAndOut" />
+                                                        </DataTrigger.ExitActions>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                    <Image x:Name="imageReady" Height="32" Width="32" Source="/MarbleLibrary;component/Images\passed.circle.icon.32x32.png" Canvas.Bottom="0" Canvas.Right="0" Opacity="0">
+                                        <Image.RenderTransform>
+                                            <RotateTransform  CenterX="16" CenterY="16"/>
+                                        </Image.RenderTransform>
+                                        <Image.Style>
+                                            <Style>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Source={x:Static Application.Current}, Path=ViewModel.MarbleConnector.State, UpdateSourceTrigger=PropertyChanged}" Value="FrameworkReady">
+                                                        <DataTrigger.EnterActions>
+                                                            <BeginStoryboard x:Name="animationFadeReady">
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.Target="{Binding TemplatedParent}" Storyboard.TargetProperty="Opacity"
+                                                                        From="0" To="1" Duration="0:0:0.5" AutoReverse="False" />
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </DataTrigger.EnterActions>
+                                                        <DataTrigger.ExitActions>
+                                                            <RemoveStoryboard BeginStoryboardName="animationFadeReady" />
+                                                        </DataTrigger.ExitActions>
+
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Canvas>
+                                <TextBlock Grid.Column="1" x:Name="ConnectorStateTextBox" Margin="10" TextWrapping="Wrap"
+                                    Text="{Binding Source={x:Static Application.Current}, Path=ViewModel.MarbleConnector.State, Converter={converters:ConnectorStateToString}}">
+                                </TextBlock>
+                                <TextBlock Grid.Column="2" Margin="10" Text="{Binding PinchInfo}" Foreground="Red"
+                                           Visibility="{Binding ElementName=radioButtonPinch, Path=IsChecked, Converter={Converters:BoolToVisibilityCollapsedConverter}}"></TextBlock>
+                            </Grid>
+
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                            
+                                <Button x:Name="CaptureButton" Content="Capture" Height="30" Margin="0,5,5,5" Style="{DynamicResource MarbleButton}"
+                                    Click="OnCaptureButtonClick" IsEnabled="{Binding Source={x:Static Application.Current}, Path=ViewModel.MarbleConnector.State, Converter={converters:ConnectorStateToIsIdleConverter}}"
+                                        ToolTip="Captures the phone screen and creates display element table." Visibility="Collapsed" />
+                                <Button x:Name="OpenButton" Grid.Column="1" Content="Open..." Height="30" Width="60" Margin="5,0,0,0" Style="{DynamicResource MarbleButton}" ToolTip="Opens previously capture image (and display elements) from a file."
+                                    Click="OnOpenButtonClick" IsEnabled="{Binding MarbleConnector.State, Converter={converters:ConnectorStateToIsIdleConverter}}" Visibility="Collapsed" />
+                            </Grid>
+
+                            <GroupBox x:Name="groupBoxRealCapture" Header="Screen Capture" Margin="5" Background="White" Style="{DynamicResource MarbleGroupBox}">
+                                <StackPanel>
+                                    <!--<StackPanel.Style>
+                                        <Style>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding }"
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>-->
+                            
+                                    <TextBlock x:Name="textBlockCoordinatesText" HorizontalAlignment="Center"/>
+                                    <Canvas x:Name="canvasRealCapture" Width="240" Height="320" MouseMove="OnRealCaptureMouseMove" Margin="5,5,5,5" ClipToBounds="True"
+                                        MouseLeave="OnRealCaptureMouseLeave" MouseLeftButtonUp="OnRealCaptureMouseLeftButtonUp"
+                                        MouseLeftButtonDown="OnRealCaptureMouseLeftButtonDown" MouseEnter="OnRealCaptureMouseEnter"
+                                        ContextMenuOpening="ContextMenu_ContextMenuOpening" 
+                                        MouseRightButtonDown="RealCapture_OnMouseRightButtonDown" MouseRightButtonUp="RealCapture_MouseRightButtonUp" ContextMenuClosing="RealCapture_ContextMenuClosing" SizeChanged="canvasRealCapture_SizeChanged">
+                                        <Canvas.Resources>
+                                            
+                                            <!-- Dragging Context Menu -->
+                                            <ContextMenu x:Key="ContextMenuCanvasRealCaptureDrag" Closed="ContextMenuCanvasRealCaptureDrag_OnClosed" ContextMenuClosing="RealCapture_ContextMenuClosing">
+                                                <MenuItem Header="Drag by Description" Command="{Binding DragCommand}">
+                                                    <MenuItem.CommandParameter>
+                                                        <MultiBinding Converter="{converters:DisplayElementAndSelectionMethodCommandParameters}">
+                                                            <Binding Path="DraggedDisplayElement" />
+                                                            <Binding Source="{x:Static viewModel:ElementSelectionMethod.Description}" />
+                                                        </MultiBinding>
+                                                    </MenuItem.CommandParameter>
+                                                </MenuItem>
+                                                <MenuItem Header="Drag by Resource ID" Command="{Binding DragCommand}">
+                                                    <MenuItem.CommandParameter>
+                                                        <MultiBinding Converter="{converters:DisplayElementAndSelectionMethodCommandParameters}">
+                                                            <Binding Path="DraggedDisplayElement" />
+                                                            <Binding Source="{x:Static viewModel:ElementSelectionMethod.ResourceId}" />
+                                                        </MultiBinding>
+                                                    </MenuItem.CommandParameter>
+                                                </MenuItem>
+                                                <MenuItem Header="Drag by Text" Command="{Binding DragCommand}">
+                                                    <MenuItem.CommandParameter>
+                                                        <MultiBinding Converter="{converters:DisplayElementAndSelectionMethodCommandParameters}">
+                                                            <Binding Path="DraggedDisplayElement" />
+                                                            <Binding Source="{x:Static viewModel:ElementSelectionMethod.Text}" />
+                                                        </MultiBinding>
+                                                    </MenuItem.CommandParameter>
+                                                </MenuItem>
+                                                <MenuItem Header="Drag by Index Tree" Command="{Binding DragCommand}">
+                                                    <MenuItem.CommandParameter>
+                                                        <MultiBinding Converter="{converters:DisplayElementAndSelectionMethodCommandParameters}">
+                                                            <Binding Path="DraggedDisplayElement" />
+                                                            <Binding Source="{x:Static viewModel:ElementSelectionMethod.IndexTree}" />
+                                                        </MultiBinding>
+                                                    </MenuItem.CommandParameter>
+                                                </MenuItem>
+                                                <MenuItem Visibility="Collapsed" Header="Drag by Relative Coordinates" />
+                                            </ContextMenu>
+                                            
+                                        </Canvas.Resources>
+                                        <Canvas.ContextMenu>
+                                            <ContextMenu x:Name="ContextMenuCanvasRealCapture" >
+                                                <!--<MenuItem Header="Copy image to clipboard" Click="CopyImageToClipboard_Click" 
+                                                          ToolTip="Image data is copied to clipboard for pasting to other applications."/>-->
+                                                <!--<MenuItem Header="Exit to idle" Command="{Binding ExitToIdleCommand}" 
+                                                          Visibility="{Binding IsPhoneControlEnabled, Converter={Converters:BoolToVisibilityCollapsedConverter}}" ToolTip="Returns the phone UI to initial state." />-->
+
+                                                <MenuItem x:Name="MenuItemSelectDescription" Header="Select by Description" Command="{Binding SelectByDescriptionCommand}" CommandParameter="{Binding Path=CurrentDisplayElement.Description}">
+                                                    <MenuItem.ToolTip>
+                                                        <StackPanel Orientation="Vertical">
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="Select by Description ("/>
+                                                                <TextBlock Text="{Binding Path=CurrentDisplayElement.Description}"/>
+                                                                <TextBlock Text=")."/>
+                                                            </StackPanel>
+                                                            <StackPanel x:Name="StackPanelMenuItemSelectDescriptionWarning" Orientation="Horizontal" Visibility="Collapsed" Margin="0,10,0,0">
+                                                                <Image Source="/MarbleLibrary;component/Images\warning.shadow.icon.16x16.png" />
+                                                                <TextBlock Text="WARNING, Multiple items found with same description. Index is used with this selection method and this index only works for current items on screen." 
+                                                                           TextWrapping="Wrap" Width="400"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </MenuItem.ToolTip>
+                                                    <MenuItem.Style>
+                                                        <Style TargetType="{x:Type MenuItem}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Path=CurrentDisplayElement.IsCheckable}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </MenuItem.Style>
+                                                </MenuItem>
+                                                <MenuItem x:Name="MenuItemSelectResourceId" Header="Select by Resource ID" Command="{Binding SelectByResourceIdCommand}" CommandParameter="{Binding Path=CurrentDisplayElement.ResourceId}">
+                                                    <MenuItem.ToolTip>
+                                                        <StackPanel Orientation="Vertical">
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="Select by Resource ID ("/>
+                                                                <TextBlock Text="{Binding Path=CurrentDisplayElement.ResourceId}"/>
+                                                                <TextBlock Text=")."/>
+                                                            </StackPanel>
+                                                            <StackPanel x:Name="StackPanelMenuItemSelectResourceIdWarning" Orientation="Horizontal" Visibility="Collapsed" Margin="0,10,0,0">
+                                                                <Image Source="/MarbleLibrary;component/Images\warning.shadow.icon.16x16.png" />
+                                                                <TextBlock Text="WARNING, Multiple items found with same resource ID. Index is used with this selection method and this index only works for current items on screen." 
+                                                                           TextWrapping="Wrap" Width="400"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </MenuItem.ToolTip>
+                                                    <MenuItem.Style>
+                                                        <Style TargetType="{x:Type MenuItem}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Path=CurrentDisplayElement.IsCheckable}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </MenuItem.Style>
+                                                </MenuItem>
+                                                <MenuItem x:Name="MenuItemSelectText" Header="Select by Text" Command="{Binding SelectByTextCommand}" CommandParameter="{Binding Path=CurrentDisplayElement.Text}" >
+                                                    <MenuItem.ToolTip>
+                                                        <StackPanel Orientation="Vertical">
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="Select by Text ("/>
+                                                                <TextBlock Text="{Binding Path=CurrentDisplayElement.Text}"/>
+                                                                <TextBlock Text=")."/>
+                                                            </StackPanel>
+                                                            <StackPanel x:Name="StackPanelMenuItemSelectTextWarning" Orientation="Horizontal" Visibility="Collapsed" Margin="0,10,0,0">
+                                                                <Image Source="/MarbleLibrary;component/Images\warning.shadow.icon.16x16.png" />
+                                                                <TextBlock Text="WARNING, Multiple items found with same text. Index is used with this selection method and this index only works for current items on screen." 
+                                                                           TextWrapping="Wrap" Width="400"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </MenuItem.ToolTip>
+                                                    <MenuItem.Style>
+                                                        <Style TargetType="{x:Type MenuItem}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Path=CurrentDisplayElement.IsCheckable}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </MenuItem.Style>
+                                                </MenuItem>
+                                                <MenuItem x:Name="MenuItemSelectIndexTree" Header="Select by Index Tree" Command="{Binding SelectByIndexTreeCommand}" CommandParameter="{Binding Path=CurrentDisplayElement.IndexTree}">
+                                                    <MenuItem.ToolTip>
+                                                        <StackPanel Orientation="Vertical">
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="Select by Index Tree ("/>
+                                                                <TextBlock Text="{Binding Path=CurrentDisplayElement.IndexTree}"/>
+                                                                <TextBlock Text=")."/>
+                                                            </StackPanel>
+                                                            <StackPanel x:Name="StackPanelMenuItemSelectIndexTreeWarning" Orientation="Horizontal" Visibility="Collapsed" Margin="0,10,0,0">
+                                                                <Image Source="/MarbleLibrary;component/Images\warning.shadow.icon.16x16.png" />
+                                                                <TextBlock Text="WARNING, Multiple items found with same index tree. Index is used with this selection method and this index only works for current items on screen." 
+                                                                           TextWrapping="Wrap" Width="400"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </MenuItem.ToolTip>
+                                                    <MenuItem.Style>
+                                                        <Style TargetType="{x:Type MenuItem}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Path=CurrentDisplayElement.IsCheckable}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </MenuItem.Style>
+                                                </MenuItem>
+                                                <MenuItem Header="Select by Relative Coordinates" Command="{Binding SelectByRelativeCoordinatesCommand}" CommandParameter="{Binding Path=CurrentStartCoordinates}">
+                                                    <MenuItem.ToolTip>
+                                                        <WrapPanel>
+                                                            <TextBlock Text="Select by Relative Coordinates ("/>
+                                                            <TextBlock>
+                                                                <TextBlock.Text>
+                                                                    <MultiBinding Converter="{Converters:DoubleValuesToPercentage}">
+                                                                        <Binding Path="CurrentStartCoordinates.X"/>
+                                                                        <Binding Path="CanvasRealCapture.ActualWidth"/>
+                                                                    </MultiBinding>
+                                                                </TextBlock.Text>
+                                                            </TextBlock>
+                                                            <TextBlock Text=", "/>
+                                                            <TextBlock>
+                                                                <TextBlock.Text>
+                                                                    <MultiBinding Converter="{Converters:DoubleValuesToPercentage}">
+                                                                        <Binding Path="CurrentStartCoordinates.Y"/>
+                                                                        <Binding Path="CanvasRealCapture.ActualHeight"/>
+                                                                    </MultiBinding>
+                                                                </TextBlock.Text>
+                                                            </TextBlock>
+                                                            <TextBlock Text=")."/>
+                                                        </WrapPanel>
+                                                    </MenuItem.ToolTip>
+                                                    <MenuItem.Style>
+                                                        <Style TargetType="{x:Type MenuItem}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Path=CurrentDisplayElement.IsCheckable}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </MenuItem.Style>
+                                                </MenuItem>
+                                                <MenuItem Header="Select by Absolute Coordinates" Command="{Binding SelectByCoordinatesCommand}" CommandParameter="{Binding Path=CurrentStartCoordinates}">
+                                                    <MenuItem.ToolTip>
+                                                        <WrapPanel>
+                                                            <TextBlock Text="Select by Absolute Coordinates ("/>
+                                                            <TextBlock Text="{Binding Path=CurrentStartCoordinates}"/>
+                                                            <TextBlock Text=")."/>
+                                                        </WrapPanel>
+                                                    </MenuItem.ToolTip>
+                                                    <MenuItem.Style>
+                                                        <Style TargetType="{x:Type MenuItem}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Path=CurrentDisplayElement.IsCheckable}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </MenuItem.Style>
+                                                </MenuItem>
+
+                                                
+                                                <!--<MenuItem StaysOpenOnClick="False">
+                                                    <MenuItem.Header>
+                                                        <Button Content="button testing" Command="{Binding ToggleCommand}" Click="MenuItemButton_Click_CloseContextMenu" Style="{StaticResource MenuItemButtonStyle}">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                                    <Binding Path="CurrentDisplayElement" />
+                                                                    <Binding Source="{x:Static viewModel:ElementSelectionMethod.IndexTree}" />
+                                                                    <Binding Source="{x:Null}" />
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </MenuItem.Header>
+
+
+                                                    <MenuItem Header="Submenuitem1"></MenuItem>
+                                                    <MenuItem Header="Submenuitem1"></MenuItem>
+                                                    <MenuItem Header="Submenuitem1"></MenuItem>
+                                                    <MenuItem Header="Submenuitem1"></MenuItem>
+                                                </MenuItem>-->
+
+                                                <Separator x:Name="SeparatorExpectMenuItems" Visibility="{Binding ElementName=menuItemToggleByDescription, Path=Visibility, UpdateSourceTrigger=PropertyChanged}" />
+                                                    <!--<Separator.Style>
+                                                        <Style TargetType="{x:Type Separator}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding ElementName=ExpectContextMenuItem, Path=Visibility}" Value="Collapsed">
+                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Separator.Style>
+                                                </Separator>-->
+                                                
+                                                <MenuItem x:Name="LongSelectContextMenuItem">
+                                                    <MenuItem.Header>
+                                                        <Button Content="Long Select" Command="{Binding SelectByDefaultSelectionMethodCommand}" CommandParameter="{StaticResource True}"
+                                                                Click="MenuItemButton_Click_CloseContextMenu" Style="{StaticResource MenuItemButtonStyle}"
+                                                                ToolTip="Long selects item using best available criteria." />
+                                                    </MenuItem.Header>                                                   
+                                                    
+                                                    <MenuItem Header="Long Select by Description" Command="{Binding SelectLongByDescriptionCommand}" CommandParameter="{Binding Path=CurrentDisplayElement.Description}"
+                                                              ToolTip="Long selects item using description as selection criteria.">
+                                                        
+                                                    </MenuItem>
+
+                                                    <MenuItem Header="Long Select by Text" Command="{Binding SelectLongByTextCommand}" CommandParameter="{Binding Path=CurrentDisplayElement.Text}"
+                                                              ToolTip="Long selects item using description as selection criteria.">
+
+                                                    </MenuItem>
+
+                                                    <MenuItem Header="Long Select by Resource ID" Command="{Binding SelectLongByResourceIdCommand}" CommandParameter="{Binding Path=CurrentDisplayElement.ResourceId}"
+                                                              ToolTip="Long selects item using description as selection criteria.">
+
+                                                    </MenuItem>
+
+                                                    <MenuItem Header="Long Select by Index Tree" Command="{Binding SelectLongByIndexTreeCommand}" CommandParameter="{Binding Path=CurrentDisplayElement.IndexTree}"
+                                                              ToolTip="Long selects item using description as selection criteria.">
+
+                                                    </MenuItem>
+
+                                                    <MenuItem Header="Long Select by Relative Coordinates" Command="{Binding SelectLongByRelativeCoordinatesCommand}" CommandParameter="{Binding Path=CurrentStartCoordinates}"
+                                                              ToolTip="Long selects item using description as selection criteria.">
+
+                                                    </MenuItem>
+
+                                                </MenuItem>
+
+                                                <MenuItem x:Name="ExpectContextMenuItem" Visibility="Collapsed" >
+                                                    <MenuItem.Header>
+                                                        <Button Content="Expect This" Command="{Binding ExpectCommand}" Click="MenuItemButton_Click_CloseContextMenu" Style="{StaticResource MenuItemButtonStyle}"
+                                                                ToolTip="Creates a script command for verifying that this item is found from the phone screen.">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{converters:DisplayElementAndSelectionMethodCommandParameters}">
+                                                                    <Binding Path="CurrentDisplayElement" />
+                                                                    <Binding Path="DefaultSelectionMethod" UpdateSourceTrigger="PropertyChanged" />
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </MenuItem.Header>
+                                                    
+                                                    <MenuItem Header="Expect by Description" Command="{Binding ExpectCommand}" ToolTip="Expects item using description as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:DisplayElementAndSelectionMethodCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.Description}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                    <MenuItem Header="Expect by Resource ID" Command="{Binding ExpectCommand}" ToolTip="Expects item using resource id as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:DisplayElementAndSelectionMethodCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.ResourceId}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>                                                   
+                                                    <MenuItem Header="Expect by Text" Command="{Binding ExpectCommand}" ToolTip="Expects item using text as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:DisplayElementAndSelectionMethodCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.Text}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                    <MenuItem Header="Expect by Index Tree" Command="{Binding ExpectCommand}" ToolTip="Expects item using index tree as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:DisplayElementAndSelectionMethodCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.IndexTree}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+
+                                                </MenuItem>
+                                                <MenuItem x:Name="DontExpectContextMenuItem" Visibility="Collapsed">
+                                                    <MenuItem.Header>
+                                                        <Button Content="Do Not Expect This" Command="{Binding NotExpectCommand}" Click="MenuItemButton_Click_CloseContextMenu" Style="{StaticResource MenuItemButtonStyle}"
+                                                                ToolTip="Creates a script command for verifying that this item is NOT found from the phone screen.">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{converters:DisplayElementAndSelectionMethodCommandParameters}">
+                                                                    <Binding Path="CurrentDisplayElement" />
+                                                                    <Binding Path="DefaultSelectionMethod" UpdateSourceTrigger="PropertyChanged" />
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </MenuItem.Header>
+                                                    
+                                                    <MenuItem Header="Do Not Expect by Description" Command="{Binding NotExpectCommand}" ToolTip="Does NOT expect item using description as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:DisplayElementAndSelectionMethodCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.Description}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                    <MenuItem Header="Do Not Expect by Text" Command="{Binding NotExpectCommand}" ToolTip="Does NOT expect item using text as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:DisplayElementAndSelectionMethodCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.Text}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                    
+                                                </MenuItem>
+                                                <MenuItem x:Name="CheckContextMenuItem" >
+                                                    <MenuItem.Header>
+                                                        <Button Content="Check This" Command="{Binding CheckCommand}" Click="MenuItemButton_Click_CloseContextMenu" Style="{StaticResource MenuItemButtonStyle}"
+                                                                ToolTip="Checks whether item is found using default selection method as selection criteria.">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{converters:DisplayElementAndSelectionMethodCommandParameters}">
+                                                                    <Binding Path="CurrentDisplayElement" />
+                                                                    <Binding Path="DefaultSelectionMethod" UpdateSourceTrigger="PropertyChanged" />
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </MenuItem.Header>
+
+                                                    <MenuItem Header="Check by Description" Command="{Binding CheckCommand}" ToolTip="Checks whether item is found using Description as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:DisplayElementAndSelectionMethodCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.Description}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                    <MenuItem Header="Check by Resource ID" Command="{Binding CheckCommand}" ToolTip="Checks whether item is found using Resource ID as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:DisplayElementAndSelectionMethodCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.ResourceId}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                    <MenuItem Header="Check by Text" Command="{Binding CheckCommand}" ToolTip="Checks whether item is found using Text as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:DisplayElementAndSelectionMethodCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.Text}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                    <MenuItem Header="Check by Index Tree" Command="{Binding CheckCommand}" ToolTip="Checks whether item is found using Index Tree as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:DisplayElementAndSelectionMethodCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.IndexTree}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+
+                                                </MenuItem>
+
+                                                <Separator x:Name="SeparatorToggleMenuItems" Visibility="{Binding ElementName=menuItemToggleByDescription, Path=Visibility}" />
+                                                
+                                                <MenuItem x:Name="menuItemToggleByDescription" Command="{Binding ToggleCommand}">
+                                                    <MenuItem.Header>
+                                                        <Button Content="Toggle by Description" Command="{Binding ToggleCommand}" Click="MenuItemButton_Click_CloseContextMenu" Style="{StaticResource MenuItemButtonStyle}">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                                    <Binding Path="CurrentDisplayElement" />
+                                                                    <Binding Source="{x:Static viewModel:ElementSelectionMethod.Description}" />
+                                                                    <Binding Source="{x:Null}" />
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </MenuItem.Header>
+                                                    <MenuItem.CommandParameter>
+                                                        <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                            <Binding Path="CurrentDisplayElement" />
+                                                            <Binding Source="{x:Static viewModel:ElementSelectionMethod.Description}" />
+                                                            <Binding Source="{x:Null}" />
+                                                        </MultiBinding>
+                                                    </MenuItem.CommandParameter>
+                                                    <MenuItem.Style>
+                                                        <Style TargetType="{x:Type MenuItem}">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Path=CurrentDisplayElement.IsCheckable}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </MenuItem.Style>
+                                                    <MenuItem Header="Toggle" FontWeight="Bold" Command="{Binding ToggleCommand}" ToolTip="Toggles checkable item using description as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.Description}" />
+                                                                <Binding Source="{x:Null}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                    <MenuItem Header="Toggle On" Command="{Binding ToggleCommand}" ToolTip="Toggles checkable item on using description as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.Description}" />
+                                                                <Binding Source="{StaticResource True}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                    <MenuItem Header="Toggle Off" Command="{Binding ToggleCommand}" ToolTip="Toggles checkable item off using description as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.Description}" />
+                                                                <Binding Source="{StaticResource False}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                </MenuItem>
+
+                                                <MenuItem x:Name="menuItemToggleByText" Command="{Binding ToggleCommand}">
+                                                    <MenuItem.Header>
+                                                        <Button Content="Toggle by Text" Command="{Binding ToggleCommand}" Click="MenuItemButton_Click_CloseContextMenu" Style="{StaticResource MenuItemButtonStyle}">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                                    <Binding Path="CurrentDisplayElement" />
+                                                                    <Binding Source="{x:Static viewModel:ElementSelectionMethod.Text}" />
+                                                                    <Binding Source="{x:Null}" />
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </MenuItem.Header>
+                                                    <MenuItem.CommandParameter>
+                                                        <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                            <Binding Path="CurrentDisplayElement" />
+                                                            <Binding Source="{x:Static viewModel:ElementSelectionMethod.Text}" />
+                                                            <Binding Source="{x:Null}" />
+                                                        </MultiBinding>
+                                                    </MenuItem.CommandParameter>
+                                                    <MenuItem.Style>
+                                                        <Style TargetType="{x:Type MenuItem}">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Path=CurrentDisplayElement.IsCheckable}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </MenuItem.Style>
+                                                    <MenuItem Header="Toggle" FontWeight="Bold" Command="{Binding ToggleCommand}" ToolTip="Toggles checkable item using text as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.Text}" />
+                                                                <Binding Source="{x:Null}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                    <MenuItem Header="Toggle On" Command="{Binding ToggleCommand}" ToolTip="Toggles checkable item on using text as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.Text}" />
+                                                                <Binding Source="{StaticResource True}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                    <MenuItem Header="Toggle Off" Command="{Binding ToggleCommand}" ToolTip="Toggles checkable item off using text as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.Text}" />
+                                                                <Binding Source="{StaticResource False}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                </MenuItem>
+
+                                                <MenuItem x:Name="menuItemToggleByResourceId" Command="{Binding ToggleCommand}">
+                                                    <MenuItem.Header>
+                                                        <Button Content="Toggle by Resource ID" Command="{Binding ToggleCommand}" Click="MenuItemButton_Click_CloseContextMenu" Style="{StaticResource MenuItemButtonStyle}">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                                    <Binding Path="CurrentDisplayElement" />
+                                                                    <Binding Source="{x:Static viewModel:ElementSelectionMethod.ResourceId}" />
+                                                                    <Binding Source="{x:Null}" />
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </MenuItem.Header>
+                                                    <MenuItem.CommandParameter>
+                                                        <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                            <Binding Path="CurrentDisplayElement" />
+                                                            <Binding Source="{x:Static viewModel:ElementSelectionMethod.ResourceId}" />
+                                                            <Binding Source="{x:Null}" />
+                                                        </MultiBinding>
+                                                    </MenuItem.CommandParameter>
+                                                    <MenuItem.Style>
+                                                        <Style TargetType="{x:Type MenuItem}">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Path=CurrentDisplayElement.IsCheckable}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </MenuItem.Style>
+                                                    <MenuItem Header="Toggle" FontWeight="Bold" Command="{Binding ToggleCommand}" ToolTip="Toggles checkable item using resource ID as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.ResourceId}" />
+                                                                <Binding Source="{x:Null}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                    <MenuItem Header="Toggle On" Command="{Binding ToggleCommand}" ToolTip="Toggles checkable item on using resource ID as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.ResourceId}" />
+                                                                <Binding Source="{StaticResource True}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                    <MenuItem Header="Toggle Off" Command="{Binding ToggleCommand}" ToolTip="Toggles checkable item off using resource ID as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.ResourceId}" />
+                                                                <Binding Source="{StaticResource False}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                </MenuItem>
+
+                                                <MenuItem x:Name="menuItemToggleByIndexTree" Command="{Binding ToggleCommand}">
+                                                    <MenuItem.Header>
+                                                        <Button Content="Toggle by Index Tree" Command="{Binding ToggleCommand}" Click="MenuItemButton_Click_CloseContextMenu" Style="{StaticResource MenuItemButtonStyle}">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                                    <Binding Path="CurrentDisplayElement" />
+                                                                    <Binding Source="{x:Static viewModel:ElementSelectionMethod.IndexTree}" />
+                                                                    <Binding Source="{x:Null}" />
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </MenuItem.Header>
+                                                    <MenuItem.CommandParameter>
+                                                        <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                            <Binding Path="CurrentDisplayElement" />
+                                                            <Binding Source="{x:Static viewModel:ElementSelectionMethod.IndexTree}" />
+                                                            <Binding Source="{x:Null}" />
+                                                        </MultiBinding>
+                                                    </MenuItem.CommandParameter>
+                                                    <MenuItem.Style>
+                                                        <Style TargetType="{x:Type MenuItem}">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Path=CurrentDisplayElement.IsCheckable}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </MenuItem.Style>
+                                                    <MenuItem Header="Toggle" FontWeight="Bold" Command="{Binding ToggleCommand}" ToolTip="Toggles checkable item using index tree as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.IndexTree}" />
+                                                                <Binding Source="{x:Null}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                    <MenuItem Header="Toggle On" Command="{Binding ToggleCommand}" ToolTip="Toggles checkable item on using index tree as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.IndexTree}" />
+                                                                <Binding Source="{StaticResource True}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                    <MenuItem Header="Toggle Off" Command="{Binding ToggleCommand}" ToolTip="Toggles checkable item off using index tree as selection criteria.">
+                                                        <MenuItem.CommandParameter>
+                                                            <MultiBinding Converter="{converters:ToggleCommandParameters}">
+                                                                <Binding Path="CurrentDisplayElement" />
+                                                                <Binding Source="{x:Static viewModel:ElementSelectionMethod.IndexTree}" />
+                                                                <Binding Source="{StaticResource False}" />
+                                                            </MultiBinding>
+                                                        </MenuItem.CommandParameter>
+                                                    </MenuItem>
+                                                </MenuItem>
+
+                                            </ContextMenu>
+                                        </Canvas.ContextMenu>                                    
+                                    </Canvas>
+                                    
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Button x:Name="BackButton" Command="{Binding BackButtonCommand}" Style="{StaticResource MarbleButton}" Background="Black" Width="50" Margin="5,0,5,0"
+                                                Focusable="False" Visibility="{Binding CanSave, Converter={Converters:BoolToVisibilityCollapsedConverter}}" ToolTip="Simulates product HW-key back. Returns to previous UI state.">
+                                            <TextBlock Text="" FontFamily="Wingdings 3" FontSize="16"/>
+                                        </Button>
+
+                                        <Button x:Name="ButtonExit" Command="{Binding ExitToIdleCommand}" Style="{StaticResource MarbleButton}" Background="Black" Width="50" Margin="5,0,5,0"
+                                                Focusable="False" Visibility="{Binding CanSave, Converter={Converters:BoolToVisibilityCollapsedConverter}}" ToolTip="Returns to idle screen.">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="" FontFamily="Wingdings 3" FontWeight="Bold" FontSize="16" Margin="0,0,-5,0"/>
+                                                <TextBlock Text="" FontFamily="Wingdings 3"  FontSize="16"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                        <Button x:Name="ButtonVolumeDown" Command="{Binding VolumeDownButtonCommand}" Style="{StaticResource MarbleButton}" Background="Black" Width="50" Margin="5,0,5,0"
+                                                Focusable="False" Visibility="{Binding CanSave, Converter={Converters:BoolToVisibilityCollapsedConverter}}" ToolTip="Simulates product HW-key volume down.">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="" FontFamily="Webdings" Margin="0,2,0,0" FontSize="16" Style="{StaticResource MarbleTextBlockDarkBackgroundStyle}"/>
+                                                <TextBlock Text="-" Margin="0,-1,0,0" Style="{StaticResource MarbleTextBlockDarkBackgroundStyle}"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                        <Button x:Name="ButtonVolumeUp" Command="{Binding VolumeUpButtonCommand}" Style="{StaticResource MarbleButton}" Background="Black" Width="50" Margin="5,0,5,0"
+                                                Focusable="False" Visibility="{Binding CanSave, Converter={Converters:BoolToVisibilityCollapsedConverter}}" ToolTip="Simulates product HW-key volume up.">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="" FontFamily="Webdings" Margin="0,2,0,0" FontSize="16" Style="{StaticResource MarbleTextBlockDarkBackgroundStyle}"/>
+                                                <TextBlock Text="+" Style="{StaticResource MarbleTextBlockDarkBackgroundStyle}"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                        <Button x:Name="ButtonKeyLock" Command="{Binding PowerButtonCommand}" Style="{StaticResource MarbleButton}" Background="Black" Width="50" Margin="5,0,5,0"
+                                                Focusable="False" Visibility="{Binding CanSave, Converter={Converters:BoolToVisibilityCollapsedConverter}}" ToolTip="Simulates product HW-key power.">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="O" Style="{StaticResource MarbleTextBlockDarkBackgroundStyle}"/>
+                                                <TextBlock Text="i" Style="{StaticResource MarbleTextBlockDarkBackgroundStyle}" Margin="-7,-3,0,0"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </StackPanel>
+                                        
+
+                                    <TextBlock x:Name="textBlockInfoText" Foreground="{StaticResource MarbleDarkPurleBackgroundGradient}" HorizontalAlignment="Center" Margin="5,5,5,5" MaxWidth="{Binding ElementName=canvasRealCapture, Path=ActualWidth}" TextTrimming="WordEllipsis" ToolTip="{Binding ElementName=textBlockInfoText, Path=Text}" />
+                                    
+                                    <Button x:Name="SaveButton" Content="Save Capture..." Height="30" Margin="0,10,0,0" Style="{StaticResource MarbleButton}"
+                                            Click="OnSaveButtonClick" IsEnabled="{Binding CanSave, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding}"
+                                            ToolTip="Saves captured image along with the element table to a file." Visibility="Collapsed" />
+                                </StackPanel>
+                            </GroupBox>
+
+                            
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <!--<Popup x:Name="popupElementDetails" Grid.Column="1" IsOpen="True" StaysOpen="True" PlacementTarget="{Binding ElementName=groupBoxCommandHistory}" Placement="Top" Opacity="0.8">
+                        
+                    </Popup>-->
+                    
+                    <Grid x:Name="GridDetailsAndCommandHistory" Grid.Column="1" VerticalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+
+                        <StackPanel Background="{StaticResource MarbleDarkPurpleButtonBackground}" DataContext="{Binding ElementName=windowCaptureTool}" Margin="5">
+                            <TextBlock Text="Element Details" Style="{StaticResource MarbleTextBlockDarkBackgroundStyle}" Margin="5 0"/>
+
+                            <Grid MaxWidth="{Binding ElementName=groupBoxCommandHistory, Path=ActualWidth, UpdateSourceTrigger=PropertyChanged}" Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="5" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                
+                                <TextBlock Grid.Row="0" Text="Description" Style="{StaticResource MarbleTextBlockDarkBackgroundStyle}"/>
+                                <TextBlock Grid.Row="1" Text="Resource ID" Style="{StaticResource MarbleTextBlockDarkBackgroundStyle}"/>                                
+                                <TextBlock Grid.Row="2" Text="Text" Style="{StaticResource MarbleTextBlockDarkBackgroundStyle}"/>
+                                <TextBlock Grid.Row="3" Text="Index Tree" Style="{StaticResource MarbleTextBlockDarkBackgroundStyle}"/>
+                                <TextBlock Grid.Row="4" Text="Coordinates" Style="{StaticResource MarbleTextBlockDarkBackgroundStyle}"/>
+
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Path=CurrentDisplayElement.Description}" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Path=CurrentDisplayElement.ResourceId}" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Grid.Column="2" Grid.Row="2" Text="{Binding Path=CurrentDisplayElement.Text}" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Grid.Column="2" Grid.Row="3" Text="{Binding Path=CurrentDisplayElement.IndexTree}" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+
+                                <StackPanel Grid.Column="2" Grid.Row="4" Orientation="Horizontal">
+                                    <StackPanel.Style>
+                                        <Style TargetType="{x:Type StackPanel}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=CurrentDisplayElement.Rectangle, UpdateSourceTrigger=PropertyChanged}" Value="{x:Null}">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    <TextBlock Text="(" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}"/>
+                                    <TextBlock Text="{Binding Path=CurrentDisplayElement.Rectangle.X, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}"/>
+                                    <TextBlock Text=", " Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}"/>
+                                    <TextBlock Text="{Binding Path=CurrentDisplayElement.Rectangle.Y, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}"/>
+                                    <TextBlock Text=") " Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}"/>
+                                    <TextBlock Text="{Binding Path=CurrentDisplayElement.Rectangle.Width, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}"/>
+                                    <TextBlock Text="x" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}"/>
+                                    <TextBlock Text="{Binding Path=CurrentDisplayElement.Rectangle.Height, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+
+                        <GroupBox x:Name="groupBoxCommandHistory" Grid.Column="1" Grid.Row="1" Header="Command History" 
+                                  Margin="0" Background="White" Style="{StaticResource MarbleGroupBox}">
+                        
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal">
+
+                                    <Button Style="{StaticResource MarbleButton}" Width="80" Height="20" Margin="2" Command="{Binding Path=ExecuteLastPythonCommand}"
+                                        ToolTip="Executes last command in command history." IsEnabled="{Binding Source={x:Static Application.Current}, Path=ViewModel.MarbleConnector.State, Converter={converters:ConnectorStateToIsIdleConverter}}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="u" FontFamily="Wingdings 3" Margin="5,2,5,0"/>
+                                            <TextBlock Text="Last" Style="{StaticResource MarbleTextBlockStyle}"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button x:Name="ButtonExecuteSelectedPython" Style="{StaticResource MarbleButton}" Width="80" Height="20" Margin="2" Click="ButtonExecuteSelectedPython_OnClick" IsEnabled="False"
+                                            ToolTip="Executes selected commands in command history.">
+                                        <!--<Button.Style>
+                                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MarbleButton}">
+                                                <Setter Property="IsEnabled" Value="{Binding Source={x:Static Application.Current}, Path=ViewModel.MarbleConnector.State, Converter={converters:ConnectorStateToIsIdleConverter}}" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=avalonEditCommandHistory, Path=SelectedText, UpdateSourceTrigger=PropertyChanged}" Value="{x:Null}">
+                                                        <Setter Property="IsEnabled" Value="False" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ElementName=avalonEditCommandHistory, Path=SelectedText, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static system:String.Empty}">
+                                                        <Setter Property="IsEnabled" Value="False" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ElementName=avalonEditCommandHistory, Path=SelectedText, UpdateSourceTrigger=PropertyChanged, Converter={utilities:HasPythonScriptValidPrefixAndPostfix}}" Value="False">
+                                                        <Setter Property="IsEnabled" Value="False" />
+                                                    </DataTrigger> 
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>-->
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="u" FontFamily="Wingdings 3" Margin="5,2,5,0"/>
+                                            <TextBlock Text="Selected" Style="{StaticResource MarbleTextBlockStyle}"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Style="{StaticResource MarbleButton}" Width="80" Height="20" Margin="2" Command="{Binding Path=ExecuteAllPythonCommand}"
+                                        ToolTip="Executes all commands in command history." IsEnabled="{Binding Source={x:Static Application.Current}, Path=ViewModel.MarbleConnector.State, Converter={converters:ConnectorStateToIsIdleConverter}}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="u" FontFamily="Wingdings 3" Margin="5,2,5,0"/>
+                                            <TextBlock Text="All" Style="{StaticResource MarbleTextBlockStyle}"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button x:Name="ButtonClearCommandHistory" Style="{StaticResource MarbleButton}" Width="80" Height="20" Margin="2" 
+                                            ToolTip="Clears command history." Command="{Binding Path=ClearCommandHistoryCommand}">
+                                        Clear
+                                    </Button>
+                                    
+                                </StackPanel>
+
+                                <avalonEdit:TextEditor x:Name="avalonEditCommandHistory" Grid.Row="1" SyntaxHighlighting="Default" WordWrap="True" ShowLineNumbers="True" VerticalScrollBarVisibility="Auto"
+                                                       TextChanged="AvalonEditCommandHistory_OnTextChanged">
+                                                       <!--Width="{Binding ElementName=groupBoxCommandHistory, Path=ActualWidth, Converter={Converters:DoubleValueAndParameterValueAdded}, ConverterParameter=-10}" 
+                                                       MaxWidth="{Binding ElementName=groupBoxCommandHistory, Path=ActualWidth, Converter={Converters:DoubleValueAndParameterValueAdded}, ConverterParameter=-10}">-->
+                                                       <!--MaxHeight="{Binding ElementName=groupBoxRealCapture, Path=ActualHeight, Converter={Converters:DoubleValueAndParameterValueAdded}, ConverterParameter=-36}">-->
+                                    <avalonEdit:TextEditor.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Copy" Command="Copy" />
+                                            <MenuItem Header="Copy All" Click="MenuItemCopyAllCommandHistory_Click" />
+                                        </ContextMenu>
+                                    </avalonEdit:TextEditor.ContextMenu>
+                                </avalonEdit:TextEditor>
+
+                                <Grid Grid.Row="2" Margin="-3" Background="{StaticResource MarbleDarkPurleBackgroundGradient}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <TextBlock Grid.Column="0" Style="{StaticResource MarbleTextBlockDarkBackgroundStyle}" Margin="5,5,0,5">></TextBlock>
+                                    <!--<TextBox x:Name="TextBoxPythonParser" Grid.Column="1" AcceptsTab="False" MaxLines="1" HorizontalAlignment="Stretch" Margin="5"
+                                             PreviewKeyDown="TextBoxPythonParser_OnPreviewKeyDown"/>-->
+                                    <avalonEdit:TextEditor x:Name="AvalonEditPythonParser" Grid.Column="1" HorizontalAlignment="Stretch" Margin="5" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden"
+                                             PreviewKeyDown="AvalonEditPythonParser_OnPreviewKeyDown"/>
+
+                                    <Button x:Name="ButtonExecutePythonParserCommand" Grid.Column="2" Style="{StaticResource MarbleButton}" Width="50" Height="24" Margin="3" 
+                                        ToolTip="Executes command typed in the parser. Click or press Enter key in parser." IsEnabled="{Binding Source={x:Static Application.Current}, Path=ViewModel.MarbleConnector.State, Converter={converters:ConnectorStateToIsIdleConverter}}" Click="ButtonExecutePythonParserCommand_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="u" FontFamily="Wingdings 3" Margin="5,2,5,0"/>
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                                
+                        </GroupBox>
+                        
+                    </Grid>
+
+                    <CustomControls:AdvancedGridSplitter x:Name="AdvancedGridSplitterElementTable" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Stretch" 
+                                                         ResizeDirection="Columns" CollapseMode="None" Width="8" Panel.ZIndex="10">
+                        <CustomControls:AdvancedGridSplitter.Style>
+                            <Style TargetType="{x:Type CustomControls:AdvancedGridSplitter}" BasedOn="{StaticResource {x:Type CustomControls:AdvancedGridSplitter}}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=ToggleButtonShowElementTable, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=ToggleButtonShowElementTable, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </CustomControls:AdvancedGridSplitter.Style>
+                    </CustomControls:AdvancedGridSplitter>
+
+                        <GroupBox x:Name="groupBoxElementTable" Grid.Column="3" Header="Element Table" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Background="White"
+                                  ScrollViewer.CanContentScroll="False" >
+                        <GroupBox.Style>
+                            <Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource MarbleGroupBox}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding DisplayElements.Count, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ValueBiggerThanParameter}, ConverterParameter=0}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding DisplayElements}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=ToggleButtonShowElementTable, Path=IsChecked}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=ToggleButtonShowElementTable, Path=IsChecked}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                        </GroupBox.Style>
+
+                            <DataGrid x:Name="dataGridElementTable" DataContext="{Binding}" ItemsSource="{Binding Path=DisplayElements, UpdateSourceTrigger=PropertyChanged}"
+                                CanUserReorderColumns="True" CanUserAddRows="False" IsReadOnly="True"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False"
+                                CanUserDeleteRows="False" SelectionUnit="FullRow" SelectionMode="Extended" GridLinesVisibility="None"
+                                AlternatingRowBackground="{StaticResource MarbleDataGridAlternatingRowBackground}" CanUserResizeRows="False" MouseMove="OnElementTable_MouseMove"
+                                PreviewMouseDown="ElementTable_PreviewMouseDown" MouseLeave="ElementTable_MouseLeave"
+                                Foreground="{StaticResource MarbleNormalTextColorOnLightBackground}" 
+                                Background="White"
+                                ContextMenu="{Binding ElementName=canvasRealCapture, Path=ContextMenu}"
+                                ContextMenuOpening="ContextMenu_ContextMenuOpening"
+                                ContextMenuClosing="ContextMenuCanvasRealCaptureDrag_OnClosed">
+                                <DataGrid.Resources>
+                                    <Style x:Key="DataGridTextBlockColumnElementDefaultStyle" TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Padding" Value="3,0,3,0" />
+                                        <Setter Property="HorizontalAlignment" Value="Right" />
+                                    </Style>
+                                    <Style x:Key="DataGridTextBlockColumnElementForNumberStyle" TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Padding" Value="3,0,3,0" />
+                                        <Setter Property="HorizontalAlignment" Value="Right" />
+                                    </Style>
+                                    <Style x:Key="DataGridCheckBoxColumnElementDefaultStyle"  TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="Margin" Value="1,1,1,1" />
+                                        <Setter Property="IsHitTestVisible" Value="False" />
+                                    </Style>
+                                </DataGrid.Resources>
+                                <DataGrid.CellStyle>
+                                    <Style TargetType="{x:Type DataGridCell}">
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Trigger.Setters>
+                                                    <Setter Property="Background" Value="{StaticResource MarblePurpleHighlightBackground}" />
+                                                    <Setter Property="BorderBrush" Value="{StaticResource MarblePurpleHighlightBackground}" />
+                                                    <Setter Property="Foreground" Value="{StaticResource MarbleNormalTextColorOnDarkBackground}" />
+                                                </Trigger.Setters>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.CellStyle>
+                                <DataGrid.Columns>                                 
+                                    <DataGridTextColumn Header="Left" SortMemberPath="Rectangle.X" Binding="{Binding Rectangle.X}" IsReadOnly="True"
+                                                        ElementStyle="{StaticResource DataGridTextBlockColumnElementForNumberStyle}" />
+                                    <DataGridTextColumn Header="Top" SortMemberPath="Rectangle.Y" Binding="{Binding Rectangle.Y}" IsReadOnly="True"
+                                                        ElementStyle="{StaticResource DataGridTextBlockColumnElementForNumberStyle}" />
+                                    <DataGridTextColumn Header="Width" SortMemberPath="Rectangle.Width" Binding="{Binding Rectangle.Width}" IsReadOnly="True"
+                                                        ElementStyle="{StaticResource DataGridTextBlockColumnElementForNumberStyle}" />
+                                    <DataGridTextColumn Header="Height" SortMemberPath="Rectangle.Height" Binding="{Binding Rectangle.Height}" IsReadOnly="True"
+                                                        ElementStyle="{StaticResource DataGridTextBlockColumnElementForNumberStyle}" />
+                                    <DataGridTextColumn Header="Center X" SortMemberPath="Center.X" Binding="{Binding Center.X}" IsReadOnly="True"
+                                                        ElementStyle="{StaticResource DataGridTextBlockColumnElementForNumberStyle}" />
+                                    <DataGridTextColumn Header="Center Y" SortMemberPath="Center.Y" Binding="{Binding Center.Y}" IsReadOnly="True"
+                                                        ElementStyle="{StaticResource DataGridTextBlockColumnElementForNumberStyle}" />
+
+                                    <DataGridTextColumn Header="Index Tree" SortMemberPath="IndexTree" Binding="{Binding Path=IndexTree}" IsReadOnly="True" 
+                                                        ElementStyle="{StaticResource DataGridTextBlockColumnElementForNumberStyle}"/>
+                                    <DataGridTextColumn Header="Text" SortMemberPath="Text" Binding="{Binding Path=Text}" IsReadOnly="True" />
+                                    <DataGridTextColumn Header="Resource ID" SortMemberPath="ResourceId" Binding="{Binding Path=ResourceId}" IsReadOnly="True" />
+                                    <DataGridTextColumn Header="Description" SortMemberPath="Description" Binding="{Binding Path=Description}" IsReadOnly="True" />
+                                    <DataGridTextColumn Header="Class" SortMemberPath="Class" Binding="{Binding Path=Class}" IsReadOnly="True" />
+                                    <DataGridTextColumn Header="Package" SortMemberPath="Package" Binding="{Binding Path=Package}" IsReadOnly="True" />
+
+                                    <DataGridCheckBoxColumn Header="Checkable" SortMemberPath="IsCheckable" Binding="{Binding Path=IsCheckable, Mode=OneWay}" IsReadOnly="True" IsThreeState="True">
+                                        <DataGridCheckBoxColumn.ElementStyle>
+                                            <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource DataGridCheckBoxColumnElementDefaultStyle}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsCheckable}" Value="{x:Null}">
+                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGridCheckBoxColumn.ElementStyle>
+                                    </DataGridCheckBoxColumn>
+                                    <DataGridCheckBoxColumn Header="Checked" SortMemberPath="IsChecked" Binding="{Binding Path=IsChecked, Mode=OneWay}" IsReadOnly="True" IsThreeState="True">
+                                        <DataGridCheckBoxColumn.ElementStyle>
+                                            <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource DataGridCheckBoxColumnElementDefaultStyle}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsChecked}" Value="{x:Null}">
+                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGridCheckBoxColumn.ElementStyle>
+                                    </DataGridCheckBoxColumn>
+                                    <DataGridCheckBoxColumn Header="Clickable" SortMemberPath="IsClickable" Binding="{Binding Path=IsClickable, Mode=OneWay}" IsReadOnly="True" IsThreeState="True">
+                                        <DataGridCheckBoxColumn.ElementStyle>
+                                            <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource DataGridCheckBoxColumnElementDefaultStyle}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsClickable}" Value="{x:Null}">
+                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGridCheckBoxColumn.ElementStyle>
+                                    </DataGridCheckBoxColumn>
+                                    <DataGridCheckBoxColumn Header="Enabled" SortMemberPath="IsEnabled" Binding="{Binding Path=IsEnabled, Mode=OneWay}" IsReadOnly="True" IsThreeState="True">
+                                        <DataGridCheckBoxColumn.ElementStyle>
+                                            <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource DataGridCheckBoxColumnElementDefaultStyle}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsEnabled}" Value="{x:Null}">
+                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGridCheckBoxColumn.ElementStyle>
+                                    </DataGridCheckBoxColumn>
+                                    <DataGridCheckBoxColumn Header="Focusable" SortMemberPath="IsFocusable" Binding="{Binding Path=IsFocusable, Mode=OneWay}" IsReadOnly="True" IsThreeState="True">
+                                        <DataGridCheckBoxColumn.ElementStyle>
+                                            <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource DataGridCheckBoxColumnElementDefaultStyle}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsFocusable}" Value="{x:Null}">
+                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGridCheckBoxColumn.ElementStyle>
+                                    </DataGridCheckBoxColumn>
+                                    <DataGridCheckBoxColumn Header="Focused" SortMemberPath="IsFocused" Binding="{Binding Path=IsFocused, Mode=OneWay}" IsReadOnly="True" IsThreeState="True">
+                                        <DataGridCheckBoxColumn.ElementStyle>
+                                            <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource DataGridCheckBoxColumnElementDefaultStyle}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsFocused}" Value="{x:Null}">
+                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGridCheckBoxColumn.ElementStyle>
+                                    </DataGridCheckBoxColumn>
+                                    <DataGridCheckBoxColumn Header="Scrollable" SortMemberPath="IsScrollable" Binding="{Binding Path=IsScrollable, Mode=OneWay}" IsReadOnly="True" IsThreeState="True">
+                                        <DataGridCheckBoxColumn.ElementStyle>
+                                            <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource DataGridCheckBoxColumnElementDefaultStyle}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsScrollable}" Value="{x:Null}">
+                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGridCheckBoxColumn.ElementStyle>
+                                    </DataGridCheckBoxColumn>
+                                    <DataGridCheckBoxColumn Header="Long Clickable" SortMemberPath="IsLongClickable" Binding="{Binding Path=IsLongClickable, Mode=OneWay}" IsReadOnly="True" IsThreeState="True">
+                                        <DataGridCheckBoxColumn.ElementStyle>
+                                            <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource DataGridCheckBoxColumnElementDefaultStyle}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsLongClickable}" Value="{x:Null}">
+                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGridCheckBoxColumn.ElementStyle>
+                                    </DataGridCheckBoxColumn>
+                                    <DataGridCheckBoxColumn Header="Password" SortMemberPath="IsPassword" Binding="{Binding Path=IsPassword, Mode=OneWay}" IsReadOnly="True" IsThreeState="True">
+                                        <DataGridCheckBoxColumn.ElementStyle>
+                                            <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource DataGridCheckBoxColumnElementDefaultStyle}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsPassword}" Value="{x:Null}">
+                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGridCheckBoxColumn.ElementStyle>
+                                    </DataGridCheckBoxColumn>
+                                    <DataGridCheckBoxColumn Header="Selected" SortMemberPath="IsSelected" Binding="{Binding Path=IsSelected, Mode=OneWay}" IsReadOnly="True" IsThreeState="True">
+                                        <DataGridCheckBoxColumn.ElementStyle>
+                                            <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource DataGridCheckBoxColumnElementDefaultStyle}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="{x:Null}">
+                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGridCheckBoxColumn.ElementStyle>
+                                    </DataGridCheckBoxColumn>
+                                    
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                        </GroupBox>
+
+                </Grid>
+
+            </DockPanel>
+                
+        </GroupBox>
+
+        <Grid x:Name="GridWindowBottomBar" DockPanel.Dock="Bottom" Grid.Row="1" Background="{StaticResource MarbleDarkPurpleButtonBackground}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="buttonClose" Grid.Column="2" Width="100" DockPanel.Dock="Top" HorizontalAlignment="Center" Content="Close" Margin="5" Height="30" Style="{DynamicResource MarbleButton}" Click="OnButtonCloseClick" />
+
+        </Grid>
+
+    </Grid>
+</Window>

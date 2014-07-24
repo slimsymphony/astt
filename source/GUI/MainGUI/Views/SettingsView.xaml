@@ -1,0 +1,40 @@
+﻿<Views:UcBase x:Class="Marble.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sb="clr-namespace:Wpf.Controls;assembly=Wpf.SplitButton"
+             xmlns:acb="clr-namespace:AttachedCommandBehavior;assembly=AttachedCommandBehavior"
+             xmlns:Model="clr-namespace:Marble.Model" xmlns:Converters="clr-namespace:Marble.Converters" xmlns:Views="clr-namespace:Marble.Views"
+             xmlns:ViewModel="clr-namespace:Marble.ViewModel"
+             xmlns:CustomControls="clr-namespace:MarbleLibrary.CustomControls;assembly=MarbleLibrary"
+             xmlns:Converters1="clr-namespace:MarbleLibrary.Converters;assembly=MarbleLibrary"
+             xmlns:System="clr-namespace:System;assembly=mscorlib" mc:Ignorable="d" 
+             d:DesignWidth="440" d:DesignHeight="280" MinWidth="220" MinHeight="200">
+    <Views:UcBase.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Close"
+                        Executed="CloseCommandHandler"/>
+    </Views:UcBase.CommandBindings>
+
+    <Grid x:Name="LayoutRoot" Background="#FF2F2F2F" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <GroupBox x:Name="mainGroupBox" Grid.Column="0" Header="Settings" Margin="3,3,3,8" Background="White" Style="{DynamicResource MarbleGroupBox}">
+            <TabControl Name="tabSettings">
+            </TabControl>
+        </GroupBox>
+        <Grid Grid.Row="1" Grid.ColumnSpan="3" Background="{StaticResource MarbleDarkPurpleButtonBackground}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="buttonOK" Content="OK" Grid.Column="1" HorizontalAlignment="Left" Width="100" Height="30" Margin="5" Style="{StaticResource MarbleButton}" Command="{Binding SaveCommand}" Click="buttonOK_Click" />
+            <Button x:Name="buttonCancel" Content="Cancel" Grid.Column="2" HorizontalAlignment="Right" Width="100" Height="30" Margin="5" Style="{StaticResource MarbleButton}" Command="{Binding CancelCommand}" Click="buttonCancel_Click" />
+        </Grid>
+    </Grid>
+</Views:UcBase>

@@ -1,0 +1,548 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E8D5A1C5-12D1-45C8-87DC-261F5DBFFE64}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Marble</RootNamespace>
+    <AssemblyName>Marble</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\gui\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;FRAMEWORK_SUPPORTS_MARBLE_SETTINGS_DIRECTORY</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\gui\</OutputPath>
+    <DefineConstants>TRACE;FRAMEWORK_SUPPORTS_MARBLE_SETTINGS_DIRECTORY</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Marble.M.Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AttachedCommandBehavior, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalLibraries\Controls\AttachedCommandBehavior\AttachedCommandBehavior.dll</HintPath>
+    </Reference>
+    <Reference Include="FirmwareUpdate">
+      <HintPath>..\ExternalLibraries\Executables\FirmwareUpdate.exe</HintPath>
+    </Reference>
+    <Reference Include="FuseLib">
+      <HintPath>..\ExternalLibraries\dll\FuseLib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Granite_flash">
+      <HintPath>..\ExternalLibraries\Executables\Granite_flash.exe</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit">
+      <HintPath>..\ExternalLibraries\dll\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython, Version=2.7.0.40, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL" />
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalLibraries\dll\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MediatorLib">
+      <HintPath>..\ExternalLibraries\Controls\MediatorLib\MediatorLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamic, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ExceptionMessageBox, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalLibraries\dll\Microsoft.ExceptionMessageBox.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Scripting, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Scripting.Metadata, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Nokia.Connectivity.Messaging, Version=2011.51.0.210, Culture=neutral, PublicKeyToken=2e132f98bfa8d3e6, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalLibraries\dll\Nokia.Connectivity.Messaging.dll</HintPath>
+    </Reference>
+    <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Service">
+      <HintPath>..\ExternalLibraries\dll\Service.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Activities.Core.Presentation" />
+    <Reference Include="System.Activities.Presentation" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit.VisualStudio.Design, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalLibraries\dll\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TestAutomation.HWController.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\framework\dlls\TestAutomation.HWController.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="TestAutomation.Remote.Shared">
+      <HintPath>..\ExternalLibraries\dll\TestAutomation.Remote.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Visiblox.Charts, Version=4.0.1.49882, Culture=neutral, PublicKeyToken=1543c03f04c4461b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalLibraries\dll\Visiblox.Charts.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="Wpf.SplitButton, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalLibraries\Controls\SplitButton\Wpf.SplitButton.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Communication\FrameworkCommands.cs" />
+    <Compile Include="Communication\SimModel.cs" />
+    <Compile Include="Converters\BlackboxEnabledStatusToImageConverter.cs" />
+    <Compile Include="Converters\ChartConverters.cs" />
+    <Compile Include="Converters\ConnectorConnectionsToImageConverter.cs" />
+    <Compile Include="Converters\ConnectorStateToIsIdleConverted.cs" />
+    <Compile Include="Converters\ConnectorStateToString.cs" />
+    <Compile Include="Converters\ConnectionTypeToImageConverter.cs" />
+    <Compile Include="Converters\ScriptingToolCommandParameterConverters.cs" />
+    <Compile Include="Converters\TestCaseSummaryItemsToStatusConverter.cs" />
+    <Compile Include="Converters\CoreTestToolTestSetToFeatureHeadingConverter.cs" />
+    <Compile Include="Converters\CoreTestToolTestSetToSubareaHeadingConverter.cs" />
+    <Compile Include="Converters\DateTimeToStringConverter.cs" />
+    <Compile Include="Converters\PmdMatchLevelToImageConverter.cs" />
+    <Compile Include="Converters\PMDMatchLevelToTooltipConverter.cs" />
+    <Compile Include="Converters\StringIsEpmtyToBoolConverter.cs" />
+    <Compile Include="Converters\TestReportResultToImageConverter.cs" />
+    <Compile Include="Converters\SelectedTestReportsToImageConverter.cs" />
+    <Compile Include="Converters\PMDMatchToColorConverter.cs" />
+    <Compile Include="Converters\TraceConnectionTypeToVisibilityConverter.cs" />
+    <Compile Include="MarbleMainWindow.xaml.cs">
+      <DependentUpon>MarbleMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ChartDataModel.cs" />
+    <Compile Include="Model\CoreTestToolSettingsModel.cs" />
+    <Compile Include="Model\DeviceCollection.cs" />
+    <Compile Include="Model\DisplayElement.cs" />
+    <Compile Include="Model\MarbleLoggingModel.cs" />
+    <Compile Include="Model\MarbleSettingsModel.cs" />
+    <Compile Include="Model\GraphModel.cs" />
+    <Compile Include="Model\IGuiPlugin.cs" />
+    <Compile Include="Model\MediatorModel.cs" />
+    <Compile Include="Model\PhoneModel.cs" />
+    <Compile Include="Model\ExtendedSimModel.cs" />
+    <Compile Include="Model\PythonClassModel.cs" />
+    <Compile Include="Model\QcDomainStructureModel.cs" />
+    <Compile Include="Model\TestCaseSummaryModel.cs" />
+    <Compile Include="Model\TestReportModel.cs" />
+    <Compile Include="Model\ViewUserPreferencesModel.cs" />
+    <Compile Include="Templates\MarbleLogEntryDataTemplateSelector.cs" />
+    <Compile Include="Templates\Expander.xaml.cs">
+      <DependentUpon>Expander.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\TestCaseItemDataTemplateSelector.cs" />
+    <Compile Include="Templates\TestReportTestStepDataTemplateSelector.cs" />
+    <Compile Include="Utilities\AvalonEditExtensions.cs" />
+    <Compile Include="Utilities\Collection.cs" />
+    <Compile Include="Utilities\GraphUtilities.cs" />
+    <Compile Include="Utilities\NokiaTestHarnessUtilities.cs" />
+    <Compile Include="Utilities\CoreTestToolUtilities.cs" />
+    <Compile Include="Utilities\GraniteSettingsXmlParser.cs" />
+    <Compile Include="Utilities\PythonScriptCommands.cs" />
+    <Compile Include="Utilities\PythonIndentationStrategy.cs" />
+    <Compile Include="Utilities\PythonParser.cs" />
+    <Compile Include="Utilities\QC\MarbleQCImport.cs" />
+    <Compile Include="Utilities\QC\IMarbleQCImport.cs" />
+    <Compile Include="Utilities\SimXmlParser.cs" />
+    <Compile Include="Utilities\TestCaseUtilities.cs" />
+    <Compile Include="Utilities\TestResultToFlowDocument.cs" />
+    <Compile Include="Utilities\TestResultToRichTextFormat.cs" />
+    <Compile Include="Utilities\TestResultXmlParser.cs" />
+    <Compile Include="Utilities\TimedStringBuffer.cs" />
+    <Compile Include="Utilities\UltimaUsageLogger.cs" />
+    <Compile Include="ViewModel\BlackBoxViewModel.cs" />
+    <Compile Include="ViewModel\BltUeViewModel.cs" />
+    <Compile Include="ViewModel\CaptureToolViewModel.cs" />
+    <Compile Include="ViewModel\FlasherViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModel\QcSettingsViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\CoreTestToolSettingsViewModel.cs" />
+    <Compile Include="ViewModel\SimManagerViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModel\SimpleTextEditorViewModel.cs" />
+    <Compile Include="ViewModel\PhoneViewModel.cs" />
+    <Compile Include="ViewModel\TestReportItemViewModel.cs" />
+    <Compile Include="ViewModel\TestReportViewModel.cs" />
+    <Compile Include="Views\BlackBoxView.xaml.cs">
+      <DependentUpon>BlackBoxView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BltUeView.xaml.cs">
+      <DependentUpon>BltUeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CaptureTool.xaml.cs">
+      <DependentUpon>CaptureTool.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ConnectionSelectionWindow.xaml.cs">
+      <DependentUpon>ConnectionSelectionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Communication\Connector.cs" />
+    <Compile Include="Converters\ConnectorStateToImageConverter.cs" />
+    <Compile Include="Converters\ConnectorStateToRunStopText.cs" />
+    <Compile Include="Converters\ConnectorStateToTooltipConverter.cs" />
+    <Compile Include="Converters\ConnectorStateToVisibilityConverter.cs" />
+    <Compile Include="Converters\StatusToColorConverter.cs" />
+    <Compile Include="Views\FileItemView.xaml.cs">
+      <DependentUpon>FileItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentlyTestingBarUc.xaml.cs">
+      <DependentUpon>CurrentlyTestingBarUc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MarbleLogView.xaml.cs">
+      <DependentUpon>MarbleLogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FlasherView.xaml.cs">
+      <DependentUpon>FlasherView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\GraphView.xaml.cs">
+      <DependentUpon>GraphView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\UcTestResultChange.xaml.cs">
+      <DependentUpon>UcTestResultChange.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CoreTestToolSettingsView.xaml.cs">
+      <DependentUpon>CoreTestToolSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\ProgressDialog\ProgressDialog.xaml.cs">
+      <DependentUpon>ProgressDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\ProgressDialog\ProgressDialogResult.cs" />
+    <Compile Include="Views\Dialogs\ProgressDialog\ProgressDialogSettings.cs" />
+    <Compile Include="Views\MarbleWikiView.xaml.cs">
+      <DependentUpon>MarbleWikiView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QcSettingsView.xaml.cs">
+      <DependentUpon>QcSettingsView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SimManagerView.xaml.cs">
+      <DependentUpon>SimManagerView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\TestReportsTabView.xaml.cs">
+      <DependentUpon>TestReportsTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TestReportTestCaseSummaryView.xaml.cs">
+      <DependentUpon>TestReportTestCaseSummaryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TestReportView.xaml.cs">
+      <DependentUpon>TestReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\DialogFindAndReplace.xaml.cs">
+      <DependentUpon>DialogFindAndReplace.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\DialogNumericValue.xaml.cs">
+      <DependentUpon>DialogNumericValue.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\MarbleSplashScreen.xaml.cs">
+      <DependentUpon>MarbleSplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Executor.xaml.cs">
+      <DependentUpon>Executor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Communication\FuseClient.cs" />
+    <Compile Include="Utilities\CompressWorker.cs" />
+    <Compile Include="Utilities\MailWorker.cs" />
+    <Compile Include="Utilities\SettingsTemplateSelector.cs" />
+    <Compile Include="Utilities\TestCasePyParser.cs" />
+    <Compile Include="Utilities\TestsetXmlParser.cs" />
+    <Compile Include="ViewModel\MarbleMainViewModel.cs" />
+    <Compile Include="Views\SimpleTextEditorView.xaml.cs">
+      <DependentUpon>SimpleTextEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TestLabView.xaml.cs">
+      <DependentUpon>TestLabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UcBase.cs" />
+    <Compile Include="Views\VideoPlayerView.xaml.cs">
+      <DependentUpon>VideoPlayerView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MarbleMainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\MarbleLogEntryCellTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\Expander.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\TestCaseItemDataTemplateResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BlackBoxView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BltUeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CaptureTool.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ConnectionSelectionWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FileItemView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CurrentlyTestingBarUc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MarbleLogView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FlasherView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GraphView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\UcTestResultChange.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CoreTestToolSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\ProgressDialog\ProgressDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MarbleWikiView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\QcSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SimManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TestReportsTabView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TestReportTestCaseSummaryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TestReportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\DialogFindAndReplace.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\DialogNumericValue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\MarbleSplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Executor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Templates\TestCaseResultCellTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SimpleTextEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TestLabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VideoPlayerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\MarbleMainModel.cs" />
+    <Compile Include="Model\Models.cs" />
+    <Compile Include="Model\XmlDocumentModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Resource Include="Marble.M.Icon.ico" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Content Include="DataFiles\ICSharpCode.PythonBinding.Resources.Python.xshd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataFiles\bootstrap.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataFiles\country_list.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GraniteLibrary\MarbleLibrary.csproj">
+      <Project>{18B67670-D884-4846-9E65-BDE173CD33C7}</Project>
+      <Name>MarbleLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IPC\Nokia.Granite.IPC.ClientServiceCommon\TestAutomation.Gui.Marble.IPC.ClientServiceCommon.csproj">
+      <Project>{9CC8974D-45E3-4FA2-B98F-840B9B2400B3}</Project>
+      <Name>TestAutomation.Gui.Marble.IPC.ClientServiceCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Settings\Nokia.Granite.Settings\TestAutomation.Gui.Marble.Settings.csproj">
+      <Project>{5ADB53D5-9805-45F5-A95E-99ACFE52AEEE}</Project>
+      <Name>TestAutomation.Gui.Marble.Settings</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

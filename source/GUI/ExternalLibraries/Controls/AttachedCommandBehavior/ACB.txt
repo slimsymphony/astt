@@ -1,0 +1,2 @@
+The AttatchedCommandBehaviour V2 can be found from Marlon Grechs blog.
+http://marlongrech.wordpress.com/2008/12/13/attachedcommandbehavior-v2-aka-acb/

@@ -1,0 +1,6 @@
+C:\GitRepo\marble_bj\framework\dlls\Managed.AndroidDebugBridge.xml
+C:\GitRepo\marble_bj\framework\dlls\Managed.AndroidDebugBridge.dll
+C:\GitRepo\marble_bj\framework\dlls\Managed.AndroidDebugBridge.pdb
+C:\GitRepo\marble_bj\source\TestAutomation\Managed.AndroidDebugBridge\obj\Debug\Managed.Adb.csprojResolveAssemblyReference.cache
+C:\GitRepo\marble_bj\source\TestAutomation\Managed.AndroidDebugBridge\obj\Debug\Managed.AndroidDebugBridge.dll
+C:\GitRepo\marble_bj\source\TestAutomation\Managed.AndroidDebugBridge\obj\Debug\Managed.AndroidDebugBridge.pdb

@@ -1,0 +1,12 @@
+<TraceActivation>
+  <Configuration Name="CM_trace" Version="3">
+	<Settings>
+	  <Timestamp Name="MCU" State="Off" />
+	  <Storage Name="PMM" State="True" />
+	</Settings>
+	<TraceType XPath="//McuTrace[@Device=&quot;PN_DEV_HOST&quot;]">
+	  <TraceGroup Name="COMMGR_MESSAGE_RECEIVE_TRA" State="Extended" />
+	  <TraceGroup Name="COMMGR_MESSAGE_SEND_TRA" State="Extended" />
+	</TraceType>
+  </Configuration>
+</TraceActivation>

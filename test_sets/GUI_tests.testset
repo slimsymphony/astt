@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<testset>
+  <testcase name="Print phone numbers" feature="All cases" subarea="GUI tests">
+    <testscript directory="..\test_scripts\self_tests" file="GUI_test_suite" class="testBed" method="printPhonenumbers" />
+  </testcase>
+  <testcase name="Fails case" feature="All cases" subarea="GUI tests">
+    <testscript directory="..\test_scripts\self_tests" file="GUI_test_suite" class="testBed" method="failCase" />
+  </testcase>
+  <testcase name="Error case" feature="All cases" subarea="GUI tests">
+    <testscript directory="..\test_scripts\self_tests" file="GUI_test_suite" class="testBed" method="errorCase" />
+  </testcase>
+  <testcase name="Random result" feature="All cases" subarea="GUI tests">
+    <testscript directory="..\test_scripts\self_tests" file="GUI_test_suite" class="testBed" method="randomCase" />
+  </testcase>
+  <testcase name="File not found" feature="All cases" subarea="GUI tests">
+    <testscript directory="..\test_scripts\self_tests" file="some_file_that_doesnt exist" class="testBed" method="emptyCase" />
+  </testcase>
+  <testcase name="Empty 2" feature="All cases" subarea="GUI tests">
+    <testscript directory="..\test_scripts\self_tests" file="GUI_test_suite" class="testBed" method="emptyCase1" />
+  </testcase>
+  <testcase name="Empty 3" feature="All cases" subarea="GUI tests">
+    <testscript directory="..\test_scripts\self_tests" file="GUI_test_suite" class="testBed" method="emptyCase2" />
+  </testcase>
+  <testcase name="Empty 4" feature="All cases" subarea="GUI tests">
+    <testscript directory="..\test_scripts\self_tests" file="GUI_test_suite" class="testBed" method="emptyCase3" />
+  </testcase>
+  <testcase name="Empty 5" feature="All cases" subarea="GUI tests">
+    <testscript directory="..\test_scripts\self_tests" file="GUI_test_suite" class="testBed" method="emptyCase4" />
+  </testcase>
+</testset>

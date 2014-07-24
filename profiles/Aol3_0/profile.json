@@ -1,0 +1,5 @@
+[{"ro.product.platform":"Nokia X software platform 3.0","ro.product.device": "athena"},
+{"ro.product.platform":"Nokia X software platform 2.0","ro.product.device": "athena"},
+{"ro.product.platform":"Nokia X software platform 3.0","ro.product.device": "RM-1057"},
+{"ro.product.platform":"Nokia X software platform 2.0","ro.product.device": "RM-1057"},
+{"ro.product.platform":"Nokia X software platform 2.0","ro.build.product": "libralte"}]

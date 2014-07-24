@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-16"?>
+<settings>
+  <setting name="ABCSIM1">
+    <value type="dictionary">
+      <item>
+        <key>
+          <string>PIN2</string>
+        </key>
+        <value>
+          <float>-7.364747E+24</float>
+        </value>
+      </item>
+      <item>
+        <key>
+          <string>PUK2</string>
+        </key>
+        <value>
+          <int>236332636</int>
+        </value>
+      </item>
+      <item>
+        <key>
+          <string>PIN1</string>
+        </key>
+        <value>
+          <int>2362352</int>
+        </value>
+      </item>
+    </value>
+  </setting>
+  <setting name="SmsText">
+    <value type="string">This is a Nokia test message from Granite</value>
+  </setting>
+  <setting name="SocketPort">
+    <value type="int">808090</value>
+  </setting>
+  <setting name="PhoneNumber">
+    <value type="string">+3580505050945945849</value>
+  </setting>
+  <setting name="SocketAddress">
+    <value type="string">localhost</value>
+  </setting>
+  <setting name="ResetDectionMethod">
+    <value type="string">X-files</value>
+  </setting>
+  <setting name="NonDecoradedSetting">
+    <value type="int">90</value>
+  </setting>
+  <setting name="DuplicateSettingName">
+    <value type="string">Value with same name exists also in other setting file</value>
+  </setting>
+  <setting name="PythonList">
+    <value type="list">
+      <string>Python</string>
+      <string>list</string>
+      <string>is</string>
+      <string>supported</string>
+    </value>
+  </setting>
+  <setting name="PythonTuple">
+    <value type="list">
+      <string>Python</string>
+      <string>tuple</string>
+      <string>is</string>
+      <string>supported</string>
+      <string>but</string>
+      <string>converted</string>
+      <string>to</string>
+      <string>list</string>
+      <string>because</string>
+      <string>tuple</string>
+      <string>is</string>
+      <string>not</string>
+      <string>serializable</string>
+    </value>
+  </setting>
+  <setting name="SettingList">
+    <value type="list">
+      <string>List</string>
+      <string>is</string>
+      <string>supported</string>
+    </value>
+  </setting>
+  <setting name="SomeArray">
+    <value type="list">
+      <string>Array</string>
+      <string>is</string>
+      <string>supported</string>
+      <string>but</string>
+      <string>also</string>
+      <string>converted</string>
+      <string>to</string>
+      <string>list</string>
+    </value>
+  </setting>
+  <setting name="Clock">
+    <value type="date">10/19/2012 13:33:00</value>
+  </setting>
+</settings>

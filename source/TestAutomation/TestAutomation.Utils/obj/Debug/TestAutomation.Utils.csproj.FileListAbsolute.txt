@@ -1,0 +1,4 @@
+C:\GitRepo\marble_bj\framework\dlls\TestAutomation.Utils.dll
+C:\GitRepo\marble_bj\framework\dlls\TestAutomation.Utils.pdb
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.Utils\obj\Debug\TestAutomation.Utils.dll
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.Utils\obj\Debug\TestAutomation.Utils.pdb

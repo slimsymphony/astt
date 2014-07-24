@@ -1,0 +1,5 @@
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.ScriptingService\bin\Debug\TestAutomation.ScriptingService.dll
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.ScriptingService\bin\Debug\TestAutomation.ScriptingService.pdb
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.ScriptingService\obj\Debug\TestAutomation.ScriptingService.csprojResolveAssemblyReference.cache
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.ScriptingService\obj\Debug\TestAutomation.ScriptingService.dll
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.ScriptingService\obj\Debug\TestAutomation.ScriptingService.pdb

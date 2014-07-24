@@ -1,0 +1,21 @@
+{
+    "portrait": {
+        
+        "first": [90,120],
+        "h_span": 152,
+        "v_span": 200,
+        "columns": 3,
+        "main_apps": ["People", "Messaging", "Alarms",
+                      "Gallery", "Music", "Calendar",
+                      "Store", "Email", "Calculator",
+                      "Settings", "HERE", "Downloads",
+                      "MixRadio", "Voice Dialer", "QLogcat", 
+                      "BTTestApp", "Multiple PDP...", "MSAPU", 
+                      "Browser", "EmbmsTestA...", "Qualcomm S...",
+                      "FM Radio New", "FM Tx New", "Movie Studio",
+                      "QSensorTest", "Qualcomm DLT", "Phone",
+                      "Sound Recor...", "FM Radio", "FM Transmitter",
+                      "QVTester-04", "CNESettings", "Qualcomm Izat"]
+        
+    }
+}

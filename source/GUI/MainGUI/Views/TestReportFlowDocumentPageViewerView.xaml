@@ -1,0 +1,199 @@
+﻿<Views:UcBase x:Class="Marble.Views.TestReportFlowDocumentPageViewerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sb="clr-namespace:Wpf.Controls;assembly=Wpf.SplitButton"
+             xmlns:acb="clr-namespace:AttachedCommandBehavior;assembly=AttachedCommandBehavior"
+              xmlns:Model="clr-namespace:Marble.Model" xmlns:Converters="clr-namespace:Marble.Converters" xmlns:Views="clr-namespace:Marble.Views"
+             xmlns:ViewModel="clr-namespace:Marble.ViewModel"
+              xmlns:CustomControls="clr-namespace:MarbleLibrary.CustomControls;assembly=MarbleLibrary"
+              xmlns:Converters1="clr-namespace:MarbleLibrary.Converters;assembly=MarbleLibrary"
+              xmlns:local="clr-namespace:Marble.Templates" mc:Ignorable="d"
+              d:DataContext="{d:DesignInstance ViewModel:TestReportViewModel, IsDesignTimeCreatable=False}"
+             d:DesignWidth="640" d:DesignHeight="480"
+              ScrollViewer.CanContentScroll="False" ScrollViewer.VerticalScrollBarVisibility="Auto">
+    <Views:UcBase.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Close"
+                        Executed="CloseCommandHandler"/>
+    </Views:UcBase.CommandBindings>
+    
+    <Grid x:Name="LayoutRoot" Background="#FF2F2F2F">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <FlowDocumentPageViewer x:Name="flowDocumentPageViewer" Grid.Row="0" Background="White">
+            <FlowDocument x:Name="flowDocumentTestReport" Background="AliceBlue" FontFamily="Segoe UI">
+                <Paragraph x:Name="paragraphTestReportResult">
+
+                    <Image Source="{Binding Path=TestReport.ResultImageSource}" Height="32" Width="32" Margin="5" />
+                    <CustomControls:BindableRun TextBinding="{Binding Path=TestReport.Result}" />
+                </Paragraph>
+                <Table FontSize="13">
+                    <TableRowGroup Paragraph.TextAlignment="Left">
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run Text="Author" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <CustomControls:BindableRun TextBinding="{Binding Path=TestReport.Author}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run Text="Test Group Filter" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <CustomControls:BindableRun TextBinding="{Binding Path=TestReport.TestGroupFilter}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run Text="Test Start Time" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <CustomControls:BindableRun TextBinding="{Binding Path=TestReport.StartTime}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run Text="Summary" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <CustomControls:BindableRun TextBinding="{Binding Path=TestReport.Summary}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+
+                
+                <!--[ PRODUCT ]-->
+                <Paragraph Background="#FF2F2F2F">
+                    <Run Text="Product" Foreground="White"/>
+                </Paragraph>
+
+                <Table FontSize="13">
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run Text="Name" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <CustomControls:BindableRun TextBinding="{Binding Path=TestReport.TestReportProduct.Name}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run Text="Main Display" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <CustomControls:BindableRun TextBinding="{Binding Path=TestReport.TestReportProduct.MainDisplay}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run Text="IMEI" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <CustomControls:BindableRun TextBinding="{Binding Path=TestReport.TestReportProduct.Imei}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run Text="Software Version" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <CustomControls:BindableRun TextBinding="{Binding Path=TestReport.TestReportProduct.SoftwareVersion}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run Text="Hardware Version" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <CustomControls:BindableRun TextBinding="{Binding Path=TestReport.TestReportProduct.HardwareVersion}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run Text="Marble Server Version" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <CustomControls:BindableRun TextBinding="{Binding Path=TestReport.TestReportProduct.MarbleServerVersion}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+
+            </FlowDocument>
+        </FlowDocumentPageViewer>
+
+        <Grid x:Name="gridBottomControlBar" Grid.Row="1" Grid.ColumnSpan="3">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF2F2F2F" Offset="1"/>
+                    <GradientStop Color="#FF444444"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="buttonOpenTestResult" Grid.Column="0" HorizontalAlignment="Left" Width="150" Height="30" Margin="5" Style="{DynamicResource MarbleButton}" Click="buttonOpenTestResult_Click">
+                <TextBlock Text="Open Test Report..." />
+            </Button>
+            <Button x:Name="buttonExportToRtf" Grid.Column="1" HorizontalAlignment="Left" Width="150" Height="30" Margin="5" Style="{DynamicResource MarbleButton}" Click="buttonExportToRtf_Click">
+                <TextBlock Text="Export to RTF..." />
+            </Button>
+            <Button x:Name="buttonCancel" Grid.Column="2" HorizontalAlignment="Right" Width="100" Height="30" Margin="5" Style="{DynamicResource MarbleButton}" Command="Close">
+                <TextBlock Text="Close" />
+            </Button>
+        </Grid>
+
+    </Grid>
+</Views:UcBase>

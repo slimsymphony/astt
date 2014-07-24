@@ -1,0 +1,36 @@
+﻿<Views:UcBase x:Class="Marble.Views.TestReportsTabView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Views="clr-namespace:Marble.Views"
+             mc:Ignorable="d" 
+             d:DesignWidth="640" d:DesignHeight="480">
+    <Grid x:Name="LayoutRoot" Background="#FF2F2F2F" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <Views:TestReportView x:Name="testReportViewTestReportTab" Grid.Column="1" />
+
+        <Border x:Name="borderErrorInfo" Grid.Column="1" Background="{StaticResource MarbleDataGridCellFailedBackground}" CornerRadius="5" Height="Auto" VerticalAlignment="Top" Visibility="Collapsed" Margin="5">
+            <StackPanel Orientation="Horizontal" >
+                <Image Height="32" Width="32" Margin="5" Source="/MarbleLibrary;component/Images/failed.circle.icon.32x32.png" />
+
+                <StackPanel MaxWidth="400">
+                    <TextBlock x:Name="textBlockErrorInfoHeader" Text="No Test Results Found"  Margin="5" FontSize="25" Foreground="White" TextWrapping="Wrap">
+                        <TextBlock.Effect>
+                            <DropShadowEffect BlurRadius="5" Direction="0" ShadowDepth="0" Color="Black" />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock x:Name="textBlockErrorInfoText" Text="Load test set containing test results or run test(s) to display test results."  Margin="5" Foreground="White" TextWrapping="Wrap">
+                        <TextBlock.Effect>
+                            <DropShadowEffect BlurRadius="5" Direction="0" ShadowDepth="0" Color="Black" />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Views:UcBase>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<testset timedrunenabled="False" repeattime="00:00:00" shuffle="False" nexttestsetpath="">
+  <testcase name="Take captures" feature="Test feature" subarea="Test subarea" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\example" file="example_tests" class="ExampleTest" method="takeCaptures" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" />
+  </testcase>
+  <testcase name="Test selection" feature="Test feature" subarea="Test subarea" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\example" file="example_tests" class="ExampleTest" method="testSelect" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" />
+  </testcase>
+  <testcase name="Test navigate" feature="Test feature" subarea="Test subarea" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\example" file="example_tests" class="ExampleTest" method="testNavigate" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" />
+  </testcase>
+</testset>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Drivers>
+  <Driver UID="DriverDcPowerSupplyAgilent663Xxx">
+    <Header>
+      <Name>TeaDriverDcPowerSupplyAgilent663Xxx</Name>
+      <Description>TeaDriver...Add description</Description>
+      <Vendor>Nokia Tea group</Vendor>
+      <Version>
+        <MajorVersion></MajorVersion>
+        <MinorVersion></MinorVersion>
+        <Revision></Revision>
+      </Version>
+    </Header>
+    <ComponentReference>
+      <AssemblyReference>
+        <AssemblyName>Tea.Driver.DcPowerSupplyAgilent663Xxx.dll</AssemblyName>
+        <ClassName>DriverDcPowerSupplyAgilent663Xxx</ClassName>
+      </AssemblyReference>
+    </ComponentReference>
+    <Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <VisaDriverName>TeaLowLevelDriverVisa</VisaDriverName>
+      <ConnectionString>GPIB0::3::INSTR</ConnectionString>
+      <SafetyMaxVoltageLimit>4</SafetyMaxVoltageLimit>
+      <SafetyMaxCurrentLimit>2</SafetyMaxCurrentLimit>
+      <OverVoltageProtectionValue>20</OverVoltageProtectionValue>
+      <OverCurrentProtectionState>true</OverCurrentProtectionState>
+      <CurrentLimitValue>2</CurrentLimitValue>
+      <VoltageLimitValue>4</VoltageLimitValue>
+    </Configuration>
+  </Driver>
+</Drivers>

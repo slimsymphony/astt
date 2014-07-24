@@ -1,0 +1,71 @@
+<html>
+<head><title>GRANITE private interface</title></head>
+<body leftmargin=20>
+<font size="4">1.&nbsp;Introduction</font><br>
+<br>
+<font size="4">2.&nbsp;Message Header</font><br>
+<br>
+<font size="4">3.&nbsp;Message Descriptions</font><br>
+<font size="3">3.1.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_STATUS_REQ">GRN_STATUS_REQ</a></font><br>
+<font size="3">3.2.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_STATUS_RESP">GRN_STATUS_RESP</a></font><br>
+<font size="3">3.3.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_TEST_REQ">GRN_TEST_REQ</a></font><br>
+<font size="3">3.4.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_TEST_RESP">GRN_TEST_RESP</a></font><br>
+<font size="3">3.5.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_TEST_NTF">GRN_TEST_NTF</a></font><br>
+<font size="3">3.6.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_ABORT_REQ">GRN_ABORT_REQ</a></font><br>
+<font size="3">3.7.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_ABORT_RESP">GRN_ABORT_RESP</a></font><br>
+<font size="3">3.8.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_DISPLAY_UPDATE_NTF_001_008">GRN_DISPLAY_UPDATE_NTF (from 001.008)</a></font><br>
+<font size="3">3.9.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_CTC_START_REQ_001_003">GRN_CTC_START_REQ (from 001.003)</a></font><br>
+<font size="3">3.10.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_CTC_START_RESP_001_003">GRN_CTC_START_RESP (from 001.003)</a></font><br>
+<font size="3">3.11.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_CTC_STOP_REQ_001_003">GRN_CTC_STOP_REQ (from 001.003)</a></font><br>
+<font size="3">3.12.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_CTC_STOP_RESP_001_003">GRN_CTC_STOP_RESP (from 001.003)</a></font><br>
+<font size="3">3.13.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_RESULT_REQ">GRN_RESULT_REQ</a></font><br>
+<font size="3">3.14.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_RESULT_RESP">GRN_RESULT_RESP</a></font><br>
+<font size="3">3.15.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_TERM_REQ">GRN_TERM_REQ</a></font><br>
+<font size="3">3.16.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_TERM_RESP">GRN_TERM_RESP</a></font><br>
+<font size="3">3.17.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_CLEAR_REQ">GRN_CLEAR_REQ</a></font><br>
+<font size="3">3.18.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_CLEAR_RESP">GRN_CLEAR_RESP</a></font><br>
+<font size="3">3.19.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_CLEAR_TESTCASE_REQ">GRN_CLEAR_TESTCASE_REQ</a></font><br>
+<font size="3">3.20.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_CLEAR_TESTCASE_RESP">GRN_CLEAR_TESTCASE_RESP</a></font><br>
+<font size="3">3.21.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_RESET_PHONE_REQ">GRN_RESET_PHONE_REQ</a></font><br>
+<font size="3">3.22.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_PROVISIONING_WRITE_REQ_001_005">GRN_PROVISIONING_WRITE_REQ (from 001.005)</a></font><br>
+<font size="3">3.23.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_PROVISIONING_WRITE_RESP_001_005">GRN_PROVISIONING_WRITE_RESP (from 001.005)</a></font><br>
+<font size="3">3.24.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_PROVISIONING_READ_REQ_001_005">GRN_PROVISIONING_READ_REQ (from 001.005)</a></font><br>
+<font size="3">3.25.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_PROVISIONING_READ_RESP_001_005">GRN_PROVISIONING_READ_RESP (from 001.005)</a></font><br>
+<font size="3">3.26.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_PROVISIONING_SELECT_REQ_001_005">GRN_PROVISIONING_SELECT_REQ (from 001.005)</a></font><br>
+<font size="3">3.27.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_PROVISIONING_SELECT_RESP_001_005">GRN_PROVISIONING_SELECT_RESP (from 001.005)</a></font><br>
+<font size="3">3.28.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_PROVISIONING_DELETE_REQ_001_005">GRN_PROVISIONING_DELETE_REQ (from 001.005)</a></font><br>
+<font size="3">3.29.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_PROVISIONING_DELETE_RESP_001_005">GRN_PROVISIONING_DELETE_RESP (from 001.005)</a></font><br>
+<br>
+<font size="4">4.&nbsp;Subblock Descriptions</font><br>
+<font size="3">4.1.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_NO_INFO">GRN_NO_INFO</a></font><br>
+<font size="3">4.2.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_PARSE_ERROR_INFO">GRN_PARSE_ERROR_INFO</a></font><br>
+<font size="3">4.3.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_WBXML_REQ_INFO">GRN_WBXML_REQ_INFO</a></font><br>
+<font size="3">4.4.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_WBXML_RESP_INFO">GRN_WBXML_RESP_INFO</a></font><br>
+<font size="3">4.5.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_INDEX_INFO">GRN_INDEX_INFO</a></font><br>
+<font size="3">4.6.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_SERVER_VERSION_INFO">GRN_SERVER_VERSION_INFO</a></font><br>
+<font size="3">4.7.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_SERVER_STATE_INFO">GRN_SERVER_STATE_INFO</a></font><br>
+<font size="3">4.8.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_PROVISIONG_DATA">GRN_PROVISIONG_DATA</a></font><br>
+<br>
+<font size="4">5.&nbsp;Symbol Information</font><br>
+<font size="3">5.1.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GENERAL_CONST">Constants</a></font><br>
+<font size="3">5.2.&nbsp;&nbsp;<a href="#MSG_ID">Message ID's</a></font><br>
+<font size="3">5.3.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#SB_ID">Subblock ID's</a></font><br>
+<font size="3">5.4.&nbsp;&nbsp;Constant tables<a target=isi href=""></a></font><br>
+<font size="3">5.4.1.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_SERVER_STATE">GRN_SERVER_STATE</a></font><br>
+<font size="3">5.4.2.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_OPTIONS">GRN_OPTIONS</a></font><br>
+<font size="3">5.4.3.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_NOTIFICATIONS">GRN_NOTIFICATIONS</a></font><br>
+<font size="3">5.4.4.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_CAUSES">GRN_CAUSES</a></font><br>
+<font size="3">5.4.5.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_TEST_PARSE_ERRORS">GRN_TEST_PARSE_ERRORS</a></font><br>
+<font size="3">5.4.6.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_WBXML_VERSIONS">GRN_WBXML_VERSIONS</a></font><br>
+<font size="3">5.4.7.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_WBXML_PUBLIC_IDS">GRN_WBXML_PUBLIC_IDS</a></font><br>
+<font size="3">5.4.8.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_WBXML_CHARSETS">GRN_WBXML_CHARSETS</a></font><br>
+<font size="3">5.4.9.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_WBXML_GLOBALS">GRN_WBXML_GLOBALS</a></font><br>
+<font size="3">5.4.10.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_WBXML_TAG_BITS">GRN_WBXML_TAG_BITS</a></font><br>
+<font size="3">5.4.11.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_WBXML_TAGS">GRN_WBXML_TAGS</a></font><br>
+<font size="3">5.4.12.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_WBXML_ATTR_LABELS">GRN_WBXML_ATTR_LABELS</a></font><br>
+<font size="3">5.4.13.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_WBXML_ATTR_VALUES">GRN_WBXML_ATTR_VALUES</a></font><br>
+<font size="3">5.4.14.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_STATUS_BITS">GRN_STATUS_BITS</a></font><br>
+<font size="3">5.4.15.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_PROVISIONING_DATA_TYPES">GRN_PROVISIONING_DATA_TYPES</a></font><br>
+<font size="3">5.4.16.&nbsp;&nbsp;<a target=isi href="i_granite_m.html#GRN_PROVISIONING_RESPONSE">GRN_PROVISIONING_RESPONSE</a></font><br>
+<br>
+<font size="4">6.&nbsp;Notes</font><br>

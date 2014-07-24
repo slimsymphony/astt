@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LowLevelDrivers>
+  <LowLevelDriver UID="TeaLowLevelDriverVisa">
+    <Header>
+      <Name>TeaDriver...Add name</Name>
+      <Description>TeaDriver...Add description</Description>
+      <Vendor>Nokia Tea group</Vendor>
+      <Version>
+        <MajorVersion></MajorVersion>
+        <MinorVersion></MinorVersion>
+        <Revision></Revision>
+      </Version>
+    </Header>
+    <ComponentReference>
+      <AssemblyReference>
+        <AssemblyName>Tea.LowLevelDriver.VisaNi.dll</AssemblyName>
+        <ClassName>LowLevelDriverVisaNi</ClassName>
+      </AssemblyReference>
+    </ComponentReference>
+    <Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <DllFilePath>C:\Program Files\National Instruments\MeasurementStudioVS2010\DotNET\Assemblies\9.0.40.156\NationalInstruments.VisaNS.dll</DllFilePath>
+      <!-- <DllFilePath>C:\Program Files\National Instruments\MeasurementStudioVS2010\DotNET\Assemblies\9.0.40.156\NationalInstruments.VisaNS.dll</DllFilePath> -->
+      <!-- <DllFilePath>C:\Program Files\National Instruments\MeasurementStudioVS2008\DotNET\Assemblies\Current\NationalInstruments.VisaNS.dll</DllFilePath> -->
+    </Configuration>
+  </LowLevelDriver>
+</LowLevelDrivers>

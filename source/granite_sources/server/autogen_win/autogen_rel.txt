@@ -1,0 +1,12 @@
+--------------------------------------------------------------------------------------------
+Link to autogen release documentation:
+--------------------------------------------------------------------------------------------
+
+http://mauicph.nokia.com/rdtools/MCL/<release>/autogen/release_note.html
+
+<release> is the autogen release version. E.g. 10w27
+
+Example url:
+  http://mauicph.nokia.com/rdtools/MCL/10w25/autogen/release_note.html
+
+--------------------------------------------------------------------------------------------

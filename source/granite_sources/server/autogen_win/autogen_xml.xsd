@@ -1,0 +1,1748 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- ======================================================================================================= -->
+<!-- autogen_xml.xsd                                                                                         -->
+<!-- ======================================================================================================= -->
+<!-- Schema, describing format of autogen XML files                                                          -->
+<!--                                                                                                         -->
+<!-- Version history:                                                                                        -->
+<!-- 003.004  19-Jan-2011  Stig H. Eliasen                                                                   -->
+<!--          Support for indication of BCD NSW                                                              -->
+<!-- 003.003  07-May-2010  Stig H. Eliasen                                                                   -->
+<!--          Support for traces                                                                             -->
+<!-- 003.002  13-Aug-2009  Niels-Erik Ostergard                                                              -->
+<!--          Support for OST resources and printf functionality                                             -->
+<!-- 003.001  09-Mar-2009  Stig H. Eliasen, Niels-Erik Ostergard                                             -->
+<!--          Changes due to review                                                                          -->
+<!-- 003.000  12-Jan-2009  Stig H. Eliasen, Niels-Erik Ostergard                                             -->
+<!-- 002.000  12-Apr-2007  Christian J. Hansen                                                               -->
+<!--          Changes due to review                                                                          -->
+<!-- 001.000  14-Dec-2006  Christian J. Hansen                                                               -->
+<!--          First version of the file                                                                      -->
+<!-- ======================================================================================================= -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <!-- Outer node. Must be there in order to support all resource types in same schema -->
+  <xs:element name="AutogenXml">
+    <xs:complexType>
+      <xs:choice minOccurs="1" maxOccurs="1">
+        <xs:element name="CommonSymbols" type="CommonSymbolsType" />
+        <xs:element name="ResourceShared" type="ResourceSharedType" />
+        <xs:element name="ResourceIsi" type="ResourceIsiType" />
+        <xs:element name="ResourceIsiExtension" type="ResourceIsiType" />
+        <xs:element name="ResourceIsiCommon" type="ResourceIsiType" />
+        <xs:element name="ResourceIsiCommonExtension" type="ResourceIsiPrefixType" />
+        <xs:element name="ResourceIsiPrivate" type="ResourceIsiPrivateType" />
+        <xs:element name="ResourceIsiPrefix" type="ResourceIsiPrefixType" />
+        <xs:element name="ResourcePhonet" type="ResourcePhonetType" />
+        <xs:element name="ResourcePhonetExtended" type="ResourcePhonetType" />
+        <xs:element name="ResourceOst" type="ResourceOstType" />
+        <xs:element name="ResourceMediaModule" type="ResourceMediaModuleType" />
+        <xs:element name="ResourceMediaModuleExtension" type="ResourceMediaModuleExtensionType" />
+        <xs:element name="ResourceGenericProtocol" type="ResourceGenericProtocolType" />
+        <xs:element name="ResourceGenericProtocolExtension" type="ResourceGenericProtocolType" />
+        <xs:element name="ResourceInvariantTraces" type="ResourceInvariantTracesType" />
+        <xs:element name="ResourceTraceSymbian" type="ResourceTraceSymbianType" />
+        <xs:element name="ResourceVendorComponentTraces" type="ResourceVendorComponentTracesType" />
+        <xs:element name="ResourceTraceMcu" type="ResourceTraceMcuType" />
+        <xs:element name="ResourceTraceOs" type="ResourceTraceOsType" />
+        <xs:element name="ResourceTraceHal" type="ResourceTraceHalType" />
+        <xs:element name="ResourceTraceMaster" type="ResourceTraceMasterType" />
+        <xs:element name="ResourceTraceCdsp5" type="ResourceTraceCdsp5Type" />
+        <xs:element name="ResourceTraceAdsp5" type="ResourceTraceAdsp5Type" />
+        <xs:element name="ResourceTraceHsp" type="ResourceTraceHspType" />
+      </xs:choice>
+      <xs:attribute name="Version" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+  <!-- =====================================================================================-->
+  <!-- Common types -->
+  <!-- =====================================================================================-->
+  <xs:attributeGroup name="VersionInfoGroup">
+    <xs:attribute name="ValidFrom" type="VersionType" use="optional" />
+    <xs:attribute name="ObsoleteFrom" type="VersionType" use="optional" />
+  </xs:attributeGroup>
+  <!-- Feature Flag type -->
+  <xs:complexType name="FeatureFlagType">
+    <xs:sequence>
+      <xs:element name="Operand" type="FeatureFlagOperandType" minOccurs="1" maxOccurs="2" />
+    </xs:sequence>
+    <xs:attribute name="Operator" use="optional">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="And" />
+          <xs:enumeration value="Or" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Negate" type="xs:token" fixed="True" use="optional" />
+  </xs:complexType>
+  <!-- Feature Flag operand type -->
+  <xs:complexType name="FeatureFlagOperandType">
+    <xs:simpleContent>
+      <xs:extension base="NullType">
+        <xs:attribute name="Name" type="xs:string" use="required" />
+        <xs:attribute name="Value" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- Description types -->
+  <!-- =====================================================================================-->
+  <xs:complexType name="DescriptionType">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:choice>
+        <xs:element name="Break" type="NullType" />
+        <xs:element name="Para" type="xs:string" />
+        <xs:element name="Bullet" type="xs:string" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DescriptionNotesType">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="Note">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="1">
+            <xs:element name="Description" type="DescriptionType" />
+          </xs:sequence>
+          <xs:attribute name="Name" type="xs:string" use="required" />
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- Project info types -->
+  <!-- =====================================================================================-->
+  <xs:complexType name="ProjectInfoType">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="NokiaEntity" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="Confidentiality" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="SiteName" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ProjectName" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ProjectOwner" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="IsiVersionAutoGenerate" type="VersionType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="CopyrightYear" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="AlignmentCheckBreak" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="AlignmentCheckDisable" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="InheritBaseResourceDefinitions" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="IsiVersioningNotSupported" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="Nokia3rdPartyVendorOutput" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ProtocolHasNoMessages" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="SubmessageNamesAreUnique" type="NullType" minOccurs="0" maxOccurs="1" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- ISI header information types -->
+  <!-- =====================================================================================-->
+  <xs:complexType name="IsihdrInfoType">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="AliasName" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ContinuusInstanceName" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ContinuusInstanceName16" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ContinuusProjectDb" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ContinuusProjectPath" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ContinuusProjectPath16" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="DefinitionName" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="Filename" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="Filename16" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="Title" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="MergedMaskPrefix" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="PhonetHeaderLayout" type="EPhonetHeaderLayoutType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="StructName" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="StructLengthValue" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="StructLengthName" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="StructPhonetLengthName" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="Varname16" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="IsiHeaderTop" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="IsiHeaderTop16" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="IsiHeaderBeforeDef" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="IsiHeaderBeforeDef16" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="IsiHeaderAfterDef" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="IsiHeaderAfterDef16" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="GenerationType" type="EIsihdrGenerationType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="PointerGenerationType" type="EPointerGenerationType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="GenerateAllStructureElements" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="GenerateAsBitfield" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="GenerateAsBool" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="GenerateAsEnum8" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="GenerateAsEnum16" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="GenerateBitfields" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="GenerateBools" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="GenerateMergedMasks" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="GenerateMergedMasks16" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="IncludePhonetHeader" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="IncludePhonetHeader16" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="PhonetHeaderDontGenerate" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="SplitAsArray" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="SplitDwords16" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="SplitDwordSigned" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="SplitDwordUnsigned" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="SplitWordSigned" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="SplitWordUnsigned" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="StructLengthSizeof" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="StructLengthSum" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="DontGenerateId" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="DontGenerate" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="DontGenerate8" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="DontGenerate16" type="NullType" minOccurs="0" maxOccurs="1" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- HTML information types -->
+  <!-- =====================================================================================-->
+  <xs:complexType name="HtmlInfoType">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ContinuusProjectDb" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ContinuusProjectName" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="DirectoryPath" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="DocumentNumber" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="Filename" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="Title" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="IncludeVarnameColumn" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="IncludeIntroduction" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="IncludePhonetHeader" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="DontGenerate" type="NullType" minOccurs="0" maxOccurs="1" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- PMD information types -->
+  <!-- =====================================================================================-->
+  <xs:complexType name="PmdInfoType">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="PmdPhonetDeviceId" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="PmdPhonetObjectId" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="EnvironmentVariable" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="MessageInSummary" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="PmdIsNotParameter" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="PmdParameter" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ParameterInSummary" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="UseConstTblComment" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="TraceInSummary" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="TraceActivationDefaultStateOn" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="TraceActivationExclude" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="TraceActivationText" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="TraceIdentifier" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="TraceLogicalGroup" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="TraceSource" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="TraceSourceFlags" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="TraceSourceIdentifier" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="TraceSourceName" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="DontGenerate" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="HardwareMasterTrace" type="NullType" minOccurs="0" maxOccurs="1" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- Version history types -->
+  <!-- =====================================================================================-->
+  <xs:complexType name="VersionHistoryType">
+    <xs:sequence>
+      <xs:element name="VersionInfo" type="VersionInfoType" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VersionInfoType">
+    <xs:sequence>
+      <xs:element name="IsihdrInfo" type="IsihdrInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="HtmlInfo" type="HtmlInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Reason" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Reference" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+      <xs:choice minOccurs="0" maxOccurs="1">
+        <xs:element name="NotYetSupported" type="NullType" minOccurs="0" maxOccurs="1" />
+        <xs:element name="NoLongerSupported" type="NullType" minOccurs="0" maxOccurs="1" />
+      </xs:choice>
+      <xs:element name="SuppressAutogenWarnings" type="NullType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Description" type="DescriptionType" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="Version" type="xs:string" use="required" />
+    <xs:attribute name="Status" type="EVersionStates" use="required" />
+    <!-- Should be changed to DateType later on... -->
+    <xs:attribute name="Date" type="xs:string" use="required" />
+    <xs:attribute name="Editor" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="EVersionStates">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Draft" />
+      <xs:enumeration value="NonDraft" />
+      <xs:enumeration value="Proposal" />
+      <xs:enumeration value="Approved" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- =====================================================================================-->
+  <!-- Sequence item groups -->
+  <!-- =====================================================================================-->
+  <xs:group name="ArrayItemsGroup">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="Alignment" type="AlignmentType" />
+        <xs:element name="Array" type="ArrayType" />
+        <xs:element name="Filler" type="FillerType" />
+        <xs:element name="IrregularStructure" type="IrregularStructureType" />
+        <xs:element name="Number" type="NumberType" />
+        <xs:element name="String" type="StringType" />
+        <xs:element name="StructureReference" type="StructureReferenceType" />
+        <xs:element name="SubblockReference" type="SubblockReferenceType" />
+        <xs:element name="PhonetDevice" type="NumberType" />
+        <xs:element name="PhonetObject" type="SpecialNumberType" />
+        <xs:element name="MediaId" type="SpecialNumberType" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="IrregularStructureItemsGroup">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="Filler" type="FillerType" />
+        <xs:element name="Number" type="NumberType" />
+        <xs:element name="PhonetDevice" type="NumberType" />
+        <xs:element name="PhonetObject" type="SpecialNumberType" />
+        <xs:element name="MediaId" type="SpecialNumberType" />
+        <xs:element name="TraceGroupId" type="SpecialNumberType" />
+        <xs:element name="TraceId" type="SpecialNumberType" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="SequenceItemsGroup">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="Alignment" type="AlignmentType" />
+        <xs:element name="Array" type="ArrayType" />
+        <xs:element name="Filler" type="FillerType" />
+        <xs:element name="IrregularStructure" type="IrregularStructureType" />
+        <xs:element name="Number" type="NumberType" />
+        <xs:element name="Optional" type="OptionalType" />
+        <xs:element name="ProtocolReference" type="ProtocolReferenceType" />
+        <xs:element name="ExternalDecoder" type="ExternalDecoderType" />
+        <xs:element name="PhonetMessageBlock" type="PhonetMessageBlockType" />
+        <xs:element name="PmdAnchor" type="PmdAnchorType" />
+        <xs:element name="RawData" type="RawDataType" />
+        <xs:element name="XFile" type="XFileType" />
+        <xs:element name="Selection" type="SelectionType" />
+        <xs:element name="String" type="StringType" />
+        <xs:element name="StructureReference" type="StructureReferenceType" />
+        <xs:element name="SubblockList" type="SubblockListType" />
+        <xs:element name="SubblockIdList" type="SubblockListType" />
+        <xs:element name="SubblockReference" type="SubblockReferenceType" />
+        <xs:element name="PhonetDevice" type="NumberType" />
+        <xs:element name="PhonetObject" type="SpecialNumberType" />
+        <xs:element name="MediaId" type="SpecialNumberType" />
+        <xs:element name="TraceDataLength" type="SpecialNumberType" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="TraceSequenceItemsGroup">
+    <xs:sequence>
+      <xs:choice>
+        <!-- Printf is only allowed in traces and must be placed outside SequenceItemsGroup. -->
+        <!-- Placement of printf is not fixed among the items. Note that only one printf is  -->
+        <!-- allowed per trace. This requirement is not catched by the schema.               -->
+        <xs:element name="Printf" type="PrintfType" />
+        <xs:element name="McuFunctionAddress" type="SpecialNumberType" />
+        <!-- Include all common sequence items -->
+        <xs:group ref="SequenceItemsGroup" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="SubblockItemsGroup">
+    <xs:sequence>
+      <xs:choice>
+        <!-- As sub block length is optional and placement is not fixed, -->
+        <!-- sub block length has to be placed in this list -->
+        <xs:element name="SubblockLength" type="SpecialNumberType" />
+        <xs:element name="TraceEntityId" type="SpecialNumberType" />
+        <xs:element name="TraceGroupId" type="SpecialNumberType" />
+        <xs:element name="TraceId" type="SpecialNumberType" />
+        <!-- Include all common sequence items -->
+        <xs:group ref="SequenceItemsGroup" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="PrintfItemsGroup">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="Number" type="NumberType" />
+        <xs:element name="String" type="StringType" />
+        <xs:element name="Filler" type="FillerType" />
+        <xs:element name="Alignment" type="AlignmentType" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="ProtocolMessageItemsGroup">
+    <xs:sequence>
+      <xs:choice>
+        <!-- Protocol message specific sequence items -->
+        <xs:element name="MessageId" type="SpecialNumberType" />
+        <xs:element name="SubmessageId" type="SpecialNumberType" />
+        <xs:element name="MessageLength" type="SpecialNumberType" />
+        <!-- Include all common sequence items -->
+        <xs:group ref="SequenceItemsGroup" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:group>
+  <!-- =====================================================================================-->
+  <!-- Count types -->
+  <!-- =====================================================================================-->
+  <xs:complexType name="CountType">
+    <xs:simpleContent>
+      <xs:extension base="NullType">
+        <xs:attribute name="Type" type="ECountAlgorithmTypes" use="required" />
+        <xs:attribute name="TagName" type="DefinitionNameType" use="optional" />
+        <xs:attribute name="Value" type="xs:token" use="optional" default="0" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <!-- Count algorithm types  -->
+  <xs:simpleType name="ECountAlgorithmTypes">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Fixed" />
+      <xs:enumeration value="TagValue" />
+      <xs:enumeration value="TagValuePlusValue" />
+      <xs:enumeration value="ValueMinusTagValue" />
+      <xs:enumeration value="ValueMultipliedWithTagValue" />
+      <xs:enumeration value="TagValueDividedWithValue" />
+      <xs:enumeration value="TagValueDividedWithValueRoundedUp" />
+      <xs:enumeration value="AsManyAsPossible" />
+      <xs:enumeration value="ZeroTerminated" />
+      <xs:enumeration value="Unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- =====================================================================================-->
+  <!-- Common symbols type -->
+  <!-- =====================================================================================-->
+  <xs:complexType name="CommonSymbolsType">
+    <xs:sequence>
+      <xs:element name="Tables" type="TablesType" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- Message resource types -->
+  <!-- =====================================================================================-->
+  <!-- Resource base type (used as base for most resource types) -->
+  <xs:complexType name="BaseResourceType" abstract="true">
+    <xs:sequence>
+      <xs:element name="Description" type="DescriptionType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="ProjectInfo" type="ProjectInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="IsihdrInfo" type="IsihdrInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="HtmlInfo" type="HtmlInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="PmdInfo" type="PmdInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="SuppressAutogenWarnings" type="NullType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="DescriptionNotes" type="DescriptionNotesType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="VersionHistory" type="VersionHistoryType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="SharedFiles" type="SharedFilesType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Constants" type="ConstantsType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Tables" type="TablesType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Structures" type="StructuresType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Subblocks" type="SubblocksType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="SubblockTemplates" type="SubblockTemplatesType" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" use="required" />
+    <xs:attribute name="Version" type="VersionType" use="optional" />
+  </xs:complexType>
+  <!-- Shared Resource -->
+  <xs:complexType name="ResourceSharedType">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:attribute name="PhonetName" type="DefinitionNameType" use="required" />
+        <xs:attribute name="PhonetId" type="xs:int" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ISI Messages -->
+  <xs:complexType name="ResourceIsiType">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:sequence>
+          <xs:element name="Messages" type="IsiMessagesType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="PhonetName" type="DefinitionNameType" use="optional" />
+        <xs:attribute name="PhonetId" type="xs:int" use="optional" />
+        <xs:attribute name="SupportsCommonMessages" type="xs:boolean" use="optional" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ISI Common Messages (Extension) -->
+  <xs:complexType name="ResourceIsiCommonExtensionType">
+    <xs:complexContent>
+      <xs:extension base="ResourceSharedType">
+        <xs:sequence>
+          <xs:element name="Messages" type="IsiPrefixMessagesType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ISI Private Messages -->
+  <xs:complexType name="ResourceIsiPrivateType">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:sequence>
+          <xs:element name="Messages" type="IsiPrivateMessagesType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="PrivateName" type="DefinitionNameType" use="required" />
+        <xs:attribute name="PrivateId" type="xs:int" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ISI Prefix Messages -->
+  <xs:complexType name="ResourceIsiPrefixType">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:sequence>
+          <xs:element name="Messages" type="IsiPrefixMessagesType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="PhonetName" type="DefinitionNameType" use="required" />
+        <xs:attribute name="PhonetId" type="xs:int" use="required" />
+        <xs:attribute name="SupportsCommonMessages" type="xs:boolean" use="optional" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Phonet messages -->
+  <xs:complexType name="ResourcePhonetType">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:sequence>
+          <xs:element name="Messages" type="PhonetMessagesType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="PhonetName" type="DefinitionNameType" use="required" />
+        <xs:attribute name="PhonetId" type="xs:int" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Ost messages -->
+  <xs:complexType name="ResourceOstType">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:sequence>
+          <xs:element name="Messages" type="ProtocolMessagesType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Media Module -->
+  <xs:complexType name="ResourceMediaModuleType">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:sequence>
+          <xs:element name="Messages" type="MediaModuleMessagesType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="MediaName" type="DefinitionNameType" use="required" />
+        <xs:attribute name="MediaId" type="xs:int" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Media Module (Extension) -->
+  <xs:complexType name="ResourceMediaModuleExtensionType">
+    <xs:complexContent>
+      <xs:extension base="ResourceMediaModuleType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Generic protocol -->
+  <xs:complexType name="ResourceGenericProtocolType">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:sequence>
+          <xs:element name="Messages" type="ProtocolMessagesType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="ProtocolName" type="DefinitionNameType" use="required" />
+        <xs:attribute name="ProtocolId" type="xs:int" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Related messages -->
+  <xs:complexType name="RelatedMessagesType">
+    <xs:sequence>
+      <xs:element name="RelatedMessage" type="RelatedMessageType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <!-- Related message -->
+  <xs:complexType name="RelatedMessageType">
+    <xs:attribute name="Name" type="xs:string" use="required" />
+    <xs:attributeGroup ref="VersionInfoGroup" />
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- Invariant trace types -->
+  <!-- =====================================================================================-->
+  <!-- Invariant traces -->
+  <xs:complexType name="ResourceInvariantTracesType">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:sequence>
+          <xs:element name="TraceGroups" type="InvariantTraceGroupsType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="EntityName" type="DefinitionNameType" use="required" />
+        <xs:attribute name="EntityId" type="xs:int" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="InvariantTraceGroupsType">
+    <xs:sequence>
+      <xs:element name="TraceGroup" type="InvariantTraceGroupType" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InvariantTraceGroupType">
+    <xs:sequence>
+      <xs:element name="FeatureFlag" type="FeatureFlagType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Description" type="DescriptionType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="IsihdrInfo" type="IsihdrInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="HtmlInfo" type="HtmlInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="PmdInfo" type="PmdInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="SuppressAutogenWarnings" type="NullType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Traces" type="InvariantTracesType" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="Name" type="DefinitionNameType" use="required" />
+    <xs:attribute name="Id" type="xs:int" use="required" />
+  </xs:complexType>
+  <xs:complexType name="InvariantTracesType">
+    <xs:sequence>
+      <xs:element name="Trace" type="InvariantTraceType" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InvariantTraceType">
+    <xs:sequence>
+      <xs:element name="Description" type="DescriptionType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="IsihdrInfo" type="IsihdrInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="HtmlInfo" type="HtmlInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="PmdInfo" type="PmdInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="SuppressAutogenWarnings" type="NullType" minOccurs="0" maxOccurs="1" />
+      <xs:group ref="TraceSequenceItemsGroup" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="Name" type="DefinitionNameType" use="required" />
+    <xs:attribute name="Id" type="xs:int" use="required" />
+    <xs:attribute name="DecodeName" type="xs:string" use="required" />
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- Symbian trace type -->
+  <!-- =====================================================================================-->
+  <!-- Symbian traces -->
+  <xs:complexType name="ResourceTraceSymbianType">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:sequence>
+          <xs:element name="TraceGroups" type="InvariantTraceGroupsType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="EntityName" type="DefinitionNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- Vendor component trace type -->
+  <!-- =====================================================================================-->
+  <!-- Vendor component traces -->
+  <xs:complexType name="ResourceVendorComponentTracesType">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:sequence>
+          <xs:element name="TraceGroups" type="InvariantTraceGroupsType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="EntityName" type="DefinitionNameType" use="required" />
+        <xs:attribute name="EntityId" type="xs:int" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- MCU trace types -->
+  <!-- =====================================================================================-->
+  <!-- MCU traces -->
+  <xs:complexType name="ResourceTraceMcuType">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:sequence>
+          <xs:element name="TraceGroups" type="InvariantTraceGroupsType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="PhonetName" type="DefinitionNameType" use="optional" />
+        <xs:attribute name="PhonetId" type="xs:int" use="optional" />
+        <xs:attribute name="SupportsCommonMessages" type="xs:boolean" use="optional" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- OS trace type -->
+  <!-- =====================================================================================-->
+  <!-- Os traces -->
+  <xs:complexType name="ResourceTraceOsType">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:sequence>
+          <xs:element name="TraceGroups" type="InvariantTraceGroupsType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- HAL trace type -->
+  <!-- =====================================================================================-->
+  <!-- Hal traces -->
+  <xs:complexType name="ResourceTraceHalType">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:sequence>
+          <xs:element name="TraceGroups" type="InvariantTraceGroupsType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- Master trace type -->
+  <!-- =====================================================================================-->
+  <!-- Master traces -->
+  <xs:complexType name="ResourceTraceMasterType">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:sequence>
+          <xs:element name="TraceGroups" type="InvariantTraceGroupsType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="PhonetName" type="DefinitionNameType" use="optional" />
+        <xs:attribute name="PhonetId" type="xs:int" use="optional" />
+        <xs:attribute name="SupportsCommonMessages" type="xs:boolean" use="optional" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- CDSP trace type -->
+  <!-- =====================================================================================-->
+  <!-- Cdsp traces -->
+  <xs:complexType name="ResourceTraceCdsp5Type">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:sequence>
+          <xs:element name="TraceGroups" type="InvariantTraceGroupsType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="EntityName" type="DefinitionNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- ADSP trace type -->
+  <!-- =====================================================================================-->
+  <!-- Adsp traces -->
+  <xs:complexType name="ResourceTraceAdsp5Type">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:sequence>
+          <xs:element name="TraceGroups" type="InvariantTraceGroupsType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="EntityName" type="DefinitionNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- HSP trace type -->
+  <!-- =====================================================================================-->
+  <!-- Hsp traces -->
+  <xs:complexType name="ResourceTraceHspType">
+    <xs:complexContent>
+      <xs:extension base="BaseResourceType">
+        <xs:sequence>
+          <xs:element name="TraceGroups" type="InvariantTraceGroupsType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="EntityName" type="DefinitionNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- Shared files types -->
+  <!-- =====================================================================================-->
+  <xs:complexType name="SharedFilesType">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="SharedFile" type="SharedFileType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedFileType">
+    <xs:complexContent>
+      <xs:extension base="BaseType">
+        <xs:attribute name="Name" type="DefinitionNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- Constant types -->
+  <!-- =====================================================================================-->
+  <xs:complexType name="ConstantsType">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:choice>
+        <xs:element name="Constant" type="ConstantType" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- Constant -->
+  <xs:complexType name="ConstantType">
+    <xs:complexContent>
+      <xs:extension base="BaseType">
+        <xs:attribute name="Name" type="DefinitionNameType" use="required" />
+        <xs:attribute name="Id" type="xs:token" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Bit mask -->
+  <xs:complexType name="BitmaskType">
+    <xs:complexContent>
+      <xs:extension base="BaseType">
+        <xs:attribute name="Name" type="DefinitionNameType" use="required" />
+        <xs:attribute name="Pattern" type="BitmaskPatternType" use="required" />
+        <xs:attribute name="Mask" type="xs:long" use="required" />
+        <xs:attribute name="Value" type="xs:long" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Bit mask pattern -->
+  <xs:simpleType name="BitmaskPatternType">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="[-01]*" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- =====================================================================================-->
+  <!-- Tables types -->
+  <!-- =====================================================================================-->
+  <xs:complexType name="TablesType">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:choice>
+        <xs:element name="FtdTable" type="FtdTableType" />
+        <xs:element name="PpcTable" type="PpcTableType" />
+        <xs:element name="ConstantTable" type="ConstantTableType" />
+        <xs:element name="ConstantTableSubset" type="ConstantTableSubsetType" />
+        <xs:element name="BitmaskTable" type="BitmaskTableType" />
+        <xs:element name="BitmaskTableSubset" type="BitmaskTableSubsetType" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- Table type (used for all tables) -->
+  <xs:complexType name="BaseTableType" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="BaseType">
+        <xs:attribute name="Name" type="DefinitionNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- FTD table -->
+  <xs:complexType name="FtdTableType">
+    <xs:sequence>
+      <xs:element name="FeatureFlag" type="FeatureFlagType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Description" type="DescriptionType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="IsihdrInfo" type="IsihdrInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="HtmlInfo" type="HtmlInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="PmdInfo" type="PmdInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="SuppressAutogenWarnings" type="NullType" minOccurs="0" maxOccurs="1" />
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="FtdString" type="FtdStringType" />
+        <xs:element name="FtdValue" type="FtdValueType" />
+        <xs:element name="FtdTableValue" type="FtdValueType" />
+        <xs:element name="FtdInputValue" type="FtdValueType" />
+      </xs:choice>
+    </xs:sequence>
+    <xs:attributeGroup ref="VersionInfoGroup" />
+  </xs:complexType>
+  <!-- Table entry type (used by all table entries -->
+  <xs:complexType name="BaseTableEntryType" abstract="true">
+    <xs:sequence>
+      <xs:element name="Description" type="DescriptionType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="IsihdrInfo" type="IsihdrInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="HtmlInfo" type="HtmlInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="PmdInfo" type="PmdInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="SuppressAutogenWarnings" type="NullType" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="Name" type="DefinitionNameType" use="required" />
+    <xs:attributeGroup ref="VersionInfoGroup" />
+  </xs:complexType>
+  <!-- FTD type (used by any FTD type) -->
+  <xs:complexType name="BaseFtdType" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="BaseTableEntryType">
+        <xs:sequence minOccurs="0" maxOccurs="1">
+          <xs:element name="SupportedModes">
+            <xs:complexType>
+              <xs:sequence minOccurs="1" maxOccurs="3">
+                <xs:element name="Mode" type="FtdModeType" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="SuppressAutogenWarnings" type="NullType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="FtdIsStaticData" type="NullType" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="Id" type="xs:int" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- FTD mode -->
+  <xs:simpleType name="FtdModeType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="RD" />
+      <xs:enumeration value="Operator" />
+      <xs:enumeration value="InfraVendors" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- FTD string -->
+  <xs:complexType name="FtdStringType">
+    <xs:complexContent>
+      <xs:extension base="BaseFtdType">
+        <xs:sequence>
+          <xs:element name="String" type="StringFtdType" minOccurs="1" maxOccurs="1" />
+          <xs:element name="Description" type="DescriptionType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="IsihdrInfo" type="IsihdrInfoType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="HtmlInfo" type="HtmlInfoType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="PmdInfo" type="PmdInfoType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="SuppressAutogenWarnings" type="NullType" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- String -->
+  <xs:complexType name="StringFtdType">
+    <xs:attribute name="Name" type="xs:string" use="required" />
+    <xs:attribute name="MinLength" type="xs:int" use="optional" />
+    <xs:attribute name="MaxLength" type="xs:int" use="optional" />
+  </xs:complexType>
+  <!-- FTD value -->
+  <xs:complexType name="FtdValueType">
+    <xs:complexContent>
+      <xs:extension base="BaseFtdType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+          <xs:group ref="FtdItemsGroup" />
+        </xs:sequence>
+        <xs:attribute name="Size" type="SizeNormalType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- FTD input value -->
+  <xs:complexType name="FtdInputValueType">
+    <xs:complexContent>
+      <xs:extension base="BaseFtdType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+          <xs:group ref="FtdItemsGroup" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:group name="FtdItemsGroup">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="Filler" type="FillerType" />
+        <xs:element name="Number" type="NumberType" />
+        <xs:element name="IrregularStructure" type="IrregularStructureType" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:group>
+  <!-- PPC table -->
+  <xs:complexType name="PpcTableType">
+    <xs:sequence>
+      <xs:element name="Description" type="DescriptionType" minOccurs="0" maxOccurs="1" />
+    <xs:element name="IsihdrInfo" type="IsihdrInfoType" minOccurs="0" maxOccurs="1" />
+    <xs:element name="HtmlInfo" type="HtmlInfoType" minOccurs="0" maxOccurs="1" />
+    <xs:element name="PmdInfo" type="PmdInfoType" minOccurs="0" maxOccurs="1" />
+    <xs:element name="SuppressAutogenWarnings" type="NullType" minOccurs="0" maxOccurs="1" />
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="PpcEntry" type="BasePpcType" />
+        </xs:sequence>
+    </xs:sequence>
+    <xs:attributeGroup ref="VersionInfoGroup" />
+  </xs:complexType>
+  <xs:complexType name="BasePpcType">
+    <xs:complexContent>
+      <xs:extension base="BaseTableEntryType">
+        <xs:attribute name="Id" type="xs:int" use="required" />
+        <xs:attribute name="SequenceName" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Constant table -->
+  <xs:complexType name="ConstantTableType">
+    <xs:complexContent>
+      <xs:extension base="BaseTableType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+          <xs:choice>
+            <xs:element name="Constant" type="ConstantType" />
+          </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="SignedValues" type="xs:boolean" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Bitmask table -->
+  <xs:complexType name="BitmaskTableType">
+    <xs:complexContent>
+      <xs:extension base="BaseTableType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+          <xs:choice>
+            <xs:element name="Bitmask" type="BitmaskType" />
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Constant sub set table -->
+  <xs:complexType name="ConstantTableSubsetType">
+    <xs:complexContent>
+      <xs:extension base="BaseTableType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+          <xs:choice>
+            <xs:element name="ConstantReference" type="ConstantRefType" />
+          </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="ParentConstantTable" type="DefinitionNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Constant reference -->
+  <xs:complexType name="ConstantRefType">
+    <xs:complexContent>
+      <xs:extension base="BaseType">
+        <xs:attribute name="Name" type="DefinitionNameType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Bitmask sub set table -->
+  <xs:complexType name="BitmaskTableSubsetType">
+    <xs:complexContent>
+      <xs:extension base="BaseTableType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+          <xs:choice>
+            <xs:element name="BitmaskReference" type="ConstantRefType" />
+          </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="ParentBitmaskTable" type="DefinitionNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- Sequence types -->
+  <!-- =====================================================================================-->
+  <xs:complexType name="StructuresType">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Structure" type="StructureType" />
+    </xs:sequence>
+  </xs:complexType>
+  <!-- Base sequence type (used for messages, sequences and sub blocks) -->
+  <xs:complexType name="BaseSequenceType">
+    <xs:complexContent>
+      <xs:extension base="BaseType">
+        <xs:attribute name="Name" type="DefinitionNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Sequence type (used for messages, sequences and sub blocks) -->
+  <xs:complexType name="StructureType">
+    <xs:complexContent>
+      <xs:extension base="BaseSequenceType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:choice>
+            <xs:element name="MessageId" type="SpecialNumberType" />
+            <xs:element name="MessageLength" type="SpecialNumberType" />
+            <xs:group ref="SequenceItemsGroup" />
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- Sub block types -->
+  <!-- =====================================================================================-->
+  <xs:complexType name="SubblocksType">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Subblock" type="SubblockType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SubblockTemplatesType">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="SubblockTemplate" type="SubblockType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SubblockType">
+    <xs:complexContent>
+      <xs:extension base="BaseSequenceType">
+        <xs:sequence>
+          <xs:element name="SubblockLengthLimit" type="xs:string" minOccurs="0" maxOccurs="1" />
+          <xs:element name="SubblockLengthMissing" type="NullType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="SubblockLengthNotDivisibleBy4" type="NullType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="SubblockLengthRelatesToDataPartOnly" type="NullType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="SubblockId" type="SpecialNumberType" />
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="SubblockItemsGroup" />
+          </xs:sequence>
+        </xs:sequence>
+        <!-- sub block templates don't have ID -->
+        <xs:attribute name="Id" type="xs:int" use="optional" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- Message types -->
+  <!-- =====================================================================================-->
+  <xs:complexType name="IsiMessagesType">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Message" type="IsiMessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IsiPrivateMessagesType">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Message" type="IsiPrivateMessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IsiPrefixMessagesType">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Message" type="IsiPrefixMessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PhonetMessagesType">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Message" type="PhonetMessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MediaModuleMessagesType">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Message" type="MediaModuleMessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProtocolMessagesType">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Message" type="ProtocolMessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <!-- General message type -->
+  <xs:complexType name="BaseMessageType" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="BaseSequenceType">
+        <xs:attribute name="Id" type="xs:int" use="required" />
+        <xs:attribute name="SubName" type="DefinitionNameType" use="optional" />
+        <xs:attribute name="SubId" type="xs:int" use="optional" />
+        <xs:attribute name="Function" type="EMessageFunctionTypes" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ISI message type -->
+  <xs:complexType name="IsiMessageType">
+    <xs:complexContent>
+      <xs:extension base="BaseMessageType">
+        <xs:sequence>
+          <xs:element name="MessageLengthRelatesToDataPartOnly" type="NullType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="RelatedMessages" type="RelatedMessagesType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="TransactionId" type="SpecialNumberType" />
+          <xs:element name="MessageId" type="SpecialNumberType" />
+          <xs:sequence minOccurs="0" maxOccurs="1">
+            <xs:element name="SubmessageId" type="SpecialNumberType" />
+          </xs:sequence>
+          <xs:sequence minOccurs="0" maxOccurs="1">
+            <xs:element name="TraceId" type="SpecialNumberType" />
+          </xs:sequence>
+          <xs:sequence minOccurs="0" maxOccurs="1">
+            <xs:element name="XtiMasterId" type="SpecialNumberType" />
+          </xs:sequence>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="SequenceItemsGroup" />
+          </xs:sequence>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Private ISI message type -->
+  <xs:complexType name="IsiPrivateMessageType">
+    <xs:complexContent>
+      <xs:extension base="BaseMessageType">
+        <xs:sequence>
+          <xs:element name="MessageLengthRelatesToDataPartOnly" type="NullType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="RelatedMessages" type="RelatedMessagesType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="TransactionId" type="SpecialNumberType" />
+          <xs:element name="MessageId" type="SpecialNumberType" />
+          <xs:element name="PrivateId" type="SpecialNumberType" />
+          <xs:sequence minOccurs="0" maxOccurs="1">
+            <xs:element name="SubmessageId" type="SpecialNumberType" />
+          </xs:sequence>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="SequenceItemsGroup" />
+          </xs:sequence>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Prefix ISI message type -->
+  <xs:complexType name="IsiPrefixMessageType">
+    <xs:complexContent>
+      <xs:extension base="BaseMessageType">
+        <xs:sequence>
+          <xs:element name="MessageLengthRelatesToDataPartOnly" type="NullType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="RelatedMessages" type="RelatedMessagesType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="TransactionId" type="SpecialNumberType" />
+          <xs:element name="MessageId" type="SpecialNumberType" />
+          <xs:element name="ResourceId" type="SpecialNumberType" />
+          <xs:sequence minOccurs="0" maxOccurs="1">
+            <xs:element name="SubmessageId" type="SpecialNumberType" />
+          </xs:sequence>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="SequenceItemsGroup" />
+          </xs:sequence>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Phonet message type -->
+  <xs:complexType name="PhonetMessageType">
+    <xs:complexContent>
+      <xs:extension base="BaseMessageType">
+        <xs:sequence>
+          <xs:element name="MessageLengthRelatesToDataPartOnly" type="NullType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="RelatedMessages" type="RelatedMessagesType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="MessageId" type="SpecialNumberType" />
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="SequenceItemsGroup" />
+          </xs:sequence>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Media Module message type -->
+  <xs:complexType name="MediaModuleMessageType">
+    <xs:complexContent>
+      <xs:extension base="BaseMessageType">
+        <xs:sequence>
+          <xs:element name="MessageLengthRelatesToDataPartOnly" type="NullType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="RelatedMessages" type="RelatedMessagesType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="MessageId" type="SpecialNumberType" />
+          <xs:sequence minOccurs="0" maxOccurs="1">
+            <xs:element name="SubmessageId" type="SpecialNumberType" />
+          </xs:sequence>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="SequenceItemsGroup" />
+          </xs:sequence>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Generic protocol message type -->
+  <xs:complexType name="ProtocolMessageType">
+    <xs:complexContent>
+      <xs:extension base="BaseSequenceType">
+        <xs:sequence>
+          <xs:element name="MessageLengthRelatesToDataPartOnly" type="NullType" minOccurs="0" maxOccurs="1" />
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:group ref="ProtocolMessageItemsGroup" />
+          </xs:sequence>
+        </xs:sequence>
+        <xs:attribute name="Id" type="xs:int" use="required" />
+        <xs:attribute name="SubName" type="DefinitionNameType" use="optional" />
+        <xs:attribute name="SubId" type="xs:int" use="optional" />
+        <xs:attribute name="Function" type="EMessageFunctionTypes" use="optional" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- Number types -->
+  <!-- =====================================================================================-->
+  <!-- Type (used for all types) -->
+  <xs:complexType name="BaseType" abstract="true">
+    <xs:sequence>
+      <xs:element name="FeatureFlag" type="FeatureFlagType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Description" type="DescriptionType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="IsihdrInfo" type="IsihdrInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="HtmlInfo" type="HtmlInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="PmdInfo" type="PmdInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="SuppressAutogenWarnings" type="NullType" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attributeGroup ref="VersionInfoGroup" />
+  </xs:complexType>
+  <!-- Base named Type -->
+  <xs:complexType name="BaseNamedType" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="BaseType">
+        <xs:attribute name="Name" type="xs:string" use="required" />
+        <xs:attribute name="VarName" type="DefinitionNameType" use="optional" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Complex Type -->
+  <xs:complexType name="BaseArrayType" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="BaseNamedType">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:element name="ArrayMaximumSize" type="xs:string" minOccurs="0" maxOccurs="1" />
+          <xs:element name="Count" type="CountType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseComplexType" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="BaseNamedType">
+        <xs:sequence minOccurs="0" maxOccurs="1">
+          <xs:element name="Count" type="CountType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseStringType" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="BaseNamedType">
+        <xs:sequence minOccurs="1" maxOccurs="4">
+          <xs:choice maxOccurs="3">
+            <xs:element name="StringBcdMap" type="StringBcdMapType" minOccurs="0" maxOccurs="1" />
+            <xs:element name="StringExcludeZeroTerminationFromLength" type="NullType" minOccurs="0" maxOccurs="1" />
+            <xs:element name="StringUnformatted" type="NullType" minOccurs="0" maxOccurs="1" />
+            <xs:element name="StringMaximumLength" type="xs:string" minOccurs="0" maxOccurs="1" />
+          </xs:choice>
+          <xs:element name="Count" type="CountType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- BaseExternalDecoder reference -->
+  <xs:complexType name="BaseExternalDecoderType" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="BaseNamedType">
+        <xs:sequence minOccurs="0" maxOccurs="1">
+          <xs:element name="DecodeFlags" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="Flag" type="xs:token" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="DecodeDLLName" type="DllNameType" use="required" />
+        <xs:attribute name="FunctionName" type="DefinitionNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- PhonetMessageBlock reference -->
+  <xs:complexType name="BasePhonetMessageBlockType" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="BaseNamedType">
+        <xs:sequence minOccurs="0" maxOccurs="1">
+          <xs:element name="MessageFlags" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="Flag" type="xs:token" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SpecialNumberType">
+    <xs:complexContent>
+      <xs:extension base="BaseNamedType">
+        <xs:attribute name="Size" type="xs:int" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Filler item -->
+  <xs:complexType name="FillerType">
+    <xs:complexContent>
+      <xs:extension base="BaseNamedType">
+        <xs:attribute name="Size" type="xs:int" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Alignment item -->
+  <xs:complexType name="AlignmentType">
+    <xs:complexContent>
+      <xs:extension base="BaseType">
+        <xs:attribute name="Boundary" type="AlignmentBoundaryType" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Number item -->
+  <xs:complexType name="NumberType">
+    <xs:complexContent>
+      <xs:extension base="BaseNamedType">
+        <xs:sequence>
+          <xs:element name="DefaultValue" type="xs:token" minOccurs="0" maxOccurs="1" />
+          <xs:element name="MinValue" type="xs:token" minOccurs="0" maxOccurs="1" />
+          <xs:element name="MaxValue" type="xs:token" minOccurs="0" maxOccurs="1" />
+          <xs:element name="ExceptionalValues" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="Value" type="xs:token" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="Presentation" type="PresentationType" minOccurs="1" maxOccurs="1" />
+          <xs:element name="FillerReplacement" type="FillerReplacementVersionType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="IsihdrInfo" type="IsihdrInfoType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="HtmlInfo" type="HtmlInfoType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="PmdInfo" type="PmdInfoType" minOccurs="0" maxOccurs="1" />
+          <xs:element name="SuppressAutogenWarnings" type="NullType" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="Size" type="xs:byte" use="required" />
+        <xs:attribute name="Signed" type="xs:boolean" use="required" />
+        <xs:attribute name="Tag" type="DefinitionNameType" use="optional" />
+        <xs:attribute name="Endian" type="EEndianTypes" use="optional" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Filler Replacement -->
+  <xs:complexType name="FillerReplacementVersionType">
+    <xs:simpleContent>
+      <xs:extension base="NullType">
+        <xs:attribute name="Version" type="VersionType" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <!-- Presentation Type -->
+  <xs:complexType name="PresentationType">
+    <xs:simpleContent>
+      <xs:extension base="NullType">
+        <xs:attribute name="Type" type="EPresentationTypes" use="required" />
+        <xs:attribute name="ConstantType" type="EConstantTypes" use="optional" />
+        <xs:attribute name="Timestamp" type="ETimestampTypes" use="optional" />
+        <xs:attribute name="TableName" type="DefinitionNameType" use="optional" />
+        <xs:attribute name="ResourceName" type="xs:string" use="optional" />
+        <xs:attribute name="Q" type="xs:int" use="optional" />
+        <xs:attribute name="Scale" type="xs:double" use="optional" default="1.0" />
+        <xs:attribute name="Offset" type="xs:decimal" use="optional" default="0.0" />
+        <xs:attribute name="Unit" type="xs:string" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <!-- Presentation Type Enumeration -->
+  <xs:simpleType name="EPresentationTypes">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Decimal" />
+      <xs:enumeration value="Binary" />
+      <xs:enumeration value="HexaDecimal" />
+      <xs:enumeration value="Constant" />
+      <xs:enumeration value="Character" />
+      <xs:enumeration value="FtdId" />
+      <xs:enumeration value="Timestamp" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- String item -->
+  <xs:complexType name="StringType">
+    <xs:complexContent>
+      <xs:extension base="BaseStringType">
+        <xs:attribute name="Type" type="EStringTypes" use="required" />
+        <xs:attribute name="Endian" type="EEndianTypes" use="required" />
+        <xs:attribute name="IsZeroTerminated" type="xs:boolean" use="required" />
+        <xs:attribute name="MaxLength" type="xs:int" use="optional" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- String BCD Map -->
+  <xs:complexType name="BcdMapType">
+    <xs:attribute name="BCD" type="EBcdValueType" use="required" />
+    <xs:attribute name="ASCII" type="xs:unsignedByte" use="required" />
+  </xs:complexType>
+  
+  <xs:complexType name="StringBcdMapType">
+    <xs:sequence minOccurs="16" maxOccurs="16">
+      <xs:element name="Map" type="BcdMapType" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <!-- String BCD Map Enumeration -->
+  <xs:simpleType name="EBcdValueType">
+    <xs:restriction base="xs:unsignedByte">
+      <xs:minInclusive value="0" />
+      <xs:maxInclusive value="15" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Printf item -->
+  <xs:complexType name="PrintfType">
+    <xs:complexContent>
+      <xs:extension base="BaseNamedType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="PrintfItemsGroup" />
+        </xs:sequence>
+        <xs:attribute name="Format" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Array item -->
+  <xs:complexType name="ArrayType">
+    <xs:complexContent>
+      <xs:extension base="BaseArrayType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+          <xs:group ref="ArrayItemsGroup" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Irregular Structure item -->
+  <xs:complexType name="IrregularStructureType">
+    <xs:complexContent>
+      <xs:extension base="BaseNamedType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+          <xs:group ref="IrregularStructureItemsGroup" />
+        </xs:sequence>
+        <xs:attribute name="Size" type="SizeNormalType" use="required" />
+        <xs:attribute name="Endian" type="EEndianTypes" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Sub block list -->
+  <xs:complexType name="SubblockListType">
+    <xs:complexContent>
+      <xs:extension base="BaseComplexType">
+        <xs:sequence>
+          <xs:choice minOccurs="0" maxOccurs="1">
+            <xs:element name="FtdData" type="NullType" />
+            <xs:element name="FtdInputData" type="NullType" />
+          </xs:choice>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="SubblockReference" type="SubblockListEntryType" />
+          </xs:sequence>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Sub block list entry -->
+  <xs:complexType name="SubblockListEntryType">
+    <xs:complexContent>
+      <xs:extension base="BaseType">
+        <xs:attribute name="SubblockName" type="DefinitionNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Protocol reference -->
+  <xs:complexType name="ProtocolReferenceType">
+    <xs:complexContent>
+      <xs:extension base="BaseComplexType">
+        <xs:attribute name="ProtocolName" type="DefinitionNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ExternalDecoder reference -->
+  <xs:complexType name="ExternalDecoderType">
+    <xs:complexContent>
+      <xs:extension base="BaseExternalDecoderType">
+        <xs:sequence minOccurs="0" maxOccurs="1">
+          <xs:element name="Count" type="CountType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- PhonetMessageBlock reference -->
+  <xs:complexType name="PhonetMessageBlockType">
+    <xs:complexContent>
+      <xs:extension base="BasePhonetMessageBlockType">
+        <xs:sequence minOccurs="0" maxOccurs="1">
+          <xs:element name="Count" type="CountType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- PmdAnchor reference -->
+  <xs:complexType name="PmdAnchorType">
+    <xs:complexContent>
+      <xs:extension base="BaseComplexType">
+        <xs:attribute name="PmdStructureName" type="DefinitionNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- RawData reference -->
+  <xs:complexType name="RawDataType">
+    <xs:complexContent>
+      <xs:extension base="BaseComplexType">
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- XFile reference -->
+  <xs:complexType name="XFileType">
+    <xs:complexContent>
+      <xs:extension base="BaseComplexType">
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Structure reference -->
+  <xs:complexType name="StructureReferenceType">
+    <xs:complexContent>
+      <xs:extension base="BaseNamedType">
+        <xs:attribute name="StructureName" type="DefinitionNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Sub block reference -->
+  <xs:complexType name="SubblockReferenceType">
+    <xs:complexContent>
+      <xs:extension base="BaseNamedType">
+        <xs:attribute name="SubblockName" type="DefinitionNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Selection type -->
+  <xs:complexType name="SelectionType">
+    <xs:complexContent>
+      <xs:extension base="BaseNamedType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:choice>
+            <xs:element name="Case">
+              <xs:complexType>
+                <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                  <xs:element name="Description" type="DescriptionType" minOccurs="0" maxOccurs="1" />
+                  <xs:element name="IsihdrInfo" type="IsihdrInfoType" minOccurs="0" maxOccurs="1" />
+                  <xs:element name="HtmlInfo" type="HtmlInfoType" minOccurs="0" maxOccurs="1" />
+                  <xs:element name="PmdInfo" type="PmdInfoType" minOccurs="0" maxOccurs="1" />
+                  <xs:element name="SuppressAutogenWarnings" type="NullType" minOccurs="0" maxOccurs="1" />
+                  <xs:group ref="SequenceItemsGroup" />
+                </xs:sequence>
+                <xs:attribute name="TagValue" type="xs:token" use="required" />
+                <xs:attributeGroup ref="VersionInfoGroup" />
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Default">
+              <xs:complexType>
+                <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                  <xs:element name="Description" type="DescriptionType" minOccurs="0" maxOccurs="1" />
+                  <xs:element name="IsihdrInfo" type="IsihdrInfoType" minOccurs="0" maxOccurs="1" />
+                  <xs:element name="HtmlInfo" type="HtmlInfoType" minOccurs="0" maxOccurs="1" />
+                  <xs:element name="PmdInfo" type="PmdInfoType" minOccurs="0" maxOccurs="1" />
+                  <xs:element name="SuppressAutogenWarnings" type="NullType" minOccurs="0" maxOccurs="1" />
+                  <xs:group ref="SequenceItemsGroup" />
+                </xs:sequence>
+                <xs:attributeGroup ref="VersionInfoGroup" />
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="TagName" type="DefinitionNameType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Optional item -->
+  <xs:complexType name="OptionalType">
+    <xs:complexContent>
+      <xs:extension base="BaseNamedType">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:group ref="ArrayItemsGroup" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- =====================================================================================-->
+  <!-- Simple types -->
+  <!-- =====================================================================================-->
+  <!-- Size of 8, 16 or 32 bits -->
+  <xs:simpleType name="SizeNormalType">
+    <xs:restriction base="xs:byte">
+      <xs:enumeration value="8" />
+      <xs:enumeration value="16" />
+      <xs:enumeration value="32" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Definition name -->
+  <xs:simpleType name="DefinitionNameType">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="[_A-Za-z][0-9A-Za-z_]*" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- DLL name -->
+  <xs:simpleType name="DllNameType">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="[_A-Za-z][0-9A-Za-z_]*[.]{1}[dD]{1}[lL]{2}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Null type - no value at all -->
+  <xs:simpleType name="NullType">
+    <xs:restriction base="xs:token">
+      <xs:maxLength value="0" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Version - must be a string on format "xxx.xxx" -->
+  <xs:simpleType name="VersionType">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="[0-9]{3}\.[0-9]{3}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Date - must be a string on format "dd-MMM-yyyy" -->
+  <xs:simpleType name="DateType">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="[0-9]{2}-[A-Za-z]{3}-[0-9]{4}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Timetamp types  -->
+  <xs:simpleType name="ETimestampTypes">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="GsmFrame" />
+      <xs:enumeration value="StiXti" />
+      <xs:enumeration value="Unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Endian types  -->
+  <xs:simpleType name="EEndianTypes">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="BigEndian" />
+      <xs:enumeration value="LittleEndian" />
+      <xs:enumeration value="NoBcdNsw" />
+      <xs:enumeration value="BcdNsw" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Constant types  -->
+  <xs:simpleType name="EConstantTypes">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="PhonetResource" />
+      <xs:enumeration value="PhonetDevice" />
+      <xs:enumeration value="PhonetObject" />
+      <xs:enumeration value="PhonetMedia" />
+      <xs:enumeration value="TrueFalse" />
+      <xs:enumeration value="OnOff" />
+      <xs:enumeration value="EnabledDisabled" />
+      <xs:enumeration value="YesNo" />
+      <xs:enumeration value="OkFail" />
+      <xs:enumeration value="ColdWarm" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Phonet header layout types  -->
+  <xs:simpleType name="EPhonetHeaderLayoutType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="1" />
+      <xs:enumeration value="2" />
+      <xs:enumeration value="3" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Isi header generation types  -->
+  <xs:simpleType name="EIsihdrGenerationType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="DontGenerate" />
+      <xs:enumeration value="Anysize" />
+      <xs:enumeration value="AnysizeByte" />
+      <xs:enumeration value="AnysizeWord" />
+      <xs:enumeration value="SingleElement" />
+      <xs:enumeration value="SingleElementByte" />
+      <xs:enumeration value="ReserveSpace" />
+      <xs:enumeration value="PointerVoid" />
+      <xs:enumeration value="Pointer" />
+      <xs:enumeration value="Union" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Pointer generation types  -->
+  <xs:simpleType name="EPointerGenerationType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="void*" />
+      <xs:enumeration value="int32*" />
+      <xs:enumeration value="uint32*" />
+      <xs:enumeration value="int16*" />
+      <xs:enumeration value="uint16*" />
+      <xs:enumeration value="int8*" />
+      <xs:enumeration value="uint8*" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Message function for "Function" attribute in messages -->
+  <xs:simpleType name="EMessageFunctionTypes">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Base" />
+      <xs:enumeration value="Request" />
+      <xs:enumeration value="Response" />
+      <xs:enumeration value="Notification" />
+      <xs:enumeration value="Indication" />
+      <xs:enumeration value="StiTrace" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Boundary sizes for Alignment type -->
+  <xs:simpleType name="AlignmentBoundaryType">
+    <xs:restriction base="xs:byte">
+      <xs:enumeration value="16" />
+      <xs:enumeration value="24" />
+      <xs:enumeration value="32" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="EStringTypes">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Ascii" />
+      <xs:enumeration value="Unicode" />
+      <xs:enumeration value="Bcd" />
+      <xs:enumeration value="Utf8" />
+      <xs:enumeration value="Gsm" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

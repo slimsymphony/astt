@@ -1,0 +1,12 @@
+<TraceActivation>
+  <Configuration Name="OS_MONITOR_BLOCK_HOOKS" Version="3">
+	<Settings>
+	  <Timestamp Name="MCU" State="Off" />
+	  <Storage Name="PMM" State="True" />
+	</Settings>
+	<TraceType XPath="//OsTrace[@Device=&quot;PN_DEV_HOST&quot;]">
+	  <TraceGroup Name="OS_MONITOR_BLOCK_HOOKS" State="On" />
+	  <TraceGroup Name="OS_MONITOR_INFO_HOOKS" State="On" />
+	</TraceType>
+  </Configuration>
+</TraceActivation>

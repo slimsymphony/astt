@@ -1,0 +1,481 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{18B67670-D884-4846-9E65-BDE173CD33C7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MarbleLibrary</RootNamespace>
+    <AssemblyName>MarbleLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\GUI_Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\GUI_Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AttachedCommandBehavior, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalLibraries\Controls\AttachedCommandBehavior\AttachedCommandBehavior.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ExceptionMessageBox, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalLibraries\dll\Microsoft.ExceptionMessageBox.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="PDFClown">
+      <HintPath>..\ExternalLibraries\dll\PDFClown.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="PresentationFramework.Classic" />
+    <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\Microsoft Ribbon for WPF\V4.0\RibbonControlsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="SevenZipSharp">
+      <HintPath>..\ExternalLibraries\Controls\SevenZipSharp\SevenZipSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalLibraries\dll\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Presentation" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="Wpf.SplitButton, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalLibraries\Controls\SplitButton\Wpf.SplitButton.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\CheckBoxBehaviour.cs" />
+    <Compile Include="Commands\DataGridBehaviour.cs" />
+    <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Commands\EventBehaviourFactory.cs" />
+    <Compile Include="Commands\WindowClosingBehaviour.cs" />
+    <Compile Include="Converters\BoolToTextWrappingConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\EnumToBoolConverter.cs" />
+    <Compile Include="Converters\GuiConverters.cs" />
+    <Compile Include="Converters\LevelToIndent.cs" />
+    <Compile Include="Converters\VisibilityConverters.cs" />
+    <Compile Include="CustomControls\AdvancedGridSplitter.cs" />
+    <Compile Include="CustomControls\BindableRun.cs" />
+    <Compile Include="CustomControls\ExtendedColumnDefinition.cs" />
+    <Compile Include="CustomControls\ExtendedPropertyGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\FastObservableCollection.cs" />
+    <Compile Include="CustomControls\IterationControl.xaml.cs">
+      <DependentUpon>IterationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\ListViewExtensions.cs" />
+    <Compile Include="CustomControls\MarbleMainMenuItem.cs" />
+    <Compile Include="CustomControls\MarbleToolTip.cs" />
+    <Compile Include="CustomControls\PreserveTextComboBox.cs" />
+    <Compile Include="CustomControls\ClickSelectTextBox.cs" />
+    <Compile Include="CustomControls\FocusableListView.cs" />
+    <Compile Include="CustomControls\FocusableListViewItem.cs" />
+    <Compile Include="CustomControls\NumericTextBox.cs" />
+    <Compile Include="CustomControls\SplashScreen.cs" />
+    <Compile Include="CustomControls\TextBoxBuffered.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\AlphanumComparator.cs" />
+    <Compile Include="Utilities\BindingProxy.cs" />
+    <Compile Include="Utilities\Compress.cs" />
+    <Compile Include="Utilities\DataGridRollbackOnUnfocusedBehaviour.cs" />
+    <Compile Include="Utilities\DeferredAction.cs" />
+    <Compile Include="Utilities\DispatcherHelper.cs" />
+    <Compile Include="Utilities\ErrorCheckingUtilities.cs" />
+    <Compile Include="Utilities\ExceptionHandler.cs" />
+    <Compile Include="Utilities\FileUtilities.cs" />
+    <Compile Include="Utilities\MarbleTexts.cs" />
+    <Compile Include="Utilities\GuiUtilities.cs" />
+    <Compile Include="Utilities\ImageComparer.cs" />
+    <Compile Include="Utilities\ImageUtilities.cs" />
+    <Compile Include="Utilities\MessageListener.cs" />
+    <Compile Include="Utilities\MouseUtilities.cs" />
+    <Compile Include="Utilities\PasswordBoxAssistant.cs" />
+    <Compile Include="Utilities\PdfUtilities.cs" />
+    <Compile Include="Utilities\TextUtilities.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\109_AllAnnotations_Default_32x32_72.png" />
+    <Resource Include="Images\109_AllAnnotations_Error_32x32_72.png" />
+    <Resource Include="Images\109_AllAnnotations_Help_32x32_72.png" />
+    <Resource Include="Images\blackbox.icon.15x16.png" />
+    <Resource Include="Images\checkbox.checked.16x16.png" />
+    <Resource Include="Images\checkbox.checked.icon.16x16.png" />
+    <Resource Include="Images\checkbox.checked.icon2.16x16.png" />
+    <Resource Include="Images\checkbox.checked.selected.16x16.png" />
+    <Resource Include="Images\checkbox.disabled.16x16.png" />
+    <Resource Include="Images\checkbox.unchecked.16x16.png" />
+    <Resource Include="Images\checkbox.unchecked.icon.16x16.png" />
+    <Resource Include="Images\checkbox.unchecked.selected.16x16.png" />
+    <Resource Include="Images\connection.icon.32x32.png" />
+    <Resource Include="Images\connection.icon2.32x32.png" />
+    <Resource Include="Images\connection.missing.icon.32x32.png" />
+    <Resource Include="Images\connection.missing.icon2.32x32.png" />
+    <Resource Include="Images\copy.icon.16x16.png" />
+    <Resource Include="Images\cut.icon.16x16.png" />
+    <Resource Include="Images\doc_shred_%2832x32%29.png" />
+    <Resource Include="Images\email.passed.report.icon.32x32.png" />
+    <Resource Include="Images\empty.label.32x16.png" />
+    <Resource Include="Images\empty.report.icon.32x32.png" />
+    <Resource Include="Images\executor.icon.32x32.png" />
+    <Resource Include="Images\failed.circle.icon.16x16.png" />
+    <Resource Include="Images\failed.circle.icon.20x20.png" />
+    <Resource Include="Images\failed.circle.icon.32x32.png" />
+    <Resource Include="Images\failed.report.icon.32x32.png" />
+    <Resource Include="Images\load.arrow.icon.16x16.png" />
+    <Resource Include="Images\load.arrow.icon.32x31.png" />
+    <Resource Include="Images\multiple.failed.reports.icon.32x32.png" />
+    <Resource Include="Images\multiple.passed.reports.icon.32x32.png" />
+    <Resource Include="Images\navigate.activity.icon.64x64.png" />
+    <Resource Include="Images\new.document.icon.16x16.png" />
+    <Resource Include="Images\new.document.icon.32x32.png" />
+    <Resource Include="Images\no.resolution.circle.icon.16x16.png" />
+    <Resource Include="Images\no.resolution.circle.icon.20x20.png" />
+    <Resource Include="Images\no.resolution.circle.icon.32x32.png" />
+    <Resource Include="Images\open.file.icon2.16x16.png" />
+    <Resource Include="Images\open.file.icon2.32x32.png" />
+    <Resource Include="Images\output.icon.32x32.png" />
+    <Resource Include="Images\passed.circle.icon.16x16.png" />
+    <Resource Include="Images\passed.circle.icon.20x20.png" />
+    <Resource Include="Images\passed.circle.icon.32x32.png" />
+    <Resource Include="Images\paste.icon2.16x16.png" />
+    <Resource Include="Images\Pickaxe_oma_transparent3.ico" />
+    <Resource Include="Images\Pickaxe_oma_transparent3.png" />
+    <Resource Include="Images\play.icon.16x16.png" />
+    <Resource Include="Images\play.icon.32x32.png" />
+    <Resource Include="Images\radiobutton.checked.icon.15x16.png" />
+    <Resource Include="Images\radiobutton.unchecked.icon.15x16.png" />
+    <Resource Include="Images\report.icon.16x16.png" />
+    <Resource Include="Images\report.icon.32x32.png" />
+    <Resource Include="Images\report.icon2.16x16.png" />
+    <Resource Include="Images\report.icon2.32x32.png" />
+    <Resource Include="Images\save.as.icon2.16x16.png" />
+    <Resource Include="Images\save.as.icon2.32x32.png" />
+    <Resource Include="Images\save.icon.16x16.png" />
+    <Resource Include="Images\save.icon.32x32.png" />
+    <Resource Include="Images\screen.capture.icon.32x32.png" />
+    <Resource Include="Images\screen.capture.small.icon.32x32.png" />
+    <Resource Include="Images\screen.capture.small.icon.64x64.png" />
+    <Resource Include="Images\search.icon.16x16.png" />
+    <Resource Include="Images\sim.horizontal.icon.16x21.png" />
+    <Resource Include="Images\sim.icon.16x16.png" />
+    <Resource Include="Images\sim.icon.32x32.png" />
+    <Resource Include="Images\sim.icon2.16x16.png" />
+    <Resource Include="Images\stop.icon.16x16.png" />
+    <Resource Include="Images\stop.icon.32x32.png" />
+    <Resource Include="Images\tcp.label.32x16.png" />
+    <Resource Include="Images\undo.icon.16x16.png" />
+    <Resource Include="Images\usb.label.32x16.png" />
+    <Resource Include="Images\whitebox.icon.15x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="CustomControls\IterationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\CheckBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\AdvancedGridSplitter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\ComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\ContextMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\Buttons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\MarbleToolTip.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\Expander.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\ToggleButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\ProgressBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\DataGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\ScrollBars.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\MarbleColors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\MarbleMainMenuItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\MarbleTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\RadioButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\RibbonTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\SettingsEmptyStringTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\SettingsStringTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\TabControlStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\flasher.icon.32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\warning.icon.16x16.png" />
+    <Resource Include="Images\warning.icon.20x20.png" />
+    <Resource Include="Images\warning.icon.32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\blackbox.icon.32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add.to.test.lab.icon.32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\tracing.icon.32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="7za.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Images\bugreport.icon.16x16.png" />
+    <Resource Include="Images\bugreport.icon.20x20.png" />
+    <Resource Include="Images\bugreport.icon.32x32.png" />
+    <Resource Include="Images\new.run.icon.16x16.png" />
+    <Resource Include="Images\new.run.icon.32x32.png" />
+    <Resource Include="Images\pause.marble.icon.64x64.png" />
+    <Resource Include="Images\play.marble.icon.64x64.png" />
+    <Resource Include="Images\error.shadow.icon.16x16.png" />
+    <Resource Include="Images\error.shadow.icon.20x20.png" />
+    <Resource Include="Images\error.shadow.icon.32x32.png" />
+    <Resource Include="Images\failed.circle.shadow.icon.16x16.png" />
+    <Resource Include="Images\failed.circle.shadow.icon.20x20.png" />
+    <Resource Include="Images\failed.circle.shadow.icon.32x32.png" />
+    <Resource Include="Images\framework.message.icon.16x16.png" />
+    <Resource Include="Images\framework.message.icon.20x20.png" />
+    <Resource Include="Images\framework.message.icon.32x32.png" />
+    <Resource Include="Images\warning.shadow.icon.16x16.png" />
+    <Resource Include="Images\warning.shadow.icon.20x20.png" />
+    <Resource Include="Images\warning.shadow.icon.32x32.png" />
+    <Resource Include="Images\framework.icon.16x16.png" />
+    <Resource Include="Images\framework.icon.20x20.png" />
+    <Resource Include="Images\framework.icon.32x32.png" />
+    <Resource Include="Images\framework.request.icon.16x16.png" />
+    <Resource Include="Images\framework.request.icon.20x20.png" />
+    <Resource Include="Images\framework.request.icon.32x32.png" />
+    <Resource Include="Images\framework.response.icon.16x16.png" />
+    <Resource Include="Images\framework.response.icon.20x20.png" />
+    <Resource Include="Images\framework.response.icon.32x32.png" />
+    <Resource Include="Images\gui.message.icon.16x16.png" />
+    <Resource Include="Images\gui.message.icon.20x20.png" />
+    <Resource Include="Images\gui.message.icon.32x32.png" />
+    <Resource Include="Images\info.icon.16x16.png" />
+    <Resource Include="Images\info.icon.20x20.png" />
+    <Resource Include="Images\info.icon.32x32.png" />
+    <Resource Include="Images\start.start.icon.16x16.png" />
+    <Resource Include="Images\start.start.icon.20x20.png" />
+    <Resource Include="Images\start.start.icon.32x32.png" />
+    <Resource Include="Images\event.icon.16x16.png" />
+    <Resource Include="Images\event.icon.20x20.png" />
+    <Resource Include="Images\event.icon.32x32.png" />
+    <Resource Include="Images\unlock.icon.21x32.png" />
+    <Resource Include="Images\marble.logo.1039x467.png" />
+    <Resource Include="Images\Marble.M.Icon.ico" />
+    <Resource Include="Images\emulator.offline.icon.32x32.png" />
+    <Resource Include="Images\phone.offline.icon.32x32.png" />
+    <Resource Include="Images\emulator.icon.32x32.png" />
+    <Resource Include="Images\phone.icon.32x32.png" />
+    <Resource Include="Images\iron.python.code.icon.64x64.png" />
+    <Resource Include="Images\copy.icon.32x32.png" />
+    <Resource Include="Images\failed.time.icon.16x16.png" />
+    <Resource Include="Images\failed.time.icon.20x20.png" />
+    <Resource Include="Images\failed.time.icon.32x32.png" />
+    <Resource Include="Images\index.icon.16x16.png" />
+    <Resource Include="Images\index.icon.20x20.png" />
+    <Resource Include="Images\index.icon.32x32.png" />
+    <Resource Include="Images\minimize.arrow.down.icon.16x16.png" />
+    <Resource Include="Images\minimize.arrow.down.icon.20x20.png" />
+    <Resource Include="Images\minimize.arrow.down.icon.32x32.png" />
+    <Resource Include="Images\minimize.arrow.up.icon.16x16.png" />
+    <Resource Include="Images\minimize.arrow.up.icon.20x20.png" />
+    <Resource Include="Images\minimize.arrow.up.icon.32x32.png" />
+    <Resource Include="Images\none.icon.16x16.png" />
+    <Resource Include="Images\none.icon.20x20.png" />
+    <Resource Include="Images\none.icon.32x32.png" />
+    <Resource Include="Images\passed.failed.circle.icon.16x16.png" />
+    <Resource Include="Images\passed.failed.circle.icon.20x20.png" />
+    <Resource Include="Images\passed.failed.circle.icon.32x32.png" />
+    <Resource Include="Images\new.window.icon.16x16.png" />
+    <Resource Include="Images\new.window.icon.20x20.png" />
+    <Resource Include="Images\new.window.icon.32x32.png" />
+    <Resource Include="Images\play.gray.icon.32x32.png" />
+    <Resource Include="Images\stopping.icon.20x20.png" />
+    <Resource Include="Images\paused.icon.20x20.png" />
+    <Resource Include="Images\playing.icon.20x20.png" />
+    <Resource Include="Images\pause.with.delay.icon.32x32.png" />
+    <Resource Include="Images\stop.red.icon.32x32.png" />
+    <Resource Include="Images\charts.icon.16x16.png" />
+    <Resource Include="Images\charts.icon.20x20.png" />
+    <Resource Include="Images\charts.icon.32x32.png" />
+    <Resource Include="Images\move.icon.16x16.png" />
+    <Resource Include="Images\move.icon.20x20.png" />
+    <Resource Include="Images\move.icon.32x32.png" />
+    <Resource Include="Images\zoom.white.icon.16x16.png" />
+    <Resource Include="Images\zoom.white.icon.20x20.png" />
+    <Resource Include="Images\zoom.white.icon.32x32.png" />
+    <Resource Include="Images\failed.circle.icon.313x320.png" />
+    <Resource Include="Images\passed.circle.icon.313x320.png" />
+    <Resource Include="Images\flasher.icon.232x320.png" />
+    <Resource Include="Images\settings.icon.159x160.png" />
+    <Resource Include="Images\settings.icon.318x320.png" />
+    <Resource Include="Images\trashcan.icon.16x16.png" />
+    <Resource Include="Images\trashcan.icon.20x20.png" />
+    <Resource Include="Images\trashcan.icon.32x32.png" />
+    <Resource Include="Images\pause.icon.16x16.png" />
+    <Resource Include="Images\pause.icon.32x32.png" />
+    <Resource Include="Images\test.set.exporting.icon.24x24.png" />
+    <Resource Include="Images\test.set.exporting.icon.32x32.png" />
+    <Resource Include="Images\test.set.importing.icon.24x24.png" />
+    <Resource Include="Images\test.set.importing.icon.32x32.png" />
+    <Resource Include="Images\test.set.import.icon.32x32.png" />
+    <Resource Include="Images\test.set.icon.16x16.png" />
+    <Resource Include="Images\test.set.icon.20x20.png" />
+    <Resource Include="Images\test.set.icon.32x32.png" />
+    <Resource Include="Images\user.icon.16x16.png" />
+    <Resource Include="Images\user.icon.20x20.png" />
+    <Resource Include="Images\user.icon.32x32.png" />
+    <Resource Include="Images\folder.closed.icon.16x16.png" />
+    <Resource Include="Images\folder.closed.icon.32x32.png" />
+    <Resource Include="Images\folder.open.icon.16x16.png" />
+    <Resource Include="Images\folder.open.icon.32x32.png" />
+    <Resource Include="Images\current.measurement.icon.32x32.png" />
+    <Resource Include="Images\settings.icon.32x32.png" />
+    <EmbeddedResource Include="Images\sort.ascend.32x32.png" />
+    <EmbeddedResource Include="Images\sort.category.128x128.png" />
+    <Resource Include="Images\iteration.add.icon.10x10.png" />
+    <Resource Include="Images\iteration.move.first.icon.16x16.png" />
+    <Resource Include="Images\iteration.move.last.icon.16x16.png" />
+    <Resource Include="Images\iteration.move.next.icon.16x16.png" />
+    <Resource Include="Images\iteration.move.previous.icon.16x16.png" />
+    <Resource Include="Images\iteration.remove.icon.10x10.png" />
+    <Resource Include="Images\memory.leak.icon.32x32.png" />
+    <Resource Include="Images\marble.dark.background.1x1024.jpg" />
+    <Resource Include="Images\sim.image.320x224.png" />
+    <Resource Include="Images\image.not.found.240x203.png" />
+    <Resource Include="Images\comment.light.icon.16x16.png" />
+    <Resource Include="Images\comment.greyscale.icon.16x16.png" />
+    <Resource Include="Images\empty.report.icon.16x16.png" />
+    <Resource Include="Images\comment.icon.16x16.png" />
+    <Resource Include="Images\timeout.icon.16x16.png" />
+    <Resource Include="Images\timeout.icon.20x20.png" />
+    <Resource Include="Images\timeout.icon.32x32.png" />
+    <Resource Include="Images\loading.yellow.orange.icon.32x32.png" />
+    <Resource Include="Images\replace.icon.16x16.png" />
+    <Resource Include="Images\Marble.G.Icon.ico" />
+    <Resource Include="Images\go.to.line.icon.16x16.png" />
+    <Resource Include="Images\redo.icon.16x16.png" />
+    <Resource Include="Images\error.icon.16x16.png" />
+    <Resource Include="Images\error.icon.20x20.png" />
+    <Resource Include="Images\error.icon.32x32.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,225 @@
+#----------------------------------------------------------------------
+# NOKIA
+# R&D Copenhagen
+# CoreSW/Corleone
+#
+#
+#      Makefile for autogen (product environment only)
+#      -----------------------------------------------
+#      Makefile
+#
+# 
+#
+# Synergy DB:        co1tss
+# Project:           autogen
+# Filename:          MakeAutogenDevice
+#
+# Document code:      -
+#
+# Copyright (c) Nokia. All rights reserved
+#
+# Change history:
+#
+# VERSION     : 6          DRAFT     16-Apr-2008   Jussi Aho
+# REASON      : Modifications 
+# REFERENCE   : -
+# DESCRIPTION : Added dumpvars for debugging variables, added .d file 
+#               generation to get dependency information. version 4 merged.
+#
+# VERSION     : 4          DRAFT      08-May-2008  Stig H. Eliasen
+# REASON      : File added
+# REFERENCE   : -
+# DESCRIPTION : File for processor specific inclusion of macro files
+#
+# VERSION     : 2          DRAFT      07-Nov-2007  Jussi Aho
+# REASON      : update
+# REFERENCE   : -
+# DESCRIPTION : Update for Eutran Build system
+#
+# VERSION     : 1          DRAFT      08-Oct-2007  Christian J. Hansen
+# REASON      : First version
+# REFERENCE   : -
+# DESCRIPTION : -
+#----------------------------------------------------------------------
+# Usage:
+#
+# Make PMD file:
+#     gmake -f MakeAutogenDevice pmd
+#
+# Make mon_trace_group_ids:
+#     gmake -f MakeAutogenDevice mon_trace_group_ids.h
+#
+# Clean outputs (clean files from pmd directory and all *stamp files):
+#     gmake -f MakeAutogenDevice clean
+#
+#----------------------------------------------------------------------
+
+# Make sure targets are deleted on error
+.DELETE_ON_ERROR:
+
+MAKEFILE = MakeAutogenDevice
+
+-include .eutran_makefiletemplate_pre
+
+#
+# List of source code files (Autogen)
+#
+
+SRCHOST_AUTOGEN = \
+	autogen_check.c \
+	autogen_def.c \
+	autogen_device_includes.c \
+	autogen_dsp.c \
+	autogen_init.c \
+	autogen_invariant_trace.c \
+	autogen_main.c \
+	autogen_mcu_trace_core.c \
+	autogen_mcu_trace_protocol.c \
+	autogen_object.c \
+	autogen_parsexml.c \
+	autogen_prop.c \
+	autogen_protocols_eutran.c \
+	autogen_ref.c \
+	autogen_symbols.c \
+	autogen_user.c \
+	autogen_util.c \
+	autogen_vendor.c \
+	dwarfReader.c \
+	elfReader.c \
+	list.c \
+	output_pmd.c \
+	output_pmd_debug.c \
+	output_pmd_generate.c \
+	output_pmd_info.c \
+	output_pmd_msg.c \
+	output_pmd_typedef_hierarchy.c \
+	output_pmd_types.c \
+	pmd_compression2.c \
+	pmd_constants.c \
+	pmd_stringpool.c \
+	pmd_heap.c
+
+#
+# List of source code files (ti2)
+#
+SRCHOST_TI2 = ti2grp.c
+
+HOSTCFLAGS += $(CFLAGS_AUTOGEN)
+HOSTDEPFLAGS += $(CFLAGS_AUTOGEN)
+
+
+#
+# List of source code files
+#
+SRCHOST = $(SRCHOST_AUTOGEN) $(SRCHOST_TI2)
+
+
+PROGRAM_AUTOGEN = autogen_exe.exe
+PROGRAM_TI2     = ti2grp.exe
+
+
+#
+#  Compile and load a program or library
+#
+all:	$(PROGRAM_AUTOGEN) $(PROGRAM_TI2)
+
+OBJHOST_AUTOGEN = $(SRCHOST_AUTOGEN:%.c=%.o)
+DEPHOST_AUTOGEN = $(SRCHOST_AUTOGEN:%.c=%.d)
+
+OBJHOST_TI2GRP = $(SRCHOST_AUTOGEN:%.c=%.o)
+DEPHOST_TI2GRP = $(SRCHOST_AUTOGEN:%.c=%.d)
+
+HOSTCC=gcc
+
+depend: $(DEPHOST_AUTOGEN) $(DEPHOST_TI2GRP)
+
+#$(DEPHOST_AUTOGEN): $(SRCHOST_AUTOGEN)
+
+
+$(DEPHOST_AUTOGEN): %.d: %.c
+	$(ECHO) "Generating .d file for $<"; \
+	$(HOSTCC) -MM $(HOSTCFLAGS) $(IPATH) $< -MF $@.$$$$; \
+	perl -pe 's,\($*\)\.o[ :]*,\1.o $* : ,g' < $@.$$$$ > $@; \
+	rm -f $@.$$$$
+
+$(OBJHOST_AUTOGEN): %.o: %.c %.d
+	$(ECHO) "Compiling file $<..."; \
+	$(HOSTCC) \
+	-DAUTOGEN_ENVIRONMENT_PRODUCT_DEVICE \
+	$(HOSTCFLAGS) $(IPATH) $< -o $@
+
+$(PROGRAM_AUTOGEN): $(OBJHOST_AUTOGEN)
+	$(HOSTCC) $^ -lm -o $@
+
+OBJHOST_TI2     = $(SRCHOST_TI2:%.c=%.o)
+
+$(OBJHOST_TI2): %.o: %.c
+	$(HOSTCC) \
+	$(HOSTCFLAGS) $(IPATH) $< -o $@
+
+$(PROGRAM_TI2): $(OBJHOST_TI2)
+	$(HOSTCC) $^ -o $@ \
+	
+ifeq ($(SIMULATION_ENVIRONMENT), G_SIMULATION_ENVIRONMENT_WINDOWS)
+mon_trace_group_ids.h: $(PROGRAM_TI2)
+	set -e; \
+	./$(PROGRAM_TI2) >$@;
+else
+mon_trace_group_ids.h: $(PROGRAM_TI2)
+	set -e; \
+	./$(PROGRAM_TI2) >$@;
+endif
+
+FILES2CLEAN = $(OBJHOST_AUTOGEN) $(PROGRAM_AUTOGEN) \
+$(OBJHOST_TI2) $(PROGRAM_TI2) autogen.log
+
+FILES2DISTCLEAN += mon_trace_group_ids.h
+
+PUBLIC_INTERFACES = \
+mcu_trace_conf.h \
+isi_macros_empty.h
+
+define RunAutogen
+	@target=$(@:%-stamp=%); \
+	echo "Generating $$target files using autogen..."; \
+	if [ ! -d $$target ]; then mkdir $$target; fi; \
+	./$(PROGRAM_AUTOGEN) -d$$target -o$$target && touch $@
+endef
+
+.PHONY: pmd help
+
+pmd-stamp: $(PROGRAM_AUTOGEN)
+	$(RunAutogen)
+
+pmd: pmd-stamp
+
+dumpvars::
+	echo "IPATH: $(IPATH)" ; \
+	echo " "; \
+	echo "HOSTCFLAGS: $(HOSTCFLAGS)" ; \
+	echo " "; \
+	echo "HOSTDEPFLAGS: $(HOSTDEPFLAGS)" ;
+
+help::
+	echo " "; \
+	echo "MakeAutogenDevice targets:"; \
+	echo "    depend                to generate dependencies"; \
+	echo "    pmd                   to generate device .pmd file"; \
+	echo "    mon_trace_group_ids.h compile ti2grp and generate header file"; \
+	echo "    dumpvars              dump variables used in compilation"; \
+	echo "    clean                 to clean";\
+	echo " "
+
+clean::
+	$(ECHO) "Cleaning...";\
+	$(RM) $(FILES2CLEAN) ; \
+	$(RM) -r pmd *-stamp *.d;
+
+
+ifneq ($(wildcard .eutran_makefiletemplate),)
+    include .eutran_makefiletemplate
+else
+    include $(MAKEFILE_TEMPLATE)
+endif
+################################################################################
+# DO NOT DELETE

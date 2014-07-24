@@ -1,0 +1,682 @@
+﻿<UserControl x:Class="Marble.Views.TestLabView"
+             x:Name="ucTestLabView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:sb="clr-namespace:Wpf.Controls;assembly=Wpf.SplitButton"
+             xmlns:acb="clr-namespace:AttachedCommandBehavior;assembly=AttachedCommandBehavior"
+             xmlns:local="clr-namespace:Marble"
+             xmlns:model="clr-namespace:Marble.Model"
+             xmlns:converters="clr-namespace:Marble.Converters"
+             xmlns:Converters="clr-namespace:MarbleLibrary.Converters;assembly=MarbleLibrary"
+             xmlns:command="clr-namespace:MarbleLibrary.Commands;assembly=MarbleLibrary"
+             xmlns:CustomControls="clr-namespace:MarbleLibrary.CustomControls;assembly=MarbleLibrary"
+             xmlns:Utilities="clr-namespace:MarbleLibrary.Utilities;assembly=MarbleLibrary"
+             xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:ViewModel="clr-namespace:Marble.ViewModel"
+             xmlns:Views="clr-namespace:Marble.Views" d:DesignWidth="800" d:DesignHeight="600" Background="{StaticResource MarbleLightNaturalBackgroundGradient}"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance ViewModel:MarbleMainViewModel, IsDesignTimeCreatable=False}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Templates/TestCaseResultCellTemplate.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <ContextMenu x:Key="contextMenuTestCase" >
+                <MenuItem Header="Edit Test..." Command="{Binding Source={x:Static Application.Current}, Path=ViewModel.EditSelectedTestCommand, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding}">
+                    <!--<MenuItem Header="Using Internal Editor..." />
+                    <MenuItem Header="Using Notepad++..." />
+                    <MenuItem Header="Using UltraEdit..." />
+                    <MenuItem Header="Using PyScripter..." />
+                    <MenuItem Header="Using IDLE..." />
+                    <MenuItem Header="Using Python Win..." />
+                    <MenuItem Header="Using Programmer's Notepad..." />
+                    <MenuItem Header="Using ConTEXT..." />
+                    <MenuItem Header="Using PyDev - Eclipse..." />-->
+                </MenuItem>
+            </ContextMenu>
+
+            <ObjectDataProvider x:Key="testRuntimeUnit"
+                    MethodName="GetValues"
+                    ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="model:TestRuntimeUnit" />
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+
+            <Converters:NumericValueIsBiggerThanParameterValue x:Key="ValueBiggerThanParameter" />
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutGrid">
+        <Grid.Resources>
+            <Utilities:BindingProxy x:Key="bindingProxyLayoutGrid" Data="{Binding}" />
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition x:Name="columnDefinitionTestReport" Width="300" MinWidth="0" MaxWidth="{Binding ElementName=ucTestLabView, Path=ActualWidth, Converter={Converters:DoubleValueAndParameterValueAdded}, ConverterParameter=-8}" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Expander Header="Test Set Settings" Grid.ColumnSpan="3" Style="{StaticResource MarbleTextHeaderExpanderStyle}">
+            
+            <Grid x:Name="gridTestSetSettings" Grid.IsSharedSizeScope="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" MaxHeight="40"/>
+                    <RowDefinition Height="40" MaxHeight="40"/>
+                    <RowDefinition Height="40" MaxHeight="40"/>                    
+                    <!-- Replaces Auto height in the way that "background" image won't make grid resize. -->
+                    <RowDefinition>
+                        <RowDefinition.Style>
+                            <Style TargetType="{x:Type RowDefinition}">
+                                <Setter Property="Height" Value="40" />
+                                <Setter Property="MaxHeight" Value="40" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsTracingEnabledForTestrun, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                        <Setter Property="MaxHeight" Value="0" />
+                                        <Setter Property="Height" Value="0" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </RowDefinition.Style>
+                    </RowDefinition>
+                    <RowDefinition Height="40" MaxHeight="40"/>
+                    <RowDefinition Height="40" MaxHeight="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!--<Image x:Name="imageSettingsBackground" Grid.Column="0" Grid.RowSpan="99" Grid.ColumnSpan="99" Height="{Binding ElementName=gridTestSetSettings, Path=ActualHeight, Converter={Converters:DoubleValueAndParameterValueAdded}, ConverterParameter=-10}" Source="/MarbleLibrary;component/Images\settings.icon.318x320.png" Margin="20,0,5,0" HorizontalAlignment="Left" Opacity="0.2" />-->
+                <Image x:Name="imageSettingsBackground" Grid.Column="0" Grid.RowSpan="99" Grid.ColumnSpan="99" Height="140" ClipToBounds="False" Source="/MarbleLibrary;component/Images\settings.icon.318x320.png" Margin="50,0,5,0" HorizontalAlignment="Left" Opacity="0.2" />
+
+                <TextBlock Text="Order" Margin="5,0,0,0" ToolTip="Whether to randomize the selection of the next test case." VerticalAlignment="Center" Foreground="{StaticResource MarbleNormalTextColorOnLightBackground}" Style="{StaticResource MarbleTextBlockLightBackgroundStyle}"/>
+
+                <CheckBox Grid.Column="1" x:Name="checkBoxShuffle" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=TestSetModel.ShuffleMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Content="Shuffle" ToolTip="Whether to randomize the selection of the next test case."/>
+                <Button Grid.Column="1" HorizontalAlignment="Right" Content="Clear Results" Width="100" Height="28" Command="{Binding ClearResultsFromSelectedTestCases}" Style="{DynamicResource MarbleButton}" Margin="5 0"
+                             ToolTip="Clears all results from selected test cases."/>
+
+                <TextBlock Text="Repeat" Grid.Row="1" Grid.Column="0" Margin="5 0" VerticalAlignment="Center" Foreground="{StaticResource MarbleNormalTextColorOnLightBackground}" ToolTip="Selected test cases are repeated for a given time."
+                           Style="{StaticResource MarbleTextBlockLightBackgroundStyle}"/>
+
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <!--<CheckBox x:Name="checkBoxEnableTimedRun" Margin="0,0,10,0"  VerticalAlignment="Center" Content="Enabled" IsChecked="{Binding Path=TestSetModel.TimedRunStarted, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
+                    <CheckBox x:Name="checkBoxEnableTimedRun" Margin="0,0,10,0"  VerticalAlignment="Center" Content="Enabled" IsChecked="{Binding Path=IsTimedRunStartedForUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              ToolTip="Enables/disables timed run for test execution."/>
+                    <!--<CustomControls:NumericTextBox x:Name="numericTextBoxRepeat" VerticalAlignment="Center" MinValue="0" MaxValue="9999" MaxLength="4" UseAutomaticValueCorrection="True" Text="{Binding TestSetModel.TestSetRepeatTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="30" 
+                                                   IsEnabled="{Binding ElementName=checkBoxEnableTimedRun, Path=IsChecked}" Opacity="{Binding ElementName=numericTextBoxRepeat, Path=IsEnabled, Converter={Converters:IsEnabledToOpacity}}" />-->
+                    <CustomControls:NumericTextBox x:Name="numericTextBoxRepeat" VerticalAlignment="Center" MinValue="0" MaxValue="9999" MaxLength="4" UseAutomaticValueCorrection="True" Text="{Binding TestSetRepeatTimeForUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="30" 
+                                                   IsEnabled="{Binding ElementName=checkBoxEnableTimedRun, Path=IsChecked}" Opacity="{Binding ElementName=numericTextBoxRepeat, Path=IsEnabled, Converter={Converters:IsEnabledToOpacity}}" 
+                                                   PreviewKeyDown="NumericTextBoxRepeat_OnPreviewKeyDown"
+                                                   ToolTip="Duration for the timed run."/>
+                    <!--<ComboBox x:Name="comboBoxRuntimeUnit" ItemsSource="{Binding Source={StaticResource testRuntimeUnit}}" SelectedValue="{Binding TestSetModel.CurrentTestRuntimeUnit, Mode=TwoWay}" Width="100" 
+                              VerticalAlignment="Center" IsEditable="False" DataContext="{Binding}" IsSynchronizedWithCurrentItem="True" Margin="5 0"
+                              IsEnabled="{Binding ElementName=checkBoxEnableTimedRun, Path=IsChecked}" Opacity="{Binding ElementName=comboBoxRuntimeUnit, Path=IsEnabled, Converter={Converters:IsEnabledToOpacity}}" />-->
+                    <ComboBox x:Name="comboBoxRuntimeUnit" ItemsSource="{Binding Source={StaticResource testRuntimeUnit}}" SelectedValue="{Binding Path=CurrentTestRuntimeUnit, Mode=TwoWay}" Width="100" 
+                              VerticalAlignment="Center" IsEditable="False" DataContext="{Binding}" IsSynchronizedWithCurrentItem="True" Margin="5 0"
+                              IsEnabled="{Binding ElementName=checkBoxEnableTimedRun, Path=IsChecked}" Opacity="{Binding ElementName=comboBoxRuntimeUnit, Path=IsEnabled, Converter={Converters:IsEnabledToOpacity}}" />
+                    <!--<CheckBox x:Name="checkBoxRepeatShuffle" Content="Shuffle" VerticalAlignment="Center" IsChecked="{Binding TestSetModel.ShuffleMode, Mode=OneWayToSource}" Margin="10,0,0,0"
+                              IsEnabled="{Binding ElementName=checkBoxEnableTimedRun, Path=IsChecked}"/>-->
+                    <Button x:Name="buttonUndoChangesToTimedRun" ToolTip="Undoes changes and sets the values currently in effect." Command="{Binding Path=UndoChangesToTimedRun}" Margin="5,0,5,0" Height="28" Style="{StaticResource MarbleLightButton}">
+                        <Image Source="/MarbleLibrary;component/Images\undo.icon.16x16.png" Height="16" Width="16" Margin="5,0,5,0"/>
+                    </Button>
+                    <Button x:Name="buttonApplyChangesToTimedRun" Content="Apply" ToolTip="Applies changes to timed run." Command="{Binding Path=ApplyChangesToTimedRun}" Margin="5,0,5,0" Width="50" Height="28" Style="{StaticResource MarbleButton}"/>
+                </StackPanel>
+
+                <TextBlock Grid.Row="2" Text="Next Test set" Margin="5,0,0,0" ToolTip="Defines test set that is automatically opened and executed after this one." VerticalAlignment="Center" Foreground="{StaticResource MarbleNormalTextColorOnLightBackground}" 
+                           Style="{StaticResource MarbleTextBlockLightBackgroundStyle}"/>                
+                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                    <TextBox x:Name="TextBoxNextTestSet" Text="{Binding TestSetModel.NextTestSetPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          Width="250" VerticalAlignment="Center" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}">
+                        <TextBox.Style>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="{x:Static System:String.Empty}">
+                                        <Setter Property="ToolTipService.IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                    <Button Width="90" Height="28" Click="BrowseNextTestSet_Click" VerticalAlignment="Stretch" Style="{StaticResource MarbleButton}" Margin="5 0">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Margin="5,0,5,0" Height="16" Width="16" Source="/MarbleLibrary;component/Images\open.file.icon2.16x16.png" HorizontalAlignment="Left" />
+                                <TextBlock Text="Browse..." Style="{StaticResource MarbleTextBlockDarkBackgroundStyle}" />
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+
+                <TextBlock Grid.Row="3" Text="Trace Activation XML" Margin="5,0,0,0" ToolTip="Enables additional traces defined in XML file." VerticalAlignment="Center" Style="{StaticResource MarbleTextBlockLightBackgroundStyle}"
+                           Visibility="{Binding IsTracingEnabledForTestrun, Converter={Converters:BoolToVisibilityCollapsedConverter}}"/>
+                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Visibility="{Binding IsTracingEnabledForTestrun, Converter={Converters:BoolToVisibilityCollapsedConverter}}">
+                    <ComboBox x:Name="ComboboxTraceFiles" IsEditable="False" SelectedValue="{Binding TraceXmlPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          ItemsSource="{Binding Source={x:Static model:MarbleSettingsModel.FileSettings}, Path=RecentTraceFiles, UpdateSourceTrigger=PropertyChanged}" 
+                          Width="250" VerticalAlignment="Center">
+                        <ComboBox.ToolTip>
+                            <TextBlock Text="{Binding TraceXmlPath, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" />
+                        </ComboBox.ToolTip>
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel.ToolTip>
+                                        <TextBlock Text="{Binding UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" />
+                                    </StackPanel.ToolTip>
+                                    <TextBlock Text="{Binding UpdateSourceTrigger=PropertyChanged, Converter={Converters:FilePathToFileName}}" TextTrimming="CharacterEllipsis"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <Button Width="90" Height="28" Click="Browse_Click" VerticalAlignment="Stretch" Style="{StaticResource MarbleButton}" Margin="5,0,5,0">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Margin="5,0,5,0" Height="16" Width="16" Source="/MarbleLibrary;component/Images\open.file.icon2.16x16.png" HorizontalAlignment="Left" />
+                                <TextBlock Text="Browse..." Style="{StaticResource MarbleTextBlockDarkBackgroundStyle}"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Test Case" Margin="5 0" VerticalAlignment="Center" Foreground="{StaticResource MarbleNormalTextColorOnLightBackground}" 
+                           Style="{StaticResource MarbleTextBlockLightBackgroundStyle}"
+                           ToolTip="Skips exit to idle at the beginning and at the end of a test case."/>
+
+                <CheckBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,5,0" IsChecked="{Binding IsSetupAndTearDownDisabled}"
+                          Content="Disable exit in Setup and Teardown" ToolTip="Skips exit to idle at the beginning and at the end of a test case."/>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="CI" Margin="5 0" VerticalAlignment="Center" Foreground="{StaticResource MarbleNormalTextColorOnLightBackground}" 
+                           Style="{StaticResource MarbleTextBlockLightBackgroundStyle}"
+                           ToolTip="Script paths are relative to the test set file location (rather than to Marble location)."/>                
+                
+                <CheckBox Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,5,0"
+                          IsChecked="{Binding TestSetModel.ScriptPathsRelativeToTestSet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          Content="Bind Scripts to Test Set" ToolTip="Script paths are relative to the test set file location (rather than to Marble location)."/>
+
+            </Grid>
+        </Expander>
+
+        <GroupBox Grid.Row="1" Grid.Column="0" >
+            <GroupBox.Style>
+                <Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource MarbleGroupBoxCustomHeader}">
+                    <!--<Setter Property="Header">
+                        <Setter.Value>
+                            
+                        </Setter.Value>
+                    </Setter>-->
+                </Style>
+            </GroupBox.Style>
+            <GroupBox.Header>
+                <Grid>                    
+                    <!-- Background banner -->
+                    <Rectangle RadiusX="1" RadiusY="1" Height="26" Margin="-9,0,0,0" VerticalAlignment="Top" StrokeThickness="0" Fill="{StaticResource MarbleDefaultGroupBoxHeaderBackground}" />
+
+                    <TextBlock Text="Test Cases" Height="20" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,2,0,0" FontFamily="Calibri" Typography.Capitals="SmallCaps" FontSize="11pt"/>
+                    
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,2,10,2">
+                        <ToggleButton x:Name="toggleButtonSearch" Style="{StaticResource ExpanderLeftHeaderStyle}" ToolTip="Toggle test case search visibility." />
+                        <Image Height="16" Width="16" Source="/MarbleLibrary;component/Images\search.icon.16x16.png">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=toggleButtonSearch, Path=IsChecked}" Value="True">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <TextBox x:Name="textBoxSearch" Text="" Height="22" Width="200" ToolTip="Find and select test case(s)." Margin="0,0,5,0"
+                                 PreviewKeyDown="TextBoxSearch_OnPreviewKeyDown" TextChanged="TextBoxSearch_OnTextChanged" Visibility="{Binding ElementName=toggleButtonSearch, Path=IsChecked, Converter={StaticResource BoolToVisibility}}">
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                    <Style.Resources>
+                                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                            <VisualBrush.Visual>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Image Height="16" Width="16" Source="/MarbleLibrary;component/Images\search.icon.16x16.png" />
+                                                    <Label Content="Find Test Case(s)..." Foreground="Gray" FontStyle="Italic" />
+                                                </StackPanel>
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                        <LinearGradientBrush x:Key="TextNotFoundBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FFFF6464" Offset="0"/>
+                                            <GradientStop Color="White" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Style.Resources>
+                                    <Setter Property="BorderBrush" Value="Black"/>
+                                    <Setter Property="BorderThickness" Value="1.5"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                        </Trigger>
+                                        <Trigger Property="Text" Value="{x:Null}">
+                                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                        </Trigger>
+                                        <Trigger Property="IsKeyboardFocused" Value="True">
+                                            <Setter Property="Background" Value="White" />
+                                        </Trigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text.Length, Converter={StaticResource ValueBiggerThanParameter}, ConverterParameter=0}" Value="True" />
+                                                <Condition Binding="{Binding Path=IsSearchedTextFound, UpdateSourceTrigger=PropertyChanged}" Value="False" />
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Background" Value="{StaticResource TextNotFoundBrush}" />
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                        <ComboBox x:Name="comboBoxSearchArea" Margin="5,0,0,0" Background="{StaticResource MarbleDefaultGroupBoxHeaderBackground}" Foreground="White" BorderBrush="Black" BorderThickness="1.5" SelectionChanged="ComboBoxSearchArea_OnSelectionChanged"
+                                  ToolTip="Field where text is searched." Visibility="{Binding ElementName=toggleButtonSearch, Path=IsChecked, Converter={StaticResource BoolToVisibility}}"
+                                  Style="{StaticResource ComboBoxDarkChromeStyle}">
+                            <ComboBoxItem x:Name="comboBoxItemSearchTestCase" IsSelected="True">Test Case</ComboBoxItem>
+                            <ComboBoxItem x:Name="comboBoxItemSearchSubarea">Subarea</ComboBoxItem>
+                            <ComboBoxItem x:Name="comboBoxItemSearchFeature">Feature</ComboBoxItem>
+                            <ComboBoxItem x:Name="comboBoxItemSearchResult">Result</ComboBoxItem>
+                            <ComboBoxItem x:Name="comboBoxItemSearchErrorReason">Error Reason</ComboBoxItem>
+                            <ComboBoxItem x:Name="comboBoxItemSearchRunTime">Run Time</ComboBoxItem>
+                            <ComboBoxItem x:Name="comboBoxItemSearchAll">All</ComboBoxItem>
+                        </ComboBox>
+                        <CheckBox x:Name="checkBoxSearchMatchCase" Margin="5,0,0,0" ToolTip="Match case." Foreground="White" VerticalAlignment="Center" Checked="CheckBoxSearchMatchCase_OnCheckedChanged" Unchecked="CheckBoxSearchMatchCase_OnCheckedChanged"
+                                  Visibility="{Binding ElementName=toggleButtonSearch, Path=IsChecked, Converter={StaticResource BoolToVisibility}}">
+                            <CheckBox.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="a" Foreground="White"/>
+                                    <TextBlock Text="/" Foreground="{StaticResource MarbleDataGridCellErrorBackground}" FontWeight="ExtraBold">
+                                        <TextBlock.Effect>
+                                            <DropShadowEffect BlurRadius="10" Color="Black" Direction="0" ShadowDepth="0" />
+                                        </TextBlock.Effect>
+                                    </TextBlock>
+                                    <TextBlock Text="A" Foreground="White"/>
+                                </StackPanel>
+                            </CheckBox.Content>
+                        </CheckBox>
+                        <Button x:Name="buttonSearchTestCase" Margin="5,0,0,0" Height="22" Width="30" Style="{StaticResource MarbleButton}" Click="ButtonSearchTestCase_OnClick"
+                                Visibility="{Binding ElementName=toggleButtonSearch, Path=IsChecked, Converter={StaticResource BoolToVisibility}}" ToolTip="Find and select test cases matching the find criteria.">
+                            <Image Height="16" Width="16" Source="/MarbleLibrary;component/Images\search.icon.16x16.png" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </GroupBox.Header>
+            <DataGrid x:Name="testCaseDataGrid" ItemsSource="{Binding TestSetModel.TestCases}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Background="White"
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" AutoGenerateColumns="False" CanUserReorderColumns="False" ClipToBounds="True" ScrollViewer.CanContentScroll="True"
+                      CanUserResizeRows="False" CanUserSortColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="None" IsSynchronizedWithCurrentItem="True"
+                      AlternatingRowBackground="{StaticResource MarbleDataGridAlternatingRowBackground}" AllowDrop="True" Sorting="OnTestCaseDataGridSorting" Loaded="OnDataGridLoaded"
+                      ContextMenuOpening="OnContextMenuOpening" DragEnter="OnTestCaseDragEnter" DragOver="OnTestCaseDragOver"
+                      PreviewKeyDown="OnTestCaseDataGridPreviewKeyDown"
+                      command:DataGridBehaviour.DataGridDropCommand="{Binding DataGridDropCommand}"
+                      Utilities:DataGridRollbackOnUnfocusedBehaviour.DataGridRollbackOnUnfocused="True"
+                      EnableRowVirtualization="True" EnableColumnVirtualization="True"
+                      VirtualizingStackPanel.VirtualizationMode="Recycling" VirtualizingStackPanel.IsVirtualizing="True" 
+                      VirtualizingPanel.IsVirtualizingWhenGrouping="True" VirtualizingPanel.ScrollUnit="Item"
+                      SelectionChanged="TestCaseDataGridSelectionChanged"
+                      Foreground="{StaticResource MarbleNormalTextColorOnLightBackground}"
+                      >
+                <!--VirtualizingPanel.CacheLengthUnit="Page" VirtualizingPanel.CacheLength="10"-->
+                <!--<DataGrid.Style>
+                    <Style TargetType="{x:Type DataGrid}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=TestSetModel.IsBlackboxEnabled}" Value="False">
+                                <Setter TargetName="dataGridTemplateColumnBlackbox" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Style>-->
+                <DataGrid.Resources>
+                    <Style x:Key="CellStyleTestCaseDataGrid" TargetType="{x:Type DataGridCell}">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Trigger.Setters>
+                                    <Setter Property="Background" Value="{StaticResource MarbleDataGridCellUnresolvedBackground}" />
+                                    <Setter Property="BorderBrush" Value="{StaticResource MarbleDataGridCellUnresolvedBackground}" />
+                                </Trigger.Setters>
+                            </Trigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True"/>
+                                    <Condition Binding="{Binding Result.Result}" Value="Error" />
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.Setters>
+                                    <Setter Property="Background" Value="{StaticResource MarbleDataGridCellErrorBackground}" />
+                                    <Setter Property="BorderBrush" Value="{StaticResource MarbleDataGridCellErrorBackground}" />
+                                    <Setter Property="Foreground" Value="White" />
+                                </MultiDataTrigger.Setters>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True"/>
+                                    <Condition Binding="{Binding Result.Result}" Value="Failed" />
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.Setters>
+                                    <Setter Property="Background" Value="{StaticResource MarbleDataGridCellFailedBackground}" />
+                                    <Setter Property="BorderBrush" Value="{StaticResource MarbleDataGridCellFailedBackground}" />
+                                    <Setter Property="Foreground" Value="White" />
+                                </MultiDataTrigger.Setters>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True"/>
+                                    <Condition Binding="{Binding Result.Result}" Value="Passed" />
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.Setters>
+                                    <Setter Property="Background" Value="{StaticResource MarbleDataGridCellPassedBackground}" />
+                                    <Setter Property="BorderBrush" Value="{StaticResource MarbleDataGridCellPassedBackground}" />
+                                    <Setter Property="Foreground" Value="White" />
+                                </MultiDataTrigger.Setters>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource CellStyleTestCaseDataGrid}" />
+                </DataGrid.CellStyle>
+                <DataGrid.ContextMenu>
+                    <ContextMenu x:Name="dataGridContextMenu">
+                        <MenuItem Header="Size Column to Fit" Click="OnContextMenuSizeColumnClicked" />
+                        <MenuItem Header="Size All Columns to Fit" Click="OnContextMenuSizeAllColumnsClicked" />
+                        <Separator />
+                        <MenuItem x:Name="menuItemShowHideSubarea" Header="Subarea" IsCheckable="True" IsChecked="True" Checked="OnContextMenuItemChecked" Unchecked="OnContextMenuItemUnChecked" />
+                        <MenuItem x:Name="menuItemShowHideFeature" Header="Feature" IsCheckable="True" IsChecked="True" Checked="OnContextMenuItemChecked" Unchecked="OnContextMenuItemUnChecked" />
+                        <MenuItem x:Name="menuItemShowHideTestCase" Header="Test Case" IsCheckable="True" IsChecked="True" Checked="OnContextMenuItemChecked" Unchecked="OnContextMenuItemUnChecked" />
+                        <MenuItem x:Name="menuItemShowHideResult" Header="Result" IsCheckable="True" IsChecked="True" Checked="OnContextMenuItemChecked" Unchecked="OnContextMenuItemUnChecked" />
+                        <MenuItem x:Name="menuItemShowHideResultSummary" Header="Result Summary" IsCheckable="True" IsChecked="True" Checked="OnContextMenuItemChecked" Unchecked="OnContextMenuItemUnChecked" />
+                        <MenuItem x:Name="menuItemShowHideErrorReason" Header="Error Reason" IsCheckable="True" IsChecked="True" Checked="OnContextMenuItemChecked" Unchecked="OnContextMenuItemUnChecked" />
+                        <MenuItem x:Name="menuItemShowHideRunTime" Header="Run time" IsCheckable="True" IsChecked="True" Checked="OnContextMenuItemChecked" Unchecked="OnContextMenuItemUnChecked" />
+                        <!--
+                        <MenuItem Header="Priority" IsCheckable="True" IsChecked="False" />
+                        <MenuItem Header="New" IsCheckable="True" IsChecked="False" />
+                        <MenuItem Header="Error ID" IsCheckable="True" IsChecked="False" />
+                        <MenuItem Header="Error title" IsCheckable="True" IsChecked="False" />
+                        <MenuItem Header="Description" IsCheckable="True" IsChecked="False" />
+                        <MenuItem Header="Time run" IsCheckable="True" IsChecked="False" />
+                        <MenuItem Header="Run amount" IsCheckable="True" IsChecked="False" />
+                        -->
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <!-- <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" /> -->
+                        <Setter Property="ContextMenu" Value="{StaticResource contextMenuTestCase}" />
+                        <Setter Property="Visibility" Value="{Binding IsVisible, Converter={Converters:BoolToVisibilityCollapsedConverter}}" />
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn x:Name="dataGridTemplateColumnWhitebox" CanUserResize="False" Width="Auto" Visibility="{Binding Data.IsWhiteboxCheckBoxesEnabled, Source={StaticResource bindingProxyLayoutGrid}, UpdateSourceTrigger=PropertyChanged, Converter={Converters:BoolToVisibilityCollapsedConverter}}">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <sb:SplitButton Name="SelectionButton" Height="24" Mode="Split" Placement="Bottom">
+                                        <sb:SplitButton.Content>
+                                            <CheckBox Name="SplitButtonCheckBox" IsChecked="{Binding DataContext.IsWhiteboxHeaderSplitButtonCheckBoxChecked, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                                              VerticalAlignment="Center">
+                                                <Image Source="/MarbleLibrary;component/Images\whitebox.icon.15x16.png" Height="16" Width="15" VerticalAlignment="Center" ToolTip="Whitebox mode."
+                                                       Visibility="{Binding Data.CanWhiteboxCheckBoxesBeEnabled, Source={StaticResource bindingProxyLayoutGrid}, UpdateSourceTrigger=PropertyChanged, Converter={Converters:BoolToVisibilityCollapsedConverter}}" />
+                                            </CheckBox>
+                                        </sb:SplitButton.Content>
+                                        <MenuItem Header="Check all" Click="WhiteboxCheckAllRows" />
+                                        <MenuItem Header="Check none" Click="WhiteboxUnCheckAllRows" />
+                                        <MenuItem Header="Check selected" Click="WhiteboxOnSelectionMenuSelectSelectedClick" />
+                                        <MenuItem Header="Add selected" Click="WhiteboxOnSelectionMenuAddSelectedClick" />
+                                        <MenuItem Header="Invert checked" Click="WhiteboxOnSelectionMenuInvertSelectionClick" />
+                                        <!--
+                                        <MenuItem Header="Sort" Click="OnSelectionMenuSortClick" />
+                                        -->
+                                    </sb:SplitButton>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Path=IsWhiteboxChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsRoot, Converter={Converters:BoolToVisibilityCollapsedConverter}}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
+                    <DataGridTemplateColumn x:Name="dataGridTemplateColumnBlackbox" CanUserResize="False" Visibility="{Binding Data.IsBlackboxCheckBoxesEnabled, Source={StaticResource bindingProxyLayoutGrid}, UpdateSourceTrigger=PropertyChanged, Converter={Converters:BoolToVisibilityCollapsedConverter}}" >
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+
+                                    <sb:SplitButton Name="SelectionButton" Height="24" Mode="Split" Placement="Bottom">
+                                        <sb:SplitButton.Content>
+                                            <CheckBox Name="SplitButtonCheckBox" IsChecked="{Binding DataContext.IsBlackboxHeaderSplitButtonCheckBoxChecked, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                                              VerticalAlignment="Center">
+                                                <Image Source="/MarbleLibrary;component/Images\blackbox.icon.15x16.png" Height="16" Width="15" VerticalAlignment="Center" ToolTip="Blackbox mode." />
+                                            </CheckBox>
+                                        </sb:SplitButton.Content>
+                                        <MenuItem Header="Check all" Click="BlackboxCheckAllRows" />
+                                        <MenuItem Header="Check none" Click="BlackboxUnCheckAllRows" />
+                                        <MenuItem Header="Check selected" Click="BlackboxOnSelectionMenuSelectSelectedClick" />
+                                        <MenuItem Header="Add selected" Click="BlackboxOnSelectionMenuAddSelectedClick" />
+                                        <MenuItem Header="Invert checked" Click="BlackboxOnSelectionMenuInvertSelectionClick" />
+
+                                    </sb:SplitButton>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Path=IsBlackboxChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsRoot, Converter={Converters:BoolToVisibilityCollapsedConverter}}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+            <DataGridTemplateColumn x:Name="dataGridTemplateColumnRunCount" Header="" MinWidth="50" MaxWidth="50" CanUserResize="False">
+                <DataGridTemplateColumn.HeaderTemplate>
+                    <DataTemplate>
+                        <CustomControls:NumericTextBox x:Name="textBoxHeaderTotalRunCount" Height="22" Width="33" Margin="4,0,0,0" VerticalAlignment="Top" Padding="3 1"
+                                        Text="{Binding DataContext.TestSetModel.HeaderRunCount, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}"
+                                        NumberMode="Int" MinValue="1" MaxValue="999" MouseWheelIncrement="1" UseAutomaticValueCorrection="True" MaxLength="3">
+                            <CustomControls:NumericTextBox.Style>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Style.Triggers>
+                                        <Trigger Property="Validation.HasError" Value="True">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                        <GradientStop Color="#FFFF6464" Offset="0"/>
+                                                        <GradientStop Color="White" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                                <DataTrigger Binding="{Binding DataContext.TestSetModel.HeaderRunCount, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                                    <Setter Property="Foreground" Value="Transparent" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                </Style>
+                            </CustomControls:NumericTextBox.Style>
+                        </CustomControls:NumericTextBox>
+                    </DataTemplate>
+                </DataGridTemplateColumn.HeaderTemplate>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <CustomControls:NumericTextBox x:Name="textBoxTotalRunCount" Height="22" Width="33" VerticalAlignment="Top" Padding="3 1"
+                                                Text="{Binding TotalRunCount, UpdateSourceTrigger=PropertyChanged}"
+                                                Visibility="{Binding IsRoot, Converter={Converters:BoolToVisibilityCollapsedConverter}}"
+                                                NumberMode="Int" MinValue="1" MaxValue="999" MouseWheelIncrement="1" UseAutomaticValueCorrection="True" MaxLength="3"
+                                                acb:CommandBehavior.Event="TextChanged"
+                                                acb:CommandBehavior.Command="{Binding DataContext.TotalRunCountTextBoxCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                                acb:CommandBehavior.CommandParameter="{Binding ElementName=textBoxTotalRunCount, Path=Text}">
+                            <CustomControls:NumericTextBox.Style>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Style.Triggers>
+                                        <Trigger Property="Validation.HasError" Value="True">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                        <GradientStop Color="#FFFF6464" Offset="0"/>
+                                                        <GradientStop Color="White" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </CustomControls:NumericTextBox.Style>
+                        </CustomControls:NumericTextBox>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn x:Name="dataGridTemplateColumnResult" Header="Result" Width="Auto" MinWidth="80" SortMemberPath="Result.Result"
+                                    CellTemplate="{StaticResource testCaseResultTemplate}" />
+
+                    <!--<DataGridTemplateColumn x:Name="dataGridTemplateColumnSubarea" Header="{Binding Data.TestSetModel.IsCoreTestToolOnlyTestSet, Source={StaticResource bindingProxyLayoutGrid}, UpdateSourceTrigger=PropertyChanged, Converter={converters:CoreTestToolTestSetToSubareaHeadingConverter}}" MinWidth="50" SortMemberPath="Subarea">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Padding="3 1" Text="{Binding Subarea}" Visibility="{Binding IsRoot, Converter={Converters:BoolToVisibilityCollapsedConverter}}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
+
+                    <DataGridTextColumn x:Name="dataGridTemplateColumnSubarea" Header="{Binding Data.TestSetModel.IsCoreTestToolOnlyTestSet, Source={StaticResource bindingProxyLayoutGrid}, UpdateSourceTrigger=PropertyChanged, Converter={converters:CoreTestToolTestSetToSubareaHeadingConverter}}" 
+                                        MinWidth="50" SortMemberPath="Subarea" Binding="{Binding Path=Subarea}" IsReadOnly="True">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource CellStyleTestCaseDataGrid}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsRoot}" Value="False">
+                                        <Setter Property="Foreground" Value="Transparent" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+
+                    <!--<DataGridTemplateColumn x:Name="dataGridTemplateColumnFeature" Header="{Binding Data.TestSetModel.IsCoreTestToolOnlyTestSet, Source={StaticResource bindingProxyLayoutGrid}, UpdateSourceTrigger=PropertyChanged, Converter={converters:CoreTestToolTestSetToFeatureHeadingConverter}}" MinWidth="50" SortMemberPath="Feature">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Padding="3 1" Text="{Binding Feature}" Visibility="{Binding IsRoot, Converter={Converters:BoolToVisibilityCollapsedConverter}}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
+
+                    <DataGridTextColumn x:Name="dataGridTemplateColumnFeature" Header="{Binding Data.TestSetModel.IsCoreTestToolOnlyTestSet, Source={StaticResource bindingProxyLayoutGrid}, UpdateSourceTrigger=PropertyChanged, Converter={converters:CoreTestToolTestSetToFeatureHeadingConverter}}" 
+                                        MinWidth="50" SortMemberPath="Feature" Binding="{Binding Path=Feature}" IsReadOnly="True">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource CellStyleTestCaseDataGrid}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsRoot}" Value="False">
+                                        <Setter Property="Foreground" Value="Transparent" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+
+                    <!--<DataGridTemplateColumn x:Name="dataGridTemplateColumnTestCase" Header="Test Case" MinWidth="50" SortMemberPath="Name">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Padding="3 1" Text="{Binding Name}" Visibility="{Binding IsRoot, Converter={Converters:BoolToVisibilityCollapsedConverter}}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>-->
+
+                    <DataGridTextColumn x:Name="dataGridTemplateColumnTestCase" Header="Test Case" MinWidth="50" SortMemberPath="Name" Binding="{Binding Path=Name}" IsReadOnly="True">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource CellStyleTestCaseDataGrid}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsRoot}" Value="False">
+                                        <Setter Property="Foreground" Value="Transparent" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTemplateColumn x:Name="dataGridTemplateColumnResultSummary" Header="Result Summary" Width="Auto" MinWidth="50" SortMemberPath="Result">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel.Style>
+                                        <Style TargetType="{x:Type StackPanel}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding HasChildren}" Value="True">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    <Image x:Name="testCasePassedImage" Source="/MarbleLibrary;component/Images/passed.circle.icon.16x16.png" Height="16" Width="16" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding PassedTestCaseCount, UpdateSourceTrigger=PropertyChanged}" Width="25" VerticalAlignment="Center" />
+                                    <Image x:Name="testCaseFailedImage" Source="/MarbleLibrary;component/Images/failed.circle.icon.16x16.png" Height="16" Width="16" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding FailedTestCaseCount, UpdateSourceTrigger=PropertyChanged}" Width="25" VerticalAlignment="Center" />
+                                    <Image x:Name="testCaseErrorImage" Source="/MarbleLibrary;component/Images/warning.icon.16x16.png" Height="16" Width="16" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding WarningCount, UpdateSourceTrigger=PropertyChanged}" Width="25" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!--<DataGridTemplateColumn x:Name="dataGridTemplateColumnErrorReason" Header="Error Reason" Width="50" MinWidth="50" SortMemberPath="Result.ErrorReason">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Padding="3 1" Text="{Binding Result.ErrorReason}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
+
+                    <DataGridTextColumn x:Name="dataGridTemplateColumnErrorReason" Header="Error Reason" Width="50" MinWidth="50" SortMemberPath="Result.ErrorReason" Binding="{Binding Path=Result.ErrorReason}" IsReadOnly="True" CellStyle="{StaticResource CellStyleTestCaseDataGrid}"/>
+
+                    <!--<DataGridTemplateColumn x:Name="dataGridTemplateColumnRunTime" Header="Run Time" MinWidth="50" SortMemberPath="Result.RunTime">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                        <TextBlock Padding="3 1" Text="{Binding Result.RunTime, Converter={converters:DateTimeToStringConverter}}">
+                                            <TextBlock.Style>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Result.Result}" Value="{x:Null}">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Result.Result}" Value="{x:Static System:String.Empty}">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
+
+                    <DataGridTextColumn x:Name="dataGridTemplateColumnRunTime" Header="Run Time" MinWidth="50" SortMemberPath="Result.RunTime" Binding="{Binding Result.RunTime, Converter={converters:DateTimeToStringConverter}}" IsReadOnly="True">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource CellStyleTestCaseDataGrid}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Result.Result}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Result.Result}" Value="{x:Static System:String.Empty}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+
+                </DataGrid.Columns>
+        </DataGrid>
+    </GroupBox>
+
+        <CustomControls:AdvancedGridSplitter Grid.Row="1" Grid.Column="1" x:Name="advancedGridSplitterHorizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch" ResizeDirection="Columns" CollapseMode="Next" Width="0" IsEnabled="False" Panel.ZIndex="10" Visibility="Collapsed"/>
+
+        <Grid Grid.Row="1" Grid.Column="2" x:Name="gridTestReport" ClipToBounds="True" Visibility="Collapsed">
+            <!--<Views:TestReportView x:Name="testReportViewMainWindow" Visibility="Collapsed"/>-->
+        </Grid> 
+           
+    </Grid>
+</UserControl>

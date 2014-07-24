@@ -1,0 +1,124 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="MarbleColors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="ButtonFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type ToggleButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource MarbleDefaultButtonBackground}"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="1.2"/>
+        <Setter Property="Foreground" Value="{StaticResource MarbleNormalTextColorOnDarkBackground}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <!--<Microsoft_Windows_Themes:ButtonChrome x:Name="Chrome" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" RenderMouseOver="{TemplateBinding IsMouseOver}" RenderPressed="{TemplateBinding IsPressed}" RenderDefaulted="{TemplateBinding Button.IsDefaulted}" SnapsToDevicePixels="true">
+							<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+						</Microsoft_Windows_Themes:ButtonChrome>-->
+                    <Grid x:Name="Chrome" SnapsToDevicePixels="true">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Border x:Name="buttonBackground" Margin="1" Grid.RowSpan="2" Background="{TemplateBinding Background}" CornerRadius="5">
+                            <Border.Effect>
+                                <DropShadowEffect x:Name="effectButtonShadow" Color="Black" Direction="270" ShadowDepth="1"/>
+                            </Border.Effect>
+                        </Border>
+
+                        <Border Grid.Row="0" x:Name="rectangleButtonGlow" CornerRadius="5" Margin="3,2,3,2">
+                            <Border.Background>
+                                <LinearGradientBrush x:Name="glowFill" EndPoint="0,1" StartPoint="0,0">
+                                    <GradientStop Color="#00FFFFFF" Offset="1"/>
+                                    <GradientStop Color="#90FFFFFF" Offset="0"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+
+                        <Border Grid.RowSpan="2" x:Name="rectangleHover" CornerRadius="5" Margin="{TemplateBinding BorderThickness}" Visibility="Collapsed">
+                            <Border.Background>
+                                <LinearGradientBrush x:Name="hoverFill" EndPoint="0,1" StartPoint="0,0">
+                                    <!--<GradientStop Color="#00FFFFFF" Offset="1"/>-->
+                                    <GradientStop Color="#50FFFFFF" Offset="0"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+
+                        <Border Grid.RowSpan="2" x:Name="rectangleFocus" CornerRadius="5" Margin="{TemplateBinding BorderThickness}" BorderThickness="{TemplateBinding BorderThickness}" Visibility="Collapsed" BorderBrush="{StaticResource MarbleYellowHighlight}" />
+
+                        <ContentPresenter x:Name="buttonContentPresenter" TextBlock.FontFamily="Calibri" Typography.Capitals="SmallCaps" TextBlock.FontSize="11pt" Grid.RowSpan="2"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" 
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                        <Border x:Name="buttonBorder" Grid.RowSpan="2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <!--<Setter Property="RenderDefaulted" TargetName="Chrome" Value="true"/>-->
+                            <Setter Property="Visibility" TargetName="rectangleFocus" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="true">
+                            <!--<Setter Property="RenderPressed" TargetName="Chrome" Value="true"/>-->
+                            <Setter Property="Visibility" TargetName="rectangleButtonGlow" Value="Collapsed" />
+                            <Setter TargetName="buttonContentPresenter" Property="TextBlock.Foreground" Value="{StaticResource MarbleYellowHighlight}" />
+                            <Setter Property="Visibility" TargetName="rectangleHover" Value="Visible" />
+                            <Setter Property="BorderThickness" Value="2" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="#ADADAD"/>
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Visibility" TargetName="rectangleButtonGlow" Value="Collapsed" />
+                            <Setter Property="BorderBrush" TargetName="buttonBorder" Value="#ADADAD" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Visibility" TargetName="rectangleHover" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="true">
+                            <Setter Property="Visibility" TargetName="rectangleFocus" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Margin" TargetName="buttonBackground" Value="0,1,0,0" />
+                            <Setter Property="Margin" TargetName="buttonContentPresenter" Value="0,2,0,0" />
+                            <Setter Property="Effect" TargetName="buttonBackground" Value="{x:Null}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ToggleButtonWithImageStyle" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
+        <!--<Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}" >
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>-->
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="False">
+                <Setter Property="Image.Opacity" Value="0.4" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--<Style x:Key="ToggleButtonWithCornerArrow" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
+        
+    </Style>-->
+
+</ResourceDictionary>

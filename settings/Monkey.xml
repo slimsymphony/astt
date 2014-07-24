@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monkey_config>
+
+  <!-- how many actions will be executed for application before executing self.exit(). 0 = unlimited -->
+  <applicationactionlimit value="50"/>
+  <!-- when there's no targets available, use this action-->
+  <notargetsaction value="select.long('KBD_KEY_BACK')" />
+  <!--<notargetsaction value="select((100,150))" />-->
+  <!--<notargetsaction value="delay(3000)" />-->
+  
+  <!-- how many times monkey will do testing. 0 = unlimited. use 0 if time limition wanted -->
+  <monkeyactions value="0" />
+  <!-- how long monkey testing will be done. seconds will override others, seconds=0 will use minutes etc.-->
+  <testingtime seconds="0" minutes="1" hours="0" />
+  <gettargetattemps value="3" />
+  
+  <!-- can be configured during execution to enable pause -->
+  <pause value="!true" />
+  
+  <!-- print all available targets / events during each step. if savestate is set, state will be saved as well -->
+  <printtargets value="!true" />
+  <savestate value="!true" />
+  
+  <!-- <onlytarget name="Phone"/> -->
+  
+  <!-- BLACKLIST OF ITEMS WHICH SHOULD NOT BE TOUCHED -->
+  <blacklist>
+    <blacklisted item="nPpMr9sVBCk6gU_5cNvFpww"/> <!--no SIM card-->
+    <blacklisted item="evo_screen_corner_mask_left_top.png"/>
+    <blacklisted item="evo_screen_corner_mask_right_top.png"/>
+    <blacklisted item="evo_screen_corner_mask_left_bottom.png"/>
+    <blacklisted item="evo_screen_corner_mask_right_bottom.png"/>
+    <blacklisted item="tutorial/grid-menu"/>
+    <blacklisted item="Tutorial"/>
+    <blacklisted item="Elisa"/>
+    <blacklisted item="satk-app-0/grid-menu"/>
+    <blacklisted item="satk-app-1/grid-menu"/>
+  </blacklist>
+
+  <!-- WEIGHTS FOR SINGLE ITEMS -->
+  <weights>
+    <weight item="evo_icon_statusbar_simone_accent.png" weight="0" />
+    <weight item="evo_icon_statusbar_simtwo_accent.png" weight="0" />
+    <weight item="evo_icon_statusbar_network_0.png" weight="0" />
+    <weight item="evo_icon_camera_xl.png" weight="1" />
+    <weight item="statusbar/usb" weight="0.1" />
+    <weight item="ndjsRWn6WuE2XwPB8Edt46w" weight="1" /> <!-- Messages -->
+    <weight item="nokia_wallpapers.mp4.[t=1325419200,m=1,d=238x110].jpg" weight="10" />
+    <weight item="voice-call-application/answer-call" weight="0.00001" />
+  </weights>
+
+  <!-- TARGETS -->
+  <targets>
+    <target weight="10" name="button">
+      <actions>
+        <!--<action name="select.long">
+          <param name="length" variable="random.randint(17,500)"></param>
+          <param name="length" value="17"></param>
+        </action>-->
+        <action name="select" />
+      </actions>
+      <require>
+        <attribute name="handled-touch-events" value="press"></attribute>
+        <attribute name="handled-touch-events" value="release"></attribute>
+      </require>
+      <exclude>
+        <attribute name="handled-touch-events" value=""></attribute>
+      </exclude>
+    </target>
+
+    <target weight="1" name="activity-screen-scroll-container">
+      <actions>
+        <action name="gesture.flick">
+          <param name="direction" value="left"></param>
+          <param name="direction" value="right"></param>
+          <param name="direction" value="down"></param>
+          <param name="direction" value="up"></param>
+        </action>
+      </actions>
+    </target>
+    
+    <!-- home screen container. can be flicked left and right / up and down -->
+    <target weight="1" name="scroll-container">
+      <require>
+        <attribute name="name" value="main-menu-scroller"></attribute>
+      </require>
+      <actions>
+        <action name="gesture.flick">
+          <param name="direction" value="left"></param>
+          <param name="direction" value="right"></param>
+          <param name="direction" value="down"></param>
+          <param name="direction" value="up"></param>
+        </action>
+      </actions>
+    </target>
+
+    <target weight="0.1" name="scroll-container">
+      <actions>
+        <action name="select" />
+        <action name="gesture.flick">
+          <param name="direction" value="down"></param>
+          <param name="direction" value="up"></param>
+        </action>
+      </actions>
+    </target>
+
+     <!--statusbar node. flick down to open ntf-drawer --> 
+    <target weight="0.1" name="statusbar">
+      <actions>
+        <action name="gesture.flick">
+          <param name="direction" value="down"></param>
+        </action>
+      </actions>
+    </target>
+
+    <target weight="1" name="label">
+      <require>
+        <attribute name="text" value="Bluetooth"></attribute>
+      </require>
+      <actions>
+        <action name="select"/>
+      </actions>
+    </target>
+
+     <!--this is ntf-drawer handle bar. drag it up --> 
+    <target name="image-widget" weight="50">
+      <actions>
+        <action name="gesture.flick">
+          <param name="direction" value="up"></param>
+        </action>
+      </actions>
+      <require>
+        <attribute name="image" value="ntf-drawer/grey-tip"></attribute>
+      </require>
+    </target>
+
+    <target name="image-widget" weight="15">
+      <actions>
+        <action name="gesture.flick">
+          <param name="direction" value="up"></param>
+        </action>
+      </actions>
+      <require>
+        <attribute name="image" value="evo_options_handle_anim.png"></attribute>
+      </require>
+    </target>
+    
+    <!--selectable items, such items in phonebook--> 
+    <target weight="1" name="cell-renderer">
+      <require>
+        <attribute name="handled-touch-events" value="click"></attribute>
+      </require>
+      <actions>
+        <action name="select" />
+      </actions>
+    </target>
+
+    <!--these are for option menus-->
+    <target weight="3" name="stacked-container">
+      <require>
+        <attribute name="name" value="dialog-area"></attribute>
+      </require>
+      <actions>
+        <action name="gesture.flick">
+          <param name="direction" value="up"></param>
+          <param name="direction" value="down"></param>
+        </action>
+        <action name="select" />
+      </actions>
+    </target>
+
+    <target weight="1" name="stacked-container">
+      <actions>
+        <action name="select" />
+        <action name="gesture.flick">
+          <param name="direction" value="left"></param>
+          <param name="direction" value="down"></param>
+        </action>
+      </actions>
+    </target>
+
+    <!--to get option menu on screen, optionsbar has to be flicked up--> 
+    <target weight="1" name="optionsbar">
+      <actions>
+        <action name="gesture.flick">
+          <param name="direction" value="up"></param>
+        </action>
+      </actions>
+    </target>
+
+    <target weight="1" name="fast-menu">
+      <actions>
+        <action name="select">
+        </action>
+      </actions>
+    </target>
+    
+    <target weight="1" name="container">
+      <actions>
+        <action name="gesture.flick">
+          <param name="direction" value="up"></param>
+          <param name="direction" value="down"></param>
+        </action>
+      </actions>
+      <require>
+        <attribute name="handled-touch-events" value="drag"></attribute>
+      </require>
+      <exclude>
+        <attribute name="handled-touch-events" value="enter,leave,click,long-hold"></attribute>
+      </exclude>
+    </target>
+        
+    <target weight="1" name="textinput">
+      <actions>
+        <action name="select"></action>
+        <action name="gesture.flick">
+          <param name="direction" value="up"></param>
+          <param name="direction" value="down"></param>
+        </action>
+      </actions>
+    </target>
+    
+  </targets>
+
+  <!-- TRIGGERS -->
+  <triggers>
+    
+    <trigger name="image-widget">
+      <!-- example, quitting call if call has been created -->
+      <require>
+        <attribute name="image" value="voice-call-application/reject-call"></attribute>
+      </require>
+      <actions>
+        <!-- if more than 1 action, then action will be selected randomly-->
+        <action>
+          <command name="select('voice-call-application/reject-call')"/>
+        </action>
+      </actions>
+    </trigger>
+    
+    <trigger name="image-widget">
+      <!-- using time picker if visible -->
+      <require>
+        <attribute name="image" value="widgets/hour-background"></attribute>
+      </require>
+      <actions>
+        <!-- if more than 1 action, then action will be selected randomly-->
+        <action>
+          <method name="use_time_picker"/>
+        </action>
+      </actions>
+    </trigger>
+    
+    <trigger name="image-widget">
+      <!-- using date picker if visible -->
+      <require>
+        <attribute name="image" value="widgets/datepicker-bg"></attribute>
+      </require>
+      <actions>
+        <!-- if more than 1 action, then action will be selected randomly-->
+        <action>
+          <method name="use_date_picker"/>
+        </action>
+      </actions>
+    </trigger>
+    
+    <!-- using virtual keyboard if visible -->
+    <trigger name="key">
+      <require>
+        <attribute name="name" value="k-clear"></attribute>
+      </require>
+      <actions>
+        <action>
+          <method name="use_virtual_keyboard"/>
+        </action>
+      </actions>
+    </trigger>
+    
+    <!-- quitting emergency call if it has been created, do not remove! -->
+    <trigger name="label">
+      <require>
+        <attribute name="text" value="Emergency call"></attribute>
+      </require>
+      <actions>
+        <action>
+          <command name="select('voice-call-application/reject-call')"/>
+        </action>
+      </actions>
+    </trigger>
+
+    <!-- example, close bluetooth application -->
+    <trigger name="application">
+      <require>
+        <attribute name="name" value="bluetooth"></attribute>
+      </require>
+      <actions>
+        <!-- if more than 1 action, then action will be selected randomly-->
+        <action>
+          <method name="close_bluetooth_application" />
+        </action>
+      </actions>
+    </trigger>
+    
+    <!-- if PIN codes are asked, go back -->
+    <trigger name="label">
+      <optional>
+        <attribute name="text" value="Give your PIN:"></attribute>
+        <attribute name="text" value="Give your PIN2:"></attribute>
+      </optional>
+      <actions>
+        <action>
+          <command name="select('KBD_KEY_BACK')"/>
+        </action>
+      </actions>
+    </trigger>
+
+    <!-- dead end trigger when no sim cards. go back-->
+    <trigger name="label">
+      <require>
+        <attribute name="text" value="Choose a SIM for calls and messages"></attribute>
+      </require>
+      <actions>
+         <action>
+          <method name="press_back" />
+        </action>
+      </actions>
+    </trigger>
+
+  </triggers>
+
+</monkey_config>

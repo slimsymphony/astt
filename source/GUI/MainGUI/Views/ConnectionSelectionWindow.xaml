@@ -1,0 +1,175 @@
+﻿<Window x:Class="Marble.ConnectionSelectionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:Marble.Converters"
+        xmlns:converters2="clr-namespace:MarbleLibrary.Converters;assembly=MarbleLibrary"
+        Title="Connection Selection" SizeToContent="WidthAndHeight"
+        Icon="/MarbleLibrary;component/Images/Marble.M.Icon.ico"
+        ShowInTaskbar="False">
+
+    <DockPanel x:Name="LayoutRoot" Background="#FF2F2F2F">
+        <!--<Grid x:Name="LayoutRoot" Background="#FF2F2F2F">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>-->
+
+        <Grid DockPanel.Dock="Bottom" Grid.Row="1">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF2F2F2F" Offset="1"/>
+                    <GradientStop Color="#FF444444"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            
+            
+            <Button x:Name="buttonModifyConnections" Grid.Column="0" Width="200" DockPanel.Dock="Top" HorizontalAlignment="Center" Content="Modify Connections with Fuse..." Margin="5" Height="30" Click="Button_Click" Style="{DynamicResource MarbleButton}" />
+
+            <Button x:Name="buttonClose" Grid.Column="2" Width="100" DockPanel.Dock="Top" HorizontalAlignment="Center" Content="Close" Margin="5" Height="30" Style="{DynamicResource MarbleButton}" Click="buttonClose_Click" />
+
+        </Grid>
+
+        <GroupBox x:Name="groupBoxConnections" Grid.Column="0" Header="Active Connections" Margin="2" Background="White" Style="{DynamicResource MarbleGroupBox}">
+            <DataGrid Grid.Row="0" Margin="5" Name="connectionsDatagrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                  AutoGenerateColumns="False" CanUserReorderColumns="True" CanUserAddRows="False" CanUserResizeRows="False" CanUserResizeColumns="False"
+                  CanUserDeleteRows="False" SelectionUnit="Cell" SelectionMode="Single" GridLinesVisibility="None"
+                  AlternatingRowBackground="AliceBlue" ItemsSource="{Binding Source={x:Static Application.Current}, Path=ViewModel.FuseClient.ConnectedProducts, UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Setter Property="Foreground" Value="Black" />
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{x:Null}" />
+                                <Setter Property="BorderBrush" Value="{x:Null}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Main">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Path=IsMain, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Remote">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <CheckBox IsChecked="{Binding Path=IsRemote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock VerticalAlignment="Center" Margin="5 0 0 0" Text="{Binding Path=RemoteIndex, UpdateSourceTrigger=PropertyChanged}">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="Text" Value="0">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>                    
+                    <DataGridTemplateColumn Header="Reference">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Path=IsReference, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn SortMemberPath="Trace">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="TextBlockTraceHeader" Text="Trace" ToolTip="Connection that is used to mediated trace messages." />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Path=IsTrace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                      Visibility="{Binding Path=Connection.Type, Converter={converters:TraceConnectionTypeToVisibilityConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>                    
+                    <DataGridTemplateColumn Header="Name">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Padding="3" Text="{Binding ProductName}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Type">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Padding="3" Text="{Binding Version.RMCode}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="SW version">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Padding="3" Text="{Binding Version.VersionString}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="SW date">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Padding="3" Text="{Binding Version.Date}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="IMEI">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Padding="3" Text="{Binding ProductImei}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Connection">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image x:Name="imageConnectionLabel" Source="{Binding Connection.Name, Converter={converters:ConnectionTypeToImageConverter}}" Height="16" Width="32" Margin="0,0,5,0" />
+                                    <TextBlock Padding="3" Text="{Binding Connection.Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="PMD file">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>                                        
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Image x:Name="imagePdmMatch" Source="{Binding PMD.MatchLevel, UpdateSourceTrigger=PropertyChanged, Converter={converters:PmdMatchLevelToImageConverter}}" Height="16" Width="16" Margin="0,0,5,0" />
+                                    <TextBlock Grid.Column="1" Padding="3" Text="{Binding PMD.FilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Foreground="{Binding PMD.MatchLevel, Converter={converters:PMDMatchToColorConverter}}" ToolTip="{Binding PMD.MatchLevel, Converter={converters:PmdMatchLevelToTooltipConverter}}"/>
+                                    <Button Grid.Column="2" Style="{DynamicResource MarbleButton}" Click="Button_Click_2" Tag="{Binding Connection.GUID, UpdateSourceTrigger=PropertyChanged}">
+                                        <Image x:Name="imageBrowse" Source="/MarbleLibrary;component/Images/open.file.icon2.16x16.png" Height="16" Width="16" Margin="3" />
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>                    
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+    </DockPanel>
+</Window>

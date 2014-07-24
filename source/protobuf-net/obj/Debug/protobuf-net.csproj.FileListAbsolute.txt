@@ -1,0 +1,12 @@
+C:\marble1.0\marble\source\Profiler\protobuf-net\bin\Debug\protobuf-net.xml
+C:\marble1.0\marble\source\Profiler\protobuf-net\bin\Debug\protobuf-net.dll
+C:\marble1.0\marble\source\Profiler\protobuf-net\bin\Debug\protobuf-net.pdb
+C:\marble1.0\marble\source\Profiler\protobuf-net\obj\Debug\protobuf-net.csprojResolveAssemblyReference.cache
+C:\marble1.0\marble\source\Profiler\protobuf-net\obj\Debug\protobuf-net.dll
+C:\marble1.0\marble\source\Profiler\protobuf-net\obj\Debug\protobuf-net.pdb
+C:\GitRepo\marble_bj\source\protobuf-net\bin\Debug\protobuf-net.xml
+C:\GitRepo\marble_bj\source\protobuf-net\bin\Debug\protobuf-net.dll
+C:\GitRepo\marble_bj\source\protobuf-net\bin\Debug\protobuf-net.pdb
+C:\GitRepo\marble_bj\source\protobuf-net\obj\Debug\protobuf-net.csprojResolveAssemblyReference.cache
+C:\GitRepo\marble_bj\source\protobuf-net\obj\Debug\protobuf-net.dll
+C:\GitRepo\marble_bj\source\protobuf-net\obj\Debug\protobuf-net.pdb

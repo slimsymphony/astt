@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<testset timedrunenabled="False" repeattime="3.00:00:00" shuffle="False" nexttestsetpath="" scriptsrelativetotestset="False">
+  <testcase name="Test selection" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testSelect" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test check and notExpect" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testNotExpectAndCheck" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test select with coordinates" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testSelectWithCoordinates" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test navigate" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testNavigate" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="test navigate - do not select" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testNavigateDoNotSelect" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test navigate jump" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testNavigateJump" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="test navigate - from recent apps" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testNavigateFromRecent" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="test check" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testCheck" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test expect" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testExpect" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test notExpect" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testnotExpect" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test swipe" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testSwipe" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test double tap" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testDoubleTap" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test tryExpect" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testTryExpect" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test input" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testInput" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test clear" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testClear" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test selectLong" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testSelectLong" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test Landscape and Portrait" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testLandscapeAndPortrait" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test Time" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testTime" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test Capture" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testCapture" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test Fail" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testFail" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="test flick" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testFlick" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="test toggle" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testToggle" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test reboot device" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testReboot" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test Volume changes" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testVolume" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test wildcards" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testWildCards" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test ram dump" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testRamDump" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test file write" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testFileCopy" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test create folder" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testCreateFolder" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test file date" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testFileDate" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test get folder content" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testGetFolderContent" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test time picker" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testTimePicker" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test date picker" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testDatePicker" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test file move" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testFileMove" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test file read" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testFileRead" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test file attributes" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testFileAttributes" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test packages" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testPackages" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test folder remove items" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testFolderRemoveItems" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test file size" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testFileSize" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test file type" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testFileType" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test file cat" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testFileCat" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Kill" feature="Kill tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="kill" class="testBed" method="testKill" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Kill (forced)" feature="Kill tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="kill" class="testBed" method="testKillForced" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Kill specific application" feature="Kill tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="kill" class="testBed" method="testKillSpecificApplication" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Kill specific application (forced)" feature="Kill tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="kill" class="testBed" method="testKillSpecificApplicationForced" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Kill topmost" feature="Kill tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="kill" class="testBed" method="testKillTopmost" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Kill topmost (forced)" feature="Kill tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="kill" class="testBed" method="testKillTopmostForced" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="State" feature="State tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="state" class="testBed" method="testState" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="State.inMainMenu" feature="State tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="state" class="testBed" method="testStateInMainMenu" relativetotestset="false" />
+    <testresult result="" time="01/01/0001 00:00:00" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Read" feature="Read tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="read" class="testBed" method="testRead" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:06" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Read - Full info" feature="Read tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="read" class="testBed" method="testReadFullInfo" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:06" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Read - Content description" feature="Read tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="read" class="testBed" method="testReadDescription" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:06" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Read - Resource Id" feature="Read tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="read" class="testBed" method="testReadResourceId" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:06" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Read - IndexTree" feature="Read tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="read" class="testBed" method="testReadIndex" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:06" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Read - Multiple types" feature="Read tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="read" class="testBed" method="testReadMultipleTypes" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:06" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Read - Multiple types and search string" feature="Read tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="read" class="testBed" method="testReadMultipleTypesSearchString" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:06" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Read - Search string" feature="Read tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="read" class="testBed" method="testReadSearchString" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:06" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Read - Area" feature="Read tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="read" class="testBed" method="testReadArea" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:06" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Read - Notifications" feature="Read tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="read" class="testBed" method="testReadNotifications" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:06" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Read - Notifications (filtered)" feature="Read tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="read" class="testBed" method="testReadNotificationsFiltered" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:06" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Read - Notifications (filtered by time)" feature="Read tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="read" class="testBed" method="testReadNotificationsFilterTime" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:06" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Check notification - wild cards" feature="Check tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="check" class="testBed" method="testCheckNotification" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:08" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Check notification toast" feature="Check tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="check" class="testBed" method="testCheckNotificationToast" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:08" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Check notification toast - wild cards" feature="Check tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="check" class="testBed" method="testCheckNotificationToastWildcard" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:08" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Check notification toast - best before" feature="Check tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="check" class="testBed" method="testCheckNotificationToastBestBefore" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:08" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Check notification toast - best before zero" feature="Check tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="check" class="testBed" method="testCheckNotificationToastBestBeforeZero" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:08" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Expect notification toast" feature="Check tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="check" class="testBed" method="testExpectNotificationToast" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:08" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="NotExpect notification toast" feature="Check tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="check" class="testBed" method="testNotExpectNotificationToast" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 11:09:08" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Resources" feature="Resources tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="resources" class="testBed" method="testResources" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 18:55:18" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Resources sub directory" feature="Resources tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="resources" class="testBed" method="testResourcesSubDirectory" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 18:55:18" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Resources not found" feature="Resources tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="resources" class="testBed" method="testResourcesNotFound" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 18:55:18" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Resources do not fail" feature="Resources tests" subarea="Self tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="resources" class="testBed" method="testResourcesDoNotFail" relativetotestset="false" />
+    <testresult result="" time="02/12/2014 18:55:18" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="test drag" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testGestureDrag" relativetotestset="false" />
+    <testresult result="" time="02/21/2014 10:53:32" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test get item" feature="Scripting" subarea="Self Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingSelfTests" method="testGetItem" relativetotestset="false" />
+    <testresult result="" time="02/25/2014 09:37:47" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test create call to remote" feature="Scripting" subarea="Remote Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingRemoteTests" method="testRemoteMOCall" relativetotestset="false" />
+    <testresult result="" time="02/21/2014 10:53:32" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test MT call from remote" feature="Scripting" subarea="Remote Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingRemoteTests" method="testRemoteMTCall" relativetotestset="false" />
+    <testresult result="" time="02/21/2014 10:53:32" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test receive SMS" feature="Scripting" subarea="Remote Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingRemoteTests" method="testReceiveSMS" relativetotestset="false" />
+    <testresult result="" time="02/21/2014 10:53:32" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+  <testcase name="Test send SMS" feature="Scripting" subarea="Remote Tests" ucid="" totalruncount="1">
+    <testscript directory="..\test_scripts\self_tests" file="marble_self_tests" class="ScriptingRemoteTests" method="testSendSMS" relativetotestset="false" />
+    <testresult result="" time="02/21/2014 10:53:32" author="" isblackboxmodeon="false" reportpath="" errorreason="" errortraceback="" originalresult="" warningcount="0" hascrashorreset="false" />
+  </testcase>
+</testset>

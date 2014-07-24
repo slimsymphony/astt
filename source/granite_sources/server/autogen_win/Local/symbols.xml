@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<AutogenXml Version="3.004" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://rdsuite.europe.nokia.com/products/autogen/files/autogen_xml.xsd">
+<CommonSymbols>
+<Tables>
+<ConstantTable Name="TrueFalse" SignedValues="false">
+<Description>
+<Para>Values taken from global.h</Para>
+</Description>
+<IsihdrInfo>
+<DefinitionName>SYMBOLS_TRUE_FALSE_CONST</DefinitionName>
+<GenerateAsBool />
+</IsihdrInfo>
+<Constant Name="TRUE" Id="1" />
+<Constant Name="FALSE" Id="0" />
+</ConstantTable>
+<ConstantTable Name="YesNo" SignedValues="false">
+<Description>
+<Para>Values taken from global.h</Para>
+</Description>
+<IsihdrInfo>
+<DefinitionName>SYMBOLS_YES_NO_CONST</DefinitionName>
+<GenerateAsBool />
+</IsihdrInfo>
+<Constant Name="YES" Id="1" />
+<Constant Name="NO" Id="0" />
+</ConstantTable>
+<ConstantTable Name="OnOff" SignedValues="false">
+<Description>
+<Para>Values taken from global.h</Para>
+</Description>
+<IsihdrInfo>
+<DefinitionName>SYMBOLS_ON_OFF_CONST</DefinitionName>
+<GenerateAsBool />
+</IsihdrInfo>
+<Constant Name="ON" Id="1" />
+<Constant Name="OFF" Id="0" />
+</ConstantTable>
+<ConstantTable Name="EnabledDisabled" SignedValues="false">
+<Description>
+<Para>Values taken from global.h</Para>
+</Description>
+<IsihdrInfo>
+<DefinitionName>SYMBOLS_ENABLED_DISABLED_CONST</DefinitionName>
+<GenerateAsBool />
+</IsihdrInfo>
+<Constant Name="ENABLED" Id="1" />
+<Constant Name="DISABLED" Id="0" />
+</ConstantTable>
+<ConstantTable Name="OkFail" SignedValues="false">
+<Description>
+<Para>Values taken from global.h</Para>
+</Description>
+<IsihdrInfo>
+<DefinitionName>SYMBOLS_OK_FAIL_CONST</DefinitionName>
+<GenerateAsBool />
+</IsihdrInfo>
+<Constant Name="OK" Id="1" />
+<Constant Name="FAIL" Id="0" />
+</ConstantTable>
+<ConstantTable Name="ColdWarm" SignedValues="false">
+<Description>
+<Para>Values taken from global.h</Para>
+</Description>
+<IsihdrInfo>
+<DefinitionName>SYMBOLS_COLD_WARM_CONST</DefinitionName>
+<GenerateAsBool />
+</IsihdrInfo>
+<Constant Name="COLD" Id="0" />
+<Constant Name="WARM" Id="1" />
+</ConstantTable>
+<ConstantTable Name="PhonetMedia" SignedValues="false">
+<Description>
+<Para>Values taken from pn_const.h, version 146</Para>
+</Description>
+<IsihdrInfo>
+<DefinitionName>SYMBOLS_PN_MEDIA_CONST</DefinitionName>
+</IsihdrInfo>
+<Constant Name="PN_MEDIA_ROUTING_REQ" Id="0" />
+<Constant Name="PN_MEDIA_RESERVED" Id="1" />
+<Constant Name="PN_MEDIA_OS" Id="2" />
+<Constant Name="PN_MEDIA_TRUST" Id="3" />
+<Constant Name="PN_MEDIA_RS232" Id="4" />
+<Constant Name="PN_MEDIA_JBUS" Id="15" />
+<Constant Name="PN_MEDIA_STI" Id="16" />
+<Constant Name="PN_MEDIA_MDI" Id="18" />
+<Constant Name="PN_MEDIA_UDP" Id="19" />
+<Constant Name="PN_MEDIA_IRDA" Id="20" />
+<Constant Name="PN_MEDIA_ENOS" Id="21" />
+<Constant Name="PN_MEDIA_INDUCTIVE" Id="22" />
+<Constant Name="PN_MEDIA_MSTI" Id="23" />
+<Constant Name="PN_MEDIA_RF" Id="24" />
+<Constant Name="PN_MEDIA_BT" Id="25" />
+<Constant Name="PN_MEDIA_IR" Id="26" />
+<Constant Name="PN_MEDIA_USB" Id="27" />
+<Constant Name="PN_MEDIA_FBUSIR" Id="28" />
+<Constant Name="PN_MEDIA_TCPIP" Id="29" />
+<Constant Name="PN_MEDIA_FBUS" Id="30" />
+<Constant Name="PN_MEDIA_MBUS" Id="31" />
+<Constant Name="PN_MEDIA_MADI" Id="32" />
+<Constant Name="PN_MEDIA_DADI" Id="33" />
+<Constant Name="PN_MEDIA_SM" Id="34" />
+<Constant Name="PN_MEDIA_RTDX" Id="35" />
+<Constant Name="PN_MEDIA_I2C" Id="36" />
+<Constant Name="PN_MEDIA_DEFAULT" Id="37" />
+<Constant Name="PN_MEDIA_HOST_SSI" Id="38" />
+<Constant Name="PN_MEDIA_JTAG" Id="39" />
+</ConstantTable>
+<ConstantTable Name="PhonetDevice" SignedValues="false">
+<Description>
+<Para>Values taken from pn_const.h, version 146</Para>
+</Description>
+<IsihdrInfo>
+<DefinitionName>SYMBOLS_PN_DEVICE_CONST</DefinitionName>
+</IsihdrInfo>
+<Constant Name="PN_DEV_TRACE" Id="253">
+<Description>
+<Para>Trace</Para>
+</Description>
+</Constant>
+<Constant Name="PN_DEV_HOST" Id="0">
+<Description>
+<Para>MCU</Para>
+</Description>
+</Constant>
+<Constant Name="PN_DEV_TRACEBOX" Id="76">
+<Description>
+<Para>Tracebox</Para>
+</Description>
+</Constant>
+<Constant Name="PN_DEV_PC" Id="16">
+<Description>
+<Para>PC</Para>
+</Description>
+</Constant>
+<Constant Name="PN_DEV_DSP_TESTER" Id="20" />
+<Constant Name="PN_DEV_COMBOX" Id="24" />
+<Constant Name="PN_DEV_SECBOX" Id="32" />
+<Constant Name="PN_DEV_SIM_READER" Id="48" />
+<Constant Name="PN_DEV_BTHF" Id="52" />
+<Constant Name="PN_DEV_PU" Id="56" />
+<Constant Name="PN_DEV_TEST" Id="60" />
+<Constant Name="PN_DEV_SERVICE_TOOL" Id="64" />
+<Constant Name="PN_DEV_DATA_PIC" Id="72" />
+<Constant Name="PN_DEV_TA" Id="84" />
+<Constant Name="PN_DEV_FASTTRACE" Id="88">
+<Description>
+<Para>FastTrace</Para>
+</Description>
+</Constant>
+<Constant Name="PN_DEV_MODEM_HOST_1" Id="92" />
+<Constant Name="PN_DEV_MODEM" Id="96" />
+<Constant Name="PN_DEV_MODEM_HOST_3" Id="100" />
+<Constant Name="PN_DEV_MODEM_2" Id="104" />
+<Constant Name="PN_DEV_SOS" Id="108">
+<Description>
+<Para>SOS</Para>
+</Description>
+</Constant>
+<Constant Name="PN_DEV_REMOTE_HOST" Id="116" />
+<Constant Name="PN_DEV_DSP_AUX" Id="120">
+<Description>
+<Para>ADSP</Para>
+</Description>
+</Constant>
+<Constant Name="PN_DEV_DSP_MAIN" Id="124">
+<Description>
+<Para>CDSP</Para>
+</Description>
+</Constant>
+<Constant Name="PN_DEV_DYNAMIC_1" Id="128" />
+<Constant Name="PN_DEV_DYNAMIC_2" Id="132" />
+<Constant Name="PN_DEV_DYNAMIC_3" Id="136" />
+<Constant Name="PN_DEV_DYNAMIC_4" Id="140" />
+<Constant Name="PN_DEV_DYNAMIC_5" Id="144" />
+</ConstantTable>
+<ConstantTable Name="PhonetResource" SignedValues="false">
+<Description>
+<Para>Values taken from pn_const.h, version 146</Para>
+</Description>
+<IsihdrInfo>
+<DefinitionName>SYMBOLS_PN_RESOURCE_CONST</DefinitionName>
+</IsihdrInfo>
+<Constant Name="PN_TRACE" Id="0" />
+<Constant Name="PN_CALL" Id="1" />
+<Constant Name="PN_SMS" Id="2" />
+<Constant Name="PN_PHONEBOOK" Id="3" />
+<Constant Name="PN_PHONE_STATUS" Id="4" />
+<Constant Name="PN_SETTINGS" Id="5" />
+<Constant Name="PN_SS" Id="6" />
+<Constant Name="PN_CUSTOM_IDLE" Id="7" />
+<Constant Name="PN_SECURITY" Id="8" />
+<Constant Name="PN_SIM" Id="9" />
+<Constant Name="PN_NETWORK" Id="10" />
+<Constant Name="PN_AUDIO" Id="11" />
+<Constant Name="PN_KEY" Id="12" />
+<Constant Name="PN_MULTI_SIM" Id="13" />
+<Constant Name="PN_PANEL" Id="14" />
+<Constant Name="PN_ECHO" Id="15" />
+<Constant Name="PN_COMMGR" Id="16" />
+<Constant Name="PN_JAVA" Id="17" />
+<Constant Name="PN_LOCAL_CONNECTIVITY" Id="18" />
+<Constant Name="PN_CLDR" Id="19" />
+<Constant Name="PN_SMS_MEMORY" Id="20" />
+<Constant Name="PN_MTC" Id="21" />
+<Constant Name="PN_CSD" Id="22" />
+<Constant Name="PN_ENERGY" Id="23" />
+<Constant Name="PN_MENU" Id="24" />
+<Constant Name="PN_TIME" Id="25" />
+<Constant Name="PN_DATA_TEST" Id="26" />
+<Constant Name="PN_PHONE_INFO" Id="27" />
+<Constant Name="PN_ACCESSORY" Id="28" />
+<Constant Name="PN_UDM" Id="29" />
+<Constant Name="PN_THEME" Id="30" />
+<Constant Name="PN_TONE" Id="31" />
+<Constant Name="PN_SOS_ADL" Id="33" />
+<Constant Name="PN_PROVISIONING" Id="34" />
+<Constant Name="PN_PERMANENT_DATA" Id="35" />
+<Constant Name="PN_WDP" Id="38" />
+<Constant Name="PN_WSP" Id="41" />
+<Constant Name="PN_SOCKET" Id="43" />
+<Constant Name="PN_HELP" Id="44" />
+<Constant Name="PN_PRJ_RESOURCE_C" Id="48" />
+<Constant Name="PN_GPDS" Id="49" />
+<Constant Name="PN_GSS" Id="50" />
+<Constant Name="PN_SELFTEST" Id="53" />
+<Constant Name="PN_OBEX" Id="54" />
+<Constant Name="PN_MEDIA_TRANSFER" Id="55">
+<IsihdrInfo>
+<AliasName>PN_PRINT</AliasName>
+</IsihdrInfo>
+</Constant>
+<Constant Name="PN_MON" Id="56" />
+<Constant Name="PN_UPF" Id="57" />
+<Constant Name="PN_LIGHT" Id="58" />
+<Constant Name="PN_GSM_CS_PH" Id="60" />
+<Constant Name="PN_FM_RADIO" Id="62" />
+<Constant Name="PN_WAP_CONN" Id="63" />
+<Constant Name="PN_TEST" Id="64" />
+<Constant Name="PN_WARRANTY" Id="66" />
+<Constant Name="PN_NVD" Id="67" />
+<Constant Name="PN_SECBOX" Id="68" />
+<Constant Name="PN_COMBOX" Id="69" />
+<Constant Name="PN_RTSP" Id="70" />
+<Constant Name="PN_SENSOR" Id="71" />
+<Constant Name="PN_APDU" Id="72" />
+<Constant Name="PN_CONTENT_DISPATCH" Id="73" />
+<Constant Name="PN_VOICE" Id="74" />
+<Constant Name="PN_SIMLOCK" Id="83" />
+<Constant Name="PN_LOCATION" Id="84" />
+<Constant Name="PN_SMC" Id="86" />
+<Constant Name="PN_VRR" Id="87" />
+<Constant Name="PN_EPOC_TEST" Id="88" />
+<Constant Name="PN_EPOC_SELFTEST" Id="89" />
+<Constant Name="PN_ATK" Id="90" />
+<Constant Name="PN_WCDMA_CS_PH" Id="91" />
+<Constant Name="PN_SYNCML" Id="92" />
+<Constant Name="PN_VERSIT" Id="93" />
+<Constant Name="PN_EPOC_MON" Id="94" />
+<Constant Name="PN_BEARERCTRL" Id="96">
+<IsihdrInfo>
+<AliasName>PN_FEATURE_CONTROL</AliasName>
+</IsihdrInfo>
+</Constant>
+<Constant Name="PN_CAMERA" Id="97" />
+<Constant Name="PN_EPOC_INFO" Id="98" />
+<Constant Name="PN_LCIF" Id="100" />
+<Constant Name="PN_IMPS_CONTACTS" Id="101" />
+<Constant Name="PN_MESSAGING" Id="102" />
+<Constant Name="PN_POC" Id="103" />
+<Constant Name="PN_HTTPSRV" Id="104" />
+<Constant Name="PN_HTTP" Id="107" />
+<Constant Name="PN_SSL" Id="108" />
+<Constant Name="PN_FILE" Id="109" />
+<Constant Name="PN_BLUETOOTH" Id="110" />
+<Constant Name="PN_ADL" Id="111" />
+<Constant Name="PN_TOUCHPAD" Id="112" />
+<Constant Name="PN_WIM" Id="113" />
+<Constant Name="PN_CONCIERGE" Id="114" />
+<Constant Name="PN_SIP" Id="115" />
+<Constant Name="PN_RTP" Id="116" />
+<Constant Name="PN_MUSIC" Id="117" />
+<Constant Name="PN_IMPS" Id="118" />
+<Constant Name="PN_TUNEPLAYER" Id="119" />
+<Constant Name="PN_ACC" Id="120" />
+<Constant Name="PN_GARBAGE" Id="122" />
+<Constant Name="PN_TRACEBOX" Id="124" />
+<Constant Name="PN_LOCATION_STORAGE" Id="125" />
+<Constant Name="PN_ACK" Id="127" />
+<Constant Name="PN_BLUETOOTH_CORE" Id="128" />
+<Constant Name="PN_I2C" Id="129" />
+<Constant Name="PN_PRJ_RESOURCE_A" Id="130" />
+<Constant Name="PN_PRJ_RESOURCE_B" Id="131" />
+<Constant Name="PN_RB_WAE1" Id="132" />
+<Constant Name="PN_PRJ_RESOURCE_D" Id="133" />
+<Constant Name="PN_PRJ_RESOURCE_E" Id="134" />
+<Constant Name="PN_PRJ_RESOURCE_F" Id="135" />
+<Constant Name="PN_PRJ_RESOURCE_G" Id="136" />
+<Constant Name="PN_PRJ_RESOURCE_H" Id="137" />
+<Constant Name="PN_PRJ_RESOURCE_I" Id="138" />
+<Constant Name="PN_PRJ_RESOURCE_J" Id="139" />
+<Constant Name="PN_UICC" Id="140" />
+<Constant Name="PN_MODEM_SIM_SRV" Id="141" />
+<Constant Name="PN_AT_MODEM" Id="142" />
+<Constant Name="PN_AT_APPL" Id="143" />
+<Constant Name="PN_MODEM_LCS" Id="144" />
+<Constant Name="PN_MODEM_TEST" Id="145" />
+<Constant Name="PN_MODEM_NVD" Id="146" />
+<Constant Name="PN_MODEM_PERM" Id="147" />
+<Constant Name="PN_ODIN" Id="148" />
+<Constant Name="PN_WTA" Id="149" />
+<Constant Name="PN_NFC" Id="150" />
+<Constant Name="PN_SCREENSAVER" Id="151" />
+<Constant Name="PN_KEYGUARD" Id="152" />
+<Constant Name="PN_LIGHT_UI" Id="153" />
+<Constant Name="PN_VAM" Id="158" />
+<Constant Name="PN_IMS" Id="161" />
+<Constant Name="PN_SOS_PERM" Id="162" />
+<Constant Name="PN_POC_UI" Id="163" />
+<Constant Name="PN_PRESENCE" Id="164" />
+<Constant Name="PN_XCAP" Id="165" />
+<Constant Name="PN_POC_GROUP" Id="166" />
+<Constant Name="PN_ISA_SETTINGS" Id="167" />
+<Constant Name="PN_TRACFONE" Id="169" />
+<Constant Name="PN_MESSAGE_STORAGE" Id="170" />
+<Constant Name="PN_MESSAGE_PROTOCOL" Id="171" />
+<Constant Name="PN_VTBTEST" Id="172" />
+<Constant Name="PN_IP_COMMS" Id="174" />
+<Constant Name="PN_HARDCORE" Id="175" />
+<Constant Name="PN_SOS_UMA" Id="176" />
+<Constant Name="PN_VIDEO_PROTOCOL" Id="177" />
+<Constant Name="PN_WLAN" Id="178" />
+<Constant Name="PN_NEWS_DELIVERY" Id="179" />
+<Constant Name="PN_WRAN" Id="180" />
+<Constant Name="PN_EUTRAN_L2" Id="181" />
+<Constant Name="PN_EUTRAN_L1" Id="182" />
+<Constant Name="PN_RF_HAL" Id="183" />
+<Constant Name="PN_IM" Id="184" />
+<Constant Name="PN_NATT" Id="185" />
+<Constant Name="PN_BACKUP" Id="186" />
+<Constant Name="PN_MOB_POLICY" Id="188" />
+<Constant Name="PN_LANDMARK" Id="189" />
+<Constant Name="PN_MOBICAST" Id="190" />
+<Constant Name="PN_FWD_ERR_CORR" Id="191" />
+<Constant Name="PN_GBA" Id="192" />
+<Constant Name="PN_DYNAMIC_LOADER" Id="193" />
+<Constant Name="PN_MODEM_MCE" Id="194" />
+<Constant Name="PN_MODEM_MON_2" Id="195" />
+<Constant Name="PN_MODEM_MON_3" Id="196" />
+<Constant Name="PN_MODEM_INFO" Id="197" />
+<Constant Name="PN_RESOURCE_MANAGER" Id="198" />
+<Constant Name="PN_VENDOR_SPECIFIC_TESTS" Id="199" />
+<Constant Name="PN_MODEM_NETWORK" Id="200" />
+<Constant Name="PN_MODEM_CALL" Id="201" />
+<Constant Name="PN_METADATA" Id="202" />
+<Constant Name="PN_MODEM_GAN" Id="203" />
+<Constant Name="PN_GSM_IO" Id="204" />
+<Constant Name="PN_EAP_AUTH" Id="206" />
+<Constant Name="PN_MY5" Id="207" />
+<Constant Name="PN_REGISTRATION" Id="208" />
+<Constant Name="PN_RPC_REQ" Id="209" />
+<Constant Name="PN_RPC_RESP" Id="210" />
+<Constant Name="PN_SLAVE_LOGOUT" Id="212" />
+<Constant Name="PN_ERROR_INFO" Id="213" />
+<Constant Name="PN_MEDIA_CONTROL" Id="215" />
+<Constant Name="PN_MEDIA_REQUEST" Id="216" />
+<Constant Name="PN_PIPE" Id="217" />
+<Constant Name="PN_ALIVE" Id="218" />
+<Constant Name="PN_NAMESERVICE" Id="219" />
+<Constant Name="PN_ROUTER" Id="220" />
+<Constant Name="PN_AUTHENTICATION" Id="222" />
+<Constant Name="PN_DUMMY_RESOURCE" Id="223" />
+<Constant Name="PN_PREFIX" Id="224" />
+<Constant Name="PN_PRIVATE" Id="225" />
+<Constant Name="PN_SOS_AUDIO" Id="226" />
+<Constant Name="PN_UI_STARTUP_CTRL" Id="227" />
+<Constant Name="PN_KODIAK" Id="228" />
+<Constant Name="PN_PAYLOAD_TEST" Id="229" />
+<Constant Name="PN_DSP_CORE" Id="230" />
+<Constant Name="PN_DSP_VIDEO" Id="231" />
+<Constant Name="PN_DSP_VOICE" Id="232" />
+<Constant Name="PN_DSP_MIDI" Id="233" />
+<Constant Name="PN_ADSP_CORE" Id="234" />
+<Constant Name="PN_DSP_SELF_TEST" Id="235" />
+<Constant Name="PN_DSP_COMMON_TEST" Id="236" />
+<Constant Name="PN_WCDMA_DSP_CS" Id="237" />
+<Constant Name="PN_WCDMA_DSP_TEST" Id="238" />
+<Constant Name="PN_GSM_DSP_CS" Id="240" />
+<Constant Name="PN_GSM_DSP_TEST" Id="241" />
+<Constant Name="PN_GSM_DSP" Id="242" />
+<Constant Name="PN_DSP_AUDIO" Id="243" />
+<Constant Name="PN_DSP_GPRS" Id="253" />
+<Constant Name="PN_DSP_MUSIC" Id="254" />
+<Constant Name="PN_NO_ROUTING" Id="255" />
+</ConstantTable>
+</Tables>
+</CommonSymbols>
+</AutogenXml>

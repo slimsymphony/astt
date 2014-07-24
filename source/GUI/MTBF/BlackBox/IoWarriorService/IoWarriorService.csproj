@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BCF0434A-E331-4882-A10C-49CCC3762509}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IoWarriorService</RootNamespace>
+    <AssemblyName>IoWarriorService</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\..\..\Services\IoWarrior\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\..\Services\IoWarrior\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\ExternalLibraries\dll\log4net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IoWarriorService.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\AD7995.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\ADM1191.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardAccessory.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardAudio.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardBsiSimSwitch.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardBsiSimSwitchV1.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardCapacitiveKeys.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardCharger.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardChargerWithBattery.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardChargerWithBatteryV2.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardExperimental.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardFlash.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardInformation.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardInvalid.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardMatrix.16x16.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardMatrix.4x7.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardMatrix.5x6.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardMatrix2.4x7.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardMatrix2.5x6.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardPatchBox.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardSim.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardTouchRC.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardTouchRC_V2.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardUni.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardUnknown.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCardUSBAccessory.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowCarduSDSwitch.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\IowSupportedCardTypes.cs" />
+    <Compile Include="Nokia.Iowarrior\Cards\MatrixBase.cs" />
+    <Compile Include="Nokia.Iowarrior\Devices\IowDevice40.cs" />
+    <Compile Include="Nokia.Iowarrior\Devices\IowDevice56.cs" />
+    <Compile Include="Nokia.Iowarrior\Devices\IowDeviceDummy.cs" />
+    <Compile Include="Nokia.Iowarrior\Devices\IowDeviceImplementation.cs" />
+    <Compile Include="Nokia.Iowarrior\Devices\IowKit\IowKit.cs" />
+    <Compile Include="Nokia.Iowarrior\IowBits.cs" />
+    <Compile Include="Nokia.Iowarrior\IowCard.cs" />
+    <Compile Include="Nokia.Iowarrior\IowCardCommand.cs" />
+    <Compile Include="Nokia.Iowarrior\IowCardDictionary.cs" />
+    <Compile Include="Nokia.Iowarrior\IowDevice.cs" />
+    <Compile Include="Nokia.Iowarrior\IowDeviceDictionary.cs" />
+    <Compile Include="Nokia.Iowarrior\IowUtil.cs" />
+    <Compile Include="Nokia.Iowarrior\JigData.cs" />
+    <Compile Include="Nokia.Iowarrior\ObjectFactory.cs" />
+    <Compile Include="Nokia.Iowarrior\_16Bit.cs" />
+    <Compile Include="Nokia.Iowarrior\_16BitMatrix.cs" />
+    <Compile Include="Nokia.Iowarrior\_16BitMatrixPoolElement.cs" />
+    <Compile Include="Nokia.Iowarrior\_16BitMultiplexer.cs" />
+    <Compile Include="Nokia.Iowarrior\_8Bit.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="iowkit.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Settings.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\IPC\Nokia.Granite.IPC.ClientServiceCommon\TestAutomation.Gui.Marble.IPC.ClientServiceCommon_Net4.csproj">
+      <Project>{9CC8974D-45E3-4FA2-B98F-840B9B2400B3}</Project>
+      <Name>TestAutomation.Gui.Marble.IPC.ClientServiceCommon_Net4</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

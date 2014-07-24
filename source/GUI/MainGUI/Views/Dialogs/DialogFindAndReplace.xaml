@@ -1,0 +1,140 @@
+﻿<Window x:Class="Marble.Views.Dialogs.DialogFindAndReplace"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:CustomControls="clr-namespace:MarbleLibrary.CustomControls;assembly=MarbleLibrary"
+        Title="Find and Replace - Marble" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <GroupBox x:Name="groupBoxFindAndReplace" Header="Find and Replace" Grid.Column="0" Margin="3,3,3,3" Background="White" Style="{DynamicResource MarbleGroupBox}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Border CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,5,0,5">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="5" ShadowDepth="0" />
+                    </Border.Effect>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background" Value="{DynamicResource ResourceKey=MarbleDataGridCellUnresolvedBackground}" />
+                        </Style>
+                    </Border.Style>
+
+                    <TextBlock x:Name="textBlockInfo" Margin="10,2,10,2" Foreground="White" />
+                                        
+                    <!--<StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                        <Image Margin="10,2,2,2" Height="20" Width="20" />
+                        <TextBlock x:Name="textBlockInfo" />
+                    </StackPanel>-->
+                </Border>
+                
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <StackPanel Margin="5,0,5,0">
+                        <TextBlock Text="Find What:" Margin="0,0,0,10" />
+                        <ComboBox x:Name="comboBoxFindWhat" Width="200" HorizontalAlignment="Left" IsEditable="True" TextBoxBase.TextChanged="comboBoxFindWhat_TextChanged" ItemsSource="{Binding Path=ParentEditorView.FindHistory}" DataContext="{Binding}" IsSynchronizedWithCurrentItem="False" GotFocus="comboBox_GotFocus_UpdateBinding" />
+                    </StackPanel>
+                    <StackPanel Margin="10,0,5,0">
+                        <TextBlock Text="Replace with:" Margin="0,0,0,10" />
+                        <ComboBox x:Name="comboBoxReplaceWith" Width="200" HorizontalAlignment="Left" IsEditable="True" TextBoxBase.TextChanged="comboBoxFindWhat_TextChanged" ItemsSource="{Binding Path=ParentEditorView.ReplaceHistory}" DataContext="{Binding}" IsSynchronizedWithCurrentItem="False" GotFocus="comboBox_GotFocus_UpdateBinding" />
+                    </StackPanel>
+
+                    <CheckBox x:Name="checkBoxMatchCase" VerticalAlignment="Bottom" Margin="10,0,0,2" Checked="checkBoxMatchCase_CheckedChanged" Unchecked="checkBoxMatchCase_CheckedChanged">
+                        <TextBlock Text="Match Case" />
+                    </CheckBox>
+                </StackPanel>
+
+            </Grid>
+        </GroupBox>
+
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF2F2F2F" Offset="1"/>
+                    <GradientStop Color="#FF444444"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" MinWidth="20" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="buttonFindPrevious" Grid.Column="0" HorizontalAlignment="Right" Width="100" Height="30" Margin="5" Click="buttonFindPrevious_Click">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MarbleButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=comboBoxFindWhat, Path=Text.Length}" Value="0">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CanFind, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                
+                <TextBlock Text="Find Previous" />
+            </Button>
+            <Button x:Name="buttonFindNext" Grid.Column="1" HorizontalAlignment="Right" Width="100" Height="30" Margin="5" Click="buttonFindNext_Click">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MarbleButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=comboBoxFindWhat, Path=Text.Length}" Value="0">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CanFind, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                
+                <TextBlock Text="Find Next" />
+            </Button>
+            <Button x:Name="buttonReplace" Grid.Column="2" HorizontalAlignment="Right" Width="100" Height="30" Margin="5" Click="buttonReplace_Click">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MarbleButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=comboBoxFindWhat, Path=Text.Length}" Value="0">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CanReplace, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                
+                <TextBlock Text="Replace" />
+            </Button>
+            <Button x:Name="buttonReplaceAll" Grid.Column="3" HorizontalAlignment="Right" Width="100" Height="30" Margin="5" Click="buttonReplaceAll_Click">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MarbleButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=comboBoxFindWhat, Path=Text.Length}" Value="0">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CanFind, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                
+                <TextBlock Text="Replace All" />
+            </Button>
+            <Button x:Name="buttonClose" Grid.Column="5" HorizontalAlignment="Right" Width="100" Height="30" Margin="5" Style="{DynamicResource MarbleButton}" Click="buttonClose_Click">
+                <TextBlock Text="Close" />
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

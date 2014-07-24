@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<mainmenu>
+    <item name="settings" title="Phone" id="nMVhfaecLikGJ1PI3AMH4mQ" uri="x-dialer:" />
+    <item name="settings" title="Contacts" id="nHOQZtX944RGC0ZDMSCQBmw" uri="x-contacts:list" />
+    <item name="settings" title="Messages" id="ndjsRWn6WuE2XwPB8Edt46w" uri="x-messaging:threads" />
+    <item name="settings" title="Alarms" id="nEWMLtaIzBCO6r407gCqMw3" uri="x-alarmclock:" />
+    <item name="settings" title="Camera" id="ntgnVOTZFQk2KRMJqvPXVew" uri="x-camera:" />
+    <item name="settings" title="Gallery" id="n7nNSbrCb4kqeY2ue3mzM5g" uri="x-gallery:noalbums" />
+    <item name="settings" title="Music" id="nrf38HL_3U0GzWB4QIbha7A" uri="x-media-library:music" />
+    <item name="settings" title="Calendar" id="nENoKTm0bnkWsYWnEtUejzQ" uri="x-calendar-evo:" />
+    <item name="settings" title="Internet" id="nh-B5LAKbdkag1ryHGAeRUw" uri="x-browser:" />
+    <item name="settings" title="Store" id="Store" uri="x-java-ams:*2145830079*1*" />
+    <item name="settings" title="Facebook" id="Facebook" uri="x-java-ams:*865449932*-1*" />
+    <item name="settings" title="Settings" id="nP6YDmTdaqE2U0eXQBadWwg" uri="x-settings:">
+      <setting name="settings-categories" type="category" title="Settings" title-string-id="nP6YDmTdaqE2U0eXQBadWwg" uri="x-settings:settings-categories">
+        <setting name="settings-connections" type="category" title="Connections" title-string-id="nB2nzrzzqnRXUi4XXpaQbwO" uri="x-settings:settings-connections">
+          <setting name="settings-airplane-mode" type="custom" title="Flight mode" title-string-id="nmWg1oFvw7ZZNZv8FtxBAwz" path="" />
+          <setting name="settings-wifi-settings" type="custom" title="Wi-Fi" title-string-id="nRsrgsnGsPXmnlFq3RcFo6l" path="" />
+          <setting name="settings-bluetooth-settings" type="custom" title="Bluetooth" title-string-id="nSKlSLpTSAEGpb_3DSouY7w" path="" />
+          <setting name="settings-dual-sim" type="category" title="Dual SIM" title-string-id="nMpXGiFKwETLgr9dXXyi1rC" uri="x-settings:settings-dual-sim">
+            <setting name="settings-sim-settings" type="category" title="SIM settings" title-string-id="n6OS35KZ3VeDTVXwu65DR4L" uri="x-settings:settings-sim-settings">
+              <setting name="settings-sim-settings-sim0" type="category" title="SIM1 (under battery)" title-string-id="SIM1 (under battery)" uri="x-settings:settings-sim-settings-sim0">
+                <setting name="settings-dual-sim-online-mode-sim0" type="on-off" title="SIM1 status" title-string-id="nMJ9TrCHO8zzTiTTPDiPEWC" path="./SimSlot/0/yapas/sim-online-mode" />
+                <setting name="settings-network-selection-sim0" type="custom" title="Network selection" title-string-id="nefpi2g4v7UFUsQar279wiT" path="" />
+                <setting name="settings-name-sim0" type="text" title="SIM1 name" title-string-id="nRbeHfOuH0pa8lu9hCqs0c1" path="./Sim/1/yapas/simcard-name" />
+                <setting name="settings-enable-disable-pin-lock" type="custom" title="Ask PIN" title-string-id="nAoWWhZhogE2nVUZeVUFLSw" path="" />
+                <setting name="settings-change-pin1" type="custom" title="Change PIN" title-string-id="nJv2Mo7KhQUWtTWNsBXI4jg" path="" />
+                <setting name="settings-change-pin2" type="custom" title="Change PIN2" title-string-id="nP4qY4U81Fk_lxPS31NYiFA" path="" />
+                <setting name="settings-enable-disable-fixed-dial" type="custom" title="Fixed dialling" title-string-id="nTS9sqSJ_LUKhnzoBm0XfVA" path="" />
+                <setting name="settings-fixed-dial-list" type="custom" title="Fixed dialling numbers" title-string-id="nmawFkRf_R0SbdCx_51zd7A" path="" />
+              </setting>
+              <setting name="settings-sim-settings-sim1" type="category" title="SIM2" title-string-id="nGG3fTuTHN7PXE5DeIQqU5R" uri="x-settings:settings-sim-settings-sim1">
+                <setting name="settings-dual-sim-online-mode-sim1" type="on-off" title="SIM2 status" title-string-id="nkwyyTS9kMgyzuxxIrhn6WN" path="./SimSlot/1/yapas/sim-online-mode" />
+                <setting name="settings-network-selection-sim1" type="custom" title="Network selection" title-string-id="nefpi2g4v7UFUsQar279wiT" path="" />
+                <setting name="settings-name-sim1" type="text" title="SIM2 name" title-string-id="nbTqTTrVcM8EMNA927vq5XV" path="./Sim/0/yapas/simcard-name" />
+                <setting name="settings-enable-disable-pin-lock" type="custom" title="Ask PIN" title-string-id="nAoWWhZhogE2nVUZeVUFLSw" path="" />
+                <setting name="settings-change-pin1" type="custom" title="Change PIN" title-string-id="nJv2Mo7KhQUWtTWNsBXI4jg" path="" />
+                <setting name="settings-change-pin2" type="custom" title="Change PIN2" title-string-id="nP4qY4U81Fk_lxPS31NYiFA" path="" />
+                <setting name="settings-enable-disable-fixed-dial" type="custom" title="Fixed dialling" title-string-id="nTS9sqSJ_LUKhnzoBm0XfVA" path="" />
+                <setting name="settings-fixed-dial-list" type="custom" title="Fixed dialling numbers" title-string-id="nmawFkRf_R0SbdCx_51zd7A" path="" />
+              </setting>
+              <setting name="settings-no-sim-text" type="multiline-label" path="" />
+            </setting>
+            <setting name="settings-preferred-sim" type="category" title="Voice and messages" title-string-id="Voice and messages" uri="x-settings:settings-preferred-sim">
+              <setting name="settings-preferred-sim-always-ask" type="on-off" title="Always ask" title-string-id="nGBdyEgpau0e-LQ2j2c4H5g" path="./yapas/multi-sim/always-ask" />
+              <setting name="settings-preferred-sim-voice-and-messages" type="custom" path="" />
+            </setting>
+            <setting name="settings-mobile-internet-category" type="category" title="Mobile internet" title-string-id="Mobile internet" uri="x-settings:settings-mobile-internet-category">
+              <setting name="settings-mobile-internet" type="custom" title="Mobile data" title-string-id="nHyKBqFbZmTlK7ZxO1IIWhT" path="./yapas/mobile/internet" />
+              <setting name="settings-preferred-sim-data" type="sim-slot" title="Data SIM" title-string-id="nrleg9pThIHLkGQvu4rxpcF" path="./yapas/multi-sim/data" />
+              <setting name="settings-access-points" type="category" title="Access points" title-string-id="Access points" uri="x-settings:settings-access-points">
+                <setting name="settings-mobile-internet-connections" type="custom" title="Internet access points" title-string-id="n3nzITusdB8hsRHDoSpFvVc" path="" />
+                <setting name="settings-mobile-browser-connections" type="custom" title="Browser settings" title-string-id="nt6od44JdPUKDPleeIWvUrw" path="" />
+                <setting name="settings-mobile-streaming-connections" type="custom" title="Streaming settings" title-string-id="nomdvPNOZUT2zcAtQvz5JwT" path="" />
+              </setting>
+              <setting name="settings-data-behaviour" type="radio" title="Data roaming" title-string-id="nyWcu1RWAg5c8O3gWnVcIVG" path="./yapas/network/data-behaviour" />
+              <setting name="data-traffic-counter" type="false" title="Counters" title-string-id="n2p5fmnixtRmHu6UHvAbRll" path="" />
+            </setting>
+            <setting name="settings-no-sim-text" type="multiline-label" path="" />
+          </setting>
+          <setting name="settings-mobile-internet-category-single-sim" type="category" title="Mobile data" title-string-id="nHyKBqFbZmTlK7ZxO1IIWhT" uri="x-settings:settings-mobile-internet-category-single-sim">
+            <setting name="settings-mobile-internet" type="custom" title="Mobile data" title-string-id="nHyKBqFbZmTlK7ZxO1IIWhT" path="./yapas/mobile/internet" />
+            <setting name="settings-mobile-internet-connections" type="custom" title="Internet access points" title-string-id="n3nzITusdB8hsRHDoSpFvVc" path="" />
+            <setting name="settings-mobile-browser-connections" type="custom" title="Browser settings" title-string-id="nt6od44JdPUKDPleeIWvUrw" path="" />
+            <setting name="settings-mobile-streaming-connections" type="custom" title="Streaming settings" title-string-id="nomdvPNOZUT2zcAtQvz5JwT" path="" />
+            <setting name="settings-data-behaviour" type="radio" title="Data roaming" title-string-id="nyWcu1RWAg5c8O3gWnVcIVG" path="./yapas/network/data-behaviour" />
+            <setting name="data-traffic-counter" type="false" title="Counters" title-string-id="n2p5fmnixtRmHu6UHvAbRll" path="" />
+          </setting>
+          <setting name="settings-mobile-background-sync" type="radio" title="Background sync" title-string-id="nWeNUWEQ3hTVypfJu5UnhOS" path="./yapas/mobile/background-sync" />
+          <setting name="settings-network-selection-single-sim" type="custom" title="Network selection" title-string-id="nefpi2g4v7UFUsQar279wiT" path="" />
+        </setting>
+        <setting name="settings-personalization" type="category" title="Personalisation" title-string-id="nqsYitlTLZE6IwHOKQs6RGg" uri="x-settings:settings-personalization">
+          <setting name="settings-sounds" type="category" title="Sounds and vibra" title-string-id="nHRsBbwRbmQJkNHowX6zSW8" uri="x-settings:settings-sounds">
+            <setting name="settings-sounds-volume" type="custom" title="Volume" title-string-id="ns_jbi-1ynEaaA_H7Nz7j5w" path="" />
+            <setting name="settings-sounds-volume-key" type="on-off" title="Volume keys" title-string-id="neTQeoGTeEvDnwMbHye26CC" path="./yapas/sound/volumekey" />
+            <setting name="settings-sounds-vibrator" type="on-off" title="Vibration" title-string-id="nPPa2D7FkhbHwGXNOXE7zn8" path="./yapas/sound/vibrator" />
+            <setting name="settings-sounds-and-alerts" type="category" title="Alert tones" title-string-id="nGswoXlsUXWcf4EKsvvBZgd" uri="x-settings:settings-sounds-and-alerts">
+              <setting name="settings-sounds-ringtone-sim1" type="content-picker" title="SIM1 ringtone" title-string-id="nQ3GdAgPc2hctWzezJkNFlp" path="./yapas/sound/ringtone-sim1" />
+              <setting name="settings-sounds-ringtone-sim2" type="content-picker" title="SIM2 ringtone" title-string-id="nIdiICvyqaL7angsKBL4J9v" path="./yapas/sound/ringtone-sim2" />
+              <setting name="settings-sounds-ringtone" type="content-picker" title="Ringtone" title-string-id="nKSmLJn7WZD0UXH8fxOToFQ" path="./yapas/sound/ringtone" />
+              <setting name="settings-sounds-messagetone" type="content-picker" title="Message tone" title-string-id="naJBfedkDqkWCF5fRgefg0Q" path="./yapas/sound/messagetone" />
+              <setting name="settings-sounds-emailtone" type="content-picker" title="Email tone" title-string-id="nEspZfTVd1aMGuhRiLrr4OZ" path="./yapas/sound/emailtone" />
+              <setting name="settings-sounds-alarmtone" type="content-picker" title="Alarm tone" title-string-id="n4kdK77AlNT9csHoHUu5eZe" path="./yapas/sound/alarmtone" />
+              <setting name="settings-sounds-alerttone" type="content-picker" title="Reminder tone" title-string-id="nvuTOvN44pThHOsZXah1yQV" path="./yapas/sound/alerttone" />
+              <setting name="settings-sounds-push-notificationtone" type="content-picker" title="Push notifications tone" title-string-id="nvNXFy0mTTMbsMMLvTxVahQ" path="./yapas/sound/pushnotificationtone" />
+            </setting>
+            <setting name="settings-sounds-feedback" type="category" title="Feedback" title-string-id="nS2ggrKOZ30FSUzUWiXGlDc" uri="x-settings:settings-sounds-feedback">
+              <setting name="settings-sounds-feedback-systemsounds" type="custom" title="System sounds" title-string-id="nPEAVE0cNyV0d2LM2QHT0i2" path="./yapas/sound/systemsounds" />
+              <setting name="settings-sounds-feedback-screensounds" type="custom" title="Screen sounds" title-string-id="npBqmEMnJnf6bq7dsSvegCS" path="./yapas/sound/screensounds" />
+              <setting name="settings-sounds-feedback-screenhaptics" type="custom" title="Screen vibra" title-string-id="nNqUZgszcg9fgWLuPKCquFq" path="./yapas/sound/screenhaptics" />
+            </setting>
+          </setting>
+          <setting name="settings-display-wallpaper-filename" type="content-picker" title="Wallpaper for lock screen" title-string-id="ndxY_0ues9EaQQQE61yx5ow" path="./yapas/display/wallpaper-filename" />
+          <setting name="settings-display-parallax-filename" type="content-picker" title="Wallpaper for home screen" title-string-id="nTqN3VBavlyfv3f9PTesqtV" path="./yapas/display/parallax-filename" />
+        </setting>
+        <setting name="settings-general" type="category" title="General" title-string-id="nKK1EQWPsu0yMrB4aNQ3zag" uri="x-settings:settings-general">
+          <setting name="settings-display-backlight-level" type="slider" title="Brightness" title-string-id="nN6T4544G6lOXfRbtpOBmFk" path="./yapas/display/backlight" />
+          <setting name="settings-standby-screen" type="on-off" title="Standby screen" title-string-id="nFdrJpuOd0Z8cbIeAqppTcx" path="./yapas/privacy/standby-screen" />
+          <setting name="settings-tap-to-wake" type="on-off" title="Screen double tap" title-string-id="nkAKIJPLV7m2ZQMT3FmISQJ" path="./yapas/privacy/tap-to-wake" />
+          <setting name="settings-phone-lock-single-sim" type="category" title="Phone lock" title-string-id="n77hbzO4ZnUe0k2e3AJmGUw" uri="x-settings:settings-phone-lock-single-sim">
+            <setting name="settings-keylock-autolock" type="radio" title="Screen time-out" title-string-id="np4fU5dev9uDPGzfBsewuZO" path="./yapas/keylock/autolock" />
+            <setting name="settings-enable-disable-pin-lock" type="custom" title="Ask PIN" title-string-id="nAoWWhZhogE2nVUZeVUFLSw" path="" />
+            <setting name="settings-change-pin1" type="custom" title="Change PIN" title-string-id="nJv2Mo7KhQUWtTWNsBXI4jg" path="" />
+            <setting name="settings-change-pin2" type="custom" title="Change PIN2" title-string-id="nP4qY4U81Fk_lxPS31NYiFA" path="" />
+            <setting name="settings-enable-disable-fixed-dial" type="custom" title="Fixed dialling" title-string-id="nTS9sqSJ_LUKhnzoBm0XfVA" path="" />
+            <setting name="settings-fixed-dial-list" type="custom" title="Fixed dialling numbers" title-string-id="nmawFkRf_R0SbdCx_51zd7A" path="" />
+          </setting>
+          <setting name="settings-phone-lock-dual-sim" type="category" title="Phone lock" title-string-id="n77hbzO4ZnUe0k2e3AJmGUw" uri="x-settings:settings-phone-lock-dual-sim">
+            <setting name="settings-keylock-autolock" type="radio" title="Screen time-out" title-string-id="np4fU5dev9uDPGzfBsewuZO" path="./yapas/keylock/autolock" />
+          </setting>
+          <setting name="settings-dateandtime" type="category" title="Time and date" title-string-id="nK8Fa6ELAX0_Q0lqZHRYuQA" uri="x-settings:settings-dateandtime">
+            <setting name="settings-nitz-update" type="on-off" title="Set automatically" title-string-id="nSuy8tLNYY0aXpGkDP9w1Qw" path="./yapas/clock/nitz-update" />
+            <setting name="settings-time-zone" type="radio" title="Time zone" title-string-id="nc0D0jgai8U_2v0c6WCqgNQ" path="./yapas/clock/time-zone-city" />
+            <setting name="settings-time" type="time" title="Time" title-string-id="naX7_Q8Tnc0_PSG-WvWsqDg" path="" />
+            <setting name="settings-date" type="date" title="Date" title-string-id="n4GheeKFwPEu1-BUdAkBECQ" path="" />
+            <setting name="settings-24h" type="on-off" title="Time format" title-string-id="noSQOOdIy4kG4OYvp7urJ_w" path="./yapas/clock/24h" />
+            <setting name="settings-dateformat" type="custom" title="Date format" title-string-id="nL0fIeyzTLECEY-I4Cgq3hQ" path="./yapas/display/dateformat" />
+          </setting>
+          <setting name="settings-language-display" type="language" title="Phone language" title-string-id="n_0S8fMgnpEKC_0PF-mWu0A" path="./yapas/display/language" />
+          <setting name="settings-language-native-digits" type="vertical-multivalue-switch" title="Number format" title-string-id="nF6f90KPTsQlFFe7VGRZliE" path="./yapas/display/native-digits-enabled" />
+          <setting name="settings-language-input-active-settings-category" type="custom" title="Writing settings" title-string-id="nur70QfrLJJ0S46aKXNMK8P" path="" />
+          <setting name="settings-push-notification-settings" type="custom" title="Notifications" title-string-id="nx1fqZVIOfkGXteXose4m3Q" path="" />
+          <setting name="backup-evo" type="false" title="Backup" title-string-id="nOAAhnlbs1U6Jz_sGohsckQ" path="" />
+          <setting name="factory-reset-all" type="false" title="Reset phone" title-string-id="nRKKpYXE4LEST6X2-5uCSJQ" path="" />
+          <setting name="update-manager-menu" type="false" title="Phone update" title-string-id="n1LGfRsdkGzVtpbW5khwOXn" path="" />
+          <setting name="nps" type="false" title="Feedback to Nokia" title-string-id="nsDezs6Q6e3FNIGzdQEFRiT" path="" />
+          <setting name="phone-update" type="false" />
+          <setting name="about" type="false" title="About product" title-string-id="nW_w-0IBXVkuBBL7vu7pMBQ" path="" />
+        </setting>
+        <setting name="settings-apps-settings" type="category" title="Apps" title-string-id="n2CoiuOmZm0qSEwLpSqL5ZQ" uri="x-settings:settings-apps-settings">
+          <setting name="settings-browser" type="category" title="Browser" title-string-id="nP5n00EOPIEWuwhbdcvYPLw" uri="x-settings:settings-browser">
+            <setting name="settings-browser-web-page" type="category" title="Saving data" title-string-id="nsZ7WbyC3VMLA76v8hXuG7m" uri="x-settings:settings-browser-web-page">
+              <setting name="settings-browser-image-quality" type="radio" title="Images" title-string-id="ncpblrLTQ4nesVwRrIq0yfi" path="./Browser/0/Ext/Nokia/ImageQuality" />
+              <setting name="settings-browser-column-view" type="on-off" title="Column view" title-string-id="nTfNMcEK69bTpulSCQ8sGlX" path="./Browser/0/Ext/Nokia/ColumnView" />
+            </setting>
+            <setting name="settings-browser-privacy" type="category" title="Privacy" title-string-id="nNzOAt8qTb0S5_OH2GWEF9A" uri="x-settings:settings-browser-privacy">
+              <setting name="settings-browser-save-passwords" type="on-off" title="Save passwords" title-string-id="nbOt2SLVTCH5EdARmtFOJiD" path="./Browser/0/Ext/Nokia/SavePasswords" />
+              <setting name="settings-browser-cookie-mode" type="on-off" title="Accept cookies" title-string-id="nC02-g5B0lkaW_JKdljco3g" path="./Browser/0/Ext/Nokia/CookieMode" />
+              <setting name="settings-browser-access-location" type="on-off" title="Access location" title-string-id="noqHB9d8SHwUOTVcbppKn6r" path="./Browser/0/Ext/Nokia/AccessLocation" />
+              <setting name="settings-browser-clear-data" type="custom" title="Clear data" title-string-id="nnaZrfa7dfXgoTTFBqoegQC" path="" />
+            </setting>
+          </setting>
+          <setting name="settings-calls" type="category" title="Calls" title-string-id="nnT9SW58e7kiv4W57E8DKZQ" uri="x-settings:settings-calls">
+            <setting name="settings-call-sim1" type="category" title="SIM1" title-string-id="nLWWCDTGszODgKbCqvl511g" uri="x-settings:settings-call-sim1">
+              <setting name="contact-mailbox-dialing-number" type="custom" title="Voice mailbox" title-string-id="n3ETTgGPZunmmwVPB7AqLLT" path="" />
+              <setting name="settings-divert-calls" type="category" title="Call forwarding" title-string-id="nZ1FlxiJVTkCNdnEuDGSkaQ" uri="x-settings:settings-divert-calls">
+                <setting name="settings-divert-calls-always" type="divert-calls" title="All voice calls" title-string-id="nNbIhP6lwBDOPaymX9LvyVy" path="" />
+                <setting name="settings-divert-calls-busy" type="divert-calls" title="If busy" title-string-id="nrlI5LanSWkET8ZmPzHdZGa" path="" />
+                <setting name="settings-divert-calls-noanswer" type="divert-calls" title="If not answered" title-string-id="npslDf6QsTHvv48Mm2GtmqU" path="" />
+                <setting name="settings-divert-calls-unreachable" type="divert-calls" title="If out of reach" title-string-id="nOEBAUo6sHgaqqIS0RkkqzA" path="" />
+              </setting>
+              <setting name="settings-call-waiting" type="custom" title="Call waiting" title-string-id="nqbV-_jkYSUygVr-0r3NErw" path="" />
+              <setting name="settings-restrict-calls" type="category" title="Call barring" title-string-id="nvLLCzCTKxXxRudAqB24dn7" uri="x-settings:settings-restrict-calls">
+                <setting name="settings-restrict-calls-all-out" type="restrict-calls" title="All outgoing" title-string-id="npN1jgFTA_UGo4cHMOVq3MQ" path="" />
+                <setting name="settings-restrict-calls-out-intl" type="restrict-calls" title="Outgoing internat." title-string-id="nIg6MddWZt0mBe2ClkgOw_w" path="" />
+                <setting name="settings-restrict-calls-out-intl-exho" type="restrict-calls" title="Internat. not home" title-string-id="neIQm9BP1wEujUshis2AokA" path="" />
+                <setting name="settings-restrict-calls-all-in" type="restrict-calls" title="All incoming" title-string-id="n01CwMawUWEeuC28_6GTnEA" path="" />
+                <setting name="settings-restrict-calls-in-roaming" type="restrict-calls" title="Incoming if abroad" title-string-id="nyWLtPqkrWkuLPMnpkrnxBw" path="" />
+                <setting name="settings-restrict-calls-deactivate-all" type="restrict-calls" title="Turn off all restrictions" title-string-id="n6Sp8f17TxkCWEOidzny54w" path="" />
+                <setting name="settings-restrict-calls-change-password" type="restrict-calls" title="Change password" title-string-id="ngSVoqnS80kampvhdwGKiOg" path="" />
+              </setting>
+              <setting name="settings-calls-send-own-number-sim0" type="radio" title="Send my number" title-string-id="nAgIR7s19mkGL5xEU3uxBFQ" path="./SimSlot/0/yapas/calls/send-own-number" />
+            </setting>
+            <setting name="settings-call-sim2" type="category" title="SIM2" title-string-id="nGG3fTuTHN7PXE5DeIQqU5R" uri="x-settings:settings-call-sim2">
+              <setting name="contact-mailbox-dialing-number" type="custom" title="Voice mailbox" title-string-id="n3ETTgGPZunmmwVPB7AqLLT" path="" />
+              <setting name="settings-divert-calls" type="category" title="Call forwarding" title-string-id="nZ1FlxiJVTkCNdnEuDGSkaQ" uri="x-settings:settings-divert-calls">
+                <setting name="settings-divert-calls-always" type="divert-calls" title="All voice calls" title-string-id="nNbIhP6lwBDOPaymX9LvyVy" path="" />
+                <setting name="settings-divert-calls-busy" type="divert-calls" title="If busy" title-string-id="nrlI5LanSWkET8ZmPzHdZGa" path="" />
+                <setting name="settings-divert-calls-noanswer" type="divert-calls" title="If not answered" title-string-id="npslDf6QsTHvv48Mm2GtmqU" path="" />
+                <setting name="settings-divert-calls-unreachable" type="divert-calls" title="If out of reach" title-string-id="nOEBAUo6sHgaqqIS0RkkqzA" path="" />
+              </setting>
+              <setting name="settings-call-waiting" type="custom" title="Call waiting" title-string-id="nqbV-_jkYSUygVr-0r3NErw" path="" />
+              <setting name="settings-restrict-calls" type="category" title="Call barring" title-string-id="nvLLCzCTKxXxRudAqB24dn7" uri="x-settings:settings-restrict-calls">
+                <setting name="settings-restrict-calls-all-out" type="restrict-calls" title="All outgoing" title-string-id="npN1jgFTA_UGo4cHMOVq3MQ" path="" />
+                <setting name="settings-restrict-calls-out-intl" type="restrict-calls" title="Outgoing internat." title-string-id="nIg6MddWZt0mBe2ClkgOw_w" path="" />
+                <setting name="settings-restrict-calls-out-intl-exho" type="restrict-calls" title="Internat. not home" title-string-id="neIQm9BP1wEujUshis2AokA" path="" />
+                <setting name="settings-restrict-calls-all-in" type="restrict-calls" title="All incoming" title-string-id="n01CwMawUWEeuC28_6GTnEA" path="" />
+                <setting name="settings-restrict-calls-in-roaming" type="restrict-calls" title="Incoming if abroad" title-string-id="nyWLtPqkrWkuLPMnpkrnxBw" path="" />
+                <setting name="settings-restrict-calls-deactivate-all" type="restrict-calls" title="Turn off all restrictions" title-string-id="n6Sp8f17TxkCWEOidzny54w" path="" />
+                <setting name="settings-restrict-calls-change-password" type="restrict-calls" title="Change password" title-string-id="ngSVoqnS80kampvhdwGKiOg" path="" />
+              </setting>
+              <setting name="settings-calls-send-own-number-sim1" type="radio" title="Send my number" title-string-id="nAgIR7s19mkGL5xEU3uxBFQ" path="./SimSlot/1/yapas/calls/send-own-number" />
+            </setting>
+            <setting name="settings-calls-no-sim-text" type="multiline-label" path="" />
+          </setting>
+          <setting name="settings-calendar" type="category" title="Calendar" title-string-id="nENoKTm0bnkWsYWnEtUejzQ" uri="x-settings:settings-calendar">
+            <setting name="settings-calendar-first-day" type="radio" title="Week starts on" title-string-id="nz8VnMwCq7ZgzTsQz8AZ0CK" path="./yapas/calendar/first-day" />
+            <setting name="settings-calendar-snooze-time" type="radio" title="Snooze time" title-string-id="nMXYReXEkskCYhI1oiGFPIg" path="./yapas/calendar/snooze-time" />
+          </setting>
+          <setting name="settings-contacts" type="category" title="Contacts" title-string-id="nHOQZtX944RGC0ZDMSCQBmw" uri="x-settings:settings-contacts">
+            <setting name="settings-contacts-sortby" type="radio" title="Sort contacts by" title-string-id="nJI9rXUsia0qOyvZgayrQcQ" path="./yapas/contacts/sortby" />
+            <setting name="settings-contacts-viewfrom" type="radio" title="View contacts from" title-string-id="nhsTeMi3O3E_yVxI2blBjlQ" path="./yapas/contacts/viewfrom" />
+          </setting>
+          <setting name="settings-mail" type="category" title="Mail" title-string-id="nmB695pOWr5nXoxJC4xSy4c" uri="x-settings:settings-mail">
+            <setting name="mail-default-mailbox" type="content-picker" title="Default mailbox" title-string-id="nHnmTQZJFXdnbFbMO4wiHqJ" path="./Mail/Ext/Nokia/DefaultMailbox" />
+          </setting>
+          <setting name="settings-messaging" type="category" title="Messaging" title-string-id="nopeC8kE_okiWerqcmwYDbA" uri="x-settings:settings-messaging">
+            <setting name="messaging-text-message-general-settings" type="category" title="Text message settings" title-string-id="nnPfCfUKN1UeqQxmSkHeGU2" uri="x-settings:messaging-text-message-general-settings">
+              <setting name="sms-character-support" type="horizontal-multivalue-switch" title="Character support" title-string-id="ni9bU7pQwFaMBf3RAS4vye4" path="./SMS/0/Ext/Nokia/sms-character-support" />
+              <setting name="messaging-text-message-settings" type="category" uri="x-settings:messaging-text-message-settings">
+                <setting name="settings-sms-request-delivery-report" type="yes-no" title="Delivery reports" title-string-id="n1ocIwPRxc91sODUhFnz21o" path="./Ext/Nokia/request-delivery-report" />
+                <setting name="settings-sms-message-center" type="smsc-sim" title="Message centre" title-string-id="n1YQSAhckQkKel4i22xY3kg" path="./SMS/0/Ext/Nokia/sms-center-number" />
+              </setting>
+            </setting>
+            <setting name="messaging-mms-general-settings" type="category" title="MMS settings" title-string-id="nxU8aiSOxDDFx6pTEKnI2iH" uri="x-settings:messaging-mms-general-settings">
+              <setting name="messaging-mms-settings" type="category" uri="x-settings:messaging-mms-settings">
+                <setting name="settings-mms-request-delivery-report" type="yes-no" title="Delivery reports" title-string-id="n1ocIwPRxc91sODUhFnz21o" path="./Ext/Nokia/request-delivery-report" />
+                <setting name="settings-retrieval-mode" type="radio" title="MMS reception" title-string-id="n32sMoMMXMT75yENRBRsSsL" path="./Ext/Nokia/retrieval-mode" />
+                <setting name="settings-mms-allow-adverts" type="yes-no" title="Allow adverts" title-string-id="niHrIvI97C6oyb7XnOp7qDr" path="./Ext/Nokia/allow-adverts" />
+                <setting name="settings-mobile-mms-connections" type="custom" title="MMS settings" title-string-id="nxU8aiSOxDDFx6pTEKnI2iH" path="" />
+              </setting>
+            </setting>
+          </setting>
+          <setting name="settings-cell-broadcast" type="category" title="Operator message" title-string-id="nuW1yhcy4tEWA8LeBX3S8ew" uri="x-settings:settings-cell-broadcast">
+            <setting name="settings-enable-disable-cell-broadcast" type="on-off" title="Operator messages" title-string-id="nKW3a3R7Gp0eEgTuVkb2LYA" path="./yapas/cell-broadcast/active" />
+            <setting name="settings-cell-broadcast-channels" type="custom" title="Channels" title-string-id="ncXVIEXysz0aD2epLoaot5A" path="./yapas/cell-broadcast/channels" />
+            <setting name="settings-cell-broadcast-languages" type="custom" title="Languages" title-string-id="niWJsOX4hoMsQAvzxgQbHrV" path="" />
+            <setting name="settings-cell-info-display" type="on-off" title="Cell info" title-string-id="nxEofLqzet4cDWZ0ith5cy9" path="./yapas/cell-broadcast/cell-info" />
+          </setting>
+          <setting name="java-ams" type="false" title="Installed apps" title-string-id="n12Jnv7yBfZ2gkPkAgX52Se" path="" />
+        </setting>
+      </setting>
+    </item>
+    <item name="settings" title="My Games" id="My Games" uri="x-java-ams:*2145830079*2*" />
+    <item name="settings" title="My Apps" id="My Apps" uri="x-java-ams:*2145830079*3*" />
+    <item name="settings" title="Calculator" id="n4WfpFcJzpE_KZs6az280kg" uri="x-calculator:" />
+    <item name="settings" title="Mail" id="nmB695pOWr5nXoxJC4xSy4c" uri="x-messaging:start-email" />
+    <item name="settings" title="Notes" id="nZKrWiFJlSUK0boE-qrfPIg" uri="x-notes:" />
+    <item name="settings" title="Files" id="nTcnBNaw1uP6xnG1qtrpbtA" uri="file:///usr" />
+    <item name="settings" title="Accounts" id="nP61VAbxwpzDgEJM7n5avHb" uri="x-accounts:" />
+    <item name="settings" title="Chat" id="Chat" uri="x-java-ams:*207279034*-1*" />
+    <item name="settings" title="eBuddy" id="eBuddy" uri="x-java-ams:*1095902722*-1*" />
+    <item name="settings" title="FM radio" id="nip8OrHdSCE6xc7-3lY-rUg" uri="x-radio:" />
+    <item name="settings" title="Videos" id="nL9i6QbDGske_5ld7GEJWYw" uri="x-media-library:videos" />
+    <item name="settings" title="Recorder" id="nDWvPRMdMU0i5qRSyYi8IdQ" uri="x-voicerecorder:" />
+    <item name="settings" title="Call log" id="nZPvskVbfkEOZx8RPcL0FjA" uri="x-calllog:calllog-recent" />
+    <item name="settings" title="Counters" id="n2p5fmnixtRmHu6UHvAbRll" uri="x-data-traffic-counter:" />
+    <item name="settings" title="Homepage" id="nQ_K1KuegSU_XoQZyuaNS8g" uri="browser://load?mode=direct,address=http://ulm.gjmptw.at" />
+    <item name="settings" title="Tutorial" id="ngDVZyTdV21uhoh9AN4uzRL" uri="x-tutorial:" />
+    <item name="settings" title="Twitter" id="Twitter" uri="x-java-ams:*1526331089*-1*" />
+    <item name="settings" title="Little Big City" id="Little Big City" uri="x-java-ams:*615648330*-1*" />
+    <item name="settings" title="Real Football 2013 Demo" id="Real Football 2013 Demo" uri="x-java-ams:*835141319*-1*" />
+    <item name="settings" title="Nokia gift" id="Nokia gift" uri="x-java-ams:*274671632*-1*" />
+    <item name="settings" title="Assassin&amp;apos;s Creed III Demo" id="Assassin&amp;apos;s Creed III Demo" uri="x-java-ams:*1127046505*-1*" />
+    <item name="settings" title="Bubble Bash 3" id="Bubble Bash 3" uri="x-java-ams:*1404921584*-1*" />
+</mainmenu>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ChipsetSupplierDescription" type="ChipsetSupplierDescriptionType" />
+  <xs:complexType name="ChipsetSupplierDescriptionType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TraceMask" type="TraceMaskType" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CrashDump" type="CrashDumpType" />
+    </xs:sequence>
+    <xs:attribute name="ChipsetSupplierId" type="xs:unsignedShort" use="required" />
+    <xs:attribute name="ChipsetSupplierName" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="TraceMaskType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TraceVersionMask" type="TraceVersionMaskType" />
+      <xs:sequence maxOccurs="unbounded">
+        <xs:element name="TraceCategory" type="TraceCategoryType" />
+      </xs:sequence>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TraceVersionMaskType">
+    <xs:sequence minOccurs="1" maxOccurs="8">
+      <xs:element name="Byte">
+        <xs:complexType>
+          <xs:attribute name="Value" type="xs:unsignedByte" use="required" />
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TraceCategoryType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="TraceGroupBit" type="TraceGroupBitType" />
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" use="required" />
+    <xs:attribute name="LogicalName" type="xs:string" use="required" />
+    <xs:attribute name="Id" type="xs:unsignedShort" use="required" />
+    <xs:attribute name="DLLName" type="xs:string" use="required" />
+    <xs:attribute name="DLLVersionMajor" type="DLLVersionType" />
+    <xs:attribute name="DLLVersionMinor" type="DLLVersionType" />
+    <xs:attribute name="Function" type="xs:string" use="required" />
+    <xs:attribute name="Restriction" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="RD" />
+          <xs:enumeration value="Restricted" />
+          <xs:enumeration value="Public" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="TraceGroupBitType">
+    <xs:attribute name="Name" type="xs:string" use="required" />
+    <xs:attribute name="LogicalName" type="xs:string" use="required" />
+    <xs:attribute name="Id" type="xs:nonNegativeInteger" use="required" />
+  </xs:complexType>
+  <xs:complexType name="CrashDumpType">
+    <xs:attribute name="Id" type="xs:unsignedShort" use="required" />
+    <xs:attribute name="DLLName" type="xs:string" use="required" />
+    <xs:attribute name="DLLVersionMajor" type="DLLVersionType" />
+    <xs:attribute name="DLLVersionMinor" type="DLLVersionType" />
+    <xs:attribute name="Function" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="DLLVersionType">
+    <xs:restriction base="xs:integer">
+      <xs:pattern value="[0-9]{3}"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,303 @@
+#-------------------------------- Tell Emacs this is a -*-makefile-*- -
+# NOKIA
+# R&D Copenhagen
+# CoreSW/Corleone
+#
+#
+#      Makefile for autogen (local environment only)
+#      ---------------------------------------------
+#      Makefile
+#
+# 
+#
+# Synergy DB:        co1tss
+# Project:           autogen
+# Filename:          MakeAutogenLocal
+#
+# Document code:      -
+#
+# Copyright (c) Nokia. All rights reserved
+#
+# Change history:
+#
+# VERSION     : 34         DRAFT      31-Oct-2007  Stig Holmsten Eliasen
+# REASON      : CR
+# REFERENCE   : -
+# DESCRIPTION : Include path for PROTOCOLS_ROOT_DIR added.
+#
+# VERSION     : 32         DRAFT      17-Sep-2007  Christian Jacob Hansen
+# REASON      : CR
+# REFERENCE   : -
+# DESCRIPTION : Updated to reflect reorganization of macro files
+#
+# VERSION     : 31         DRAFT      04-Jan-2006  Christian Jacob Hansen
+# REASON      : CR
+# REFERENCE   : -
+# DESCRIPTION : Added source file autogen_ref.c
+#
+# VERSION     : 30         DRAFT      26-Jul-2005  Christian Jacob Hansen
+# REASON      : Redesigned PMD code
+# REFERENCE   : -
+# DESCRIPTION : Added several new source files
+#
+# VERSION     : 29         DRAFT      11-Jul-2005  Christian Jacob Hansen
+# REASON      : Build enhancements
+# REFERENCE   : -
+# DESCRIPTION : Bug fix - depend info now generated correctly
+#                         SRCSHOST changed to SRCHOST
+#
+# VERSION     : 28	   DRAFT      26-Aug-2004  Stig Holmsten Eliasen
+# REASON      : Improvement
+# REFERENCE   : -
+# DESCRIPTION : Added output_xml (dummy version)
+#
+# VERSION     : 27	   DRAFT      06-May-2004  Christian Jacob Hansen
+# REASON      : Improvement
+# REFERENCE   : -
+# DESCRIPTION : Remove ISI API output again
+#
+# VERSION     : 26	   DRAFT      21-Apr-2004  Christian Jacob Hansen
+# REASON      : Improvement
+# REFERENCE   : -
+# DESCRIPTION : Added more PMD source files
+#
+# VERSION     : 25	   DRAFT      21-Apr-2004  Christian Jacob Hansen
+# REASON      : Bug fix
+# REFERENCE   : -
+# DESCRIPTION : Make file can't be used outside ISA SW build
+#
+# VERSION     : 24	   DRAFT      30-Mar-2004  Christian Jacob Hansen
+# REASON      : Improvements
+# REFERENCE   : -
+# DESCRIPTION : Added more source files
+#
+# VERSION     : 23	   DRAFT      26-Feb-2004  Christian Jacob Hansen
+# REASON      : Improvements
+# REFERENCE   : -
+# DESCRIPTION : Added ISI API for Symbian output
+#
+# VERSION     : 22	   DRAFT      04-Feb-2004  Stefan Becker
+# REASON      : Improvements
+# REFERENCE   : -
+# DESCRIPTION : Various improvements
+#
+# VERSION     : 21	   DRAFT      12-Nov-2003  Christian Jacob Hansen
+# REASON      : Improvements
+# REFERENCE   : -
+# DESCRIPTION : Added autogen.log to clean/distclean section
+#
+# VERSION     : 20	   DRAFT      29-Oct-2003  Christian Jacob Hansen
+# REASON      : Integration
+# REFERENCE   : Task co_pctls#23306
+# DESCRIPTION : Added source file autogen_prop.c
+#
+# VERSION     : 19 	   DRAFT      21-Jul-2003  Christian Jacob Hansen
+# REASON      : Make file does not work on Linus
+# REFERENCE   : Task: co_pctls#22040
+# DESCRIPTION : Changed shell path
+#
+# VERSION     : 18 	   DRAFT      24-Jun-2003  Christian Jacob Hansen
+# REASON      : Improvement
+# REFERENCE   : Task: co_pctls#21842
+# DESCRIPTION : Added TSS Server API output
+#
+# VERSION     : 17 	   DRAFT      03-Jun-2003  Christian Jacob Hansen
+# REASON      : Bug fix
+# REFERENCE   : co_pctls#21639
+# DESCRIPTION : Removed + on CFLAGS
+#
+# VERSION     : 16 	   DRAFT      16-Apr-2003  Christian Jacob Hansen
+# REASON      : Improvements
+# REFERENCE   : -
+# DESCRIPTION : Improved dependency rules
+#
+# VERSION     : 15 	   DRAFT      14-Feb-2003  Christian Jacob Hansen
+# REASON      : Improvements
+# REFERENCE   : -
+# DESCRIPTION : Changed a few places so user can specify flags etc. on 
+#               the command line
+#
+# VERSION     : 14 	   DRAFT      21-Jan-2003  Christian Jacob Hansen
+# REASON      : Autogen/PMD compression optimization
+# REFERENCE   : -
+# DESCRIPTION : Changed included list of source files
+#
+# VERSION     : 13.1       DRAFT      01-Nov-2002  Christian Jacob Hansen
+# REASON      : Remove macro expansion optimization
+# REFERENCE   : -
+# DESCRIPTION : Remove file 'autogen_server.c"
+#
+# VERSION     : 13         DRAFT      17-Oct-2002  Christian Jacob Hansen
+# REASON      : Add file 'autogen_server.c"
+# REFERENCE   : -
+# DESCRIPTION : -
+#
+# VERSION     : 12         DRAFT      05-Sep-2002  Christian Jacob Hansen
+# REASON      : Add source file
+# REFERENCE   : Continuus task co_pctls#17102
+# DESCRIPTION : Added autogen_symbol.c source file
+#
+# VERSION     : 11         DRAFT      09-Jul-2002  Christian Jacob Hansen
+# REASON      : Change
+# REFERENCE   : Continuus task co_pctls#16252
+# DESCRIPTION : Added config directory to include path
+#
+# VERSION     : 10         DRAFT      01-Jul-2002  Christian Jacob Hansen
+# REASON      : -
+# REFERENCE   : -
+# DESCRIPTION : Changed file, so it does not depend on coresw template
+#
+# VERSION     : 9          DRAFT      18-Jun-2002  Christian Jacob Hansen
+# REASON      : First version
+# REFERENCE   : -
+# DESCRIPTION : -
+#----------------------------------------------------------------------
+# Usage:
+#
+# Make HTML files:
+#     gmake -f MakeAutogenLocal html
+#
+# Make PMD file:
+#     gmake -f MakeAutogenLocal pmd
+#
+# Make ISI header file(s):
+#     gmake -f MakeAutogenLocal isihdr
+#
+# Make TSS Server API files:
+#     gmake -f MakeAutogenLocal tsa
+#
+# Make XML files:
+#     gmake -f MakeAutogenLocal xml
+#
+#----------------------------------------------------------------------
+
+MAKEFILE = MakeAutogenLocal
+
+#
+# C compiler flags
+#
+-include .eutran_makefiletemplate_pre
+ifneq ($(wildcard .eutran_makefiletemplate),)
+INCDIRS = -I- -I$(PROTOCOL_SW_COMPONENT_INTERNAL_INTERFACES_DIR) -I$(PROTOCOL_SW_INTERNAL_INTERFACES_DIR) -I$(IMAGE_PUBLIC_INTERFACES_DIR)
+HOSTCFLAGS += -g -DAUTOGEN_ENVIRONMENT_LOCAL $(INCDIRS) -I$(PRODUCT_TOP)/include -I$(PRODUCT_TOP)/config -I.
+#IPATH = -I$(PROTOCOL_SW_COMPONENT_INTERNAL_INTERFACES_DIR) -I$(PROTOCOL_SW_INTERNAL_INTERFACES_DIR) -I$(IMAGE_PUBLIC_INTERFACES_DIR)
+else
+HOSTCFLAGS += -g -DAUTOGEN_ENVIRONMENT_LOCAL -I$(PRODUCT_TOP)/include -I$(PRODUCT_TOP)/config \
+ -I$(PRODUCT_TOP)/$(CORESW_ROOT_DIR)/include -I$(PRODUCT_TOP)/$(S40_UI_ROOT_DIR)/include -I$(PRODUCT_TOP)/$(PROTOCOLS_ROOT_DIR)/protocol_sw_interface -I$(PRODUCT_TOP)/$(PROTOCOLS_ROOT_DIR)/include -I.
+endif
+
+#
+# Program name
+#
+PROGRAM = autogen_local.exe
+
+
+#
+# List of source code files
+#
+SRCHOST = \
+	autogen_check.c \
+	autogen_def.c \
+	autogen_init.c \
+	autogen_main.c \
+	autogen_object.c \
+	autogen_parsexml.c \
+	autogen_prop.c \
+	autogen_ref.c \
+	autogen_symbols.c \
+	autogen_user_local.c \
+	autogen_util.c \
+	autogen_ver_history.c \
+	autogen_vendor.c \
+	dwarfReader.c \
+	elfReader.c \
+	list.c \
+	output_pmd.c \
+	output_pmd_debug.c \
+	output_pmd_generate.c \
+	output_pmd_info.c \
+	output_pmd_msg.c \
+	output_pmd_types.c \
+	output_pmd_typedef_hierarchy.c \
+	output_html.c \
+	output_srvhdr.c \
+	output_tsa.c \
+	output_xml.c \
+	pmd_compression2.c \
+	pmd_constants.c \
+	pmd_heap.c \
+	pmd_stringpool.c
+
+#
+# Default target
+#
+all:	$(PROGRAM) 
+
+
+#
+# Compilation rules
+#
+OBJHOST = $(SRCHOST:%.c=l_%.o)
+
+ifeq ($(wildcard $(HOSTCC)),)
+	HOSTCC=gcc
+endif
+
+$(OBJHOST): l_%.o: %.c
+	$(HOSTCC) $(HOSTCFLAGS) -c $< -o $@
+
+$(PROGRAM): $(OBJHOST) 
+	$(HOSTCC) $^ -lm -o $@
+
+define RunAutogen
+	@target=$(@:%-stamp=%); \
+	echo "Generating $$target files using autogen...\n"; \
+	if [ ! -d $$target ]; then mkdir $$target; fi; \
+	./$(PROGRAM) -d$$target -o$$target && touch $@
+endef
+
+.PHONY: html pmd isihdr tsa xml
+
+pmd-stamp: $(PROGRAM)
+	$(RunAutogen)
+
+pmd: pmd-stamp
+
+html-stamp: $(PROGRAM)
+	$(RunAutogen)
+
+html: html-stamp
+
+isihdr-stamp: $(PROGRAM)
+	$(RunAutogen)
+
+isihdr: isihdr-stamp
+
+tsa-stamp: $(PROGRAM)
+	$(RunAutogen)
+
+tsa: tsa-stamp
+
+xml-stamp: $(PROGRAM)
+	$(RunAutogen)
+
+xml: xml-stamp
+
+
+# Remove all object and core files.
+#
+clean::
+	@echo Removing all object and core files...
+	@if test -d html;   then chmod -R 777 html; fi
+	@if test -d pmd;    then chmod -R 777 pmd; fi 
+	@if test -d isihdr; then chmod -R 777 isihdr; fi
+	@if test -d tsa;    then chmod -R 777 tsa; fi
+	@if test -d xml;    then chmod -R 777 xml; fi
+	rm -fR $(OBJHOST) $(PROGRAM) html isihdr pmd tsa xml *-stamp autogen.log
+
+ifneq ($(wildcard .eutran_makefiletemplate),)
+include .eutran_makefiletemplate
+else
+include $(MAKEFILE_TEMPLATE)
+endif
+

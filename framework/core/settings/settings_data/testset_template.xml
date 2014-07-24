@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    NOKIA
+    MP S40 SW
+    UI Testing Tools
+
+
+    %full_filespec: testset_template.xml-ou1s40#9:xml:ou1isasw#1 %
+                    ==========================================================
+                    ART2 XML Data - http://www.connecting.nokia.com/art2
+
+
+    Copyright (c)   Nokia. All rights reserved.
+
+    %version:       ou1s40#9 %
+    %date_created:  Thu Jun 03 22:40:34 2010 %
+    %created_by:    sapousi %
+
+    Reason:         Improvement
+    Reference:      CM Synergy task: ou1s40#51735
+    Description:    Changed test_type value not to be required
+
+    SVN version info:
+    $Revision: 209 $
+    $Id: testset_template.xml 209 2006-05-18 09:21:51Z ripakane $
+
+    Notes:
+-->
+<!DOCTYPE testset [
+<!ELEMENT testset               (hierarchy* | testcase*)>
+<!ELEMENT hierarchy             (hierarchy* | testcase*)>
+<!ELEMENT testcase              (testresult?, art2testscript?)>
+<!ELEMENT testresult            EMPTY>
+<!ELEMENT art2testscript        (art2testresult*) >
+<!ELEMENT art2testresult        EMPTY>
+
+<!ATTLIST testset
+                        name        CDATA #REQUIRED
+                        PUT         CDATA ""
+                        version     CDATA #REQUIRED
+                        gen_testset CDATA ""
+                        qc_xml_name CDATA ""
+                        passed      CDATA ""
+                        failed      CDATA ""
+                        norun       CDATA ""
+                        noresult    CDATA ""
+                        na          CDATA "">            
+                        
+
+<!ATTLIST hierarchy
+                        name        CDATA #REQUIRED
+                        open        (True | False ) "True"
+                        passed      CDATA ""
+                        failed      CDATA ""
+                        norun       CDATA ""
+                        noresult    CDATA ""
+                        na          CDATA "">
+<!ATTLIST testcase
+                        name        CDATA #REQUIRED
+                        open	    (True | False ) "False"
+                        ucid        CDATA ""
+                        priority    CDATA ""
+                        leak_run    (True | False ) "False"
+                        retest_on   (True | False ) "False"
+                        repeats     CDATA "1">
+<!ATTLIST testresult
+                        result      CDATA #REQUIRED
+                        new_error   (True | False ) "False"
+                        error_id    CDATA ""
+                        error_title CDATA ""
+                        description CDATA ""
+                        author      CDATA ""
+                        time        CDATA ""
+                        date        CDATA ""
+                        leak_file   CDATA ""
+                        leak_found  (True | False ) "False">
+
+<!ATTLIST art2testscript
+                        directory   CDATA #REQUIRED
+                        file        CDATA #REQUIRED
+                        class       CDATA #REQUIRED
+                        method      CDATA #REQUIRED>
+<!ATTLIST art2testresult
+                        report_file CDATA #REQUIRED
+                        result      CDATA #REQUIRED
+                        test_type   CDATA "">                        
+                        
+]>
+<testset version="8" name="undefined" PUT="undefined" gen_testset="" qc_xml_name="" norun="0" passed="0" failed="0" noresult="0" na="0">
+
+</testset>

@@ -1,0 +1,5 @@
+C:\GitRepo\marble_bj\framework\dlls\TestAutomation.Bridge.dll
+C:\GitRepo\marble_bj\framework\dlls\TestAutomation.Bridge.pdb
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.Bridge\obj\Debug\TestAutomation.Bridge.csprojResolveAssemblyReference.cache
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.Bridge\obj\Debug\TestAutomation.Bridge.dll
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.Bridge\obj\Debug\TestAutomation.Bridge.pdb

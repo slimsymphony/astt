@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "autogen", "autogen.vcxproj", "{E5B5810C-DC5A-4299-848B-39C22336F79B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		ADSP5|Win32 = ADSP5|Win32
+		CDSP5|Win32 = CDSP5|Win32
+		Device|Win32 = Device|Win32
+		Local_tolerant|Win32 = Local_tolerant|Win32
+		Local|Win32 = Local|Win32
+		Product|Win32 = Product|Win32
+		Symbian|Win32 = Symbian|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5B5810C-DC5A-4299-848B-39C22336F79B}.ADSP5|Win32.ActiveCfg = ADSP5|Win32
+		{E5B5810C-DC5A-4299-848B-39C22336F79B}.ADSP5|Win32.Build.0 = ADSP5|Win32
+		{E5B5810C-DC5A-4299-848B-39C22336F79B}.CDSP5|Win32.ActiveCfg = CDSP5|Win32
+		{E5B5810C-DC5A-4299-848B-39C22336F79B}.CDSP5|Win32.Build.0 = CDSP5|Win32
+		{E5B5810C-DC5A-4299-848B-39C22336F79B}.Device|Win32.ActiveCfg = Device|Win32
+		{E5B5810C-DC5A-4299-848B-39C22336F79B}.Device|Win32.Build.0 = Device|Win32
+		{E5B5810C-DC5A-4299-848B-39C22336F79B}.Local_tolerant|Win32.ActiveCfg = Local_tolerant|Win32
+		{E5B5810C-DC5A-4299-848B-39C22336F79B}.Local_tolerant|Win32.Build.0 = Local_tolerant|Win32
+		{E5B5810C-DC5A-4299-848B-39C22336F79B}.Local|Win32.ActiveCfg = Local|Win32
+		{E5B5810C-DC5A-4299-848B-39C22336F79B}.Local|Win32.Build.0 = Local|Win32
+		{E5B5810C-DC5A-4299-848B-39C22336F79B}.Product|Win32.ActiveCfg = Product|Win32
+		{E5B5810C-DC5A-4299-848B-39C22336F79B}.Product|Win32.Build.0 = Product|Win32
+		{E5B5810C-DC5A-4299-848B-39C22336F79B}.Symbian|Win32.ActiveCfg = Symbian|Win32
+		{E5B5810C-DC5A-4299-848B-39C22336F79B}.Symbian|Win32.Build.0 = Symbian|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

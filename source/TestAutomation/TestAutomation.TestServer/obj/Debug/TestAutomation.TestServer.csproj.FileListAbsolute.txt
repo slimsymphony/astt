@@ -1,0 +1,6 @@
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.TestServer\bin\Debug\TestAutomation.TestServer.dll.config
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.TestServer\bin\Debug\TestAutomation.TestServer.dll
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.TestServer\bin\Debug\TestAutomation.TestServer.pdb
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.TestServer\obj\Debug\TestAutomation.TestServer.csprojResolveAssemblyReference.cache
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.TestServer\obj\Debug\TestAutomation.TestServer.dll
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.TestServer\obj\Debug\TestAutomation.TestServer.pdb

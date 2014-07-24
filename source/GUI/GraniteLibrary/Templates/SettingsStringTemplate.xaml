@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:acb="clr-namespace:AttachedCommandBehavior;assembly=AttachedCommandBehavior">
+
+    <DataTemplate x:Key="settingsStringTemplate">
+        <StackPanel x:Name="stringStackPanel" Orientation="Vertical">
+            <TextBlock x:Name="stringTextBlock" Height="23" Padding="0,3,0,0" Text="{Binding Value}" Margin="5,0,0,0" Visibility="Visible" />
+            <TextBox x:Name="stringTextBox" Height="23" Padding="0,3,0,0" Text="{Binding Value}" Margin="5,0,0,0" Visibility="Collapsed"
+                     acb:CommandBehavior.Event="LostFocus"
+                     acb:CommandBehavior.Command="{Binding DataContext.SettingsTextBoxCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                     acb:CommandBehavior.CommandParameter="{Binding ElementName=stringTextBox, Path=Text}"/>
+        </StackPanel>
+
+        <DataTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="stringTextBlock" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="stringTextBox" Property="Visibility" Value="Visible" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="False" />
+                    <Condition SourceName="stringTextBox" Property="IsKeyboardFocused" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="stringTextBlock" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="stringTextBox" Property="Visibility" Value="Visible" />
+            </MultiTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+</ResourceDictionary>

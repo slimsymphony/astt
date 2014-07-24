@@ -1,0 +1,158 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Marble"
+                    xmlns:converters="clr-namespace:Marble.Converters"
+                    xmlns:Converters="clr-namespace:MarbleLibrary.Converters;assembly=MarbleLibrary"
+                    xmlns:model="clr-namespace:Marble.Model">
+    
+    <DataTemplate x:Key="MarbleLogEntryGenericCellTemplate">
+        <TextBlock Text="{Binding Path=Message, Mode=OneTime}" TextWrapping="WrapWithOverflow" VerticalAlignment="Top">
+
+        </TextBlock>
+    </DataTemplate>
+
+    <DataTemplate x:Key="MarbleLogEntryGuiMessageCellTemplate">
+        <TextBlock Text="{Binding Path=Message, Mode=OneTime}" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Background="{StaticResource MarbleBlueCyanGradientBackground}" Foreground="{x:Static Member=Brushes.White}">
+
+        </TextBlock>
+    </DataTemplate>
+
+    <DataTemplate x:Key="MarbleLogEntryEventCellTemplate">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+
+            <Border CornerRadius="3" Background="{StaticResource MarbleDarkPurleBackgroundGradient}" Margin="0,0,5,0" Visibility="{Binding Path=IsGrouped, Mode=OneTime, Converter={Converters:BoolToVisibilityCollapsedConverter}}"
+                    ToolTipService.ShowDuration="60000">
+                <Border.ToolTip>
+                    <ItemsControl ItemsSource="{Binding Path=GroupedTimeStamps, Mode=OneTime}" AlternationCount="{Binding Path=GroupedTimeStamps.Count, Mode=OneTime}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ItemsControl.AlternationIndex), Converter={Converters:IntValueAndParameterValueAdded}, ConverterParameter=1}" />
+                                    <TextBlock Text=". "></TextBlock>
+                                    <TextBlock Text="{Binding StringFormat={}{0:yyyy'.'MM'.'dd HH':'mm':'ss'.'fff}, Mode=OneWay}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>    
+                    </ItemsControl>
+                </Border.ToolTip>
+                <TextBlock Margin="5,0,5,0" Text="{Binding Path=GroupedTimeStamps.Count, Mode=OneTime}" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}" />
+            </Border>
+
+            <TextBlock Text="{Binding Path=Message, Mode=OneTime}" TextWrapping="WrapWithOverflow" VerticalAlignment="Top">
+
+            </TextBlock>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="MarbleLogEntryInfoCellTemplate">
+        <TextBlock Text="{Binding Path=Message, Mode=OneTime}" TextWrapping="WrapWithOverflow" VerticalAlignment="Top">
+
+        </TextBlock>
+    </DataTemplate>
+
+    <DataTemplate x:Key="MarbleLogEntryWarningCellTemplate">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+
+            <TextBlock Text="{Binding Path=Message, Mode=OneTime}" TextWrapping="WrapWithOverflow" Background="{StaticResource MarbleDataGridCellWarningBackground}">
+
+            </TextBlock>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="MarbleLogEntryErrorCellTemplate">
+        <TextBlock Text="{Binding Path=Message, Mode=OneTime}" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Background="{StaticResource MarbleDataGridCellErrorBackground}">
+
+        </TextBlock>
+    </DataTemplate>
+
+    <DataTemplate x:Key="MarbleLogEntryFailureCellTemplate">
+        <TextBlock Text="{Binding Path=Message, Mode=OneTime}" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Background="{StaticResource MarbleDataGridCellFailedBackground}" Foreground="{x:Static Member=Brushes.White}">
+
+        </TextBlock>
+    </DataTemplate>
+
+    <DataTemplate x:Key="MarbleLogEntryFatalCellTemplate">
+        <TextBlock Text="{Binding Path=Message, Mode=OneTime}" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Margin="2">
+
+        </TextBlock>
+    </DataTemplate>
+
+    <DataTemplate x:Key="MarbleLogEntryStageStartCellTemplate">
+        <TextBlock Text="{Binding Path=Message, Mode=OneTime}" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Background="{StaticResource MarbleDarkPurleBackgroundGradient}" Foreground="{StaticResource MarbleYellowHighlight}">
+
+        </TextBlock>
+    </DataTemplate>
+
+    <DataTemplate x:Key="MarbleLogEntryFrameworkRequestCellTemplate">
+        <TextBlock Text="{Binding Path=Message, Mode=OneTime}" FontFamily="Consolas" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Foreground="{x:Static Member=Brushes.Blue}">
+
+        </TextBlock>
+    </DataTemplate>
+
+    <DataTemplate x:Key="MarbleLogEntryFrameworkResponseCellTemplate">
+        <TextBlock Text="{Binding Path=Message, Mode=OneTime}" FontFamily="Consolas" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Foreground="{x:Static Member=Brushes.ForestGreen}">
+
+        </TextBlock>
+    </DataTemplate>
+
+    <!--public DataTemplate GenericMarbleLogEntryTemplate { get; set; }
+
+        public DataTemplate GuiMessageMarbleLogEntryTemplate { get; set; }
+
+        public DataTemplate EventMarbleLogEntryTemplate { get; set; }
+
+        public DataTemplate InfoMarbleLogEntryTemplate { get; set; }
+
+        public DataTemplate WarningMarbleLogEntryTemplate { get; set; }
+
+        public DataTemplate ErrorMarbleLogEntryTemplate { get; set; }
+
+        public DataTemplate FailureMarbleLogEntryTemplate { get; set; }
+
+        public DataTemplate FatalMarbleLogEntryTemplate { get; set; }
+
+        public DataTemplate StageStartMarbleLogEntryTemplate { get; set; }-->
+
+    <DataTemplate x:Key="MarbleLogEntryTypeGridViewCellTemplate" >
+
+        <!--<Image x:Name="ImageLogEntryType" Height="16" Width="16" ToolTip="{Binding Path=LogEntryType, Mode=OneTime}"/>-->
+        <Image x:Name="ImageLogEntryType" Height="16" Width="16" />
+                        
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.Generic}">
+                <Setter TargetName="ImageLogEntryType" Property="Source" Value="/MarbleLibrary;component/Images\empty.label.32x16.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.GuiMessage}">
+                <Setter TargetName="ImageLogEntryType" Property="Source" Value="/MarbleLibrary;component/Images\gui.message.icon.16x16.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.Event}">
+                <Setter TargetName="ImageLogEntryType" Property="Source" Value="/MarbleLibrary;component/Images\event.icon.16x16.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.Info}">
+                <Setter TargetName="ImageLogEntryType" Property="Source" Value="/MarbleLibrary;component/Images\info.icon.32x32.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.Warning}">
+                <Setter TargetName="ImageLogEntryType" Property="Source" Value="/MarbleLibrary;component/Images\warning.shadow.icon.16x16.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.Error}">
+                <Setter TargetName="ImageLogEntryType" Property="Source" Value="/MarbleLibrary;component/Images\error.shadow.icon.16x16.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.Failure}">
+                <Setter TargetName="ImageLogEntryType" Property="Source" Value="/MarbleLibrary;component/Images\failed.circle.shadow.icon.16x16.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.Fatal}">
+                <Setter TargetName="ImageLogEntryType" Property="Source" Value="/MarbleLibrary;component/Images\error.shadow.icon.16x16.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.StageStart}">
+                <Setter TargetName="ImageLogEntryType" Property="Source" Value="/MarbleLibrary;component/Images\start.start.icon.16x16.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.FrameworkRequest}">
+                <Setter TargetName="ImageLogEntryType" Property="Source" Value="/MarbleLibrary;component/Images\framework.icon.16x16.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=LogEntryType, Mode=OneTime}" Value="{x:Static model:MarbleLogEntryType.FrameworkResponse}">
+                <Setter TargetName="ImageLogEntryType" Property="Source" Value="/MarbleLibrary;component/Images\framework.message.icon.16x16.png" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+    
+</ResourceDictionary>

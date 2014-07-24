@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TestAutomation.Gui.Marble.Settings.SettingsManager">
+    <Position X="0.5" Y="3.25" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="TestAutomation.Gui.Marble.Settings.SettingsManager.SettingsManagerMetaObject">
+        <TypeIdentifier>
+          <NewMemberFileName>SettingsManager.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IAAMUAmAACAEBLABCAIEAIQEEAAACAAASAAIAAAABAA=</HashCode>
+      <FileName>SettingsManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_instance" />
+      <Field Name="_proxy" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TestAutomation.Gui.Marble.Settings.SettingsManagerProxy">
+    <Position X="4.5" Y="6.25" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>BAAoUAiCICAEAJADCAIIAIQAEAgACQEACAAIAQAABAQ=</HashCode>
+      <FileName>SettingsManagerProxy.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_settingModules" />
+      <Field Name="_watchers" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TestAutomation.Gui.Marble.Settings.SettingModuleCollection">
+    <Position X="8.5" Y="7" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEIAAAAAAAAAAFAACAAQBAQAAAAIAAAAIAAAAAFUAAA=</HashCode>
+      <FileName>SettingModuleCollection.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_collection" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TestAutomation.Gui.Marble.Settings.SettingModule">
+    <Position X="15.75" Y="7" Width="3.25" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="TestAutomation.Gui.Marble.Settings.SettingModule.SettingModuleMetaObject">
+        <TypeIdentifier>
+          <NewMemberFileName>SettingModule.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <InheritanceLine Type="System.Collections.CollectionBase" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="17.875" Y="5.812" />
+        <Point X="17.875" Y="6.15" />
+        <Point X="17.875" Y="6.15" />
+        <Point X="17.875" Y="7" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>IEIAOIAgCAAAABBiCQBQDIQCABBMKYEMJGRIwgGECEA=</HashCode>
+      <FileName>SettingModule.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Engine" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Lazy&lt;T&gt;" Collapsed="true">
+    <Position X="4.5" Y="3.25" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.MarshalByRefObject" Collapsed="true">
+    <Position X="4.5" Y="4.5" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Collections.Concurrent.ConcurrentDictionary&lt;TKey, TValue&gt;">
+    <Position X="12" Y="7" Width="2.75" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Collections.Generic.List&lt;T&gt;">
+    <Position X="8.5" Y="12.75" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="System.Collections.Generic.List&lt;T&gt;.Enumerator" Collapsed="true">
+        <TypeIdentifier />
+        <Lollipop Position="0.2" />
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Microsoft.Scripting.Hosting.ScriptEngine" Collapsed="true" HideInheritanceLine="true">
+    <Position X="20.25" Y="7.25" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="TestAutomation.Gui.Marble.Settings.Setting" HideInheritanceLine="true">
+    <Position X="20.25" Y="8.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ABAAMAAAQAggBAAEQAAAAAQgAAAACAAAAAAgAQAACAA=</HashCode>
+      <FileName>Setting.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Collections.CollectionBase" Collapsed="true">
+    <Position X="15.75" Y="5.25" Width="3.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

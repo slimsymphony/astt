@@ -1,0 +1,14 @@
+﻿<Window x:Class="Marble.Views.Dialogs.MarbleSplashScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Name="marbleSplashScreenWindow"
+        Title="MarbleSplashScreen" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" ShowInTaskbar="False" ResizeMode="NoResize" Background="Transparent" Closing="Window_Closing">
+
+    <!--<Border Background="{DynamicResource MarbleDarkPurleBackgroundGradient}" BorderBrush="{DynamicResource MarbleYellowHighlight}" BorderThickness="5" Width="200" Height="200">-->
+        <!--<Border.Effect>
+            <DropShadowEffect x:Name="dropShadowEffectBorder" BlurRadius="10" ShadowDepth="0" Direction="0" Color="DodgerBlue"/>
+        </Border.Effect>-->
+        
+        <Image x:Name="imageMarbleLogo" Width="1039" Height="467" Source="/MarbleLibrary;component/Images\marble.logo.1039x467.png" />
+    <!--</Border>-->
+</Window>

@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<countries>
+    <country>
+        <Data Type="String"  Code="238" Name="Denmark"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="244" Name="Finland"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="242" Name="Norway"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="240" Name="Sweden"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="250" Name="Russian Federation"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="286" Name="Turkey"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="246" Name="Lithuania"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="214" Name="Spain"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="230" Name="Czech Republic"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="231" Name="Slovakia"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="262" Name="Germany"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="232" Name="Austria"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="240" Name="Sweden"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="247" Name="Latvia"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="228" Name="Switzerland"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="248" Name="Estonia"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="234" Name="United Kingdom"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="208" Name="France"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="647" Name="Réunion (France)"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="272" Name="Ireland"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="216" Name="Hungary"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="226" Name="Romania"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="255" Name="Ukraine"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="204" Name="Netherlands"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="206" Name="Belgium"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="260" Name="Poland"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="219" Name="Croatia"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="202" Name="Greece"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="724" Name="Brazil"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="424" Name="United Arab Emirates"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="426" Name="Bahrain"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="422" Name="Oman"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="427" Name="Qatar"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="419" Name="Kuwait"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="420" Name="Saudi Arabia"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="421" Name="Yemen"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="293" Name="Slovenia"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="268" Name="Portugal"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="655" Name="South Africa"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="222" Name="Italy"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="416" Name="Jordan"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="423" Name="Palestine"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="417" Name="Syria"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="410" Name="Pakistan"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="424" Name="United Arab Emirates"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="340" Name="Guadeloupe (France)"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="612" Name="Côte d'Ivoire"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="603" Name="Algeria"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="602" Name="Egypt"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="604" Name="Morocco"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="621" Name="Nigeria"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="605" Name="Tunisia"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="639" Name="Kenya"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="640" Name="Tanzania"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="641" Name="Uganda"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="235" Name="United Kingdom"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="630" Name="Democratic Republic of the Congo"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="624" Name="Cameroon"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="631" Name="Angola"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="643" Name="Mozambique"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="645" Name="Zambia"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="606" Name="Libya"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="525" Name="Singapore"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="520" Name="Thailand"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="454" Name="Hong Kong (PRC)"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="455" Name="Macau (PRC)"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="452" Name="Viet Nam"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="505" Name="Australia"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="530" Name="New Zealand"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="515" Name="Philippines"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="510" Name="Indonesia"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="404" Name="India"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="405" Name="India"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="460" Name="China"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="466" Name="Taiwan"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="542" Name="Fiji"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="537" Name="Papua New Guinea"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="541" Name="Vanuatu"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="338" Name="Jamaica"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="502" Name="Malaysia"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="528" Name="Brunei Darussalam"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="470" Name="Bangladesh"></Data>
+    </country>
+    <country>
+        <Data Type="String"  Code="620" Name="Ghana"></Data>
+    </country>
+ </countries>  
+   
+   
+   
+   
+   
+   
+   
+   

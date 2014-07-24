@@ -1,0 +1,5 @@
+C:\GitRepo\marble_bj\framework\dlls\TestAutomation.ChkBugReport.dll
+C:\GitRepo\marble_bj\framework\dlls\TestAutomation.ChkBugReport.pdb
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.ChkBugReport\obj\Debug\TestAutomation.ChkBugReport.csprojResolveAssemblyReference.cache
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.ChkBugReport\obj\Debug\TestAutomation.ChkBugReport.dll
+C:\GitRepo\marble_bj\source\TestAutomation\TestAutomation.ChkBugReport\obj\Debug\TestAutomation.ChkBugReport.pdb

@@ -1,0 +1,629 @@
+#--------------------------------- Tell Emacs this is a -*- makefile-*-
+# NOKIA
+# R&D Copenhagen
+# CoreSW/Corleone
+#
+#
+#      Makefile for autogen (product environment only)
+#      -----------------------------------------------
+#      Makefile
+#
+# 
+#
+# Synergy DB:        co1tss
+# Project:           autogen
+# Filename:          MakeAutogen
+#
+# Document code:      -
+#
+# Copyright (c) Nokia. All rights reserved
+#
+# Change history:
+#
+# VERSION     : 80         DRAFT      11-Sep-2008  Stig Holmsten Eliasen
+# REASON      : CR
+# REFERENCE   : CM Synergy task co1tss#17250
+# DESCRIPTION : Included modifications from ou1isasw#139605: master_trace.h to ENTITY_INTERFACES.
+#
+# VERSION     : 78         DRAFT      09-Sep-2008  Stig Holmsten Eliasen
+# REASON      : CR
+# REFERENCE   : CM Synergy task co1tss#17159
+# DESCRIPTION : Included autogen_mcu_trace_misc.c.
+#
+# VERSION     : sa1corsa#77	DRAFT		25-Apr-2008	Stefan Becker
+# REASON      : Improvement
+# REFERENCE   : CM Synergy task sa1corsa#52084
+# DESCRIPTION : Updated location of pn_obj_auto.h.
+#
+# VERSION     : sa1corsa#76	DRAFT		11-Feb-2008	Stefan Becker
+# REASON      : Windows cross-compilation build
+# REFERENCE   : CM Synergy task sa1corsa#46481
+# DESCRIPTION : Flagging correction.
+#
+# VERSION     : 75         DRAFT      31-Oct-2007  Stig Holmsten Eliasen
+# REASON      : CR
+# REFERENCE   : -
+# DESCRIPTION : Include path for PROTOCOLS_ROOT_DIR added.
+#
+# VERSION     : 74         DRAFT      17-Sep-2007  Stig Holmsten Eliasen
+# REASON      : Bug fix
+# REFERENCE   : -
+# DESCRIPTION : Updated to reflect reorganization of macro files.
+#
+# VERSION     : 73         DRAFT      05-Sep-2007  Christian Jacob Hansen
+# REASON      : Bug fix
+# REFERENCE   : -
+# DESCRIPTION : Changed public include file name to master_trace.h
+#
+# VERSION     : 72         DRAFT      24-Aug-2007  Christian Jacob Hansen
+# REASON      : Added new public include files
+# REFERENCE   : SCO 408-1844
+# DESCRIPTION : Added xti_master_trace.h and xti_master_trace_m.h
+#
+# VERSION     : 71         DRAFT      26-Jun-2007  Christian Jacob Hansen
+# REASON      : Bug fix
+# REFERENCE   : -
+# DESCRIPTION : Set product environment when running ti2grp
+#
+# VERSION     : 70         DRAFT      14-Jun-2007  Stig Holmsten Eliasen
+# REASON      : CR
+# REFERENCE   : -
+# DESCRIPTION : Include protocol files split up
+#
+# VERSION     : 69         DRAFT      14-Jun-2007  Stig Holmsten Eliasen
+# REASON      : CR
+# REFERENCE   : -
+# DESCRIPTION : Include files split up
+#
+# VERSION     : 68         DRAFT      07-Jan-2006  Christian Jacob Hansen
+# REASON      : CR
+# REFERENCE   : -
+# DESCRIPTION : Change environment to AUTOGEN_ENVIRONMENT_PRODUCT_MCU
+#
+# VERSION     : 67         DRAFT      04-Jan-2006  Christian Jacob Hansen
+# REASON      : CR
+# REFERENCE   : -
+# DESCRIPTION : Added source file autogen_ref.c
+#
+# VERSION     : 66         DRAFT      21-Dec-2006  Christian Jacob Hansen
+# REASON      : CR
+# REFERENCE   : SCO 010-32541: Define public include files
+# DESCRIPTION : -
+#               
+# VERSION     : 65         DRAFT      05-Dec-2006  Christian Jacob Hansen
+# REASON      : Support "PMD in PMD"
+# REFERENCE   : -
+# DESCRIPTION : Added CDSP_PMD_FILE_NAME and CDSP_PMD_FILE_NAME_RESTRICTED 
+#               env. variables to autogen
+#               
+# VERSION     : 64         DRAFT      07-Nov-2006  Christian Jacob Hansen
+# REASON      : Support restricted/public PMD generation from command line
+# REFERENCE   : -
+# DESCRIPTION : Added command line arguments so public/restricted files are
+#               always generated
+#
+# VERSION     : 63         DRAFT      23-Oct-2006  Christian Jacob Hansen
+# REASON      : Remove support for TRACKER decode DLL
+# REFERENCE   : -
+# DESCRIPTION : Removed TRC_FILE part
+#
+# VERSION     : 62         DRAFT      06-Oct-2006  Christian Jacob Hansen
+# REASON      : Remove support for CDMA
+# REFERENCE   : -
+# DESCRIPTION : Removed source file autogen_protocols_cdma.c
+#
+# VERSION     : 61         DRAFT      27-Sep-2006  Stig Holmsten Eliasen
+# REASON      : CR
+# REFERENCE   : -
+# DESCRIPTION : Support for EUTRAN added.
+#
+# VERSION     : 60         DRAFT      19-Sep-2006  Stig Holmsten Eliasen
+# REASON      : -
+# REFERENCE   : -
+# DESCRIPTION : TRC_FILE path updated according to change in hierarchy.
+#
+# VERSION     : 59         DRAFT      30-May-2006  Stig Holmsten Eliasen
+# REASON      : Fix for non-autogen error
+# REFERENCE   : -
+# DESCRIPTION : Ensure correct PMD file type.
+#
+# VERSION     : 58         DRAFT      01-May-2006  Stig Holmsten Eliasen
+# REASON      : CR
+# REFERENCE   : -
+# DESCRIPTION : Modified to reflect new project structure.
+#
+# VERSION     : 57         DRAFT      27-Feb-2006  Stig Holmsten Eliasen
+# REASON      : No PMD file generated when .out file changed.
+# REFERENCE   : -
+# DESCRIPTION : PMD file re-generated when .out has changed.
+#               Activated via 'pvmgmake all' at project top.
+#
+# VERSION     : 56         DRAFT      30-Jan-2006  Christian Jacob Hansen
+# REASON      : Invbariant trace support
+# REFERENCE   : -
+# DESCRIPTION : Added invariant trace source file
+#
+# VERSION     : 55         DRAFT      26-Jul-2005  Christian Jacob Hansen
+# REASON      : Redesigned PMD code
+# REFERENCE   : -
+# DESCRIPTION : Added several new source files
+#
+# VERSION     : 54         DRAFT      11-Jul-2005  Christian Jacob Hansen
+# REASON      : Build enhancements
+# REFERENCE   : -
+# DESCRIPTION : Bug fix - depend info now generated correctly
+#                         SRCSHOST changed to SRCHOST
+#               Dependency added for .out file
+#
+# VERSION     : 53         DRAFT      26-Jun-2005  Christian Jacob Hansen
+# REASON      : Build enhancements
+# REFERENCE   : -
+# DESCRIPTION : Include symbol information from .out file in PMD (again)
+#
+# VERSION     : 52         DRAFT      16-Jun-2005  Stig Holmsten Eliasen
+# REASON      : Build enhancements disabled
+# REFERENCE   : -
+# DESCRIPTION : Disabled include of symbol information from .out file in PMD.
+#
+# VERSION     : 51         DRAFT      01-Jun-2005  Stig Holmsten Eliasen
+# REASON      : Build enhancements
+# REFERENCE   : -
+# DESCRIPTION : Include symbol information from .out file in PMD.
+#
+# VERSION     : 50         DRAFT      31-Jan-2005  Stig Holmsten Eliasen
+# REASON      : Build problems
+# REFERENCE   : -
+# DESCRIPTION : Problems generating ESIM builds due to mon_trace_group_ids.h
+#
+# VERSION     : 49         DRAFT      09-Dec-2004  Christian Jacob Hansen
+# REASON      : Support new MCU trace concept
+# REFERENCE   : -
+# DESCRIPTION : Added autogen_mcu_trace_xxx source files
+#
+# VERSION     : 47-48      DRAFT      10-Nov-2004  Christian Jacob Hansen
+# REASON      : Support .out file parsing
+# REFERENCE   : -
+# DESCRIPTION : Added source file
+#
+# VERSION     : 46	   DRAFT      03-Nov-2004  Stig Holmsten Eliasen
+# REASON      : Correction
+# REFERENCE   : -
+# DESCRIPTION : New path for TRC_FILE
+#
+# VERSION     : 45	   DRAFT      22-Oct-2004  Christian Jacob Hansen
+# REASON      : Improvement
+# REFERENCE   : -
+# DESCRIPTION : Add support for generating mon_trace_group_ids
+#
+# VERSION     : 44	   DRAFT      14-Oct-2004  Christian Jacob Hansen
+# REASON      : Improvement
+# REFERENCE   : -
+# DESCRIPTION : Remove MED generation
+#
+# VERSION     : 43	   DRAFT      10-Sep-2004  Stig Holmsten Eliasen
+# REASON      : Improvement
+# REFERENCE   : -
+# DESCRIPTION : Added flags
+#
+# VERSION     : 42	   DRAFT      21-Apr-2004  Christian Jacob Hansen
+# REASON      : Improvement
+# REFERENCE   : -
+# DESCRIPTION : Added more PMD source files
+#
+# VERSION     : 41	   DRAFT      30-Mar-2004  Christian Jacob Hansen
+# REASON      : Improvement
+# REFERENCE   : -
+# DESCRIPTION : Added more source files
+#
+# VERSION     : ou_isasw#40 DRAFT     16-Mar-2004  Tuomo Alasalmi
+# REASON      : Improvement
+# REFERENCE   : Continuus task ou_isasw#26627
+# DESCRIPTION : Provide backward compatibility for version.c changes.
+#
+# VERSION     : ou_isasw#39 DRAFT     08-Mar-2004  Tuomo Alasalmi
+# REASON      : Improvement
+# REFERENCE   : Continuus task ou_isasw#26132
+# DESCRIPTION : Use version.c from $PRODUCT_TOP/include.
+#
+# VERSION     : 38	   DRAFT      03-Dec-2003  Christian Jacob Hansen
+# REASON      : Change
+# REFERENCE   : -
+# DESCRIPTION : Change ATI path for disperin file
+#
+# VERSION     : 37	   DRAFT      12-Nov-2003  Christian Jacob Hansen
+# REASON      : Error: autogen.log not removed with clean
+# REFERENCE   : -
+# DESCRIPTION : Remove autogen.log when clean
+#
+# VERSION     : 36	   DRAFT      29-Oct-2003  Christian Jacob Hansen
+# REASON      : Integration
+# REFERENCE   : Task co_pctls#23306
+# DESCRIPTION : Added source file autogen_prop.c
+#
+# VERSION     : 35 	   DRAFT      30-Sep-2003  Christian Jacob Hansen
+# REASON      : Improvements
+# REFERENCE   : Task co_pctls#23066
+# DESCRIPTION : Add several source files to project
+#               
+# VERSION     : 34 	   DRAFT      20-Apr-2003  Christian Jacob Hansen
+# REASON      : Improvements
+# REFERENCE   : Task co_pctls#22585, co_pctls#22577
+# DESCRIPTION : Remove HTML output from product environment
+#               Change path to disperin file
+#               
+# VERSION     : 33 	   DRAFT      11-Apr-2003  Christian Jacob Hansen
+# REASON      : Improvements
+# REFERENCE   : PCP:MB03041443612, 
+# DESCRIPTION : Merged MakeAutogen and MakeMon2MED
+#               
+# VERSION     : 32 	   DRAFT      25-Feb-2003  Christian Jacob Hansen
+# REASON      : Add RPC interfaces
+# REFERENCE   : Task co_pctls#20672
+# DESCRIPTION : Changed included list of source files
+#
+# VERSION     : 31 	   DRAFT      21-Jan-2003  Christian Jacob Hansen
+# REASON      : Autogen/PMD compression optimization
+# REFERENCE   : -
+# DESCRIPTION : Changed included list of source files
+#
+# VERSION     : 30	   DRAFT      28-Nov-2002  Christian Jacob Hansen
+# REASON      : Bug fix with code (version 29)
+# REFERENCE   : -
+# DESCRIPTION : -
+#
+# VERSION     : 29	   DRAFT      28-Nov-2002  Christian Jacob Hansen
+# REASON      : Make file does not work on rhino platforms
+# REFERENCE   : LN PCP Errors: EJ02112847689
+# DESCRIPTION : Changed path to version.c file
+#
+# VERSION     : 28.1	   DRAFT      01-Nov-2002  Christian Jacob Hansen
+# REASON      : Remove macro expansion optimization
+# REFERENCE   : -
+# DESCRIPTION : Remove file autogen_server.c again
+#
+# VERSION     : 28	   DRAFT      17-Oct-2002  Christian Jacob Hansen
+# REASON      : Add file autogen_server.c
+# REFERENCE   : -
+# DESCRIPTION : -
+#
+# VERSION     : 27	   DRAFT      05-Sep-2002  Christian Jacob Hansen
+# REASON      : Add new autogen_coresw_xx source files
+# REFERENCE   : Continuus task co_pctls#17102
+# DESCRIPTION : -
+#
+# VERSION     : 26	   DRAFT      22-Aug-2002  Christian Jacob Hansen
+# REASON      : Bugfix: DISFERIN_FILE to DISPERIN_FILE
+# REFERENCE   : Continuus task co_pctls#17096
+# DESCRIPTION : -
+#
+# VERSION     : 25	   DRAFT      23-Jul-2002  Christian Jacob Hansen
+# REASON      : Add import of dispering.cfg and jdc.trc files
+# REFERENCE   : Continuus task co_pctls#16404
+# DESCRIPTION : -
+#
+# VERSION     : 24	   DRAFT      08-Jul-2002  Christian Jacob Hansen
+# REASON      : Changes
+# REFERENCE   : CR02051760360 / Continuus task co_pctls#16243
+#               CR02051760921 / Continuus task co_pctls#16214
+# DESCRIPTION : Added support for specifying filepath for os_trace_data.txt and pn_obj_auto.h
+#
+# VERSION     : 23	   DRAFT      01-Jul-2002  Stefan Becker
+# REASON      : Optimization
+# REFERENCE   : Continuus task sa_wcdma#122???
+# DESCRIPTION : Run autogen only when necessary.
+#
+# VERSION     : 22         DRAFT      18-Jun-2002  Stefan Becker / Christian Jacob Hansen
+# REASON      : Bug fix
+# REFERENCE   : -
+# DESCRIPTION : Removed isihdr options completely
+#               Added AUTOGEN_ENVIRONMENT_PRODUCT flag
+#
+# VERSION     : 21         DRAFT      13-Jun-2002  Stefan Becker / Christian Jacob Hansen
+# REASON      : Only compiles in HP-UX
+# REFERENCE   : -
+# DESCRIPTION : Changed completely to be based on general core sw template
+#               Added directly inclusion of version.c
+#
+# VERSION     : 20         DRAFT      23-May-2002  Christian Jacob Hansen
+# REASON      : Added/removed files
+# REFERENCE   : -
+# DESCRIPTION : Added autogen_object.* and autogen_symbols.h
+#               Removed output_packunpack.* (and pack option to Make file)
+#
+# VERSION     : 19         DRAFT      18-Feb-2002  Christian Jacob Hansen
+# REASON      : Doesn't execute autogen exe in some environments
+# REFERENCE   : -
+# DESCRIPTION : Always execute autogen in current working directory
+#
+# VERSION     : 18         DRAFT      11-Dec-2001  Christian Jacob Hansen
+# REASON      : -
+# REFERENCE   : -
+# DESCRIPTION : Added distclean part
+#
+# VERSION     : 17         DRAFT      28-Nov-2001  Christian Jacob Hansen
+# REASON      : -
+# REFERENCE   : -
+# DESCRIPTION : Updated clean part
+#
+# VERSION     : 16         DRAFT      26-Nov-2001  Danny Poulsen
+# REASON      : -
+# REFERENCE   : -
+# DESCRIPTION : Removed unnessesary stuff...
+#
+# VERSION     : 15         DRAFT      01-Nov-2001  Christian Jacob Hansen
+# REASON      : Changes
+# REFERENCE   : -
+# DESCRIPTION : Added autogen_util.* files
+#               Task co_pctls#11465
+#
+# VERSION     : 14         DRAFT      29-Oct-2001  Christian Jacob Hansen
+# REASON      : Changes
+# REFERENCE   : -
+# DESCRIPTION : Added ISI header output as possible output
+#               Task co_pctls#11398
+#
+# VERSION     : 13         DRAFT      29-Oct-2001  Christian Jacob Hansen
+# REASON      : Changes
+# REFERENCE   : -
+# DESCRIPTION : Added pack output as possible output. Updated header
+#               Task co_pctls#11378
+#
+# VERSION     : 11         DRAFT      16-Oct-2001  Christian Jacob Hansen
+# REASON      : Changes
+# REFERENCE   : -
+# DESCRIPTION : Updated names of configuration files
+#               Task co_pctls#11107
+#
+# VERSION     : 10         DRAFT      26-Sep-2001  Christian Jacob Hansen
+# REASON      : Change
+# REFERENCE   : -
+# DESCRIPTION : Changed output name to autogen_exe
+#
+# VERSION     : 9          DRAFT      05-Sep-2001  Christian Jacob Hansen
+# REASON      : Change
+# REFERENCE   : -
+# DESCRIPTION : Removed ISI header output files
+#
+# VERSION     : 8          DRAFT      23-Aug-2001  Christian Jacob Hansen
+# REASON      : Bug fix
+# REFERENCE   : -
+# DESCRIPTION : -
+#
+# VERSION     : 7          DRAFT      23-Aug-2001  Christian Jacob Hansen
+# REASON      : Changes
+# REFERENCE   : -
+# DESCRIPTION : Simplified file
+#               Removed several options
+#               Added product include path to compile options
+#
+# VERSION     : 6          DRAFT      15-Feb-2001  Petri Yli-Halkola
+# REASON      : Release 000.001.001
+# REFERENCE   : -
+# DESCRIPTION : moved linking/copying respnsibility away from fetch script 
+#               back to MakeAutogen. This makefile is based on
+#               baseline of fixed release_000_001_000
+#               added message definitions fetching as option for future use
+#               see macro_files:;
+#
+# VERSION     : 5          DRAFT      30-Nov-2000  Petri Yli-Halkola
+# REASON      : Release 0000.0001.0000
+# REFERENCE   : -
+# DESCRIPTION : moved linking/copying responsibilities for fetch script
+#
+# VERSION     : 4          DRAFT      16-Nov-2000  Petri Yli-Halkola
+# REASON      : first release (testing)
+# REFERENCE   : -
+# DESCRIPTION : Covers only autogeneration application,
+#               html, isihdr and interpreter
+#
+# VERSION     : 3          DRAFT      28-Aug-2000  Isto Hunttila
+# REASON      : Correction
+# REFERENCE   : -
+# DESCRIPTION : Added output directory creation if the directory does
+#               not exist.
+#
+# VERSION     : 2          DRAFT      28-Aug-2000  Isto Hunttila
+# REASON      : Correction
+# REFERENCE   : -
+# DESCRIPTION : MAKEFILE name corrected, added comments about usage.
+#
+# VERSION     : 1          DRAFT      25-Aug-2000  Isto Hunttila
+# REASON      : First version
+# REFERENCE   : -
+# DESCRIPTION : -
+#----------------------------------------------------------------------
+# Usage:
+#
+# Make PMD file:
+#     gmake -f MakeAutogen pmd
+#
+# Make mon_trace_group_ids:
+#     gmake -f MakeAutogen mon_trace_group_ids.h
+#
+#----------------------------------------------------------------------
+
+# Make sure targets are deleted on error
+.DELETE_ON_ERROR:
+
+MAKEFILE = MakeAutogen
+
+#
+# List of source code files (Autogen)
+#
+SRCHOST_AUTOGEN = \
+	autogen_check.c \
+	autogen_coresw.c \
+	autogen_coresw2.c \
+	autogen_coresw3.c \
+	autogen_coresw4.c \
+	autogen_coresw_cl.c \
+	autogen_coresw_mon.c \
+	autogen_def.c \
+	autogen_dsp.c \
+	autogen_iam.c \
+	autogen_iam2.c \
+	autogen_iam3.c \
+	autogen_init.c \
+	autogen_invariant_trace.c \
+	autogen_main.c \
+	autogen_mcu_trace_core.c \
+	autogen_mcu_trace_protocol.c \
+	autogen_mcu_trace_isa_ui.c \
+	autogen_mcu_trace_misc.c \
+	autogen_object.c \
+	autogen_parsexml.c \
+	autogen_prop.c \
+	autogen_protocols.c \
+	autogen_protocols2.c \
+	autogen_protocols3.c \
+	autogen_protocols_gsm.c \
+	autogen_protocols_eutran.c \
+	autogen_protocols_wcdma.c \
+	autogen_ref.c \
+	autogen_symbols.c \
+	autogen_user.c \
+	autogen_util.c \
+	autogen_vendor.c \
+	dwarfReader.c \
+	elfReader.c \
+	list.c \
+	output_pmd.c \
+	output_pmd_debug.c \
+	output_pmd_elf.c \
+	output_pmd_generate.c \
+	output_pmd_info.c \
+	output_pmd_msg.c \
+	output_pmd_typedef_hierarchy.c \
+	output_pmd_types.c \
+	pmd_compression2.c \
+	pmd_constants.c \
+	pmd_stringpool.c \
+	pmd_heap.c \
+	version.c
+
+#
+# List of source code files (ti2)
+#
+SRCHOST_TI2 = ti2grp.c
+
+ti2grp.o: $(PRODUCT_TOP)/include/mon_grp.ti
+
+HOSTCFLAGS += $(CFLAGS_AUTOGEN)
+HOSTDEPFLAGS += $(CFLAGS_AUTOGEN)
+IPATH += -I$(PRODUCT_TOP)/$(PROTOCOLS_ROOT_DIR)/protocol_sw_interface
+IPATH += -I$(PRODUCT_TOP)/$(PROTOCOLS_ROOT_DIR)/include
+IPATH += -I$(PRODUCT_TOP)/$(S40_UI_ROOT_DIR)/include
+
+
+#
+# List of source code files
+#
+SRCHOST = $(SRCHOST_AUTOGEN) $(SRCHOST_TI2)
+
+
+PROGRAM_AUTOGEN = autogen_exe.exe
+PROGRAM_TI2     = ti2grp.exe
+
+
+#
+#  Compile and load a program or library
+#
+
+# File which contains dynamically assigned object ID's
+PN_OBJ_FILE = $(PRODUCT_TOP)/include/pn_obj_auto.h
+
+# GPRS Trace configuration file to be embedded in the generated PMD file
+DISPERIN_FILE = $(PRODUCT_TOP)/$(ATI_SUB_DIR)/trace_decoder/disperin.cfg
+
+# MCU software
+OUT_FILE = $(PRODUCT_TOP)/$(OUTFILE)
+
+all:	$(PROGRAM_AUTOGEN) $(PROGRAM_TI2)
+
+ifneq ($(wildcard $(PRODUCT_TOP)/include/version.c),)
+version.c: $(PRODUCT_TOP)/include/version.c
+else
+ifeq ($(PRODUCT_CONFIGURATION),)
+version.c: $(PRODUCT_TOP)/config/version.c
+else
+version.c: $(PRODUCT_CONFIGURATION)/config/version.c
+endif
+endif
+	$(RM) $@; $(LN) $< $@
+
+OBJHOST_AUTOGEN = $(SRCHOST_AUTOGEN:%.c=%.o)
+
+$(OBJHOST_AUTOGEN): %.o: %.c
+	$(HOSTCC) \
+	-DAUTOGEN_ENVIRONMENT_PRODUCT_MCU \
+	$(HOSTCFLAGS) $(IPATH) $< -o $@
+
+$(PROGRAM_AUTOGEN): $(OBJHOST_AUTOGEN)
+	$(HOSTCC) $^ -lm -o $@
+
+OBJHOST_TI2     = $(SRCHOST_TI2:%.c=%.o)
+
+$(OBJHOST_TI2): %.o: %.c
+	$(HOSTCC) \
+	-DAUTOGEN_ENVIRONMENT_PRODUCT_MCU \
+	$(HOSTCFLAGS) $(IPATH) $< -o $@
+
+$(PROGRAM_TI2): $(OBJHOST_TI2)
+	$(HOSTCC) $^ -o $@ \
+
+RUN_PROGRAM_TI2  = set -e; ./$< >$@
+ifneq ($(findstring cygwin, $(MACHTYPE)), cygwin)
+RUN_PROGRAM_TI2 += ; $(CreateSymbolicLinkToInclude)
+endif
+
+mon_trace_group_ids.h: $(PROGRAM_TI2)
+	$(RUN_PROGRAM_TI2)
+
+FILES2CLEAN = $(OBJHOST_AUTOGEN) $(PROGRAM_AUTOGEN) \
+$(OBJHOST_TI2) $(PROGRAM_TI2) version.c autogen.log
+
+FILES2DISTCLEAN += mon_trace_group_ids.h
+
+ENTITY_INTERFACES = \
+master_trace.h
+
+PUBLIC_INTERFACES = \
+mcu_trace_conf.h \
+isi_macros_empty.h
+
+define RunAutogen
+	@target=$(@:%-stamp=%); \
+	echo "Generating $$target files using autogen...\n"; \
+	if [ ! -d $$target ]; then mkdir $$target; fi; \
+	./$(PROGRAM_AUTOGEN) -out$(OUT_FILE) -disp$(DISPERIN_FILE) -obj$(PN_OBJ_FILE) \
+		-embed_pmd$(CDSP_PMD_FILE_NAME) -embed_pmd_restricted$(CDSP_PMD_FILE_NAME_RESTRICTED) \
+		-d$$target -opmd_public -opmd_restricted -o$$target && touch $@
+endef
+
+.PHONY: pmd
+
+ifneq ($(wildcard $(DISPERIN_FILE)),)
+pmd-stamp: $(DISPERIN_FILE)
+endif
+
+ifneq ($(wildcard $(PN_OBJ_FILE)),)
+pmd-stamp: $(PN_OBJ_FILE)
+endif
+
+ifneq ($(wildcard $(OUT_FILE)),)
+pmd-stamp: $(OUT_FILE)
+endif
+
+pmd-stamp: $(PROGRAM_AUTOGEN)
+	$(RunAutogen)
+
+pmd: pmd-stamp
+
+
+clean::
+	$(RM) -r pmd *-stamp
+
+include $(MAKEFILE_TEMPLATE)
+
+################################################################################
+# DO NOT DELETE

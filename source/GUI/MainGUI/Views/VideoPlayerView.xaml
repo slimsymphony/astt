@@ -1,0 +1,108 @@
+﻿<Views:UcBase x:Class="Marble.Views.VideoPlayerView" x:Name="UcVideoPlayerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Views="clr-namespace:Marble.Views"
+              xmlns:CustomControls="clr-namespace:MarbleLibrary.CustomControls;assembly=MarbleLibrary"
+              mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600" MinWidth="300" Width="{Binding ElementName=mediaElementVideo, Path=RenderSize.Width, UpdateSourceTrigger=PropertyChanged}">
+    
+    <GroupBox x:Name="groupBoxConsoleOutput" HorizontalAlignment="Stretch" Grid.Row="5" Grid.ColumnSpan="3" Header="{Binding ElementName=UcVideoPlayerView, Path=VideoFileName, UpdateSourceTrigger=PropertyChanged}" Margin="2" Style="{DynamicResource MarbleGroupBox}">
+        <Grid x:Name="gridRoot">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <MediaElement x:Name="mediaElementVideo" LoadedBehavior="Manual" Stretch="None" ScrubbingEnabled="True" />
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Margin="4" ToolTip="Elapsed Time">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0:D2}:{1:D2}:{2:D2}">
+                            <Binding ElementName="UcVideoPlayerView" Path="CurrentTime.Hours" UpdateSourceTrigger="PropertyChanged" />
+                            <Binding ElementName="UcVideoPlayerView" Path="CurrentTime.Minutes" UpdateSourceTrigger="PropertyChanged" />
+                            <Binding ElementName="UcVideoPlayerView" Path="CurrentTime.Seconds" UpdateSourceTrigger="PropertyChanged" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+
+                <Slider Grid.Column="1" x:Name="sliderSeekBar" Thumb.DragStarted="sliderSeekBar_DragStarted" Thumb.DragCompleted="sliderSeekBar_DragCompleted" ValueChanged="sliderSeekBar_ValueChanged" />
+
+                <TextBlock Grid.Column="2" Margin="4" ToolTip="Remaining Time">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}-{0:D2}:{1:D2}:{2:D2}">
+                            <Binding ElementName="UcVideoPlayerView" Path="TimeLeft.Hours" UpdateSourceTrigger="PropertyChanged" />
+                            <Binding ElementName="UcVideoPlayerView" Path="TimeLeft.Minutes" UpdateSourceTrigger="PropertyChanged" />
+                            <Binding ElementName="UcVideoPlayerView" Path="TimeLeft.Seconds" UpdateSourceTrigger="PropertyChanged" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" Height="28">
+                    <!--<Button x:Name="buttonRewind" Content="(-(-" Width="50" Margin="2" Style="{DynamicResource MarbleButton}" Click="buttonRewind_Click" />-->
+                    <!--<Button x:Name="buttonPlayFromStart" Content="| >" Width="50" Margin="2" Style="{DynamicResource MarbleButton}" Click="buttonPlayFromStart_Click" />-->
+                    <Button x:Name="buttonPlayPause" FontSize="16" Width="100" Margin="2" Click="buttonPlayPause_Click" Style="{StaticResource MarbleButton}">
+                        <TextBlock FontFamily="Webdings" FontSize="16">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Text" Value=""></Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=UcVideoPlayerView, Path=PlayerStatus, UpdateSourceTrigger=PropertyChanged}" Value="Playing">
+                                            <Setter Property="Text" Value="" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Button>
+                    <Button x:Name="buttonStop" Width="50" Margin="2" Click="buttonStop_Click" >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MarbleButton}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=UcVideoPlayerView, Path=PlayerStatus, UpdateSourceTrigger=PropertyChanged}" Value="Stopped">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <TextBlock FontFamily="Webdings" FontSize="16" Text="" />
+                    </Button>
+                    <!--<Button x:Name="buttonFastForward" Content=">>" Width="50" Margin="2" Style="{DynamicResource MarbleButton}" Click="buttonFastForward_Click" />-->
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Height="28">
+                    <Button x:Name="buttonPreviousFrame" Width="50" Margin="2" Style="{DynamicResource MarbleButton}" Click="buttonPreviousFrame_Click"
+                            ToolTip="Jumps approximately one frame backward (200 ms).">
+                        <Button.Content>
+                            <TextBlock Text="-" FontWeight="ExtraBold" FontSize="16" Margin="0,-6,0,0" />
+                        </Button.Content>
+                    </Button>
+                    <Button x:Name="buttonNextFrame" Width="50" Margin="2" Style="{DynamicResource MarbleButton}" Click="buttonNextFrame_Click"
+                            ToolTip="Jumps approximately one frame forward (200 ms).">
+                        <Button.Content>
+                            <TextBlock Text="+" FontWeight="ExtraBold" FontSize="16" Margin="0,-6,0,0" />
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+
+        </Grid>
+    </GroupBox>
+</Views:UcBase>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RoleControlModules>
+  <RoleControlModule UID="RcmDcPowerSupplyAgilent663Xxx">
+    <Header>
+      <Name>TeaRcmDcPowerSupplyAgilent663Xxx</Name>
+      <Description>TeaRcm...Add description</Description>
+      <Vendor>Nokia Tea group</Vendor>
+      <Version>
+        <MajorVersion></MajorVersion>
+        <MinorVersion></MinorVersion>
+        <Revision></Revision>
+      </Version>
+    </Header>
+    <ComponentReference>
+      <AssemblyReference>
+        <AssemblyName>Tea.Rcm.DcPowerSupplyAgilent663Xxx.dll</AssemblyName>
+        <ClassName>RcmDcPowerSupplyAgilent663Xxx</ClassName>
+      </AssemblyReference>
+    </ComponentReference>
+    <Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <UsedDriverUid>RcmDcPowerSupplyAgilent663Xxx</UsedDriverUid>
+      <HasOwnUserControl>false</HasOwnUserControl>
+      <ShowUserControlInTestInformation>false</ShowUserControlInTestInformation>
+    </Configuration>
+  </RoleControlModule>
+</RoleControlModules>

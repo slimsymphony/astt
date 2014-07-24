@@ -1,0 +1,532 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:CustomControls="clr-namespace:MarbleLibrary.CustomControls"
+    xmlns:Converters="clr-namespace:MarbleLibrary.Converters">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="MarbleColors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type CustomControls:MarbleMainMenuItem}">
+        <Setter Property="FontSize" Value="12pt" />
+        <Setter Property="Foreground" Value="{StaticResource MarbleMainMenuItemNotSelectedColor}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CustomControls:MarbleMainMenuItem}">
+                    <Button Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" Height="{TemplateBinding Height}" ToolTipService.ShowDuration="30000">
+                        <Button.ToolTip>
+                            <Grid x:Name="gridToolTipRoot">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Rectangle Grid.Row="0" Fill="{StaticResource MarbleBlueCyanGradientBackground}" RadiusX="5" RadiusY="5" HorizontalAlignment="Stretch" />
+                                
+                                <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="5,2,5,2">
+                                    <TextBlock Text="{TemplateBinding CustomControls:MarbleMainMenuItem.ToolTipTitle}" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}" 
+                                               FontFamily="Calibri" Typography.Capitals="SmallCaps" FontSize="12pt"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="5,2,5,2">
+                                    <TextBlock Text="{TemplateBinding CustomControls:MarbleMainMenuItem.ToolTipDescription}" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}" />
+                                </StackPanel>
+                            </Grid>
+                        </Button.ToolTip>
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <StackPanel Background="{TemplateBinding Background}">
+                                    <ContentPresenter />
+                                </StackPanel>
+                                <ControlTemplate.Triggers>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsMouseOver" Value="True" />
+                                            <!--<Condition Property="IsSelected" Value="False"/>-->
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Background" Value="{StaticResource MarblePurpleHighlightBackground}" />
+                                        <Setter Property="Cursor" Value="Hand" />
+                                    </MultiTrigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource MarblePurplePressedBackground}"></Setter>
+                                    </Trigger>
+                                    <!--<Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource SelectedItemBackground}" />
+                                    </Trigger>-->
+                                    <Trigger Property="IsMouseOver" Value="False">
+                                        <Setter Property="Background" Value="Transparent" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <StackPanel x:Name="stackPanelItemContent" Orientation="Horizontal">
+                            <Image x:Name="imageMenuItemIcon" Source="{TemplateBinding LargeImageSource}" 
+                                   HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Margin="2,2,5,2"/>
+                            <!-- #FF2D2D2D  #FF474747  #FFE1E1E1-->
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock x:Name="textBlockLabelText" Text="{TemplateBinding Label}" FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" 
+                                           Typography.Capitals="SmallCaps" FontFamily="Calibri" UseLayoutRounding="False" SnapsToDevicePixels="True">
+                                    <!--<TextBlock.Effect>
+                                        <DropShadowEffect Color="Black" Direction="180" BlurRadius="5" ShadowDepth="1" />
+                                    </TextBlock.Effect>-->
+                                </TextBlock>
+                                <!--<StackPanel.Effect>
+								<DropShadowEffect Color="Black" Direction="0" BlurRadius="15" ShadowDepth="0" />
+							</StackPanel.Effect>-->
+                                <!--<StackPanel.Effect>
+									<DropShadowEffect Color="Black" Direction="0" BlurRadius="5" ShadowDepth="2" />
+								</StackPanel.Effect>-->
+                            </StackPanel>
+                        </StackPanel>
+                    </Button>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <!--<Condition Property="IsSelected" Value="False"/>-->
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="textBlockLabelText" Property="Foreground" Value="{StaticResource MarbleMainMenuItemSelectedColor}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="stackPanelItemContent" Property="Opacity" Value="0.4" />
+                        </MultiTrigger>
+                        <Trigger Property="CustomControls:MarbleMainMenuItem.IsSelected" Value="True">
+                            <Setter TargetName="textBlockLabelText" Property="FontWeight" Value="Bold"/>
+                            <Setter TargetName="textBlockLabelText" Property="Foreground" Value="{StaticResource MarbleMainMenuItemSelectedColor}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <!--<Setter Property="ToolTip">
+            <Setter.Value>
+                
+            </Setter.Value>
+        </Setter>-->
+    </Style>
+
+    <Style TargetType="{x:Type CustomControls:MarbleMainMenuToggleItem}">
+        <Setter Property="FontSize" Value="12pt" />
+        <Setter Property="Foreground" Value="{StaticResource MarbleMainMenuItemNotSelectedColor}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CustomControls:MarbleMainMenuToggleItem}">
+                    <ToggleButton Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" Height="{TemplateBinding Height}" ToolTipService.ShowDuration="30000">
+                        <ToggleButton.ToolTip>
+                            <Grid x:Name="gridToolTipRoot">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Rectangle Grid.Row="0" Fill="{StaticResource MarbleBlueCyanGradientBackground}" RadiusX="5" RadiusY="5" HorizontalAlignment="Stretch" />
+
+                                <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="5,2,5,2">
+                                    <TextBlock Text="{TemplateBinding CustomControls:MarbleMainMenuToggleItem.ToolTipTitle}" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}" 
+                                               FontFamily="Calibri" Typography.Capitals="SmallCaps" FontSize="12pt"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="5,2,5,2">
+                                    <TextBlock Text="{TemplateBinding CustomControls:MarbleMainMenuToggleItem.ToolTipDescription}" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}" />
+                                </StackPanel>
+                            </Grid>
+                        </ToggleButton.ToolTip>
+                        <ToggleButton.Template>
+                            <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                <StackPanel Background="{TemplateBinding Background}">
+                                    <ContentPresenter />
+                                </StackPanel>
+                                <ControlTemplate.Triggers>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsMouseOver" Value="True" />
+                                            <!--<Condition Property="IsSelected" Value="False"/>-->
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Background" Value="{StaticResource MarblePurpleHighlightBackground}" />
+                                        <Setter Property="Cursor" Value="Hand" />
+                                    </MultiTrigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource MarblePurplePressedBackground}"></Setter>
+                                    </Trigger>
+                                    <!--<Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource SelectedItemBackground}" />
+                                    </Trigger>-->
+                                    <Trigger Property="IsMouseOver" Value="False">
+                                        <Setter Property="Background" Value="Transparent" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </ToggleButton.Template>
+                        <StackPanel x:Name="stackPanelItemContent" Orientation="Horizontal">
+                            <Image x:Name="imageMenuItemIcon" Source="{TemplateBinding LargeImageSource}" 
+                                   HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Margin="2,2,5,2"/>
+                            <!-- #FF2D2D2D  #FF474747  #FFE1E1E1-->
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock x:Name="textBlockLabelText" Text="{TemplateBinding Label}" FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" 
+                                           Typography.Capitals="SmallCaps" FontFamily="Calibri" UseLayoutRounding="False" SnapsToDevicePixels="True">
+                                    <!--<TextBlock.Effect>
+                                        <DropShadowEffect Color="Black" Direction="180" BlurRadius="5" ShadowDepth="1" />
+                                    </TextBlock.Effect>-->
+                                </TextBlock>
+                                <!--<StackPanel.Effect>
+								<DropShadowEffect Color="Black" Direction="0" BlurRadius="15" ShadowDepth="0" />
+							</StackPanel.Effect>-->
+                                <!--<StackPanel.Effect>
+									<DropShadowEffect Color="Black" Direction="0" BlurRadius="5" ShadowDepth="2" />
+								</StackPanel.Effect>-->
+                            </StackPanel>
+                        </StackPanel>
+                    </ToggleButton>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <!--<Condition Property="IsSelected" Value="False"/>-->
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="textBlockLabelText" Property="Foreground" Value="{StaticResource MarbleMainMenuItemSelectedColor}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="stackPanelItemContent" Property="Opacity" Value="0.4" />
+                        </MultiTrigger>
+                        <Trigger Property="CustomControls:MarbleMainMenuItem.IsSelected" Value="True">
+                            <Setter TargetName="textBlockLabelText" Property="FontWeight" Value="Bold"/>
+                            <Setter TargetName="textBlockLabelText" Property="Foreground" Value="{StaticResource MarbleMainMenuItemSelectedColor}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter TargetName="imageMenuItemIcon" Property="Opacity" Value="0.4" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <!--<Setter Property="ToolTip">
+            <Setter.Value>
+                
+            </Setter.Value>
+        </Setter>-->
+    </Style>
+
+    <Style x:Key="MarbleMainMenuButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CustomControls:MarbleMainMenuItem}">
+                    <Button Command="{TemplateBinding Command}" Height="{TemplateBinding Height}">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Button.Template>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{TemplateBinding LargeImageSource}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20"/>
+                            <!-- #FF2D2D2D  #FF474747  #FFE1E1E1-->
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="{TemplateBinding Label}" FontSize="10pt" Foreground="#FFFCF6FF" VerticalAlignment="Center">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect Color="Black" Direction="180" BlurRadius="5" ShadowDepth="1" />
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                                <!--<StackPanel.Effect>
+								<DropShadowEffect Color="Black" Direction="0" BlurRadius="15" ShadowDepth="0" />
+							</StackPanel.Effect>-->
+                                <!--<StackPanel.Effect>
+									<DropShadowEffect Color="Black" Direction="0" BlurRadius="5" ShadowDepth="2" />
+								</StackPanel.Effect>-->
+                            </StackPanel>
+                        </StackPanel>
+                    </Button>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="MarbleMainMenuTextBlockGroup" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="10pt" />
+        <Setter Property="Foreground" Value="DarkGray" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="5,10,0,5" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="Black" Direction="180" BlurRadius="5" ShadowDepth="1" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type CustomControls:MarbleMainDeviceItem}">
+        <Setter Property="FontSize" Value="12pt" />
+        <Setter Property="Foreground" Value="{StaticResource MarbleMainMenuItemNotSelectedColor}" />
+        <Setter Property="Template">
+        <Setter.Value>
+            <ControlTemplate TargetType="{x:Type CustomControls:MarbleMainDeviceItem}">
+                <ToggleButton Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" Height="{TemplateBinding Height}" ToolTipService.ShowDuration="30000"
+                              IsHitTestVisible="{Binding ElementName=popupDetails, Path=IsOpen, Mode=OneWay, Converter={Converters:InvertBoolValueConverter}}"
+                              ToolTipService.IsEnabled="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Converter={Converters:InvertBoolValueConverter}}">
+                    <ToggleButton.ToolTip>
+                        <Grid x:Name="gridToolTipRoot">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Rectangle Grid.Row="0" Fill="{StaticResource MarbleBlueCyanGradientBackground}" RadiusX="5" RadiusY="5" HorizontalAlignment="Stretch" />
+
+                            <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="5,2,5,2">
+                                <TextBlock Text="{TemplateBinding CustomControls:MarbleMainDeviceItem.ToolTipTitle}" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}" 
+                                            FontFamily="Calibri" Typography.Capitals="SmallCaps" FontSize="12pt"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="5,2,5,2">
+                                <TextBlock Text="{TemplateBinding CustomControls:MarbleMainDeviceItem.ToolTipDescription}" Foreground="{StaticResource MarbleNormalTextColorOnDarkBackground}" />
+                            </StackPanel>
+                        </Grid>
+                    </ToggleButton.ToolTip>
+                    <ToggleButton.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="(ToggleButton.Opacity)"
+                                        From="0" To="1" Duration="0:0:1" />                                                         
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>       
+                    </ToggleButton.Triggers>
+                    <ToggleButton.Template>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <StackPanel Background="{TemplateBinding Background}">
+                                <ContentPresenter />
+                            </StackPanel>
+                            <ControlTemplate.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True" />
+                                        <!--<Condition Property="IsSelected" Value="False"/>-->
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Background" Value="{StaticResource MarblePurpleHighlightBackground}" />
+                                    <Setter Property="Cursor" Value="Hand" />
+                                </MultiTrigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource MarblePurplePressedBackground}"></Setter>
+                                </Trigger>
+                                <!--<Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource SelectedItemBackground}" />
+                                </Trigger>-->
+                                <Trigger Property="IsMouseOver" Value="False">
+                                    <Setter Property="Background" Value="Transparent" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </ToggleButton.Template>
+                    <Grid x:Name="gridItemContent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image x:Name="imageMenuItemIcon" Source="{TemplateBinding LargeImageSource}" 
+                                HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Margin="2,2,5,2"/>
+                        <!-- #FF2D2D2D  #FF474747  #FFE1E1E1-->
+                        <TextBlock Grid.Column="1" x:Name="textBlockLabelText" Text="{TemplateBinding Label}" FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" 
+                                    Typography.Capitals="SmallCaps" FontFamily="Calibri" UseLayoutRounding="False" SnapsToDevicePixels="True"/>
+                        <CheckBox Grid.Column="2" IsChecked="{Binding RelativeSource={RelativeSource AncestorType={x:Type CustomControls:MarbleMainDeviceItem}}, Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5 0 0 0"></CheckBox>
+                        <TextBlock Grid.Column="3" Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type CustomControls:MarbleMainDeviceItem}}, Path=MainIndex}"
+                                    FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"
+                                    Typography.Capitals="SmallCaps" FontFamily="Calibri" UseLayoutRounding="False" SnapsToDevicePixels="True">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Visible"></Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type CustomControls:MarbleMainDeviceItem}}, Path=MainIndex}" Value="0">
+                                            <Setter Property="Visibility" Value="Hidden"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <Popup x:Name="popupDetails" IsOpen="{Binding RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}, Path=IsChecked}"
+                                        AllowsTransparency="True" StaysOpen="False" PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}" Placement="Right" HorizontalOffset="5" PopupAnimation="Fade">
+                            <Popup.Style>
+                                <Style TargetType="{x:Type Popup}">
+                                    <Setter Property="TextBlock.Foreground" Value="{StaticResource MarbleNormalTextColorOnDarkBackground}" />
+                                    <Setter Property="TextBlock.FontFamily" Value="Calibri" />
+                                    <Setter Property="Typography.Capitals" Value="SmallCaps"/>
+                                    <Setter Property="TextBlock.FontSize" Value="10pt" />
+                                </Style>
+                            </Popup.Style>
+                            <StackPanel Background="{StaticResource MarbleDarkPurleBackgroundGradient}">
+                                <!--<TextBlock Text="Connection usage will be selected here in the future.&#x0a;Currently Marble framework utilizes the first available connection." Foreground="White" Margin="10"/>-->
+                                    
+                                <!-- Device information -->
+                                <Grid Margin="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <!-- RM-Code -->
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="10"></ColumnDefinition>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Height="20" HorizontalAlignment="Left" Source="{TemplateBinding LargeImageSource}" VerticalAlignment="Center">
+                                        <Image.Style>
+                                            <Style TargetType="Image">
+                                                <Setter Property="ToolTip" Value="Hardware"></Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsEmulator}" Value="True">
+                                                        <Setter Property="ToolTip" Value="Emulator"></Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                    <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button Margin="10 0" ToolTip="Disables security lock from this device.&#x0a;WARNING: Security lock can not be recovered without reflashing the device!" ToolTipService.ShowDuration="10000"
+                                                Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type CustomControls:MarbleMainDeviceItem}}, Path=DisableLockScreenCommand}" CommandParameter="{Binding Path=SerialNumber}">
+                                            <Image Height="20" Source="/MarbleLibrary;component/Images\unlock.icon.21x32.png"/>
+                                        </Button>
+                                        <Button ToolTip="Copies all displayed information to clipboard"
+                                                Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type CustomControls:MarbleMainDeviceItem}}, Path=CopyInformationToClipboard}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}">
+                                            <Image Width="20" Height="20" Source="/MarbleLibrary;component/Images\copy.icon.32x32.png"/>
+                                        </Button>
+                                    </StackPanel>
+                                    <TextBlock Grid.Row="1" Text="Model:"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Path=ProductModel}"/>
+                                    <TextBlock Grid.Row="2" Text="State:"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Path=State}"/>
+                                    <TextBlock Grid.Row="3" Text="SWVersion:"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding Path=SWVersion}"/>
+                                    <TextBlock Grid.Row="4" Text="BuildDate:"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding Path=SWBuildDate}"/>
+                                    <TextBlock Grid.Row="5" Text="HWType:"/>
+                                    <TextBlock Grid.Row="5" Grid.Column="2" Text="{Binding Path=HWType}"/>
+                                    <TextBlock Grid.Row="6" Text="HWID:"/>
+                                    <TextBlock Grid.Row="6" Grid.Column="2" Text="{Binding Path=HWVersion}"/>
+                                    <TextBlock Grid.Row="7" Text="IMEI1:"/>
+                                    <TextBlock Grid.Row="7" Grid.Column="2" Text="{Binding Path=IMEI1}"/>
+                                    <TextBlock Grid.Row="8" Text="IMEI2:"/>
+                                    <TextBlock Grid.Row="8" Grid.Column="2" Text="{Binding Path=IMEI2}"/>
+                                    <TextBlock Grid.Row="9" Text="PlatformVersion:"/>
+                                    <TextBlock Grid.Row="9" Grid.Column="2" Text="{Binding Path=PlatformVersion}"/>
+                                    <TextBlock Grid.Row="10" Text="SdkVersion:"/>
+                                    <TextBlock Grid.Row="10" Grid.Column="2" Text="{Binding Path=SdkVersion}"/>
+                                </Grid>
+                                <!-- SIM records-->
+                                <Grid Margin="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="10"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="25"></ColumnDefinition>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="10"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <!-- SIM1 -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Height="16" Width="21" Source="/MarbleLibrary;component/Images\sim.horizontal.icon.16x21.png" VerticalAlignment="Center" ToolTip="SIM1" />
+                                        <TextBlock Text="1" Margin="3 0"/>
+                                    </StackPanel>
+                                    <TextBlock Grid.Row="1" Text="Status:"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Path=SIM1State}"/>
+                                    <TextBlock Grid.Row="2" Text="Operator:"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Path=SIM1OperatorName}"/>
+                                    <TextBlock Grid.Row="3" Text="Country:"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding Path=SIM1OperatorCountry}"/>
+                                    <!-- SIM2 -->
+                                    <StackPanel Grid.Column="4" Orientation="Horizontal">
+                                        <Image Height="16" Width="21" Source="/MarbleLibrary;component/Images\sim.horizontal.icon.16x21.png" VerticalAlignment="Center" ToolTip="SIM2"/>
+                                        <TextBlock Text="2" Margin="3 0"/>
+                                    </StackPanel>
+                                    <TextBlock Grid.Row="1" Grid.Column="4" Text="Status:"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="6" Text="{Binding Path=SIM2State}"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="4" Text="Operator:"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="6" Text="{Binding Path=SIM2OperatorName}"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="4" Text="Country:"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="6" Text="{Binding Path=SIM2OperatorCountry}"/>
+                                </Grid>
+                            </StackPanel>
+                        </Popup>
+                    </Grid>
+                </ToggleButton>
+                <ControlTemplate.Triggers>
+                    <MultiTrigger>
+                        <MultiTrigger.Conditions>
+                            <Condition Property="IsMouseOver" Value="True" />
+                            <!--<Condition Property="IsSelected" Value="False"/>-->
+                        </MultiTrigger.Conditions>
+                        <Setter TargetName="textBlockLabelText" Property="Foreground" Value="{StaticResource MarbleMainMenuItemSelectedColor}" />
+                    </MultiTrigger>
+                    <MultiTrigger>
+                        <MultiTrigger.Conditions>
+                            <Condition Property="IsEnabled" Value="False" />
+                        </MultiTrigger.Conditions>
+                        <Setter TargetName="gridItemContent" Property="Opacity" Value="0.4" />
+                    </MultiTrigger>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Path=IsEmulator}" Value="True"></Condition>
+                            <Condition Binding="{Binding Path=IsOnline}" Value="True"></Condition>
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="LargeImageSource" Value="/MarbleLibrary;component/Images\emulator.icon.32x32.png" />
+                    </MultiDataTrigger>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Path=IsEmulator}" Value="True"></Condition>
+                            <Condition Binding="{Binding Path=IsOnline}" Value="False"></Condition>
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="LargeImageSource" Value="/MarbleLibrary;component/Images\emulator.offline.icon.32x32.png" />
+                    </MultiDataTrigger>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Path=IsEmulator}" Value="False"></Condition>
+                            <Condition Binding="{Binding Path=IsOnline}" Value="True"></Condition>
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="LargeImageSource" Value="/MarbleLibrary;component/Images\phone.icon.32x32.png" />
+                    </MultiDataTrigger>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Path=IsEmulator}" Value="False"></Condition>
+                            <Condition Binding="{Binding Path=IsOnline}" Value="False"></Condition>
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="LargeImageSource" Value="/MarbleLibrary;component/Images\phone.offline.icon.32x32.png" />
+                    </MultiDataTrigger>
+                    <MultiTrigger>
+                        <MultiTrigger.Conditions>
+                            <Condition Property="IsSelected" Value="True"/>
+                            <Condition Property="State" Value="{x:Static CustomControls:DeviceState.Disconnected}"/>
+                        </MultiTrigger.Conditions>
+                        <Setter TargetName="gridItemContent" Property="Opacity" Value="0.5"/>
+                    </MultiTrigger>                   
+                    </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
